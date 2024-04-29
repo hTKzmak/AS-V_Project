@@ -1,0 +1,37 @@
+@import './fonts.css';
+
+$main-background-color: #FFF;
+$main-font-color: #100E0E;
+
+body{
+    background: $main-background-color;
+    color: $main-font-color;
+    font-family: 'SF Pro Display Regular', sans-serif;
+    // font-family: 'SF Pro Display Medium', sans-serif;
+    // font-family: 'SF Pro Display Bold', sans-serif;
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    .container{
+        max-width: 1440px;
+        margin: 0 auto;
+        padding-left: 120px;
+        padding-right: 120px;
+
+        @media screen and (max-width: 768px) {
+            max-width: 768px;
+            padding: 5px 20px;
+        }
+
+        @media screen and (max-width: 1440px) {
+            max-width: 1440px;
+            padding: 5px 25px;
+        }
+    }
+
+    p, span, input{
+        font-family: 'SF Pro Display Regular', sans-serif;
+    }
+}
