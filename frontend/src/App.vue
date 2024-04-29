@@ -16,6 +16,7 @@ import Header from './components/Header/Header.vue'
   <main class="container">
     <RouterView />
   </main>
+
 </template>
 
 <style>

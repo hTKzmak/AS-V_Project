@@ -1,5 +1,6 @@
 <script>
 import { RouterLink } from 'vue-router'
+import ButtonElem from '../UI/ButtonElem.vue';
 </script>
 
 <template>
@@ -24,9 +25,9 @@ import { RouterLink } from 'vue-router'
             </RouterLink>
 
             <div class="header-buttons">
-                <button><img src="../../assets/icons/search.svg"></button>
+                <button class="buttonIcons"><img src="../../assets/icons/search.svg"></button>
                 <a href="#!"><img src="../../assets/icons/call.svg" alt="#"></a>
-                <button><img src="../../assets/icons/menu.svg"></button>
+                <button class="buttonIcons"><img src="../../assets/icons/menu.svg"></button>
             </div>
 
         </div>
@@ -45,7 +46,7 @@ import { RouterLink } from 'vue-router'
 
             <div class="header-info">
                 <a class="phone-call" href="#!"><img src="../../assets/icons/call_grey.svg" alt="#">+7 812 561 96 62</a>
-                <button><img src="../../assets/icons/menu.svg"></button>
+                <button class="buttonIcons"><img src="../../assets/icons/menu.svg"></button>
             </div>
 
         </div>
@@ -74,7 +75,15 @@ import { RouterLink } from 'vue-router'
                 </div>
             </div>
 
-            <div class="header-search"></div>
+            
+            <div class="header-search">
+                <!-- <button class="buttonElem"><img src="../../assets/icons/dots.svg" alt="">Каталог товаров</button> -->
+                <ButtonElem title="Каталог товаров" img="../../assets/icons/dots.svg"/>
+                <input type="text" placeholder="Поиск по каталогу товаров">
+                <a href="#!"><img src="../../assets/icons/heart.svg" alt=""></a>
+                <a href="#!"><img src="../../assets/icons/filters.svg" alt=""></a>
+                <ButtonElem title="Каталог товаров" img="../../assets/icons/dots.svg"/>
+            </div>
         </div>
     </header>
 </template>
@@ -160,6 +169,8 @@ header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 30px;
+            padding-bottom: 30px;
 
             ul {
                 display: flex;
@@ -202,8 +213,28 @@ header {
             }
         }
 
-        .header-search{
-            
+        .header-search {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+
+            input {
+                color: #B7B7B7;
+
+                border-radius: 8px;
+                border: 1px solid #B7B7B7;
+
+                padding: 16px 56px;
+                width: 594px;
+
+                font-size: 20px;
+
+                background: url('../../assets/icons/search_grey.svg');
+                background-repeat: no-repeat;
+                background-position: 15px 50%;
+            }
         }
 
         @media screen and (max-width: 1440px) {
@@ -211,12 +242,26 @@ header {
         }
     }
 
+    .buttonElem{
+        border-radius: 16px;
+        padding: 13px 16px;
+        font-size: 20px;
+        border: none;
+        background-color: #0071E4;
+        color: #FFF;
 
-    button {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        cursor: pointer;
+    }
+
+
+    .buttonIcons {
         border: none;
         background: transparent;
         cursor: pointer;
-
     }
 
     .phone-call {
