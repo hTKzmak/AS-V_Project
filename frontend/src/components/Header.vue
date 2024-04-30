@@ -9,9 +9,9 @@ import { RouterLink } from 'vue-router'
             <p>Ваш город: <span>Москва V</span></p>
 
             <div class="social-media">
-                <a href="#!"><img src="../assets/icons/header/whatsapp.svg" alt=""></a>
-                <a href="#!"><img src="../assets/icons/header/telegram.svg" alt=""></a>
-                <a href="#!"><img src="../assets/icons/header/vk.svg" alt=""></a>
+                <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
+                <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
+                <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@ import { RouterLink } from 'vue-router'
         <div class="container header-mobile">
 
             <RouterLink to="/">
-                <img src='../assets/icons/header/logo.svg' alt="logo">
+                <img src='../assets/logo.svg' alt="logo">
             </RouterLink>
 
             <div class="header-buttons">
@@ -35,7 +35,7 @@ import { RouterLink } from 'vue-router'
 
             <div class="header-info">
                 <RouterLink to="/">
-                    <img src='../assets/icons/header/logo.svg' alt="logo">
+                    <img src='../assets/logo.svg' alt="logo">
                 </RouterLink>
                 <div class="input-search">
                     <img src="../assets/icons/header/search.svg"><input type="text" class="search"
@@ -56,7 +56,7 @@ import { RouterLink } from 'vue-router'
         <div class="container header-desktop">
             <div class="header-navigation">
                 <RouterLink to="/">
-                    <img src='../assets/icons/header/logo.svg' alt="logo">
+                    <img src='../assets/logo.svg' alt="logo">
                 </RouterLink>
                 <ul>
                     <li><a href="#!">Весь каталог</a></li>
@@ -69,7 +69,7 @@ import { RouterLink } from 'vue-router'
                     <li><a href="#!">Контакты</a></li>
                 </ul>
                 <div class="phone">
-                    <a class="phone-call" href="#!"><img src="../../assets/icons/header/call_grey.svg" alt="#">+7 812
+                    <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812
                         561 96
                         62</a>
                     <a href="#!" class="recall">Вам перезвонить?</a>
@@ -322,7 +322,9 @@ header {
             }
 
             .iPhone14_link {
+                background: linear-gradient(90deg, #000000 22.19%, #5E556B 100%);
                 background-image: url('../assets/icons/header/gadgets/banner.png');
+                border-radius: 8px;
                 height: 64px;
                 width: 280px;
                 background-repeat: no-repeat;

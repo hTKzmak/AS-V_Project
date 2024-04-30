@@ -2,6 +2,7 @@
 
 $main-background-color: #FFF;
 $main-font-color: #100E0E;
+$link-font-color: #0071E4;
 
 body{
     background: $main-background-color;
@@ -33,5 +34,10 @@ body{
 
     p, span, a, input{
         font-family: 'SF Pro Display Regular', sans-serif;
+    }
+
+    a{
+        text-decoration: none;
+        color: $link-font-color;
     }
 }

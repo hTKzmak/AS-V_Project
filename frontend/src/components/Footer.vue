@@ -1,0 +1,258 @@
+<script>
+</script>
+
+<template>
+    <footer>
+        <div class="container footer-desktop">
+
+            <div class="footer-info">
+                <img src="../assets/logo.svg" alt="logo">
+                <div class="footer-text-info">
+                    <p>© 2013-2022</p>
+                    <p>Продажа iPhone в МСК</p>
+                    *Сайт не является публичной оффертой. Вся информация, указанная на сайте носит информационный
+                    характер.
+                </div>
+            </div>
+
+            <div class="footer-info-mobile">
+                <div class="main-info">
+                    <img src="../assets/logo.svg" alt="logo">
+                    <div class="footer-text-info">
+                        <p>© 2013-2022</p>
+                        <p>Продажа iPhone в МСК</p>
+                    </div>
+                </div>
+                *Сайт не является публичной оффертой. Вся информация, указанная на сайте носит информационный
+                характер.
+            </div>
+
+            <div class="footer-navigation">
+                <ul>
+                    <li><a href="#!">Гарантия</a></li>
+                    <li><a href="#!">Политика возрата</a></li>
+                    <li><a href="#!">Кредит</a></li>
+                    <li><a href="#!">Доставка и оплата</a></li>
+                    <li><a href="#!">Отзывы</a></li>
+                    <li><a href="#!">Контакты</a></li>
+                    <li><a href="#!">Политика конфеденциальности</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#!">iPhone</a></li>
+                    <li><a href="#!">iPad</a></li>
+                    <li><a href="#!">Macbook и iMac</a></li>
+                    <li><a href="#!">Watch</a></li>
+                    <li><a href="#!">Аксессуары</a></li>
+                    <li><a href="#!">Акции</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contacts">
+
+                <div class="phoneInfo">
+                    <div class="phone">
+                        <p>+7 812 704 86 97</p>
+                        Бесплатная консультация <br />
+                        С 10:00 до 21:00, без выходных
+                    </div>
+
+                    <div class="social-media">
+                        <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
+                        <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
+                        <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
+                    </div>
+                </div>
+
+                <div class="callAndMedia">
+                    <a class="getCall" href="#!">Заказать звонок</a>
+
+                    <div class="social-media">
+                        <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
+                        <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
+                        <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
+                    </div>
+                </div>
+                <p>Москва, ул Барклая 8</p>
+                <p>Москва, ул Барклая 8</p>
+            </div>
+        </div>
+    </footer>
+</template>
+
+<style lang="scss">
+footer {
+    padding: 30px 20px;
+
+    .footer-desktop {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+
+        @media screen and (min-width: 769px) and (max-width: 1440px) {
+            display: grid;
+            justify-content: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            display: grid;
+        }
+    }
+
+    .footer-info {
+        width: 270px;
+        font-size: 14px;
+        color: #B7B7B7;
+
+        .footer-text-info {
+            p {
+                font-size: 16px;
+                color: #878787;
+            }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1440px) {
+            display: flex;
+            align-items: start;
+            gap: 24px;
+
+            width: 500px;
+        }
+
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+    }
+
+    .footer-info-mobile {
+        display: none;
+        font-size: 14px;
+        color: #B7B7B7;
+
+        .main-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .footer-text-info {
+                text-align: start;
+                color: #878787;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            display: grid;
+            text-align: center;
+        }
+    }
+
+    .footer-navigation {
+
+        display: flex;
+        gap: 40px;
+
+        ul {
+            display: grid;
+            row-gap: 16px;
+            padding-left: 0;
+
+            li {
+                list-style-type: none;
+
+                a {
+                    text-decoration: none;
+                    color: #100E0E;
+                }
+            }
+
+            @media screen and (min-width: 769px) and (max-width: 1440px) {
+                display: flex;
+                gap: 16px;
+            }
+
+            @media screen and (max-width: 768px) {
+                display: grid;
+            }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1440px) {
+            display: grid;
+            gap: 16px;
+        }
+
+        @media screen and (max-width: 768px) {
+            display: grid;
+            gap: 10px;
+        }
+    }
+
+    .footer-contacts {
+
+        .phoneInfo {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #706E6E;
+
+            .social-media {
+                display: none;
+
+                @media screen and (min-width: 769px) and (max-width: 1440px) {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+            }
+
+            p {
+                font-family: 'SF Pro Display Medium', sans-serif;
+                font-size: 40px;
+                margin: 0;
+                color: #100E0E;
+            }
+
+            .phone {
+                @media screen and (min-width: 769px) and (max-width: 1440px) {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                }
+            }
+
+            @media screen and (min-width: 769px) and (max-width: 1440px) {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .callAndMedia {
+
+            display: flex;
+            gap: 24px;
+            align-items: center;
+
+            .getCall {
+                font-family: 'SF Pro Display Medium', sans-serif;
+                font-size: 20px;
+            }
+
+            .social-media {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                @media screen and (min-width: 769px) and (max-width: 1440px) {
+                    display: none;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                display: grid;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: 30px 0;    
+    }
+}
+</style>
