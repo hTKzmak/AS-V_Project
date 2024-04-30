@@ -1,0 +1,75 @@
+<script>
+import { RouterLink, RouterView } from 'vue-router'
+</script>
+
+<template>
+    <div class="menu">
+        <div class="">
+            <RouterLink to="/">
+                <img src="../assets/icons/menu/catalog.svg" alt="">
+                каталог
+            </RouterLink>
+        </div>
+        <RouterLink to="/">
+            <img src="../assets/icons/menu/bag.svg" alt="">
+            корзина
+        </RouterLink>
+        <RouterLink to="/">
+            <img src="../assets/icons/menu/heart.svg" alt="">
+            избранное
+        </RouterLink>
+        <RouterLink to="/">
+            <img src="../assets/icons/menu/filters.svg" alt="">
+            сравнение
+        </RouterLink>
+    </div>
+</template>
+
+<style lang="scss">
+.menu {
+    display: none;
+    width: auto;
+
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px -4px 8px 0px #0000000D;
+
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        color: #282626;
+
+        &:hover {
+            color: #0071E4;
+        }
+
+        img {
+            @media screen and (max-width: 768px) {
+                margin-left: 50%;
+                margin-right: 50%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            display: grid;
+        }
+    }
+
+
+    @media screen and (max-width: 1440px) {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
+</style>
