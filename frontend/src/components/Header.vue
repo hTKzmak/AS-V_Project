@@ -1,18 +1,17 @@
 <script>
 import { RouterLink } from 'vue-router'
-import ButtonElem from '../UI/ButtonElem.vue';
 </script>
 
 <template>
     <div class="location">
         <div class="container location-header">
 
-            <p>Ваш город: <span>Москва</span></p>
+            <p>Ваш город: <span>Москва V</span></p>
 
             <div class="social-media">
-                <a href="#!"><img src="../../assets/icons/whatsapp.svg" alt=""></a>
-                <a href="#!"><img src="../../assets/icons/telegram.svg" alt=""></a>
-                <a href="#!"><img src="../../assets/icons/vk.svg" alt=""></a>
+                <a href="#!"><img src="../assets/icons/header/whatsapp.svg" alt=""></a>
+                <a href="#!"><img src="../assets/icons/header/telegram.svg" alt=""></a>
+                <a href="#!"><img src="../assets/icons/header/vk.svg" alt=""></a>
             </div>
         </div>
     </div>
@@ -21,13 +20,13 @@ import ButtonElem from '../UI/ButtonElem.vue';
         <div class="container header-mobile">
 
             <RouterLink to="/">
-                <img src='../../assets/icons/logo.svg' alt="logo">
+                <img src='../assets/icons/header/logo.svg' alt="logo">
             </RouterLink>
 
             <div class="header-buttons">
-                <button class="buttonIcons"><img src="../../assets/icons/search.svg"></button>
-                <a href="#!"><img src="../../assets/icons/call.svg" alt="#"></a>
-                <button class="buttonIcons"><img src="../../assets/icons/menu.svg"></button>
+                <button class="buttonIcons"><img src="../assets/icons/header/search.svg"></button>
+                <a href="#!"><img src="../assets/icons/header/call.svg" alt="#"></a>
+                <button class="buttonIcons"><img src="../assets/icons/header/menu.svg"></button>
             </div>
 
         </div>
@@ -36,17 +35,18 @@ import ButtonElem from '../UI/ButtonElem.vue';
 
             <div class="header-info">
                 <RouterLink to="/">
-                    <img src='../../assets/icons/logo.svg' alt="logo">
+                    <img src='../assets/icons/header/logo.svg' alt="logo">
                 </RouterLink>
                 <div class="input-search">
-                    <img src="../../assets/icons/search.svg"><input type="text" class="search"
+                    <img src="../assets/icons/header/search.svg"><input type="text" class="search"
                         placeholder="Поиск по каталогу товаров">
                 </div>
             </div>
 
             <div class="header-info">
-                <a class="phone-call" href="#!"><img src="../../assets/icons/call_grey.svg" alt="#">+7 812 561 96 62</a>
-                <button class="buttonIcons"><img src="../../assets/icons/menu.svg"></button>
+                <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812 561 96
+                    62</a>
+                <button class="buttonIcons"><img src="../assets/icons/header/menu.svg"></button>
             </div>
 
         </div>
@@ -56,11 +56,11 @@ import ButtonElem from '../UI/ButtonElem.vue';
         <div class="container header-desktop">
             <div class="header-navigation">
                 <RouterLink to="/">
-                    <img src='../../assets/icons/logo.svg' alt="logo">
+                    <img src='../assets/icons/header/logo.svg' alt="logo">
                 </RouterLink>
                 <ul>
                     <li><a href="#!">Весь каталог</a></li>
-                    <li><a href="#!" id="fire"><img src="../../assets/icons/fire-emblem.svg">Акции</a></li>
+                    <li><a href="#!" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</a></li>
                     <li><a href="#!">Гарантия</a></li>
                     <li><a href="#!">Политика возрата</a></li>
                     <li><a href="#!">Кредит</a></li>
@@ -69,21 +69,72 @@ import ButtonElem from '../UI/ButtonElem.vue';
                     <li><a href="#!">Контакты</a></li>
                 </ul>
                 <div class="phone">
-                    <a class="phone-call" href="#!"><img src="../../assets/icons/call_grey.svg" alt="#">+7 812 561 96
+                    <a class="phone-call" href="#!"><img src="../../assets/icons/header/call_grey.svg" alt="#">+7 812
+                        561 96
                         62</a>
                     <a href="#!" class="recall">Вам перезвонить?</a>
                 </div>
             </div>
 
-            
+
             <div class="header-search">
-                <!-- <button class="buttonElem"><img src="../../assets/icons/dots.svg" alt="">Каталог товаров</button> -->
-                <ButtonElem title="Каталог товаров" img="../../assets/icons/dots.svg"/>
+                <button class="buttonElem"><img src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
                 <input type="text" placeholder="Поиск по каталогу товаров">
-                <a href="#!"><img src="../../assets/icons/heart.svg" alt=""></a>
-                <a href="#!"><img src="../../assets/icons/filters.svg" alt=""></a>
-                <ButtonElem title="Каталог товаров" img="../../assets/icons/dots.svg"/>
+                <a href="#!"><img src="../assets/icons/header/heart.svg" alt=""></a>
+                <a href="#!"><img src="../assets/icons/header/filters.svg" alt=""></a>
+                <button class="buttonElem basketBtn">
+                    <img src="../assets/icons/header/basket.svg" alt="">
+                    в корзине
+                    <div class="basketCount">
+                        1
+                    </div>
+                </button>
             </div>
+
+            <div class="header-categories">
+                <ul>
+                    <li>
+                        <a href="#!">
+                            <img src="../assets/icons/header/gadgets/iphone.svg">
+                            iPhone
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <img src="../assets/icons/header/gadgets/ipad.svg">
+                            iPad
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <img src="../assets/icons/header/gadgets/macbook.svg">
+                            MacBook и iMac
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <img src="../assets/icons/header/gadgets/applewatch.svg">
+                            Watch
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <img src="../assets/icons/header/gadgets/airpods.svg">
+                            Гаджеты
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <img src="../assets/icons/header/gadgets/tools.svg">
+                            Аксессуары
+                        </a>
+                    </li>
+                </ul>
+
+                <a href="#!" class="iPhone14_link">
+                </a>
+            </div>
+
         </div>
     </header>
 </template>
@@ -231,18 +282,61 @@ header {
 
                 font-size: 20px;
 
-                background: url('../../assets/icons/search_grey.svg');
+                background: url('../assets/icons/header/search_grey.svg');
                 background-repeat: no-repeat;
                 background-position: 15px 50%;
+            }
+        }
+
+        .header-categories {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+
+            ul {
+                display: flex;
+                gap: 16px;
+                align-items: center;
+                padding-left: 0;
+
+                li {
+                    list-style-type: none;
+
+                    a {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+
+                        text-decoration: none;
+                        font-size: 20px;
+
+                        color: #100E0E;
+
+                        &:hover {
+                            color: #0071E4;
+                        }
+                    }
+                }
+            }
+
+            .iPhone14_link {
+                background-image: url('../assets/icons/header/gadgets/banner.png');
+                height: 64px;
+                width: 280px;
+                background-repeat: no-repeat;
+                background-position: center center;
             }
         }
 
         @media screen and (max-width: 1440px) {
             display: none;
         }
+
     }
 
-    .buttonElem{
+    .buttonElem {
         border-radius: 16px;
         padding: 13px 16px;
         font-size: 20px;
@@ -264,12 +358,22 @@ header {
         cursor: pointer;
     }
 
+    .basketBtn {
+        background-color: #52D116;
+    }
+
     .phone-call {
         text-decoration: none;
         color: #000;
         display: flex;
         align-items: center;
         gap: 10px;
+    }
+
+    .basketCount {
+        box-shadow: 0px 4px 4px 0px #00000040 inset;
+        padding: 4px 12px;
+        border-radius: 32px;
     }
 }
 </style>
