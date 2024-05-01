@@ -11,13 +11,6 @@ export default {
 <template>
     <div class="products-list">
         <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
     </div>
 </template>
 

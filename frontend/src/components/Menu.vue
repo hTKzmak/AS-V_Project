@@ -87,7 +87,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
     @media screen and (max-width: 1440px) {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-around;
     }
 }
 </style>
