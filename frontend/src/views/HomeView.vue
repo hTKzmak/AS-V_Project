@@ -1,16 +1,19 @@
 <script>
-import ProductsList from '../components/ProductsList.vue'
+import PopularProducts from '../components/PopularProducts.vue'
+import NewProducts from '../components/NewProducts.vue'
 
 export default {
   components: {
-    ProductsList
+    PopularProducts,
+    NewProducts
   }
 }
 </script>
 
 <template>
   <h1>купить iPhone в Москве</h1>
-  <ProductsList />
+  <PopularProducts />
+  <NewProducts/>
 </template>
 
 <style>

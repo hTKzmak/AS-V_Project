@@ -4,13 +4,16 @@ import ProductItem from './ProductItem.vue'
 export default {
     components: {
         ProductItem
-    }
+    },
+    props: ['count']
 }
 </script>
 
 <template>
     <div class="products-list">
-        <ProductItem />
+        <div v-for="index in count" :key="index">
+            <ProductItem />
+        </div>
     </div>
 </template>
 
@@ -18,9 +21,13 @@ export default {
 .products-list {
     margin: 50px 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
     gap: 24px;
     row-gap: 30px;
+
+    @media screen and (max-width: 768px) {
+        justify-content: center;
+    }
 }
 </style>
