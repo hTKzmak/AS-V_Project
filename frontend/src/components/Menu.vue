@@ -4,13 +4,31 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
     <div class="menu">
-        <div class="">
+        <div class="menu-item">
             <RouterLink to="/">
                 <img src="../assets/icons/menu/catalog.svg" alt="">
                 каталог
             </RouterLink>
         </div>
-        <RouterLink to="/">
+        <div class="menu-item">
+            <RouterLink to="/">
+                <img src="../assets/icons/menu/bag.svg" alt="">
+                корзина
+            </RouterLink>
+        </div>
+        <div class="menu-item">
+            <RouterLink to="/">
+                <img src="../assets/icons/menu/heart.svg" alt="">
+                избранное
+            </RouterLink>
+        </div>
+        <div class="menu-item">
+            <RouterLink to="/">
+                <img src="../assets/icons/menu/filters.svg" alt="">
+                сравнение
+            </RouterLink>
+        </div>
+        <!-- <RouterLink to="/">
             <img src="../assets/icons/menu/bag.svg" alt="">
             корзина
         </RouterLink>
@@ -21,7 +39,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/">
             <img src="../assets/icons/menu/filters.svg" alt="">
             сравнение
-        </RouterLink>
+        </RouterLink> -->
     </div>
 </template>
 
@@ -56,8 +74,8 @@ import { RouterLink, RouterView } from 'vue-router'
 
         img {
             @media screen and (max-width: 768px) {
-                margin-left: 50%;
-                margin-right: 50%;
+                display: block;
+                margin: 0 auto;
             }
         }
 

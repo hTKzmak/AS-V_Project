@@ -342,22 +342,6 @@ header {
 
     }
 
-    .buttonElem {
-        border-radius: 16px;
-        padding: 13px 16px;
-        font-size: 20px;
-        border: none;
-        background-color: #0071E4;
-        color: #FFF;
-
-        display: flex;
-        align-items: center;
-        gap: 5px;
-
-        cursor: pointer;
-    }
-
-
     .buttonIcons {
         border: none;
         background: transparent;

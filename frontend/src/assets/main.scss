@@ -1,21 +1,21 @@
-@import './fonts.css';
+@import "./fonts.css";
 
-$main-background-color: #FFF;
-$main-font-color: #100E0E;
-$link-font-color: #0071E4;
+$main-background-color: #fff;
+$main-font-color: #100e0e;
+$link-font-color: #0071e4;
 
-body{
+body {
     background: $main-background-color;
     color: $main-font-color;
-    font-family: 'SF Pro Display Regular', sans-serif;
+    font-family: "SF Pro Display Regular", sans-serif;
     // font-family: 'SF Pro Display Medium', sans-serif;
     // font-family: 'SF Pro Display Bold', sans-serif;
 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
-    .container{
+
+    .container {
         max-width: 1440px;
         margin: 0 auto;
         padding-left: 120px;
@@ -32,12 +32,38 @@ body{
         }
     }
 
-    p, span, a, input{
-        font-family: 'SF Pro Display Regular', sans-serif;
+    p,
+    span,
+    a,
+    h4,
+    input {
+        font-family: "SF Pro Display Regular", sans-serif;
     }
 
-    a{
+    h3 {
+        font-family: "SF Pro Display Medium", sans-serif;
+    }
+
+    a {
         text-decoration: none;
         color: $link-font-color;
+    }
+
+    .buttonElem {
+        border-radius: 16px;
+        padding: 13px 16px;
+        font-size: 20px;
+        border: none;
+        background-color: #0071e4;
+        color: #fff;
+
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        cursor: pointer;
+
+        width: inherit;
+        justify-content: center;
     }
 }

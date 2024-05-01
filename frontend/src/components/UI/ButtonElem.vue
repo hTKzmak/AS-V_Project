@@ -5,7 +5,10 @@ export default {
 </script>
 
 <template>
-    <button class="buttonElem">{{ img, title }}</button>
+    <button class="buttonElem">
+        <img :src=img>
+        {{title}}
+    </button>
 </template>
 
 <style>

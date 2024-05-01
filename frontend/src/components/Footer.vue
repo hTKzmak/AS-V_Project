@@ -251,8 +251,8 @@ footer {
         }
     }
 
-    @media screen and (max-width: 768px) {
-        padding: 30px 0;    
+    @media screen and (max-width: 768px) {  
+        padding: 30px 0 100px;    
     }
 }
 </style>
