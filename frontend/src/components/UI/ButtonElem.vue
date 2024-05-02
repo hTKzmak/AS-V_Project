@@ -1,11 +1,11 @@
 <script>
 export default {
-    props: ['title', 'img']
+    props: ['title', 'img', 'action']
 }
 </script>
 
 <template>
-    <button class="buttonElem">
+    <button v-on:click="action" class="buttonElem">
         <img :src=img>
         {{title}}
     </button>
@@ -27,3 +27,5 @@ export default {
     cursor: pointer;
 }
 </style>
+
+
