@@ -15,6 +15,8 @@ export default {
 </script>
 
 <template>
-    <RouterLink to="/">Самое популярное</RouterLink>
-    <ProductsList :count="count" />
+    <div class="container">
+        <RouterLink to="/">Самое популярное</RouterLink>
+        <ProductsList :count="count" />
+    </div>
 </template>

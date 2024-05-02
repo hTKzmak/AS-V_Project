@@ -19,12 +19,16 @@ export default {
 
 <style lang="scss">
 .products-list {
-    margin: 50px 0;
+    margin: 5px 0 40px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 24px;
     row-gap: 30px;
+
+    @media screen and (min-width: 769px) and (max-width: 1440px) {
+        justify-content: space-around;
+    }
 
     @media screen and (max-width: 768px) {
         justify-content: center;

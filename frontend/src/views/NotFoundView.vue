@@ -46,7 +46,6 @@ export default {
   }
 
   .img {
-    /* margin-top: 10px; */
     margin: 10px auto;
 
     @media screen and (max-width: 768px) {

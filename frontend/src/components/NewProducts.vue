@@ -6,8 +6,8 @@ export default {
     components: {
         ProductsList
     },
-    data(){
-        return{
+    data() {
+        return {
             count: 8
         }
     }
@@ -15,6 +15,8 @@ export default {
 </script>
 
 <template>
-    <RouterLink to="/">Новинки</RouterLink>
-    <ProductsList :count="count"/>
+    <div class="container">
+        <RouterLink to="/">Новинки</RouterLink>
+        <ProductsList :count="count" />
+    </div>
 </template>
