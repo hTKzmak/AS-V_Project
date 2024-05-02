@@ -11,14 +11,14 @@
 <template>
     <div class="product-item">
         <div class="rating-and-settings">
-            <span class="star-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
+            <div class="star-rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
                 <a href="#!">(14)</a>
-            </span>
+            </div>
             <div class="settings">
                 <button>
                     <img src="../assets/icons/header/heart.svg">
@@ -68,13 +68,15 @@
 
         .star-rating {
             display: flex;
+            align-items: center;
             gap: 2px;
 
-            i {
+            span{
                 width: 20px;
-                height: 20px;
-                background-color: red;
-                border-radius: 100px;
+            }
+
+            .checked {
+                color: #FFAD31;
             }
 
             a {
