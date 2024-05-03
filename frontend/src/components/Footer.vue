@@ -3,7 +3,7 @@
 
 <template>
     <footer>
-        <div class="container footer-desktop">
+        <div class="container footer-container">
 
             <div class="footer-info">
                 <img src="../assets/logo.svg" alt="logo">
@@ -83,7 +83,7 @@
 footer {
     padding: 30px 20px;
 
-    .footer-desktop {
+    .footer-container {
         display: flex;
         justify-content: space-between;
         align-items: start;
