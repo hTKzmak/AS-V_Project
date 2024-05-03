@@ -141,7 +141,6 @@ import { RouterLink } from 'vue-router'
 
 <style lang="scss">
 .location {
-    // padding: 10px 25px;
     padding-top: 10px;
     padding-bottom: 10px;
     background: #F9F9F9;
@@ -164,7 +163,6 @@ import { RouterLink } from 'vue-router'
 }
 
 header {
-    // padding: 5px 20px;
     padding-top: 5px;
     padding-bottom: 5px;
     background-color: #FFF;

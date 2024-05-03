@@ -56,7 +56,7 @@ export default {
   
 </template>
 
-<style>
+<style lang="scss">
 .info {
 
   margin-top: 32px;
