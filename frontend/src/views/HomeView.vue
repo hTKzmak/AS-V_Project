@@ -3,12 +3,14 @@ import PopularProducts from '../components/PopularProducts.vue'
 import NewProducts from '../components/NewProducts.vue'
 import Banner from '../components/Banner.vue'
 import DiscountForm from '../components/DiscountForm.vue'
+import Benefits from '../components/Benefits.vue'
 
 export default {
   components: {
     PopularProducts,
     Banner,
     NewProducts,
+    Benefits,
     DiscountForm
   }
 }
@@ -19,6 +21,7 @@ export default {
   <PopularProducts />
   <Banner/>
   <NewProducts/>
+  <Benefits/>
   <DiscountForm/>
 </template>
 
