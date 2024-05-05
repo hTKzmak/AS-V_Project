@@ -7,6 +7,16 @@ import { RouterLink } from 'vue-router'
         <div class="container slider-container">
             <button><img src="../../assets/images/slider/arrowLeft.svg"></button>
             <div class="slider-content">
+                <div class="title-mobile">
+
+                    <h1>iPh
+                        <div class="oval"></div>
+                        ne 14
+                    </h1>
+
+                    <h3>от <span>137 900 ₽</span></h3>
+                    <RouterLink to="/ban">подробнее</RouterLink>
+                </div>
                 <img src="../../assets/images/slider/iphone_14.png">
                 <div class="title">
 
@@ -47,8 +57,33 @@ import { RouterLink } from 'vue-router'
             gap: 48px;
             width: 100%;
 
+            .title {
+                @media screen and (max-width: 1440px) {
+                    display: none;
+                }
+            }
+
+            .title-mobile {
+                display: none;
+
+                @media screen and (max-width: 1440px) {
+                    display: grid;
+                    text-align: center;
+                }
+            }
+
             img {
                 margin-bottom: -50px;
+
+                @media screen and (max-width: 1440px) {
+                    margin: 0 auto -45px;
+                    width: 270px;
+                }
+
+                @media screen and (max-width: 768px) {
+                    margin: 0 auto -21px;
+                    width: 173px;
+                }
             }
 
             h1 {
@@ -67,6 +102,18 @@ import { RouterLink } from 'vue-router'
                     border-radius: 500px;
 
                     margin-bottom: -10px;
+
+                    @media screen and (max-width: 768px) {
+                        width: 45px;
+                        height: 10px;
+                        border: 5px solid #1E3240;
+                    }
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 38px;
+                    text-align: center;
+                    margin: 0 auto;
                 }
             }
 
@@ -76,8 +123,19 @@ import { RouterLink } from 'vue-router'
                 margin-top: 10px;
                 margin-bottom: 35px;
 
+                font-family: "SF Pro Display Regular", sans-serif;
+
                 span {
                     font-size: 48px;
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 32px;
+                    }
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 20px;
+                    margin-bottom: 20px;
                 }
             }
 
@@ -87,8 +145,31 @@ import { RouterLink } from 'vue-router'
                 background-color: #0071E4;
                 border-radius: 8px;
                 padding: 19px 40px;
+
+                @media screen and (max-width: 1440px) {
+                    margin: 0 auto;
+                }
+
+                @media screen and (max-width: 768px) {
+                    margin: 0;
+                }
+            }
+
+            @media screen and (max-width: 1440px) {
+                display: grid;
+                justify-content: center;
             }
         }
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 1440px) {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    @media screen and (max-width: 768px) {
+        padding-top: 16px;
+        padding-bottom: 16px;
     }
 }
 </style>
