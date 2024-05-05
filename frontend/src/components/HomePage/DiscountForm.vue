@@ -5,7 +5,7 @@
 <template>
     <div class="form">
         <div class="container form-container">
-            <img src="../assets/images/mobile.png" alt="#">
+            <img src="../../assets/images/mobile.png" alt="#">
             <div class="form-template">
                 <h1>Подписка на <br> рассылку акций!</h1>
                 <p>Подпишитесь на рассылку, чтобы <br> узнавать о всех акциях первым</p>

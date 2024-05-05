@@ -1,5 +1,5 @@
 <script>
-import ProductsList from '../components/ProductsList.vue'
+import ProductsList from '../../components/ProductsList.vue'
 import { RouterLink } from 'vue-router'
 
 export default {
@@ -8,7 +8,7 @@ export default {
     },
     data() {
         return {
-            count: 8
+            count: 12
         }
     }
 }
@@ -16,7 +16,7 @@ export default {
 
 <template>
     <div class="container">
-        <RouterLink to="/">Новинки</RouterLink>
+        <RouterLink to="/">Самое популярное</RouterLink>
         <ProductsList :count="count" />
     </div>
 </template>

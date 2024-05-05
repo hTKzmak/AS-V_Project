@@ -58,7 +58,8 @@
 <style lang="scss">
 .product-item {
 
-    width: 282px;
+    // width: 282px;
+    width: 260px;
     box-shadow: 0px 4px 8px 0px #0000000D;
     padding: 20px 10px;
     border-radius: 16px;

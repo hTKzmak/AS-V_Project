@@ -53,7 +53,7 @@ export default {
         консультацию по любой модели Apple.</li>
     </ul>
   </div>
-  
+
 </template>
 
 <style lang="scss">
@@ -78,7 +78,7 @@ export default {
 }
 
 .banner {
-  background: #000 url('../assets/images/iphone.png') no-repeat;
+  background: #000 url('../../assets/images/iphone.png') no-repeat;
   background-position: 170px top;
   color: #FFF;
   display: flex;

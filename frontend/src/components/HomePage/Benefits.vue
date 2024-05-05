@@ -1,10 +1,10 @@
 <script>
 import { RouterLink } from 'vue-router'
-import discountImg from '../assets/images/discount.png'
-import deliveryImg from '../assets/images/delivery.png'
-import walletImg from '../assets/images/wallet.png'
-import columnsImg from '../assets/images/columns.png'
-import approvalImg from '../assets/images/approval.png'
+import discountImg from '../../assets/images/discount.png'
+import deliveryImg from '../../assets/images/delivery.png'
+import walletImg from '../../assets/images/wallet.png'
+import columnsImg from '../../assets/images/columns.png'
+import approvalImg from '../../assets/images/approval.png'
 
 export default {
     data() {
