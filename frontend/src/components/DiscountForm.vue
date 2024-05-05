@@ -153,6 +153,10 @@
                     @media screen and (max-width: 768px) {
                         width: auto;
                     }
+
+                    @media screen and (max-width: 420px) {
+                        width: 87%;
+                    }
                 }
 
                 input[type="submit"] {

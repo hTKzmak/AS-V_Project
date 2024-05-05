@@ -125,7 +125,7 @@ export default {
     }
 
     .benefits-item-adaptive {
-        display: flex;
+        display: none;
         justify-content: space-between;
         align-items: center;
 
@@ -209,6 +209,10 @@ export default {
             @media screen and (max-width: 768px) {
                 display: none;
             }
+        }
+
+        @media screen and (max-width: 1440px){
+            display: flex;
         }
     }
 
