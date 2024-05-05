@@ -183,5 +183,9 @@
             align-items: start;
         }
     }
+
+    @media screen and (max-width: 1440px) {
+        background-color: #fff;
+    }
 }
 </style>

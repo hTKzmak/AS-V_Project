@@ -90,7 +90,7 @@ footer {
 
         @media screen and (min-width: 769px) and (max-width: 1440px) {
             display: grid;
-            justify-content: center;
+            justify-content: stretch;
         }
 
         @media screen and (max-width: 768px) {
@@ -166,6 +166,7 @@ footer {
 
             @media screen and (min-width: 769px) and (max-width: 1440px) {
                 display: flex;
+                flex-wrap: wrap;
                 gap: 16px;
             }
 
