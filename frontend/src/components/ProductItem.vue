@@ -1,11 +1,11 @@
 <script>
-// import ButtonElem from './UI/ButtonElem.vue';
+import ButtonElem from './UI/ButtonElem.vue';
 
-// export default {
-//   components: {
-//     ButtonElem
-//   }
-// }
+export default {
+    components: {
+        ButtonElem
+    }
+}
 </script>
 
 <template>
@@ -44,7 +44,7 @@
             <div class="price-info">
                 <h4>137 900 ₽</h4>
                 <!-- мобильная версия кнопки для покупки  -->
-                <button class="buttonElem buttonCart">137 900 ₽<img src="../assets/icons/cart.svg"></button>
+                <ButtonElem title="137 900 ₽" img='/cart.svg' />
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
@@ -52,7 +52,7 @@
             </div>
 
             <!-- ПК версия кнопки для покупки  -->
-            <button class="buttonElem buttonCart"><img src="../assets/icons/cart.svg">в корзину</button>
+            <ButtonElem title="в корзину" img='/cart.svg' addedItemStyle='false' />
 
             <!-- ПК версия кнопки для показа, что товар положен в корзину  -->
             <!-- <button class="buttonElem buttonCartAdded"><img src="../assets/icons/cart-added.svg">в корзине</button> -->
@@ -179,8 +179,16 @@
                 }
             }
 
-            .buttonCart,
-            .buttonCartAdded {
+            // .buttonCart,
+            // .buttonCartAdded {
+            //     display: none;
+
+            //     @media screen and (max-width: 1440px) {
+            //         display: flex;
+            //     }
+            // }
+
+            button {
                 display: none;
 
                 @media screen and (max-width: 1440px) {
@@ -202,9 +210,18 @@
 
         }
 
-        .buttonCart,
-        .buttonCartAdded {
-            padding: 20px;
+        // .buttonCart,
+        // .buttonCartAdded {
+        //     padding: 20px;
+        //     border-radius: 8px;
+
+        //     @media screen and (max-width: 1440px) {
+        //         display: none;
+        //     }
+        // }
+
+        button {
+            padding: 16px;
             border-radius: 8px;
 
             @media screen and (max-width: 1440px) {
