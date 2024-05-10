@@ -1,9 +1,13 @@
-<script>
+<script setup>
+import { useCounterStore } from '@/stores/AppleStore';
+
+const appleStore = useCounterStore();
+
 </script>
 
 <template>
     <ul class="searchList">
-        <li class="searchItem" v-for="index in 5" :key="index">
+        <li class="searchItem" v-for="index in 3" :key="index" @click="appleStore.getData">
             <div class="search-product-info">
                 <img src="../../assets/img.png">
                 <div class="product-title">
