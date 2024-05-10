@@ -1,5 +1,12 @@
 <script>
 import { RouterLink } from 'vue-router'
+import Search from '../components/HomePage/Search.vue'
+
+export default {
+    components: {
+        Search
+    }
+}
 </script>
 
 <template>
@@ -17,6 +24,7 @@ import { RouterLink } from 'vue-router'
     </div>
 
     <header>
+
         <div class="container header-mobile">
 
             <RouterLink to="/">
@@ -28,6 +36,10 @@ import { RouterLink } from 'vue-router'
                 <a href="#!"><img src="../assets/icons/header/call.svg" alt="#"></a>
                 <button class="buttonIcons"><img src="../assets/icons/header/menu.svg"></button>
             </div>
+
+            <!-- Окно с результатом поиска -->
+            <Search />
+
 
         </div>
 
@@ -48,6 +60,9 @@ import { RouterLink } from 'vue-router'
                     62</a>
                 <button class="buttonIcons"><img src="../assets/icons/header/menu.svg"></button>
             </div>
+
+            <!-- Окно с результатом поиска -->
+            <Search />
 
         </div>
 
@@ -83,39 +98,7 @@ import { RouterLink } from 'vue-router'
                 <input type="text" placeholder="Поиск по каталогу товаров">
 
                 <!-- Окно с результатом поиска -->
-
-                <ul>
-                    <li>
-                        <div class="search-product-info">
-                            <img src="../assets/img.png">
-                            <div class="product-title">
-                                <p class="title">Product name</p>
-                                <span class="price">Product price</span>
-                            </div>
-                        </div>
-                        <RouterLink to="/404">Подробнее</RouterLink>
-                    </li>
-                    <li>
-                        <div class="search-product-info">
-                            <img src="../assets/img.png">
-                            <div class="product-title">
-                                <p class="title">Product name</p>
-                                <span class="price">Product price</span>
-                            </div>
-                        </div>
-                        <RouterLink to="/404">Подробнее</RouterLink>
-                    </li>
-                    <li>
-                        <div class="search-product-info">
-                            <img src="../assets/img.png">
-                            <div class="product-title">
-                                <p class="title">Product name</p>
-                                <span class="price">Product price</span>
-                            </div>
-                        </div>
-                        <RouterLink to="/404">Подробнее</RouterLink>
-                    </li>
-                </ul>
+                <Search />
 
                 <a href="#!"><img src="../assets/icons/header/heart.svg" alt=""></a>
                 <a href="#!"><img src="../assets/icons/header/filters.svg" alt=""></a>
@@ -328,69 +311,69 @@ header {
                 background-position: 15px 50%;
             }
 
-            ul {
-                padding: 0;
-                position: absolute;
-                right: 50%;
-                left: 19.6%;
-                top: 50px;
-                width: 45vw;
-                max-width: 706px;
-                background-color: #FFFFFF;
-                border-radius: 16px;
+            // ul {
+            //     padding: 0;
+            //     position: absolute;
+            //     right: 50%;
+            //     left: 19.6%;
+            //     top: 50px;
+            //     width: 45vw;
+            //     max-width: 706px;
+            //     background-color: #FFFFFF;
+            //     border-radius: 16px;
 
-                li {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
+            //     li {
+            //         display: flex;
+            //         justify-content: space-between;
+            //         align-items: center;
 
-                    list-style-type: none;
-                    padding: 16px 32px;
+            //         list-style-type: none;
+            //         padding: 16px 32px;
 
 
-                    .search-product-info {
+            //         .search-product-info {
 
-                        display: flex;
-                        align-items: center;
-                        gap: 16px;
+            //             display: flex;
+            //             align-items: center;
+            //             gap: 16px;
 
-                        img {
-                            width: 64px;
-                        }
+            //             img {
+            //                 width: 64px;
+            //             }
 
-                        .product-title {
-                            .title {
-                                font-size: 20px;
-                                color: #100E0E;
-                                margin: 0;
-                            }
+            //             .product-title {
+            //                 .title {
+            //                     font-size: 20px;
+            //                     color: #100E0E;
+            //                     margin: 0;
+            //                 }
 
-                            .price {
-                                font-size: 24px;
-                                color: #282626;
-                                margin: 0;
-                            }
-                        }
-                    }
+            //                 .price {
+            //                     font-size: 24px;
+            //                     color: #282626;
+            //                     margin: 0;
+            //                 }
+            //             }
+            //         }
 
-                    &::before {
-                        position: absolute;
-                        left: 0;
-                        right: 0;
+            //         &::before {
+            //             position: absolute;
+            //             left: 0;
+            //             right: 0;
 
-                        width: inherit;
-                        height: 102px;
+            //             width: inherit;
+            //             height: 102px;
 
-                        border-bottom: 1px solid #B7B7B7;
-                        content: "";
-                    }
+            //             border-bottom: 1px solid #B7B7B7;
+            //             content: "";
+            //         }
 
-                    &:last-child::before {
-                        width: 96%;
-                        left: 13px;
-                    }
-                }
-            }
+            //         &:last-child::before {
+            //             width: 96%;
+            //             left: 13px;
+            //         }
+            //     }
+            // }
         }
 
         .header-categories {
