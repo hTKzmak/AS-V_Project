@@ -44,7 +44,7 @@ export default {
             <div class="price-info">
                 <h4>137 900 ₽</h4>
                 <!-- мобильная версия кнопки для покупки  -->
-                <ButtonElem title="137 900 ₽" img='/cart.svg' />
+                <ButtonElem title="137 900 ₽" img='/cart.svg' addedItemStyle='false'/>
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
@@ -63,7 +63,9 @@ export default {
             </div>
         </div>
 
-        <div class="absent">
+        <!-- если товара нет в наличии -->
+
+        <!-- <div class="absent">
             <div class="product-info">
                 <div class="existence">
                     <div class="absent-sign"></div>
@@ -72,7 +74,7 @@ export default {
             </div>
             <p class="text-info">Мы можем сообщить вам, когда товар появится в наличии</p>
             <button class="buttonElem">сообщить о поступлении</button>
-        </div>
+        </div> -->
 
     </div>
 </template>

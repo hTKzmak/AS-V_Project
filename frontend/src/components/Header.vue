@@ -79,7 +79,44 @@ import { RouterLink } from 'vue-router'
 
             <div class="header-search">
                 <button class="buttonElem"><img src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
+
                 <input type="text" placeholder="Поиск по каталогу товаров">
+
+                <!-- Окно с результатом поиска -->
+
+                <ul>
+                    <li>
+                        <div class="search-product-info">
+                            <img src="../assets/img.png">
+                            <div class="product-title">
+                                <p class="title">Product name</p>
+                                <span class="price">Product price</span>
+                            </div>
+                        </div>
+                        <RouterLink to="/404">Подробнее</RouterLink>
+                    </li>
+                    <li>
+                        <div class="search-product-info">
+                            <img src="../assets/img.png">
+                            <div class="product-title">
+                                <p class="title">Product name</p>
+                                <span class="price">Product price</span>
+                            </div>
+                        </div>
+                        <RouterLink to="/404">Подробнее</RouterLink>
+                    </li>
+                    <li>
+                        <div class="search-product-info">
+                            <img src="../assets/img.png">
+                            <div class="product-title">
+                                <p class="title">Product name</p>
+                                <span class="price">Product price</span>
+                            </div>
+                        </div>
+                        <RouterLink to="/404">Подробнее</RouterLink>
+                    </li>
+                </ul>
+
                 <a href="#!"><img src="../assets/icons/header/heart.svg" alt=""></a>
                 <a href="#!"><img src="../assets/icons/header/filters.svg" alt=""></a>
                 <button class="buttonElem basketBtn">
@@ -273,20 +310,86 @@ header {
             align-items: center;
             gap: 15px;
 
-            input {
-                color: #B7B7B7;
+            position: relative;
 
+            input {
                 border-radius: 8px;
                 border: 1px solid #B7B7B7;
 
                 padding: 16px 56px;
                 width: 594px;
 
+                outline: none;
+
                 font-size: 20px;
 
                 background: url('../assets/icons/header/search_grey.svg');
                 background-repeat: no-repeat;
                 background-position: 15px 50%;
+            }
+
+            ul {
+                padding: 0;
+                position: absolute;
+                right: 50%;
+                left: 19.6%;
+                top: 50px;
+                width: 45vw;
+                max-width: 706px;
+                background-color: #FFFFFF;
+                border-radius: 16px;
+
+                li {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    list-style-type: none;
+                    padding: 16px 32px;
+
+
+                    .search-product-info {
+
+                        display: flex;
+                        align-items: center;
+                        gap: 16px;
+
+                        img {
+                            width: 64px;
+                        }
+
+                        .product-title {
+                            .title {
+                                font-size: 20px;
+                                color: #100E0E;
+                                margin: 0;
+                            }
+
+                            .price {
+                                font-size: 24px;
+                                color: #282626;
+                                margin: 0;
+                            }
+                        }
+                    }
+
+                    &::before {
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+
+                        width: inherit;
+                        height: 102px;
+
+                        border-bottom: 1px solid #B7B7B7;
+                        content: "";
+                    }
+
+                    &:last-child::before {
+                        width: 96%;
+                        left: 13px;
+                    }
+                }
             }
         }
 
