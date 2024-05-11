@@ -1,10 +1,17 @@
 <script>
 import { RouterLink } from 'vue-router'
 import Search from '../components/HomePage/Search.vue'
+import { useCounterStore } from '@/stores/AppleStore';
 
 export default {
     components: {
         Search
+    },
+    setup(){
+        const appleStore = useCounterStore()
+        return{
+            appleStore
+        }
     }
 }
 </script>
@@ -95,10 +102,10 @@ export default {
             <div class="header-search">
                 <button class="buttonElem"><img src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
 
-                <input type="text" placeholder="Поиск по каталогу товаров">
+                <input type="text" placeholder="Поиск по каталогу товаров" @keydown="appleStore.getValue($event.target.value)">
 
                 <!-- Окно с результатом поиска -->
-                <Search />
+                <Search :inputValue="inputValue"/>
 
                 <a href="#!"><img src="../assets/icons/header/heart.svg" alt=""></a>
                 <a href="#!"><img src="../assets/icons/header/filters.svg" alt=""></a>

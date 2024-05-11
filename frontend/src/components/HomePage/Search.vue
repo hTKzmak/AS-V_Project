@@ -4,14 +4,21 @@ import { ref } from 'vue';
 
 const appleStore = useCounterStore();
 
+const props = defineProps({
+    inputValue: String
+})
+
 // нужен для отслеживания отображения поиска
-let showMenu = ref(false)
+let showMenu = ref(true)
 
 // для изменения значения showMenu
-function changeShow(){
+function changeShow() {
     showMenu.value = !showMenu.value
     console.log(showMenu.value)
+    console.log(inputValue)
 }
+
+
 
 </script>
 

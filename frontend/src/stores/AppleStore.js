@@ -23,12 +23,17 @@ fetch(BASE_URL)
 
 export const useCounterStore = defineStore('appleStore', {
     state: () => ({
-        data: productsList
+        data: productsList,
+        inputValue: ''
     }),
 
     actions: {
         getData() {
             console.log(this.data)
+        },
+        getValue(value){
+            this.inputValue = value
+            console.log(this.inputValue)
         }
     }
 })
