@@ -1,13 +1,26 @@
 <script setup>
 import { useCounterStore } from '@/stores/AppleStore';
+import { ref } from 'vue';
 
 const appleStore = useCounterStore();
+
+// нужен для отслеживания отображения поиска
+let showMenu = ref(false)
+
+// для изменения значения showMenu
+function changeShow(){
+    showMenu.value = !showMenu.value
+    console.log(showMenu.value)
+}
 
 </script>
 
 <template>
-    <ul class="searchList">
-        <li class="searchItem" v-for="index in 3" :key="index" @click="appleStore.getData">
+    <!-- <button @click="changeShow">show menu</button> -->
+
+    <!-- v-show надо ставить вперёд класса, чтобы он заработал -->
+    <ul v-show="showMenu" class="searchList">
+        <li class="searchItem" v-for="index in 3" :key="index">
             <div class="search-product-info">
                 <img src="../../assets/img.png">
                 <div class="product-title">
