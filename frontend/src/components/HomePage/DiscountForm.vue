@@ -31,6 +31,7 @@
     background-color: #F9F9F9;
     padding-top: 40px;
     padding-bottom: 40px;
+    margin-top: 40px;
 
     .form-container {
         display: flex;

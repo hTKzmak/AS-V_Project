@@ -24,16 +24,32 @@ fetch(BASE_URL)
 export const useCounterStore = defineStore('appleStore', {
     state: () => ({
         data: productsList,
-        inputValue: ''
+        inputValue: '',
+        searchData: reactive([])
     }),
 
     actions: {
         getData() {
             console.log(this.data)
         },
-        getValue(value){
+        getValue(value) {
             this.inputValue = value
             console.log(this.inputValue)
+        },
+        searchFunc(value) {
+            let filteredProducts = this.data.filter(elem => elem.title.toLowerCase().includes(value.toLowerCase()))
+            
+            if (filteredProducts && value) {
+                this.searchData = filteredProducts
+            }
+            else if (filteredProducts && !value) {
+                this.searchData = []
+            }
+            else {
+                this.searchData = []
+            }
+
+            console.log(value)
         }
     }
 })

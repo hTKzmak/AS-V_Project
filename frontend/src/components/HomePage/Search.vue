@@ -1,38 +1,21 @@
 <script setup>
 import { useCounterStore } from '@/stores/AppleStore';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
 const appleStore = useCounterStore();
-
-const props = defineProps({
-    inputValue: String
-})
-
-// нужен для отслеживания отображения поиска
-let showMenu = ref(true)
-
-// для изменения значения showMenu
-function changeShow() {
-    showMenu.value = !showMenu.value
-    console.log(showMenu.value)
-    console.log(inputValue)
-}
-
-
 
 </script>
 
 <template>
-    <!-- <button @click="changeShow">show menu</button> -->
-
-    <!-- v-show надо ставить вперёд класса, чтобы он заработал -->
-    <ul v-show="showMenu" class="searchList">
-        <li class="searchItem" v-for="index in 3" :key="index">
+    <!-- <button @click="console.log(appleStore.searchData)">show menu</button> -->
+    
+    <ul class="searchList">
+        <li class="searchItem" v-for="index in appleStore.searchData" :key="index">
             <div class="search-product-info">
-                <img src="../../assets/img.png">
+                <div class="img" :style="{ backgroundImage: `url('${index.image}')` }"></div>
                 <div class="product-title">
-                    <p class="title">iPhone 13 Pro Max</p>
-                    <span class="price">137 900 ₽</span>
+                    <p class="title">{{ index.title }}</p>
+                    <span class="price">{{ index.price }} ₽</span>
                 </div>
             </div>
             <RouterLink to="/404">Подробнее</RouterLink>
@@ -68,15 +51,22 @@ function changeShow() {
             align-items: center;
             gap: 16px;
 
-            img {
+            .img {
                 width: 64px;
+                height: 64px;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-color: rgb(34, 34, 34);
+                background-size: cover;
 
                 @media screen and (min-width: 769px) and (max-width: 1440px) {
                     width: 48px;
+                    height: 48px;
                 }
 
                 @media screen and (max-width: 768px) {
                     width: 32px;
+                    height: 32px;
                 }
             }
 
@@ -122,7 +112,8 @@ function changeShow() {
             right: 0;
 
             width: inherit;
-            height: 102px;
+            // height: 102px;
+            height: 95px;
 
             border-bottom: 1px solid #B7B7B7;
             content: "";
@@ -164,6 +155,7 @@ function changeShow() {
         right: 0;
         max-height: 294px;
         width: inherit;
+        max-width: inherit;
 
         overflow-y: auto;
 
