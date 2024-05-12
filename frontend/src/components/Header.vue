@@ -23,10 +23,14 @@ export default {
         showSearchFunc() {
             this.showSearch = !this.showSearch
             this.showButtons = !this.showButtons
-
+            
             if (!this.showSearch) {
                 this.appleStore.searchData = []
             }
+        },
+        openSearchTablet(){
+            this.showSearch = true
+            this.showButtons = false
         }
     }
 }
@@ -90,9 +94,14 @@ export default {
                     <img src='../assets/logo.svg' alt="logo">
                 </RouterLink>
                 <div class="input-search">
-                    <img src="../assets/icons/header/search.svg"><input type="text" class="search"
-                        placeholder="Поиск по каталогу товаров" @keydown="appleStore.searchFunc($event.target.value)">
+                    <img v-if="showSearch == true" src="../assets/icons/header/search_active.svg">
+                    <img v-else src="../assets/icons/header/search.svg">
+                    <input type="text" class="search" placeholder="Поиск по каталогу товаров"
+                        @keydown="appleStore.searchFunc($event.target.value)" @click="openSearchTablet()">
                 </div>
+                <button class="buttonIcons" @click="showSearchFunc()">
+                    <img v-if="showButtons == false" src="../assets/icons/header/close.svg">
+                </button>
             </div>
 
             <div class="header-info">
