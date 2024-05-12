@@ -7,10 +7,26 @@ export default {
     components: {
         Search
     },
-    setup(){
+    data() {
+        return {
+            showSearch: false,
+            showButtons: true
+        }
+    },
+    setup() {
         const appleStore = useCounterStore()
-        return{
+        return {
             appleStore
+        }
+    },
+    methods: {
+        showSearchFunc() {
+            this.showSearch = !this.showSearch
+            this.showButtons = !this.showButtons
+
+            if (!this.showSearch) {
+                this.appleStore.searchData = []
+            }
         }
     }
 }
@@ -20,7 +36,15 @@ export default {
     <div class="location">
         <div class="container location-header">
 
-            <p>Ваш город: <span>Москва V</span></p>
+            <!-- <p>Ваш город: <span>Москва V</span></p> -->
+            <p>Ваш город:
+                <select name="select-city" id="city">
+                    <option value="Moscow">Москва</option>
+                    <option value="SP">Санкт-Петербург</option>
+                    <option value="Ekaterinburg">Екатеринбург</option>
+                    <option value="Kazan">Казань</option>
+                </select>
+            </p>
 
             <div class="social-media">
                 <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
@@ -34,14 +58,24 @@ export default {
 
         <div class="container header-mobile">
 
-            <RouterLink to="/">
-                <img src='../assets/logo.svg' alt="logo">
-            </RouterLink>
+            <div class="header-info">
+                <RouterLink to="/">
+                    <img src='../assets/logo.svg' alt="logo">
+                </RouterLink>
+
+                <div v-show="showSearch" class="input-search">
+                    <img src="../assets/icons/header/search_active.svg"><input type="text" class="search"
+                        placeholder="Поиск по каталогу товаров" @keydown="appleStore.searchFunc($event.target.value)">
+                </div>
+            </div>
 
             <div class="header-buttons">
-                <button class="buttonIcons"><img src="../assets/icons/header/search.svg"></button>
-                <a href="#!"><img src="../assets/icons/header/call.svg" alt="#"></a>
-                <button class="buttonIcons"><img src="../assets/icons/header/menu.svg"></button>
+                <button class="buttonIcons" @click="showSearchFunc()">
+                    <img v-if="showButtons == true" src="../assets/icons/header/search.svg">
+                    <img v-else-if="showButtons == false" src="../assets/icons/header/close.svg">
+                </button>
+                <a v-show="showButtons" href="#!"><img src="../assets/icons/header/call.svg" alt="#"></a>
+                <button v-show="showButtons" class="buttonIcons"><img src="../assets/icons/header/menu.svg"></button>
             </div>
 
             <!-- Окно с результатом поиска -->
@@ -101,7 +135,8 @@ export default {
             <div class="header-search">
                 <button class="buttonElem"><img src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
 
-                <input type="text" placeholder="Поиск по каталогу товаров" @keydown="appleStore.searchFunc($event.target.value)">
+                <input type="text" placeholder="Поиск по каталогу товаров"
+                    @keydown="appleStore.searchFunc($event.target.value)">
 
                 <!-- Окно с результатом поиска -->
                 <Search />
@@ -176,8 +211,16 @@ export default {
         justify-content: space-between;
         align-items: center;
 
-        p>span {
+        p>select {
             color: #0071E4;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            width: 85px;
+
+            option {
+                background: #FFF;
+            }
         }
 
         .social-media {
@@ -200,11 +243,33 @@ header {
         justify-content: space-between;
         align-items: center;
 
+        .header-info {
+
+            display: flex;
+            align-items: center;
+
+            .input-search {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-left: 18px;
+
+                input {
+                    width: 200px;
+                    border: none;
+                    outline: none;
+                    font-size: 16px;
+                }
+            }
+
+        }
+
+
         .header-buttons {
             display: flex;
             gap: 35px;
             align-items: center;
-
+            position: relative;
         }
 
         @media screen and (max-width: 768px) {

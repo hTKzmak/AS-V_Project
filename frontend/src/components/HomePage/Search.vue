@@ -151,6 +151,7 @@ const appleStore = useCounterStore();
 
     @media screen and (max-width: 768px) {
         top: 128px;
+        // top: 150px;
         left: 0;
         right: 0;
         max-height: 294px;

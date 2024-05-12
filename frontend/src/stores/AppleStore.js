@@ -48,8 +48,6 @@ export const useCounterStore = defineStore('appleStore', {
             else {
                 this.searchData = []
             }
-
-            console.log(value)
         }
     }
 })
