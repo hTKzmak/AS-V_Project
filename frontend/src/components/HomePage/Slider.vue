@@ -163,12 +163,12 @@ import { RouterLink } from 'vue-router'
     }
 
     @media screen and (min-width: 769px) and (max-width: 1440px) {
-        padding-top: 40px;
+        padding-top: 100px;
         padding-bottom: 40px;
     }
 
     @media screen and (max-width: 768px) {
-        padding-top: 16px;
+        padding-top: 100px;
         padding-bottom: 16px;
     }
 }
