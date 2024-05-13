@@ -66,6 +66,7 @@ export default {
 
         <!-- меню для планшета и телефона -->
         <div v-show="showMenu" class="menuModal container">
+            <a href="#!" class="recall">Вам перезвонить?</a>
             <p>Ваш город:
                 <select name="select-city" id="city">
                     <option value="Moscow">Москва</option>
@@ -516,6 +517,16 @@ header {
         right: 0;
         top: 64px;
         height: 100rem;
+
+        .recall {
+            position: absolute;
+            right: 80px;
+            top: -20px;
+
+            @media screen and (max-width: 768px) {
+                display: none;
+            }
+        }
 
         p {
             font-size: 18px;
