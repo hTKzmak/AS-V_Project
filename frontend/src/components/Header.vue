@@ -23,12 +23,12 @@ export default {
         showSearchFunc() {
             this.showSearch = !this.showSearch
             this.showButtons = !this.showButtons
-            
+
             if (!this.showSearch) {
                 this.appleStore.searchData = []
             }
         },
-        openSearchTablet(){
+        openSearchTablet() {
             this.showSearch = true
             this.showButtons = false
         }
@@ -40,7 +40,6 @@ export default {
     <div class="location">
         <div class="container location-header">
 
-            <!-- <p>Ваш город: <span>Москва V</span></p> -->
             <p>Ваш город:
                 <select name="select-city" id="city">
                     <option value="Moscow">Москва</option>
@@ -238,6 +237,10 @@ export default {
         }
     }
 
+    @media screen and (max-width: 1440px) {
+        display: none;
+    }
+
 }
 
 header {
@@ -391,69 +394,6 @@ header {
                 background-position: 15px 50%;
             }
 
-            // ul {
-            //     padding: 0;
-            //     position: absolute;
-            //     right: 50%;
-            //     left: 19.6%;
-            //     top: 50px;
-            //     width: 45vw;
-            //     max-width: 706px;
-            //     background-color: #FFFFFF;
-            //     border-radius: 16px;
-
-            //     li {
-            //         display: flex;
-            //         justify-content: space-between;
-            //         align-items: center;
-
-            //         list-style-type: none;
-            //         padding: 16px 32px;
-
-
-            //         .search-product-info {
-
-            //             display: flex;
-            //             align-items: center;
-            //             gap: 16px;
-
-            //             img {
-            //                 width: 64px;
-            //             }
-
-            //             .product-title {
-            //                 .title {
-            //                     font-size: 20px;
-            //                     color: #100E0E;
-            //                     margin: 0;
-            //                 }
-
-            //                 .price {
-            //                     font-size: 24px;
-            //                     color: #282626;
-            //                     margin: 0;
-            //                 }
-            //             }
-            //         }
-
-            //         &::before {
-            //             position: absolute;
-            //             left: 0;
-            //             right: 0;
-
-            //             width: inherit;
-            //             height: 102px;
-
-            //             border-bottom: 1px solid #B7B7B7;
-            //             content: "";
-            //         }
-
-            //         &:last-child::before {
-            //             width: 96%;
-            //             left: 13px;
-            //         }
-            //     }
-            // }
         }
 
         .header-categories {
@@ -528,6 +468,13 @@ header {
         box-shadow: 0px 4px 4px 0px #00000040 inset;
         padding: 4px 12px;
         border-radius: 32px;
+    }
+
+    @media screen and (max-width: 1440px) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
     }
 }
 </style>

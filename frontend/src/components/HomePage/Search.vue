@@ -135,7 +135,8 @@ const appleStore = useCounterStore();
     }
 
     @media screen and (min-width: 769px) and (max-width: 1440px) {
-        top: 128px;
+        // top: 128px;
+        top: 48px;
         left: 15%;
         max-height: 344px;
         width: 70vw;
@@ -150,8 +151,9 @@ const appleStore = useCounterStore();
     }
 
     @media screen and (max-width: 768px) {
-        top: 128px;
+        // top: 128px;
         // top: 150px;
+        top: 48px;
         left: 0;
         right: 0;
         max-height: 294px;
