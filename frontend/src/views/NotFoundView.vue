@@ -30,9 +30,16 @@ export default {
 
   h1 {
     margin: 0;
+
+    @media screen and (max-width:768px) {
+      font-size: 32px;
+    }
   }
 
   p {
+
+    color: #585656;
+
     @media screen and (max-width: 768px) {
       width: 14rem;
       margin: 10px auto;

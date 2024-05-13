@@ -32,7 +32,7 @@ export default {
     <div class="container banner-title">
       <h1>iPhone 14 Pro Max</h1>
       <p>по лучшей цене в Москве</p>
-      <ButtonElem title="подробнее" />
+      <ButtonElem title="подробнее" addedItemStyle="false" />
     </div>
   </div>
 

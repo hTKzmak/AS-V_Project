@@ -4,12 +4,13 @@ import ButtonElem from './UI/ButtonElem.vue';
 export default {
     components: {
         ButtonElem
-    }
+    },
+    props: ['id', 'title', 'price', 'image', 'rating', 'discount']
 }
 </script>
 
 <template>
-    <div class="product-item">
+    <div class="product-item" :id='id'>
         <div class="rating-and-settings">
             <div class="star-rating">
                 <span class="fa fa-star checked"></span>
@@ -29,8 +30,8 @@ export default {
             </div>
         </div>
 
-        <h3>Apple iPhone XS Max 256 ГБ золотой</h3>
-        <img class="product-image" src="../assets/img.png" alt="img">
+        <h3>{{title}}</h3>
+        <img class="product-image" :src="image" alt="img">
 
         <div class="product-item-info">
             <div class="product-info">
@@ -42,13 +43,13 @@ export default {
             </div>
 
             <div class="price-info">
-                <h4>137 900 ₽</h4>
+                <h4>{{ price }} ₽</h4>
                 <!-- мобильная версия кнопки для покупки  -->
-                <ButtonElem title="137 900 ₽" img='/cart.svg' />
+                <ButtonElem :title="price + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'/>
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
-                <h3>137 900 ₽</h3>
+                <h3>{{ price }} ₽</h3>
             </div>
 
             <!-- ПК версия кнопки для покупки  -->
@@ -63,7 +64,9 @@ export default {
             </div>
         </div>
 
-        <div class="absent">
+        <!-- если товара нет в наличии -->
+
+        <!-- <div class="absent">
             <div class="product-info">
                 <div class="existence">
                     <div class="absent-sign"></div>
@@ -72,7 +75,7 @@ export default {
             </div>
             <p class="text-info">Мы можем сообщить вам, когда товар появится в наличии</p>
             <button class="buttonElem">сообщить о поступлении</button>
-        </div>
+        </div> -->
 
     </div>
 </template>

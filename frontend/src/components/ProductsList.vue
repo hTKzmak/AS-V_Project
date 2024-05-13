@@ -5,14 +5,14 @@ export default {
     components: {
         ProductItem
     },
-    props: ['count']
+    props: ['count', 'data']
 }
 </script>
 
 <template>
     <div class="products-list">
-        <div v-for="index in count" :key="index">
-            <ProductItem />
+        <div v-for="index of data.slice(0, count)" :key="index">
+            <ProductItem :id="index.id" :title="index.title" :price="index.price" :image="index.image" :rating="index.rating" :discount="index.discount"/>
         </div>
     </div>
 </template>
