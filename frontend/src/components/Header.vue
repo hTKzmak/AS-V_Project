@@ -10,7 +10,8 @@ export default {
     data() {
         return {
             showSearch: false,
-            showButtons: true
+            showButtons: true,
+            showMenu: false
         }
     },
     setup() {
@@ -31,6 +32,9 @@ export default {
         openSearchTablet() {
             this.showSearch = true
             this.showButtons = false
+        },
+        showMenuFunc() {
+            this.showMenu = !this.showMenu
         }
     }
 }
@@ -57,7 +61,35 @@ export default {
         </div>
     </div>
 
+
     <header>
+
+        <!-- меню для планшета и телефона -->
+        <div v-show="showMenu" class="menuModal container">
+            <p>Ваш город:
+                <select name="select-city" id="city">
+                    <option value="Moscow">Москва</option>
+                    <option value="SP">Санкт-Петербург</option>
+                    <option value="Ekaterinburg">Екатеринбург</option>
+                    <option value="Kazan">Казань</option>
+                </select>
+            </p>
+            <ul>
+                <li><a href="#!">Весь каталог</a></li>
+                <li><a href="#!" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</a></li>
+                <li><a href="#!">Гарантия</a></li>
+                <li><a href="#!">Политика возрата</a></li>
+                <li><a href="#!">Кредит</a></li>
+                <li><a href="#!">Доставка и оплата</a></li>
+                <li><a href="#!">Отзывы</a></li>
+                <li><a href="#!">Контакты</a></li>
+                <div class="social-media">
+                    <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
+                    <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
+                    <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
+                </div>
+            </ul>
+        </div>
 
         <div class="container header-mobile">
 
@@ -78,7 +110,10 @@ export default {
                     <img v-else-if="showButtons == false" src="../assets/icons/header/close.svg">
                 </button>
                 <a v-show="showButtons" href="#!"><img src="../assets/icons/header/call.svg" alt="#"></a>
-                <button v-show="showButtons" class="buttonIcons"><img src="../assets/icons/header/menu.svg"></button>
+                <button class="buttonIcons" @click="showMenuFunc()">
+                    <img v-if="showMenu == true" src="../assets/icons/header/close.svg">
+                    <img v-else src="../assets/icons/header/menu.svg">
+                </button>
             </div>
 
             <!-- Окно с результатом поиска -->
@@ -106,7 +141,10 @@ export default {
             <div class="header-info">
                 <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812 561 96
                     62</a>
-                <button class="buttonIcons"><img src="../assets/icons/header/menu.svg"></button>
+                <button class="buttonIcons" @click="showMenuFunc()">
+                    <img v-if="showMenu == true" src="../assets/icons/header/close.svg">
+                    <img v-else src="../assets/icons/header/menu.svg">
+                </button>
             </div>
 
             <!-- Окно с результатом поиска -->
@@ -470,11 +508,103 @@ header {
         border-radius: 32px;
     }
 
+    .menuModal {
+        display: none;
+        position: absolute;
+        background-color: #FFF;
+        left: 0;
+        right: 0;
+        top: 64px;
+        height: 100rem;
+
+        p {
+            font-size: 18px;
+
+            &>select {
+                color: #0071E4;
+                background: transparent;
+                border: none;
+                font-size: 16px;
+                width: 85px;
+
+                option {
+                    background: #FFF;
+                }
+            }
+        }
+
+
+        ul {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            padding-left: 0;
+            flex-wrap: wrap;
+            max-width: 80%;
+
+            li {
+                list-style-type: none;
+
+                #fire {
+                    border: 1px solid #FDEFBF;
+                    background-color: #FDEFBF;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 5px 10px;
+                    border-radius: 8px;
+                    width: fit-content;
+                }
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    text-decoration: none;
+                    font-size: 18px;
+
+                    color: #100E0E;
+
+
+                    &:hover {
+                        color: #0071E4;
+                    }
+
+                }
+            }
+
+            .social-media {
+                display: flex;
+                gap: 7px;
+            }
+
+            @media screen and (max-width: 768px) {
+                display: grid;
+                margin-top: 24px;
+            }
+        }
+
+        @media screen and (max-width: 1440px) {
+            display: inherit;
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1440px) {
+            height: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            height: 100rem;
+        }
+
+    }
+
     @media screen and (max-width: 1440px) {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
+        background-color: #fff;
     }
 }
 </style>
