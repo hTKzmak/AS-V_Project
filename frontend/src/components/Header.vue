@@ -3,6 +3,13 @@ import { RouterLink } from 'vue-router'
 import Search from '../components/HomePage/Search.vue'
 import { useCounterStore } from '@/stores/AppleStore';
 
+import iPhoneIcon from '../assets/icons/header/gadgets/iphone.svg'
+import iPadIcon from '../assets/icons/header/gadgets/ipad.svg'
+import iMacIcon from '../assets/icons/header/gadgets/macbook.svg'
+import watchIcon from '../assets/icons/header/gadgets/applewatch.svg'
+import gadgetsIcon from '../assets/icons/header/gadgets/airpods.svg'
+import toolsIcon from '../assets/icons/header/gadgets/tools.svg'
+
 export default {
     components: {
         Search
@@ -11,13 +18,55 @@ export default {
         return {
             showSearch: false,
             showButtons: true,
-            showMenu: false
+            showMenu: false,
+            activeCategory: null,
+            booleanCategory: false,
         }
     },
     setup() {
         const appleStore = useCounterStore()
         return {
-            appleStore
+            appleStore,
+            categories: [
+                {
+                    id: 1, title: 'iPhone', image: iPhoneIcon, list: [
+                        { id: 1, title: 'test', link: 'test' },
+                        { id: 2, title: 'test 2', link: 'test 2' },
+                    ]
+                },
+                {
+                    id: 2, title: 'iPad', image: iPadIcon, list: [
+                        { id: 1, title: 'test', link: 'test' },
+                        { id: 2, title: 'test 2', link: 'test 2' },
+                    ]
+                },
+                {
+                    id: 3, title: 'MacBook и iMac', image: iMacIcon, list: [
+                        { id: 1, title: 'test', link: 'test' },
+                        { id: 2, title: 'test 2', link: 'test 2' },
+                    ]
+                },
+                {
+                    id: 4, title: 'Watch', image: watchIcon, list: [
+                        { id: 1, title: 'test', link: 'test' },
+                        { id: 2, title: 'test 2', link: 'test 2' },
+                    ]
+                },
+                {
+                    id: 5, title: 'Гаджеты', image: gadgetsIcon, list: [
+                        { id: 1, title: 'iPhone 14 Pro Max', link: 'test' },
+                        { id: 2, title: 'iPhone 14 Pro', link: 'test 2' },
+                        { id: 3, title: 'iPhone 14', link: 'test 3' },
+                    ]
+                },
+                {
+                    id: 6, title: 'Аксессуары', image: toolsIcon, list: [
+                        { id: 1, title: 'test', link: 'test' },
+                        { id: 2, title: 'test 2', link: 'test 2' },
+                    ]
+                },
+
+            ]
         }
     },
     methods: {
@@ -35,13 +84,18 @@ export default {
         },
         showMenuFunc() {
             this.showMenu = !this.showMenu
+        },
+
+        showCategoryFunc(index) {
+            this.booleanCategory = !this.booleanCategory
+            this.activeCategory = index
         }
     }
 }
 </script>
 
 <template>
-    <div class="location">
+    <!-- <div class="location">
         <div class="container location-header">
 
             <p>Ваш город:
@@ -59,7 +113,7 @@ export default {
                 <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <header>
@@ -201,41 +255,16 @@ export default {
 
             <div class="header-categories">
                 <ul>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/iphone.svg">
-                            iPhone
+                    <li v-for="(category, index) in this.categories">
+                        <a href="#!" @mouseover="showCategoryFunc(index)">
+                            <img :src="category.image">
+                            {{ category.title }}
                         </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/ipad.svg">
-                            iPad
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/macbook.svg">
-                            MacBook и iMac
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/applewatch.svg">
-                            Watch
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/airpods.svg">
-                            Гаджеты
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/tools.svg">
-                            Аксессуары
-                        </a>
+                        <ul v-if="activeCategory === index && booleanCategory == true" class="categoriesList">
+                            <li v-for="listItem in category.list">
+                                <a href="#!">{{ listItem.title }}</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
 
@@ -248,39 +277,39 @@ export default {
 </template>
 
 <style lang="scss">
-.location {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background: #F9F9F9;
+// .location {
+//     padding-top: 10px;
+//     padding-bottom: 10px;
+//     background: #F9F9F9;
 
-    .location-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+//     .location-header {
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
 
-        p>select {
-            color: #0071E4;
-            background: transparent;
-            border: none;
-            font-size: 16px;
-            width: 85px;
+//         p>select {
+//             color: #0071E4;
+//             background: transparent;
+//             border: none;
+//             font-size: 16px;
+//             width: 85px;
 
-            option {
-                background: #FFF;
-            }
-        }
+//             option {
+//                 background: #FFF;
+//             }
+//         }
 
-        .social-media {
-            display: flex;
-            gap: 7px;
-        }
-    }
+//         .social-media {
+//             display: flex;
+//             gap: 7px;
+//         }
+//     }
 
-    @media screen and (max-width: 1440px) {
-        display: none;
-    }
+//     @media screen and (max-width: 1440px) {
+//         display: none;
+//     }
 
-}
+// }
 
 header {
     padding-top: 5px;
@@ -451,6 +480,8 @@ header {
                 li {
                     list-style-type: none;
 
+                    position: relative;
+
                     a {
                         display: flex;
                         align-items: center;
@@ -463,6 +494,28 @@ header {
 
                         &:hover {
                             color: #0071E4;
+                        }
+                    }
+
+                    .categoriesList {
+                        background-color: #FFF;
+                        border-bottom-left-radius: 8px;
+                        border-bottom-right-radius: 8px;
+
+                        display: grid;
+
+                        padding: 16px;
+
+                        position: absolute;
+                        top: 75px;
+                        left: 0;
+                        right: 0;
+
+                        padding-bottom: 27px;
+                        width: 130px;
+
+                        a{
+                            font-size: 16px;
                         }
                     }
                 }
