@@ -20,7 +20,6 @@ export default {
             showButtons: true,
             showMenu: false,
             activeCategory: null,
-            booleanCategory: false,
         }
     },
     setup() {
@@ -86,9 +85,13 @@ export default {
             this.showMenu = !this.showMenu
         },
 
-        showCategoryFunc(index) {
-            this.booleanCategory = !this.booleanCategory
-            this.activeCategory = index
+        showCategoryFunc(index, showing) {
+            if(showing == 'show'){
+                this.activeCategory = index;
+            }
+            else{
+                this.activeCategory = null;
+            }
         }
     }
 }
@@ -256,11 +259,11 @@ export default {
             <div class="header-categories">
                 <ul>
                     <li v-for="(category, index) in this.categories">
-                        <a href="#!" @mouseover="showCategoryFunc(index)">
+                        <a href="#!" @mouseover="showCategoryFunc(index, 'show')">
                             <img :src="category.image">
                             {{ category.title }}
                         </a>
-                        <ul v-if="activeCategory === index && booleanCategory == true" class="categoriesList">
+                        <ul v-show="activeCategory === index" class="categoriesList" @mouseleave="showCategoryFunc(index, 'hide')">
                             <li v-for="listItem in category.list">
                                 <a href="#!">{{ listItem.title }}</a>
                             </li>
