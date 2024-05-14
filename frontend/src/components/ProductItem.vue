@@ -1,5 +1,6 @@
 <script setup>
 import { useModalStore } from '@/stores/ModalStore';
+import ButtonElem from './UI/ButtonElem.vue';
 // import ButtonElem from './UI/ButtonElem.vue';
 
 // export default {
@@ -16,17 +17,29 @@ const changeHandle = () => {
     // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
     modalStore.changeModal('Better')
 }
+
+
+    // props: ['id', 'title', 'price', 'image', 'rating', 'discount']
+    const props = defineProps({
+        id: Number,
+        title: String,
+        price: Number,
+        image: String,
+        raring: Number,
+        discount: Number
+    });
+
 </script>
 
 <template>
-    <div class="product-item">
+    <div class="product-item" :id='props.id'>
         <div class="rating-and-settings">
             <div class="star-rating">
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
+                <span class="fa fa-star missed"></span>
                 <a href="#!">(14)</a>
             </div>
             <div class="settings">
@@ -39,29 +52,53 @@ const changeHandle = () => {
             </div>
         </div>
 
-        <h3>Apple iPhone XS Max 256 ГБ золотой</h3>
-        <img class="product-image" src="../assets/img.png" alt="img">
+        <h3>{{props.title}}</h3>
+        <img class="product-image" :src="props.image" alt="img">
 
-        <div class="product-info">
-            <div class="existence">
-                <div class="existence-sign"></div>
-                <p>Есть в наличии</p>
+        <div class="product-item-info">
+            <div class="product-info">
+                <div class="existence">
+                    <div class="existence-sign"></div>
+                    <p>Есть в наличии</p>
+                </div>
+                <p>Гарантия 1 год</p>
             </div>
-            <p>Гарантия 1 год</p>
+
+            <div class="price-info">
+                <h4>{{ props.price }} ₽</h4>
+                <!-- мобильная версия кнопки для покупки  -->
+                <ButtonElem :title="props.price + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'/>
+
+                <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
+                <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
+                <h3>{{ props.price }} ₽</h3>
+            </div>
+
+            <!-- ПК версия кнопки для покупки  -->
+            <ButtonElem title="в корзину" img='/cart.svg' addedItemStyle='false' />
+
+            <!-- ПК версия кнопки для показа, что товар положен в корзину  -->
+            <!-- <button class="buttonElem buttonCartAdded"><img src="../assets/icons/cart-added.svg">в корзине</button> -->
+
+            <div class="other">
+                <a href="#!" @click="changeHandle">Хочу дешевле</a>
+                <a class="oneCLick" href="#!">Купить в 1 клик</a>
+            </div>
         </div>
 
-        <div class="price-info">
-            <h4>137 900 ₽</h4>
-            <button class="buttonElem buttonCart">137 900 ₽<img src="../assets/icons/cart.svg"></button>
-            <h3>137 900 ₽</h3>
-        </div>
+        <!-- если товара нет в наличии -->
 
-        <button class="buttonElem buttonCart"><img src="../assets/icons/cart.svg" alt="">в корзину</button>
+        <!-- <div class="absent">
+            <div class="product-info">
+                <div class="existence">
+                    <div class="absent-sign"></div>
+                    <p>Ожидается поступление</p>
+                </div>
+            </div>
+            <p class="text-info">Мы можем сообщить вам, когда товар появится в наличии</p>
+            <button class="buttonElem">сообщить о поступлении</button>
+        </div> -->
 
-        <div class="other">
-            <a href="#!" @click="changeHandle">Хочу дешевле</a>
-            <a class="oneCLick" href="#!">Купить в 1 клик</a>
-        </div>
     </div>
 </template>
 
@@ -87,6 +124,10 @@ const changeHandle = () => {
 
             .checked {
                 color: #FFAD31;
+            }
+
+            .missed {
+                color: #DBDBDB;
             }
 
             a {
@@ -118,78 +159,168 @@ const changeHandle = () => {
         height: 300px;
     }
 
-    .product-info,
-    .existence {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 16px;
-        color: #706E6E;
+    .product-item-info {
 
-        .existence-sign {
-            width: 16px;
-            height: 16px;
-            background-color: #52D116;
-            border-radius: 100px;
-            margin-right: 2px;
-        }
-    }
+        // display: none;
 
-    .price-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
+        width: inherit;
 
-        h4 {
-            text-decoration: line-through;
-            font-size: 20px;
-            color: #878787;
-            margin: 0;
+        .product-info,
+        .existence {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            color: #706E6E;
+
+            .existence-sign {
+                width: 16px;
+                height: 16px;
+                background-color: #52D116;
+                border-radius: 100px;
+                margin-right: 2px;
+            }
         }
 
-        h3 {
-            font-size: 32px;
-            margin: 0;
+        .price-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+
+            h4 {
+                text-decoration: line-through;
+                font-size: 20px;
+                color: #878787;
+                margin: 0;
+            }
+
+            h3 {
+                font-size: 32px;
+                margin: 0;
+
+                @media screen and (max-width: 1440px) {
+                    display: none;
+                }
+            }
+
+            // .buttonCart,
+            // .buttonCartAdded {
+            //     display: none;
+
+            //     @media screen and (max-width: 1440px) {
+            //         display: flex;
+            //     }
+            // }
+
+            button {
+                display: none;
+
+                @media screen and (max-width: 1440px) {
+                    display: flex;
+                }
+            }
+        }
+
+        .other {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+
+            .oneCLick {
+                font-size: 16px;
+                color: #706E6E;
+            }
+
+        }
+
+        // .buttonCart,
+        // .buttonCartAdded {
+        //     padding: 20px;
+        //     border-radius: 8px;
+
+        //     @media screen and (max-width: 1440px) {
+        //         display: none;
+        //     }
+        // }
+
+        button {
+            padding: 16px;
+            border-radius: 8px;
 
             @media screen and (max-width: 1440px) {
                 display: none;
             }
         }
 
-        .buttonCart {
-            display: none;
-
-            @media screen and (max-width: 1440px) {
-                display: flex;
-            }
+        .buttonCartAdded {
+            background-color: #6FD91C;
         }
-    }
-
-    .other {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-
-        .oneCLick {
-            font-size: 16px;
-            color: #706E6E;
-        }
-
-    }
-
-    .buttonCart {
-        padding: 20px;
-        border-radius: 8px;
 
         @media screen and (max-width: 1440px) {
-            display: none;
+            width: 259px;
         }
+    }
+
+
+    .absent {
+        width: inherit;
+        // display: none;
+
+        .product-info,
+        .existence {
+            display: flex;
+            justify-content: left;
+            gap: 2px;
+            align-items: center;
+            font-size: 16px;
+            color: #706E6E;
+
+            .absent-sign {
+                width: 16px;
+                height: 16px;
+                background-color: #0071E4;
+                border-radius: 100px;
+                margin-right: 2px;
+            }
+
+            @media screen and (max-width: 1440px) {
+                justify-content: center;
+            }
+
+        }
+
+        .text-info {
+            margin: 0;
+            color: #878787;
+            margin-left: 18px;
+        }
+
+        button {
+            border: 1px solid #0071E4;
+            color: #0071E4;
+            background: transparent;
+
+            margin-top: 16px;
+
+            padding: 17px 10px;
+
+            font-size: 18px;
+
+            border-radius: 8px;
+
+            @media screen and (max-width: 1440px) {
+                border: none;
+                padding: 0;
+            }
+        }
+
     }
 
     @media screen and (max-width: 1440px) {
-        width: 259px;
+        text-align: center;
     }
+
 }
 </style>
