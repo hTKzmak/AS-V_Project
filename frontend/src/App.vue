@@ -1,8 +1,11 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import Menu from './components/Menu.vue'
+import ModalWindow from './components/ModalWindow.vue'
+
 </script>
 
 <template>
@@ -14,6 +17,7 @@ import Menu from './components/Menu.vue'
   </header> -->
 
   <Header/>
+  <ModalWindow/>
 
   <!-- <main class="container"> -->
   <main>
@@ -26,4 +30,9 @@ import Menu from './components/Menu.vue'
 </template>
 
 <style>
+
+body{
+  position: relative;
+}
+
 </style>

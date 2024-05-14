@@ -1,8 +1,19 @@
-<script>
+<script setup>
 import { RouterLink } from 'vue-router'
+import { useModalStore } from '@/stores/ModalStore';
+
+const modalStore = useModalStore()
+
+const changeHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal.value = 'Bucket'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    modalStore.changeModal('Bucket')
+}
 </script>
 
 <template>
+
     <div class="location">
         <div class="container location-header">
 
@@ -82,7 +93,7 @@ import { RouterLink } from 'vue-router'
                 <input type="text" placeholder="Поиск по каталогу товаров">
                 <a href="#!"><img src="../assets/icons/header/heart.svg" alt=""></a>
                 <a href="#!"><img src="../assets/icons/header/filters.svg" alt=""></a>
-                <button class="buttonElem basketBtn">
+                <button class="buttonElem basketBtn" @click="changeHandle">
                     <img src="../assets/icons/header/basket.svg" alt="">
                     в корзине
                     <div class="basketCount">
@@ -137,6 +148,8 @@ import { RouterLink } from 'vue-router'
 
         </div>
     </header>
+
+    
 </template>
 
 <style lang="scss">

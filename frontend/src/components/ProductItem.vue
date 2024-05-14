@@ -1,4 +1,5 @@
-<script>
+<script setup>
+import { useModalStore } from '@/stores/ModalStore';
 // import ButtonElem from './UI/ButtonElem.vue';
 
 // export default {
@@ -6,6 +7,15 @@
 //     ButtonElem
 //   }
 // }
+
+const modalStore = useModalStore()
+
+const changeHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal = 'Better'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    modalStore.changeModal('Better')
+}
 </script>
 
 <template>
@@ -49,7 +59,7 @@
         <button class="buttonElem buttonCart"><img src="../assets/icons/cart.svg" alt="">в корзину</button>
 
         <div class="other">
-            <a href="#!">Хочу дешевле</a>
+            <a href="#!" @click="changeHandle">Хочу дешевле</a>
             <a class="oneCLick" href="#!">Купить в 1 клик</a>
         </div>
     </div>
