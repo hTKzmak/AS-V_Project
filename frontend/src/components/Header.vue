@@ -119,7 +119,6 @@ export default {
         </div>
     </div> -->
 
-
     <header>
 
         <!-- меню для планшета и телефона -->
@@ -243,15 +242,25 @@ export default {
                         :class="[!activateCatalog ? 'buttonElem' : 'buttonElem catalogBtn']"><img
                             src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
 
-                    <div class="catalogModal">
-                        <ul v-show="activateCatalog" class="catalogList">
-                            <li>Смартфоны</li>
-                            <li>Планшеты</li>
-                            <li>Компьютеры</li>
-                            <li>Часы</li>
-                            <li>Аксессуары</li>
-                            <li>Акции</li>
-                        </ul>
+                    <div class="catalog">
+                        <div v-show="activateCatalog" class="catalogModal">
+                            <ul class="catalogToolsList">
+                                <li>Смартфоны</li>
+                                <li>Планшеты</li>
+                                <li>Компьютеры</li>
+                                <li>Часы</li>
+                                <li>Аксессуары</li>
+                                <li>Акции</li>
+                            </ul>
+                            <ul v-show="activateCatalog" class="catalogItemsList">
+                                <li>Смартфоны</li>
+                                <li>Планшеты</li>
+                                <li>Компьютеры</li>
+                                <li>Часы</li>
+                                <li>Аксессуары</li>
+                                <li>Акции</li>
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
@@ -477,46 +486,63 @@ header {
                     border-bottom-right-radius: 0;
                 }
 
-                .catalogModal {
+                .catalog {
 
                     position: absolute;
                     left: 0;
                     right: 0;
                     z-index: 1;
 
-                    .catalogList {
-                        // position: absolute;
+                    .catalogModal {
                         background-color: #fff;
 
-                        display: grid;
-                        gap: 8px;
+                        display: flex;
+                        width: fit-content;
 
-                        // left: 0;
-                        // right: 0;
-                        // z-index: 1;
                         padding: 20px 16px 40px;
+                        margin: 0;
 
                         border-bottom-left-radius: 16px;
                         border-bottom-right-radius: 16px;
 
-                        li {
-                            background-color: #F9F9F9;
+                        .catalogToolsList {
+                            display: grid;
+                            gap: 8px;
+                            width: 189px;
 
-                            list-style-type: none;
+                            li {
+                                background-color: #F9F9F9;
 
-                            font-size: 20px;
+                                list-style-type: none;
 
-                            padding: 8px;
-                            border-radius: 8px;
+                                font-size: 20px;
 
-                            cursor: pointer;
+                                padding: 8px;
+                                border-radius: 8px;
 
-                            &:hover {
-                                color: #0071E4;
-                                background-color: #F0E4FF;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: #0071E4;
+                                    background-color: #F0E4FF;
+                                }
                             }
                         }
+
+                        .catalogItemsList {
+                            margin-left: 16px;
+
+                            li {
+                                list-style-type: none;
+
+                                font-size: 20px;
+
+                                cursor: pointer;
+                            }
+                        }
+
                     }
+
                 }
 
             }
