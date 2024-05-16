@@ -20,6 +20,7 @@ export default {
             showButtons: true,
             showMenu: false,
             activeCategory: null,
+            activateCatalog: false
         }
     },
     setup() {
@@ -86,10 +87,10 @@ export default {
         },
 
         showCategoryFunc(index, showing) {
-            if(showing == 'show'){
+            if (showing == 'show') {
                 this.activeCategory = index;
             }
-            else{
+            else {
                 this.activeCategory = null;
             }
         }
@@ -237,7 +238,23 @@ export default {
 
 
             <div class="header-search">
-                <button class="buttonElem"><img src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
+                <div class="catalogNavigation">
+                    <button @click="activateCatalog = !activateCatalog"
+                        :class="[!activateCatalog ? 'buttonElem' : 'buttonElem catalogBtn']"><img
+                            src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
+
+                    <div class="catalogModal">
+                        <ul v-show="activateCatalog" class="catalogList">
+                            <li>Смартфоны</li>
+                            <li>Планшеты</li>
+                            <li>Компьютеры</li>
+                            <li>Часы</li>
+                            <li>Аксессуары</li>
+                            <li>Акции</li>
+                        </ul>
+                    </div>
+
+                </div>
 
                 <input type="text" placeholder="Поиск по каталогу товаров"
                     @keydown="appleStore.searchFunc($event.target.value)">
@@ -263,7 +280,8 @@ export default {
                             <img :src="category.image">
                             {{ category.title }}
                         </a>
-                        <ul v-show="activeCategory === index" class="categoriesList" @mouseleave="showCategoryFunc(index, 'hide')">
+                        <ul v-show="activeCategory === index" class="categoriesList"
+                            @mouseleave="showCategoryFunc(index, 'hide')">
                             <li v-for="listItem in category.list">
                                 <a href="#!">{{ listItem.title }}</a>
                             </li>
@@ -449,6 +467,60 @@ header {
 
             position: relative;
 
+            .catalogNavigation {
+
+                position: relative;
+
+                .catalogBtn {
+                    background-color: #9747FF;
+                    border-bottom-left-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+
+                .catalogModal {
+
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    z-index: 1;
+
+                    .catalogList {
+                        // position: absolute;
+                        background-color: #fff;
+
+                        display: grid;
+                        gap: 8px;
+
+                        // left: 0;
+                        // right: 0;
+                        // z-index: 1;
+                        padding: 20px 16px 40px;
+
+                        border-bottom-left-radius: 16px;
+                        border-bottom-right-radius: 16px;
+
+                        li {
+                            background-color: #F9F9F9;
+
+                            list-style-type: none;
+
+                            font-size: 20px;
+
+                            padding: 8px;
+                            border-radius: 8px;
+
+                            cursor: pointer;
+
+                            &:hover {
+                                color: #0071E4;
+                                background-color: #F0E4FF;
+                            }
+                        }
+                    }
+                }
+
+            }
+
             input {
                 border-radius: 8px;
                 border: 1px solid #B7B7B7;
@@ -517,7 +589,7 @@ header {
                         padding-bottom: 27px;
                         width: 130px;
 
-                        a{
+                        a {
                             font-size: 16px;
                         }
                     }
