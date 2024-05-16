@@ -252,14 +252,15 @@ export default {
                                 <li>Аксессуары</li>
                                 <li>Акции</li>
                             </ul>
-                            <ul v-show="activateCatalog" class="catalogItemsList">
-                                <li>Смартфоны</li>
-                                <li>Планшеты</li>
-                                <li>Компьютеры</li>
-                                <li>Часы</li>
-                                <li>Аксессуары</li>
-                                <li>Акции</li>
-                            </ul>
+                            <div v-show="activateCatalog" class="catalogItemsList">
+                                <div class="catalogItem" v-for="index in 20" :id=index>
+                                    <img src="../assets/img.png">
+                                    <div class="title">
+                                        <p>iPhone 14 Pro Max</p>
+                                        <span>от 31 480₽</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -498,6 +499,7 @@ header {
 
                         display: flex;
                         width: fit-content;
+                        // height: 355px;
 
                         padding: 20px 16px 40px;
                         margin: 0;
@@ -509,6 +511,7 @@ header {
                             display: grid;
                             gap: 8px;
                             width: 189px;
+                            margin: 0;
 
                             li {
                                 background-color: #F9F9F9;
@@ -530,14 +533,60 @@ header {
                         }
 
                         .catalogItemsList {
+                            display: grid;
+                            grid-template-columns: repeat(3, auto);
+                            gap: 8px;
+
+                            overflow-y: auto;
+
+                            width: 53rem;
+                            height: 18rem;
                             margin-left: 16px;
+                            
 
-                            li {
-                                list-style-type: none;
+                            .catalogItem {
+                                display: flex;
+                                align-items: center;
 
-                                font-size: 20px;
+                                // width: 206px;
+                                // height: 64px;
+                                padding: 8px 16px 8px;
+
+                                background-color: #F9F9F9;
+
+                                border-radius: 8px;
+                                gap: 6px;
+
+                                transition: 0.3s;
 
                                 cursor: pointer;
+
+                                img {
+                                    width: 48px;
+                                }
+
+                                .title {
+
+                                    p,
+                                    span {
+                                        margin: 0;
+                                    }
+
+                                    p {
+                                        font-size: 16px;
+                                    }
+
+                                    span {
+                                        font-size: 14px;
+                                        color: #282626;
+                                    }
+                                }
+
+                                &:hover {
+                                    -webkit-box-shadow: 4px 4px 10px 0px rgba(34, 60, 80, 0.2);
+                                    -moz-box-shadow: 4px 4px 10px 0px rgba(34, 60, 80, 0.2);
+                                    box-shadow: 4px 4px 10px 0px rgba(34, 60, 80, 0.2);
+                                }
                             }
                         }
 
