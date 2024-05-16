@@ -20,7 +20,8 @@ export default {
             showButtons: true,
             showMenu: false,
             activeCategory: null,
-            activateCatalog: false
+            activateCatalog: false,
+            showProducts: false,
         }
     },
     setup() {
@@ -245,14 +246,14 @@ export default {
                     <div class="catalog">
                         <div v-show="activateCatalog" class="catalogModal">
                             <ul class="catalogToolsList">
-                                <li>Смартфоны</li>
-                                <li>Планшеты</li>
-                                <li>Компьютеры</li>
-                                <li>Часы</li>
-                                <li>Аксессуары</li>
-                                <li>Акции</li>
+                                <li @click="showProducts = !showProducts">Смартфоны</li>
+                                <li @click="showProducts = !showProducts">Планшеты</li>
+                                <li @click="showProducts = !showProducts">Компьютеры</li>
+                                <li @click="showProducts = !showProducts">Часы</li>
+                                <li @click="showProducts = !showProducts">Аксессуары</li>
+                                <li @click="showProducts = !showProducts">Акции</li>
                             </ul>
-                            <div v-show="activateCatalog" class="catalogItemsList">
+                            <div v-show="showProducts" class="catalogItemsList">
                                 <div class="catalogItem" v-for="index in 20" :id=index>
                                     <img src="../assets/img.png">
                                     <div class="title">
@@ -260,6 +261,9 @@ export default {
                                         <span>от 31 480₽</span>
                                     </div>
                                 </div>
+                                <RouterLink to="/ban">
+                                    Смотреть все товары
+                                </RouterLink>
                             </div>
                         </div>
                     </div>
@@ -499,7 +503,7 @@ header {
 
                         display: flex;
                         width: fit-content;
-                        // height: 355px;
+                        height: 288px;
 
                         padding: 20px 16px 40px;
                         margin: 0;
@@ -542,7 +546,7 @@ header {
                             width: 53rem;
                             height: 18rem;
                             margin-left: 16px;
-                            
+
 
                             .catalogItem {
                                 display: flex;
@@ -587,6 +591,12 @@ header {
                                     -moz-box-shadow: 4px 4px 10px 0px rgba(34, 60, 80, 0.2);
                                     box-shadow: 4px 4px 10px 0px rgba(34, 60, 80, 0.2);
                                 }
+                            }
+
+                            a {
+                                position: absolute;
+                                bottom: 15px;
+                                width: inherit;
                             }
                         }
 
