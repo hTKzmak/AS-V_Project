@@ -16,11 +16,15 @@ export default {
     },
     data() {
         return {
+            // для отображения/изменения иконки поиска
             showSearch: false,
+            // для скрытия кнопок (телефон, меню), если поиск активирован (относится к mobile и tablet)
             showButtons: true,
+            // для отображения меню (контакты, соц. сети, и т.д.) (относится к mobile и tablet)
             showMenu: false,
-            activeCategory: null,
+            // для отображения окна с каталогами (пока для ПК)
             activateCatalog: false,
+            // для отображения другого окна с товарами, которые связанны с определённым каталогом (пока для ПК)
             showProducts: false,
         }
     },
@@ -28,49 +32,21 @@ export default {
         const appleStore = useCounterStore()
         return {
             appleStore,
+            // categories нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             categories: [
-                {
-                    id: 1, title: 'iPhone', image: iPhoneIcon, list: [
-                        { id: 1, title: 'test', link: 'test' },
-                        { id: 2, title: 'test 2', link: 'test 2' },
-                    ]
-                },
-                {
-                    id: 2, title: 'iPad', image: iPadIcon, list: [
-                        { id: 1, title: 'test', link: 'test' },
-                        { id: 2, title: 'test 2', link: 'test 2' },
-                    ]
-                },
-                {
-                    id: 3, title: 'MacBook и iMac', image: iMacIcon, list: [
-                        { id: 1, title: 'test', link: 'test' },
-                        { id: 2, title: 'test 2', link: 'test 2' },
-                    ]
-                },
-                {
-                    id: 4, title: 'Watch', image: watchIcon, list: [
-                        { id: 1, title: 'test', link: 'test' },
-                        { id: 2, title: 'test 2', link: 'test 2' },
-                    ]
-                },
-                {
-                    id: 5, title: 'Гаджеты', image: gadgetsIcon, list: [
-                        { id: 1, title: 'iPhone 14 Pro Max', link: 'test' },
-                        { id: 2, title: 'iPhone 14 Pro', link: 'test 2' },
-                        { id: 3, title: 'iPhone 14', link: 'test 3' },
-                    ]
-                },
-                {
-                    id: 6, title: 'Аксессуары', image: toolsIcon, list: [
-                        { id: 1, title: 'test', link: 'test' },
-                        { id: 2, title: 'test 2', link: 'test 2' },
-                    ]
-                },
+                {id: 1, title: 'iPhone', image: iPhoneIcon},
+                {id: 2, title: 'iPad', image: iPadIcon},
+                {id: 3, title: 'MacBook и iMac', image: iMacIcon},
+                {id: 4, title: 'Watch', image: watchIcon},
+                {id: 5, title: 'Гаджеты', image: gadgetsIcon},
+                {id: 6, title: 'Аксессуары', image: toolsIcon},
 
             ]
         }
     },
     methods: {
+        // функция для отображения поля ввода для поиска (ф-ия используется для мобильной и планшетной версии)
+        // Эта функция используется для кнопки закрытия поиска 
         showSearchFunc() {
             this.showSearch = !this.showSearch
             this.showButtons = !this.showButtons
@@ -79,46 +55,18 @@ export default {
                 this.appleStore.searchData = []
             }
         },
+
+        // функция для работы с поиском при нажатии на поле ввода (ф-ия используется для планшета)
+        // Эта функция нужна для того, чтобы при повторном нажатии на поле ввода она не закрывалась (как это происходит для showSearchFunc, если заменитю openSearchTablet на showSearchFunc)
         openSearchTablet() {
             this.showSearch = true
             this.showButtons = false
         },
-        showMenuFunc() {
-            this.showMenu = !this.showMenu
-        },
-
-        showCategoryFunc(index, showing) {
-            if (showing == 'show') {
-                this.activeCategory = index;
-            }
-            else {
-                this.activeCategory = null;
-            }
-        }
     }
 }
 </script>
 
 <template>
-    <!-- <div class="location">
-        <div class="container location-header">
-
-            <p>Ваш город:
-                <select name="select-city" id="city">
-                    <option value="Moscow">Москва</option>
-                    <option value="SP">Санкт-Петербург</option>
-                    <option value="Ekaterinburg">Екатеринбург</option>
-                    <option value="Kazan">Казань</option>
-                </select>
-            </p>
-
-            <div class="social-media">
-                <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
-                <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
-                <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
-            </div>
-        </div>
-    </div> -->
 
     <header>
 
@@ -150,6 +98,7 @@ export default {
             </ul>
         </div>
 
+        <!-- мобильная версия header -->
         <div class="container header-mobile">
 
             <div class="header-info">
@@ -169,7 +118,7 @@ export default {
                     <img v-else-if="showButtons == false" src="../assets/icons/header/close.svg">
                 </button>
                 <a v-show="showButtons" href="#!"><img src="../assets/icons/header/call.svg" alt="#"></a>
-                <button class="buttonIcons" @click="showMenuFunc()">
+                <button v-show="showButtons" class="buttonIcons" @click="showMenu = !showMenu">
                     <img v-if="showMenu == true" src="../assets/icons/header/close.svg">
                     <img v-else src="../assets/icons/header/menu.svg">
                 </button>
@@ -180,6 +129,7 @@ export default {
 
         </div>
 
+        <!-- планшетная версия header -->
         <div class="container header-tablet">
 
             <div class="header-info">
@@ -198,9 +148,8 @@ export default {
             </div>
 
             <div class="header-info">
-                <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812 561 96
-                    62</a>
-                <button class="buttonIcons" @click="showMenuFunc()">
+                <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812 561 96 62</a>
+                <button class="buttonIcons" @click="showMenu = !showMenu">
                     <img v-if="showMenu == true" src="../assets/icons/header/close.svg">
                     <img v-else src="../assets/icons/header/menu.svg">
                 </button>
@@ -212,7 +161,7 @@ export default {
         </div>
 
 
-
+        <!-- ПК версия header -->
         <div class="container header-desktop">
             <div class="header-navigation">
                 <RouterLink to="/">
@@ -287,19 +236,14 @@ export default {
                 </button>
             </div>
 
+            <!-- здесь используется те самые categories (36 строка кода) -->
             <div class="header-categories">
                 <ul>
-                    <li v-for="(category, index) in this.categories">
-                        <a href="#!" @mouseover="showCategoryFunc(index, 'show')">
+                    <li v-for="(category) in this.categories">
+                        <a href="#!">
                             <img :src="category.image">
                             {{ category.title }}
                         </a>
-                        <ul v-show="activeCategory === index" class="categoriesList"
-                            @mouseleave="showCategoryFunc(index, 'hide')">
-                            <li v-for="listItem in category.list">
-                                <a href="#!">{{ listItem.title }}</a>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
 
@@ -312,39 +256,6 @@ export default {
 </template>
 
 <style lang="scss">
-// .location {
-//     padding-top: 10px;
-//     padding-bottom: 10px;
-//     background: #F9F9F9;
-
-//     .location-header {
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: center;
-
-//         p>select {
-//             color: #0071E4;
-//             background: transparent;
-//             border: none;
-//             font-size: 16px;
-//             width: 85px;
-
-//             option {
-//                 background: #FFF;
-//             }
-//         }
-
-//         .social-media {
-//             display: flex;
-//             gap: 7px;
-//         }
-//     }
-
-//     @media screen and (max-width: 1440px) {
-//         display: none;
-//     }
-
-// }
 
 header {
     padding-top: 5px;

@@ -6,16 +6,8 @@ import Menu from './components/Menu.vue'
 </script>
 
 <template>
-  <!-- <header class="container">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/not_found">404</RouterLink>
-      </nav>
-  </header> -->
-
   <Header/>
 
-  <!-- <main class="container"> -->
   <main>
     <RouterView />
   </main>
