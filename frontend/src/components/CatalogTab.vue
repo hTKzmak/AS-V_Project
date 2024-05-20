@@ -15,11 +15,12 @@ export default {
     data() {
         return {
             showCategories: false,
-            showProducts: false,
             categories: [
                 {
                     id: 1, title: 'iPhone', image: iPhoneIcon, products: [
-                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg }
+                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg },
+                        { id: 2, title: 'Название продукта', price: 17000, image: iPhoneImg },
+                        { id: 3, title: 'Название продукта', price: 17000, image: iPhoneImg },
                     ]
                 },
                 {
@@ -29,7 +30,8 @@ export default {
                 },
                 {
                     id: 3, title: 'MacBook и iMac', image: iMacIcon, products: [
-                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg }
+                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg },
+                        { id: 2, title: 'Название продукта', price: 17000, image: iPhoneImg },
                     ]
                 },
                 {
@@ -75,7 +77,7 @@ export default {
                         <p>{{ elem.title }}</p>
                     </div>
                     <button @click="showProductsFunc(elem)">
-                        <i v-if="showProducts === false" class="arrow down"></i>
+                        <i v-if="!showProductsList[elem.id]" class="arrow down"></i>
                         <i v-else class="arrow up"></i>
                     </button>
                 </div>
@@ -85,14 +87,18 @@ export default {
                     <li v-for="item in elem.products">
                         <div class="info">
                             <img :src=item.image>
-                            <p>{{ item.title }}</p>
-                            <span>от {{ item.price }}₽</span>
+                            <div class="title">
+                                <p>{{ item.title }}</p>
+                                <span>от {{ item.price }}₽</span>
+                            </div>
                         </div>
                         <RouterLink to="/ban">подробнее</RouterLink>
                     </li>
                 </ul>
             </div>
 
+
+            <RouterLink to="/ban">Весь каталог</RouterLink>
         </div>
 
         <div class="exit">
@@ -114,7 +120,7 @@ export default {
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
 
-    height: 300px;
+    height: 440px;
     padding-top: 45px;
 
     position: fixed;
@@ -123,9 +129,10 @@ export default {
     bottom: 48px;
 
     .catalogMenu {
-        width: 90%;
-        padding-right: 63px;
+        width: 95%;
+        padding-right: 45px;
         overflow-y: auto;
+
 
         .catalogItem {
             padding-left: 20px;
@@ -153,6 +160,10 @@ export default {
             }
 
             ul {
+
+                display: grid;
+                row-gap: 16px;
+
                 li {
 
                     display: flex;
@@ -164,29 +175,48 @@ export default {
                         margin: 0;
                         display: flex;
                         align-items: center;
-                        gap: 16px;
+                        gap: 24px;
 
                         img {
                             width: 48px;
                         }
 
-                        p, span{
-                            font-size: 20px;
-                        }
-                        
-                        span{
-                            color: #706E6E;
+                        .title {
+
+                            display: flex;
+                            gap: 16px;
+                            align-items: center;
+
+                            p,
+                            span {
+                                font-size: 20px;
+                                margin: 0;
+                            }
+
+                            span {
+                                color: #706E6E;
+                            }
+
+                            @media screen and (max-width: 768px) {
+                                display: grid;
+                                gap: 0;
+                            }
                         }
 
                     }
 
-                    a{
+                    a {
                         font-size: 20px;
                     }
 
                 }
             }
 
+        }
+
+        a {
+            font-size: 20px;
+            margin-left: 20px;
         }
 
     }

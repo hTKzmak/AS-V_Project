@@ -72,14 +72,6 @@ export default {
         <!-- меню для планшета и телефона -->
         <div v-show="showMenu" class="menuModal container">
             <a href="#!" class="recall">Вам перезвонить?</a>
-            <p>Ваш город:
-                <select name="select-city" id="city">
-                    <option value="Moscow">Москва</option>
-                    <option value="SP">Санкт-Петербург</option>
-                    <option value="Ekaterinburg">Екатеринбург</option>
-                    <option value="Kazan">Казань</option>
-                </select>
-            </p>
             <ul>
                 <li><a href="#!">Весь каталог</a></li>
                 <li><a href="#!" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</a></li>
