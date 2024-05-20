@@ -1,0 +1,188 @@
+<script>
+import { RouterLink } from 'vue-router'
+
+import iPhoneIcon from '../assets/icons/header/gadgets/iphone.svg'
+import iPadIcon from '../assets/icons/header/gadgets/ipad.svg'
+import iMacIcon from '../assets/icons/header/gadgets/macbook.svg'
+import watchIcon from '../assets/icons/header/gadgets/applewatch.svg'
+import gadgetsIcon from '../assets/icons/header/gadgets/airpods.svg'
+import toolsIcon from '../assets/icons/header/gadgets/tools.svg'
+
+import iPhoneImg from '../assets/img.png'
+
+
+export default {
+    data() {
+        return {
+            showCategories: false,
+            showProducts: false,
+            categories: [
+                {
+                    id: 1, title: 'iPhone', image: iPhoneIcon, products: [
+                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg }
+                    ]
+                },
+                {
+                    id: 2, title: 'iPad', image: iPadIcon, products: [
+                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg }
+                    ]
+                },
+                {
+                    id: 3, title: 'MacBook и iMac', image: iMacIcon, products: [
+                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg }
+                    ]
+                },
+                {
+                    id: 4, title: 'Watch', image: watchIcon, products: [
+                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg }
+                    ]
+                },
+                {
+                    id: 5, title: 'Гаджеты', image: gadgetsIcon, products: [
+                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg }
+                    ]
+                },
+                {
+                    id: 6, title: 'Аксессуары', image: toolsIcon, products: [
+                        { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg }
+                    ]
+                },
+            ]
+        }
+    },
+    methods: {
+        showProductsFunc(indexElem){
+            this.showProducts = !this.showProducts
+            console.log(indexElem)
+        }
+    }
+}
+</script>
+
+<template>
+    <div class="catalogTab">
+
+        <div class="catalogMenu">
+            <div class="catalogItem" v-for="index in categories">
+                <div class="catalogItem-elem">
+                    <div class="title">
+                        <img :src=index.image>
+                        <p>{{ index.title }}</p>
+                    </div>
+                    <button @click="showProductsFunc(index.id)">
+                        <i v-if="showProducts === false" class="arrow down"></i>
+                        <i v-else class="arrow up"></i>
+                    </button>
+                </div>
+
+                <ul v-show="showProducts">
+                    <li>lol</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="exit">
+            <button><img src="../assets/icons/header/close.svg" alt=""></button>
+        </div>
+
+    </div>
+</template>
+
+<style lang="scss">
+.catalogTab {
+
+    display: none;
+
+    justify-content: space-between;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px -4px 4px 0px #0000000D;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+
+    height: 300px;
+    padding-top: 45px;
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 48px;
+
+    .catalogMenu {
+        width: 90%;
+        padding-right: 63px;
+        overflow-y: auto;
+
+        .catalogItem {
+            // display: flex;
+            // justify-content: space-between;
+            // align-items: center;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-bottom: 1px solid #E7E7E7;
+
+            .catalogItem-elem {
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .title {
+                    display: flex;
+                    gap: 8px;
+
+                    img {
+                        width: 35px;
+                    }
+
+                    p {
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .exit {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    @media screen and (max-width: 1440px) {
+        display: flex;
+    }
+
+    @media screen and (max-width: 768px) {
+        bottom: 75px;
+    }
+
+}
+
+.arrow {
+    border: solid #706E6E;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+
+}
+
+.up {
+    border-color: #0071E4;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    border-color: #706E6E;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+</style>

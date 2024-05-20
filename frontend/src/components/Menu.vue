@@ -22,12 +22,6 @@ import { RouterLink, RouterView } from 'vue-router'
                 избранное
             </RouterLink>
         </div>
-        <div class="menu-item">
-            <RouterLink to="/">
-                <img src="../assets/icons/menu/filters.svg" alt="">
-                сравнение
-            </RouterLink>
-        </div>
         <!-- <RouterLink to="/">
             <img src="../assets/icons/menu/bag.svg" alt="">
             корзина

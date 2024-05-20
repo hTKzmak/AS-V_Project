@@ -40,7 +40,6 @@ export default {
                 {id: 4, title: 'Watch', image: watchIcon},
                 {id: 5, title: 'Гаджеты', image: gadgetsIcon},
                 {id: 6, title: 'Аксессуары', image: toolsIcon},
-
             ]
         }
     },
