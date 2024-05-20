@@ -47,13 +47,13 @@ export default {
                         { id: 1, title: 'Название продукта', price: 17000, image: iPhoneImg }
                     ]
                 },
-            ]
+            ],
+            showProductsList: {},
         }
     },
     methods: {
-        showProductsFunc(indexElem){
-            this.showProducts = !this.showProducts
-            console.log(indexElem)
+        showProductsFunc(category) {
+            this.showProductsList[category.id] = !this.showProductsList[category.id];
         }
     }
 }
@@ -63,22 +63,36 @@ export default {
     <div class="catalogTab">
 
         <div class="catalogMenu">
-            <div class="catalogItem" v-for="index in categories">
+
+            <!-- список каталогов -->
+            <div class="catalogItem" v-for="elem in categories">
+
+                <!-- сам каталог -->
+
                 <div class="catalogItem-elem">
                     <div class="title">
-                        <img :src=index.image>
-                        <p>{{ index.title }}</p>
+                        <img :src=elem.image>
+                        <p>{{ elem.title }}</p>
                     </div>
-                    <button @click="showProductsFunc(index.id)">
+                    <button @click="showProductsFunc(elem)">
                         <i v-if="showProducts === false" class="arrow down"></i>
                         <i v-else class="arrow up"></i>
                     </button>
                 </div>
 
-                <ul v-show="showProducts">
-                    <li>lol</li>
+                <!-- список продуктов определённого каталога -->
+                <ul v-show="showProductsList[elem.id]">
+                    <li v-for="item in elem.products">
+                        <div class="info">
+                            <img :src=item.image>
+                            <p>{{ item.title }}</p>
+                            <span>от {{ item.price }}₽</span>
+                        </div>
+                        <RouterLink to="/ban">подробнее</RouterLink>
+                    </li>
                 </ul>
             </div>
+
         </div>
 
         <div class="exit">
@@ -114,9 +128,6 @@ export default {
         overflow-y: auto;
 
         .catalogItem {
-            // display: flex;
-            // justify-content: space-between;
-            // align-items: center;
             padding-left: 20px;
             padding-right: 20px;
             border-bottom: 1px solid #E7E7E7;
@@ -140,6 +151,42 @@ export default {
                     }
                 }
             }
+
+            ul {
+                li {
+
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .info {
+
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        gap: 16px;
+
+                        img {
+                            width: 48px;
+                        }
+
+                        p, span{
+                            font-size: 20px;
+                        }
+                        
+                        span{
+                            color: #706E6E;
+                        }
+
+                    }
+
+                    a{
+                        font-size: 20px;
+                    }
+
+                }
+            }
+
         }
 
     }

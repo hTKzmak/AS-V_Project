@@ -225,7 +225,6 @@ export default {
                 <Search />
 
                 <a href="#!"><img src="../assets/icons/header/heart.svg" alt=""></a>
-                <a href="#!"><img src="../assets/icons/header/filters.svg" alt=""></a>
                 <button class="buttonElem basketBtn">
                     <img src="../assets/icons/header/basket.svg" alt="">
                     в корзине
