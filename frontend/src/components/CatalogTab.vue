@@ -15,7 +15,7 @@ export default {
     props: ['showCatalog'],
     data() {
         return {
-            showCategories: false,
+            choosenCategory: [],
             categories: [
                 {
                     id: 1, title: 'iPhone', image: iPhoneIcon, products: [
@@ -57,6 +57,15 @@ export default {
     methods: {
         showProductsFunc(category) {
             this.showProductsList[category.id] = !this.showProductsList[category.id];
+            if (this.showProductsList[category.id] === true && !this.choosenCategory.includes(category.id)) {
+                this.choosenCategory.push(category.id)
+            }
+            else{
+                const filteredNumbers = this.choosenCategory.filter((number) => number !== category.id);
+                this.choosenCategory = filteredNumbers
+            }
+
+            console.log(this.choosenCategory)
         },
 
         showCatalogFunc() {
@@ -80,7 +89,7 @@ export default {
                 <div class="catalogItem-elem">
                     <div class="title">
                         <img :src=elem.image>
-                        <p>{{ elem.title }}</p>
+                        <p :style="{ color: choosenCategory.includes(elem.id) ? '#0071E4' : '' }">{{ elem.title }}</p>
                     </div>
                     <button @click="showProductsFunc(elem)">
                         <i v-if="!showProductsList[elem.id]" class="arrow down"></i>
@@ -138,6 +147,7 @@ export default {
         width: 95%;
         padding-right: 45px;
         overflow-y: auto;
+        display: grid;
 
 
         .catalogItem {
@@ -163,6 +173,7 @@ export default {
                         font-size: 20px;
                     }
                 }
+
             }
 
             ul {
@@ -220,9 +231,10 @@ export default {
 
         }
 
+
         a {
             font-size: 20px;
-            margin-left: 20px;
+            margin: 10px 20px;
         }
 
     }

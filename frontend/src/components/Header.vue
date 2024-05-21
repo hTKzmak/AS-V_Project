@@ -194,7 +194,7 @@ export default {
                                 <li @click="showProducts = !showProducts">Акции</li>
                             </ul>
                             <div v-show="showProducts" class="catalogItemsList">
-                                <div class="catalogItem" v-for="index in 20" :id=index>
+                                <div class="catalogItem" v-for="index in 12" :id=index>
                                     <img src="../assets/img.png">
                                     <div class="title">
                                         <p>iPhone 14 Pro Max</p>
@@ -404,7 +404,8 @@ header {
 
                         display: flex;
                         width: fit-content;
-                        height: 288px;
+                        // height: 288px;
+                        height: 297px;
 
                         padding: 20px 16px 40px;
                         margin: 0;
@@ -442,7 +443,7 @@ header {
                             grid-template-columns: repeat(3, auto);
                             gap: 8px;
 
-                            overflow-y: auto;
+                            // overflow-y: auto;
 
                             width: 53rem;
                             height: 18rem;
