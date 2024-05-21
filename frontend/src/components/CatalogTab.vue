@@ -89,6 +89,7 @@ export default {
                 <div class="catalogItem-elem">
                     <div class="title">
                         <img :src=elem.image>
+                        <!-- <object :data=elem.image type="image/svg+xml"></object> -->
                         <p :style="{ color: choosenCategory.includes(elem.id) ? '#0071E4' : '' }">{{ elem.title }}</p>
                     </div>
                     <button @click="showProductsFunc(elem)">
@@ -165,8 +166,12 @@ export default {
                     display: flex;
                     gap: 8px;
 
-                    img {
+                    img, object, symbol {
                         width: 35px;
+
+                        svg{
+                            fill: red;
+                        }
                     }
 
                     p {

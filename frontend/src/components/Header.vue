@@ -34,12 +34,12 @@ export default {
             appleStore,
             // categories нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             categories: [
-                {id: 1, title: 'iPhone', image: iPhoneIcon},
-                {id: 2, title: 'iPad', image: iPadIcon},
-                {id: 3, title: 'MacBook и iMac', image: iMacIcon},
-                {id: 4, title: 'Watch', image: watchIcon},
-                {id: 5, title: 'Гаджеты', image: gadgetsIcon},
-                {id: 6, title: 'Аксессуары', image: toolsIcon},
+                { id: 1, title: 'iPhone', image: iPhoneIcon },
+                { id: 2, title: 'iPad', image: iPadIcon },
+                { id: 3, title: 'MacBook и iMac', image: iMacIcon },
+                { id: 4, title: 'Watch', image: watchIcon },
+                { id: 5, title: 'Гаджеты', image: gadgetsIcon },
+                { id: 6, title: 'Аксессуары', image: toolsIcon },
             ]
         }
     },
@@ -61,6 +61,12 @@ export default {
             this.showSearch = true
             this.showButtons = false
         },
+
+        // функция для отображения товаров выбранного каталога (эту функцию будет нужно доработать, если появится бекенд)
+        showCatalogToolsList(catalog) {
+            showProducts = !showProducts
+            console.log(catalog)
+        }
     }
 }
 </script>
@@ -139,7 +145,8 @@ export default {
             </div>
 
             <div class="header-info">
-                <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812 561 96 62</a>
+                <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812 561 96
+                    62</a>
                 <button class="buttonIcons" @click="showMenu = !showMenu">
                     <img v-if="showMenu == true" src="../assets/icons/header/close.svg">
                     <img v-else src="../assets/icons/header/menu.svg">
@@ -186,12 +193,12 @@ export default {
                     <div class="catalog">
                         <div v-show="activateCatalog" class="catalogModal">
                             <ul class="catalogToolsList">
-                                <li @click="showProducts = !showProducts">Смартфоны</li>
-                                <li @click="showProducts = !showProducts">Планшеты</li>
-                                <li @click="showProducts = !showProducts">Компьютеры</li>
-                                <li @click="showProducts = !showProducts">Часы</li>
-                                <li @click="showProducts = !showProducts">Аксессуары</li>
-                                <li @click="showProducts = !showProducts">Акции</li>
+                                <li id="1" @click="showProducts = !showProducts">Смартфоны</li>
+                                <li id="2" @click="showProducts = !showProducts">Планшеты</li>
+                                <li id="3" @click="showProducts = !showProducts">Компьютеры</li>
+                                <li id="4" @click="showProducts = !showProducts">Часы</li>
+                                <li id="5" @click="showProducts = !showProducts">Аксессуары</li>
+                                <li id="6" @click="showProducts = !showProducts">Акции</li>
                             </ul>
                             <div v-show="showProducts" class="catalogItemsList">
                                 <div class="catalogItem" v-for="index in 12" :id=index>
@@ -246,7 +253,6 @@ export default {
 </template>
 
 <style lang="scss">
-
 header {
     padding-top: 5px;
     padding-bottom: 5px;
