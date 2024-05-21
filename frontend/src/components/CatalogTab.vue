@@ -12,6 +12,7 @@ import iPhoneImg from '../assets/img.png'
 
 
 export default {
+    props: ['showCatalog'],
     data() {
         return {
             showCategories: false,
@@ -56,13 +57,18 @@ export default {
     methods: {
         showProductsFunc(category) {
             this.showProductsList[category.id] = !this.showProductsList[category.id];
+        },
+
+        showCatalogFunc() {
+            this.$emit('toggle-catalog')
+            console.log(this.showCatalog)
         }
     }
 }
 </script>
 
 <template>
-    <div class="catalogTab">
+    <div v-show="showCatalog" class="catalogTab">
 
         <div class="catalogMenu">
 
@@ -102,7 +108,7 @@ export default {
         </div>
 
         <div class="exit">
-            <button><img src="../assets/icons/header/close.svg" alt=""></button>
+            <button @click="showCatalogFunc"><img src="../assets/icons/header/close.svg" alt=""></button>
         </div>
 
     </div>
