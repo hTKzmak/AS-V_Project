@@ -4,6 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 export default {
     props: ['showCatalog'],
     methods: {
+        // ф-ия для отображения CatalogTab (это отдельный компонент для мобильной и планшетной версии каталогов) 
         showCatalogFunc() {
             this.$emit('toggle-catalog')
             console.log(this.showCatalog)
@@ -19,10 +20,6 @@ export default {
                 <img src="../assets/icons/menu/catalog.svg" alt="">
                 каталог
             </button>
-            <!-- <RouterLink to="/">
-                <img src="../assets/icons/menu/catalog.svg" alt="">
-                каталог
-            </RouterLink> -->
         </div>
         <div class="menu-item">
             <RouterLink to="/">

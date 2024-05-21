@@ -15,7 +15,10 @@ export default {
     props: ['showCatalog'],
     data() {
         return {
+            // выбранные категории, в которых хранятся id выбранных нами категории (нужен для стилизации текста и иконки)
             choosenCategory: [],
+
+            // существующие категории для отображения (тк бекенда ещё нет)
             categories: [
                 {
                     id: 1, title: 'iPhone', image: iPhoneIcon, products: [
@@ -51,10 +54,13 @@ export default {
                     ]
                 },
             ],
+
+            // отображение продуктов выбранной нами категории
             showProductsList: {},
         }
     },
     methods: {
+        // функция для отображения продуктов выбранной нами категории и для стилизации текста и иконок (правда сами иконки не перекрашиваются :/)
         showProductsFunc(category) {
             this.showProductsList[category.id] = !this.showProductsList[category.id];
             if (this.showProductsList[category.id] === true && !this.choosenCategory.includes(category.id)) {
@@ -68,6 +74,7 @@ export default {
             console.log(this.choosenCategory)
         },
 
+        // ф-ия для закрытия данного компонента CatalogTab, чтобы она не отображалась
         showCatalogFunc() {
             this.$emit('toggle-catalog')
             console.log(this.showCatalog)

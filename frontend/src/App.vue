@@ -11,10 +11,12 @@ export default {
   },
   data() {
     return {
+      // для отображения CatalogTab (это отдельный компонент для мобильной и планшетной версии каталогов)
       showCatalog: false
     }
   },
   methods: {
+    // ф-ия для изменения значения showCatalog, который помогает отображать или не отображать компонент
     toggleCatalog() {
       this.showCatalog = !this.showCatalog
     }

@@ -12,6 +12,7 @@ import toolsIcon from '../assets/icons/header/gadgets/tools.svg'
 
 export default {
     components: {
+        // компонент для отображения результов поиска
         Search
     },
     data() {
