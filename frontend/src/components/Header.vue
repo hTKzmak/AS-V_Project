@@ -563,7 +563,12 @@ header {
 
                         &:hover {
                             color: #0071E4;
+
+                            img {
+                                filter: brightness(0) saturate(100%) invert(40%) sepia(58%) saturate(7056%) hue-rotate(198deg) brightness(95%) contrast(101%);
+                            }
                         }
+
                     }
 
                     .categoriesList {

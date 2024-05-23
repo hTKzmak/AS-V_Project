@@ -95,8 +95,7 @@ export default {
 
                 <div class="catalogItem-elem">
                     <div class="title">
-                        <img :src=elem.image>
-                        <!-- <object :data=elem.image type="image/svg+xml"></object> -->
+                        <img :src=elem.image :style="{ filter: choosenCategory.includes(elem.id) ? 'brightness(0) saturate(100%) invert(40%) sepia(58%) saturate(7056%) hue-rotate(198deg) brightness(95%) contrast(101%)' : '' }">
                         <p :style="{ color: choosenCategory.includes(elem.id) ? '#0071E4' : '' }">{{ elem.title }}</p>
                     </div>
                     <button @click="showProductsFunc(elem)">
