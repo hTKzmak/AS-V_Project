@@ -14,7 +14,6 @@ export default {
   <div class="error-page">
     <h1>Ошибка 404</h1>
     <p>Кажется, такой страницы больше не существует.</p>
-    <!-- <ButtonElem title="вернуться на главную"/> -->
     <RouterLink class="buttonElem" to="/">вернуться на главную</RouterLink>
     <img class="img" src="../assets/404.png" alt="404 image">
   </div>

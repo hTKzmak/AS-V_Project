@@ -3,24 +3,50 @@ import { RouterLink } from 'vue-router'
 import Search from '../components/HomePage/Search.vue'
 import { useCounterStore } from '@/stores/AppleStore';
 
+import iPhoneIcon from '../assets/icons/header/gadgets/iphone.svg'
+import iPadIcon from '../assets/icons/header/gadgets/ipad.svg'
+import iMacIcon from '../assets/icons/header/gadgets/macbook.svg'
+import watchIcon from '../assets/icons/header/gadgets/applewatch.svg'
+import gadgetsIcon from '../assets/icons/header/gadgets/airpods.svg'
+import toolsIcon from '../assets/icons/header/gadgets/tools.svg'
+
 export default {
     components: {
+        // компонент для отображения результов поиска
         Search
     },
     data() {
         return {
+            // для отображения/изменения иконки поиска
             showSearch: false,
+            // для скрытия кнопок (телефон, меню), если поиск активирован (относится к mobile и tablet)
             showButtons: true,
-            showMenu: false
+            // для отображения меню (контакты, соц. сети, и т.д.) (относится к mobile и tablet)
+            showMenu: false,
+            // для отображения окна с каталогами (пока для ПК)
+            activateCatalog: false,
+            // для отображения другого окна с товарами, которые связанны с определённым каталогом (пока для ПК)
+            showProducts: false,
         }
     },
     setup() {
         const appleStore = useCounterStore()
         return {
-            appleStore
+            appleStore,
+            // categories нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
+            categories: [
+                { id: 1, title: 'iPhone', image: iPhoneIcon },
+                { id: 2, title: 'iPad', image: iPadIcon },
+                { id: 3, title: 'MacBook и iMac', image: iMacIcon },
+                { id: 4, title: 'Watch', image: watchIcon },
+                { id: 5, title: 'Гаджеты', image: gadgetsIcon },
+                { id: 6, title: 'Аксессуары', image: toolsIcon },
+            ]
         }
     },
     methods: {
+        // функция для отображения поля ввода для поиска (ф-ия используется для мобильной и планшетной версии)
+        // Эта функция используется для кнопки закрытия поиска 
         showSearchFunc() {
             this.showSearch = !this.showSearch
             this.showButtons = !this.showButtons
@@ -29,52 +55,30 @@ export default {
                 this.appleStore.searchData = []
             }
         },
+
+        // функция для работы с поиском при нажатии на поле ввода (ф-ия используется для планшета)
+        // Эта функция нужна для того, чтобы при повторном нажатии на поле ввода она не закрывалась (как это происходит для showSearchFunc, если заменитю openSearchTablet на showSearchFunc)
         openSearchTablet() {
             this.showSearch = true
             this.showButtons = false
         },
-        showMenuFunc() {
-            this.showMenu = !this.showMenu
+
+        // функция для отображения товаров выбранного каталога (эту функцию будет нужно доработать, если появится бекенд)
+        showCatalogToolsList(catalog) {
+            showProducts = !showProducts
+            console.log(catalog)
         }
     }
 }
 </script>
 
 <template>
-    <div class="location">
-        <div class="container location-header">
-
-            <p>Ваш город:
-                <select name="select-city" id="city">
-                    <option value="Moscow">Москва</option>
-                    <option value="SP">Санкт-Петербург</option>
-                    <option value="Ekaterinburg">Екатеринбург</option>
-                    <option value="Kazan">Казань</option>
-                </select>
-            </p>
-
-            <div class="social-media">
-                <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
-                <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
-                <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
-            </div>
-        </div>
-    </div>
-
 
     <header>
 
         <!-- меню для планшета и телефона -->
         <div v-show="showMenu" class="menuModal container">
             <a href="#!" class="recall">Вам перезвонить?</a>
-            <p>Ваш город:
-                <select name="select-city" id="city">
-                    <option value="Moscow">Москва</option>
-                    <option value="SP">Санкт-Петербург</option>
-                    <option value="Ekaterinburg">Екатеринбург</option>
-                    <option value="Kazan">Казань</option>
-                </select>
-            </p>
             <ul>
                 <li><a href="#!">Весь каталог</a></li>
                 <li><a href="#!" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</a></li>
@@ -92,6 +96,7 @@ export default {
             </ul>
         </div>
 
+        <!-- мобильная версия header -->
         <div class="container header-mobile">
 
             <div class="header-info">
@@ -111,7 +116,7 @@ export default {
                     <img v-else-if="showButtons == false" src="../assets/icons/header/close.svg">
                 </button>
                 <a v-show="showButtons" href="#!"><img src="../assets/icons/header/call.svg" alt="#"></a>
-                <button class="buttonIcons" @click="showMenuFunc()">
+                <button v-show="showButtons" class="buttonIcons" @click="showMenu = !showMenu">
                     <img v-if="showMenu == true" src="../assets/icons/header/close.svg">
                     <img v-else src="../assets/icons/header/menu.svg">
                 </button>
@@ -122,6 +127,7 @@ export default {
 
         </div>
 
+        <!-- планшетная версия header -->
         <div class="container header-tablet">
 
             <div class="header-info">
@@ -142,7 +148,7 @@ export default {
             <div class="header-info">
                 <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812 561 96
                     62</a>
-                <button class="buttonIcons" @click="showMenuFunc()">
+                <button class="buttonIcons" @click="showMenu = !showMenu">
                     <img v-if="showMenu == true" src="../assets/icons/header/close.svg">
                     <img v-else src="../assets/icons/header/menu.svg">
                 </button>
@@ -154,7 +160,7 @@ export default {
         </div>
 
 
-
+        <!-- ПК версия header -->
         <div class="container header-desktop">
             <div class="header-navigation">
                 <RouterLink to="/">
@@ -180,7 +186,37 @@ export default {
 
 
             <div class="header-search">
-                <button class="buttonElem"><img src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
+                <div class="catalogNavigation">
+                    <button @click="activateCatalog = !activateCatalog"
+                        :class="[!activateCatalog ? 'buttonElem' : 'buttonElem catalogBtn']"><img
+                            src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
+
+                    <div class="catalog">
+                        <div v-show="activateCatalog" class="catalogModal">
+                            <ul class="catalogToolsList">
+                                <li id="1" @click="showProducts = !showProducts">Смартфоны</li>
+                                <li id="2" @click="showProducts = !showProducts">Планшеты</li>
+                                <li id="3" @click="showProducts = !showProducts">Компьютеры</li>
+                                <li id="4" @click="showProducts = !showProducts">Часы</li>
+                                <li id="5" @click="showProducts = !showProducts">Аксессуары</li>
+                                <li id="6" @click="showProducts = !showProducts">Акции</li>
+                            </ul>
+                            <div v-show="showProducts" class="catalogItemsList">
+                                <div class="catalogItem" v-for="index in 12" :id=index>
+                                    <img src="../assets/img.png">
+                                    <div class="title">
+                                        <p>iPhone 14 Pro Max</p>
+                                        <span>от 31 480₽</span>
+                                    </div>
+                                </div>
+                                <RouterLink to="/ban">
+                                    Смотреть все товары
+                                </RouterLink>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 
                 <input type="text" placeholder="Поиск по каталогу товаров"
                     @keydown="appleStore.searchFunc($event.target.value)">
@@ -189,7 +225,6 @@ export default {
                 <Search />
 
                 <a href="#!"><img src="../assets/icons/header/heart.svg" alt=""></a>
-                <a href="#!"><img src="../assets/icons/header/filters.svg" alt=""></a>
                 <button class="buttonElem basketBtn">
                     <img src="../assets/icons/header/basket.svg" alt="">
                     в корзине
@@ -199,42 +234,13 @@ export default {
                 </button>
             </div>
 
+            <!-- здесь используется те самые categories (36 строка кода) -->
             <div class="header-categories">
                 <ul>
-                    <li>
+                    <li v-for="(category) in this.categories">
                         <a href="#!">
-                            <img src="../assets/icons/header/gadgets/iphone.svg">
-                            iPhone
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/ipad.svg">
-                            iPad
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/macbook.svg">
-                            MacBook и iMac
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/applewatch.svg">
-                            Watch
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/airpods.svg">
-                            Гаджеты
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <img src="../assets/icons/header/gadgets/tools.svg">
-                            Аксессуары
+                            <img :src="category.image">
+                            {{ category.title }}
                         </a>
                     </li>
                 </ul>
@@ -248,40 +254,6 @@ export default {
 </template>
 
 <style lang="scss">
-.location {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background: #F9F9F9;
-
-    .location-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        p>select {
-            color: #0071E4;
-            background: transparent;
-            border: none;
-            font-size: 16px;
-            width: 85px;
-
-            option {
-                background: #FFF;
-            }
-        }
-
-        .social-media {
-            display: flex;
-            gap: 7px;
-        }
-    }
-
-    @media screen and (max-width: 1440px) {
-        display: none;
-    }
-
-}
-
 header {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -417,6 +389,132 @@ header {
 
             position: relative;
 
+            .catalogNavigation {
+
+                position: relative;
+
+                .catalogBtn {
+                    background-color: #9747FF;
+                    border-bottom-left-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+
+                .catalog {
+
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    z-index: 1;
+
+                    .catalogModal {
+                        background-color: #fff;
+
+                        display: flex;
+                        width: fit-content;
+                        // height: 288px;
+                        height: 297px;
+
+                        padding: 20px 16px 40px;
+                        margin: 0;
+
+                        border-bottom-left-radius: 16px;
+                        border-bottom-right-radius: 16px;
+
+                        .catalogToolsList {
+                            display: grid;
+                            gap: 8px;
+                            width: 189px;
+                            margin: 0;
+
+                            li {
+                                background-color: #F9F9F9;
+
+                                list-style-type: none;
+
+                                font-size: 20px;
+
+                                padding: 8px;
+                                border-radius: 8px;
+
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: #0071E4;
+                                    background-color: #F0E4FF;
+                                }
+                            }
+                        }
+
+                        .catalogItemsList {
+                            display: grid;
+                            grid-template-columns: repeat(3, auto);
+                            gap: 8px;
+
+                            // overflow-y: auto;
+
+                            width: 53rem;
+                            height: 18rem;
+                            margin-left: 16px;
+
+
+                            .catalogItem {
+                                display: flex;
+                                align-items: center;
+
+                                // width: 206px;
+                                // height: 64px;
+                                padding: 8px 16px 8px;
+
+                                background-color: #F9F9F9;
+
+                                border-radius: 8px;
+                                gap: 6px;
+
+                                transition: 0.3s;
+
+                                cursor: pointer;
+
+                                img {
+                                    width: 48px;
+                                }
+
+                                .title {
+
+                                    p,
+                                    span {
+                                        margin: 0;
+                                    }
+
+                                    p {
+                                        font-size: 16px;
+                                    }
+
+                                    span {
+                                        font-size: 14px;
+                                        color: #282626;
+                                    }
+                                }
+
+                                &:hover {
+                                    -webkit-box-shadow: 4px 4px 10px 0px rgba(34, 60, 80, 0.2);
+                                    -moz-box-shadow: 4px 4px 10px 0px rgba(34, 60, 80, 0.2);
+                                    box-shadow: 4px 4px 10px 0px rgba(34, 60, 80, 0.2);
+                                }
+                            }
+
+                            a {
+                                position: absolute;
+                                bottom: 15px;
+                                width: inherit;
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+
             input {
                 border-radius: 8px;
                 border: 1px solid #B7B7B7;
@@ -451,6 +549,8 @@ header {
                 li {
                     list-style-type: none;
 
+                    position: relative;
+
                     a {
                         display: flex;
                         align-items: center;
@@ -463,6 +563,33 @@ header {
 
                         &:hover {
                             color: #0071E4;
+
+                            img {
+                                filter: brightness(0) saturate(100%) invert(40%) sepia(58%) saturate(7056%) hue-rotate(198deg) brightness(95%) contrast(101%);
+                            }
+                        }
+
+                    }
+
+                    .categoriesList {
+                        background-color: #FFF;
+                        border-bottom-left-radius: 8px;
+                        border-bottom-right-radius: 8px;
+
+                        display: grid;
+
+                        padding: 16px;
+
+                        position: absolute;
+                        top: 75px;
+                        left: 0;
+                        right: 0;
+
+                        padding-bottom: 27px;
+                        width: 130px;
+
+                        a {
+                            font-size: 16px;
                         }
                     }
                 }

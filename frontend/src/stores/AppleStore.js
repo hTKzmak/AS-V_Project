@@ -1,6 +1,10 @@
 import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue';
 
+// В данном Store предполагается получить данные о продуктах с бека (BASE_URL)
+// Здесь ещё находится функция по поиску товаров (43 строка кода - searchFunc)
+
+
 let BASE_URL = 'https://dummyjson.com/products'
 
 let productsList = reactive([])
