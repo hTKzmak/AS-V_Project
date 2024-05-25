@@ -1,16 +1,22 @@
 <script>
+import { RouterLink } from 'vue-router'
+import ButtonElem from '../UI/ButtonElem.vue';
+
 export default {
+    components: {
+        ButtonElem
+    },
     setup() {
         return {
             // characteristics нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             characteristics: [
-                { id: 1, title: 'Тип', image: iPhoneIcon },
-                { id: 2, title: 'Цвет', image: iPadIcon },
-                { id: 3, title: 'Разрешение экрана', image: iMacIcon },
-                { id: 4, title: 'Угол обзора', image: watchIcon },
-                { id: 5, title: 'Питание', image: gadgetsIcon },
-                { id: 6, title: 'Бренд', image: toolsIcon },
-                { id: 7, title: 'Страна производитель', image: toolsIcon },
+                { id: 1, title: 'Тип', text: 'Очки виртуальной реальности' },
+                { id: 2, title: 'Цвет', text: 'Белый' },
+                { id: 3, title: 'Разрешение экрана', text: '3840x2160' },
+                { id: 4, title: 'Угол обзора', text: '90°' },
+                { id: 5, title: 'Питание', text: 'От аккумулятора' },
+                { id: 6, title: 'Бренд', text: 'Oculus' },
+                { id: 7, title: 'Страна производитель', text: 'Китай' },
             ]
         }
     },
@@ -50,50 +56,70 @@ export default {
         <div class="productData">
             <h1>Oculus Quest 2 White 128GB</h1>
 
-            <div class="productData-options">
-                <nav>
-                    <ul>
-                        <li>
-                            <button id="color">
-                                <img src="../../assets/img.png" alt="product image">
-                            </button>
-                        </li>
-                        <li>
-                            <button id="color">
-                                <img src="../../assets/img.png" alt="product image">
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
+            <div class="productData-optionsAndOrder">
 
-                <h2>Объем памяти</h2>
+                <div class="productData-options">
+                    <nav>
+                        <ul>
+                            <li>
+                                <button id="color">
+                                    <img src="../../assets/img.png" alt="product image">
+                                </button>
+                            </li>
+                            <li>
+                                <button id="color">
+                                    <img src="../../assets/img.png" alt="product image">
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
 
-                <nav>
-                    <ul>
-                        <li>
-                            <button id="memory">
-                                128GB
-                            </button>
-                        </li>
-                        <li>
-                            <button id="memory">
-                                256GB
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
+                    <h2>Объем памяти</h2>
 
-                <h2>Характеристики</h2>
+                    <nav>
+                        <ul>
+                            <li>
+                                <button id="memory">
+                                    128GB
+                                </button>
+                            </li>
+                            <li>
+                                <button id="memory">
+                                    256GB
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
 
-                <div class="characteristicsList">
-                    <div class="characteristicItem">
-                        <p>Тип</p>
-                        <p>Очки виртуальной реальности</p>
+                    <h2>Характеристики</h2>
+
+                    <div class="characteristicsList">
+                        <div class="characteristicItem" v-for="elem in characteristics">
+                            <p>{{ elem.title }}</p>
+                            <p>{{ elem.text }}</p>
+                        </div>
+                        <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
                     </div>
                 </div>
-            </div>
 
-            <div class="productData-order"></div>
+                <div class="productData-order">
+                    <div class="product-info">
+                        <h4>48 000 ₽</h4>
+                        <div class="existence">
+                            <div class="existence-sign"></div>
+                            <p>Есть в наличии</p>
+                        </div>
+                    </div>
+                    <h3>44 290 ₽</h3>
+                    <ButtonElem title="Добавить в корзину" addedItemStyle="false" />
+                    <p>Купить в 1 клик</p>
+                    <div class="buyInOneClick">
+                        <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">
+                        <ButtonElem title="Купить" addedItemStyle="false" />
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </template>
@@ -152,52 +178,141 @@ export default {
             margin: 0;
         }
 
-        .productData-options {
-            nav>ul {
 
-                display: flex;
-                gap: 8px;
+        .productData-optionsAndOrder {
 
-                li {
-                    button {
+            display: flex;
+            justify-content: space-between;
 
-                        border-radius: 8px;
-                        transition: 0.2s;
-                        border: 2px solid transparent;
+            .productData-options {
 
-                        &:hover {
-                            border: 2px solid #1877F2;
+                margin-top: 50px;
+
+                nav>ul {
+
+                    display: flex;
+                    gap: 8px;
+
+                    li {
+                        button {
+
+                            border-radius: 8px;
+                            transition: 0.2s;
+                            border: 2px solid transparent;
+
+                            &:hover {
+                                border: 2px solid #1877F2;
+                            }
                         }
                     }
                 }
+
+                h2 {
+                    font-size: 18px;
+                    font-family: "SF Pro Display Medium", sans-serif;
+                }
+
+                .characteristicsList {
+
+                    width: 320px;
+                    display: grid;
+
+                    .characteristicItem {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 8px;
+
+                        p {
+
+                            font-size: 16px;
+                            margin-top: 6px;
+                            margin-bottom: 6px;
+
+                            &:first-child {
+                                color: #121212B2;
+                            }
+                        }
+                    }
+
+                    a {
+                        margin-top: 16px;
+                    }
+
+                }
             }
 
-            h2 {
-                font-size: 18px;
-                font-family: "SF Pro Display Medium", sans-serif;
-            }
-
-            .characteristicsList {
+            .productData-order {
 
                 width: 320px;
+                margin-top: 30px;
 
-                .characteristicItem {
+                .product-info {
+
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    gap: 8px;
 
-                    p {
+                    h4 {
+                        text-decoration: line-through;
+                        font-size: 20px;
+                        margin: 0;
+                    }
 
-                        font-size: 16px;
+                    .existence {
 
-                        &:first-child {
-                            color: #121212B2;
+                        display: flex;
+                        gap: 8px;
+                        align-items: center;
+
+                        .existence-sign {
+                            width: 16px;
+                            height: 16px;
+                            background-color: #52D116;
+                            border-radius: 100px;
+                            margin-right: 2px;
+                        }
+
+                        p {
+                            margin: 0;
                         }
                     }
                 }
+
+                h3 {
+                    font-size: 32px;
+                    margin-top: 4px;
+                    margin-bottom: 12px;
+                }
+
+                .buyInOneClick{
+
+                    position: relative;
+                    border-radius: 8px;
+                    border: 1px solid #1212124D;
+
+                    input {
+                        font-size: 16px;
+                        padding: 16px 0 16px 24px;
+                        width: 50%;
+    
+                        outline: none;
+                        border: none;
+                        background: transparent;
+                    }
+
+                    button{
+                        position: absolute;
+                        font-size: 16px;
+                        right: 16px;
+                        top: 3px;
+                    }
+                }
+
+
             }
         }
+
     }
 
     #color {
