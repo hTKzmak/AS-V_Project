@@ -19,6 +19,8 @@ export default {
     border: none;
     color: #FFF;
 
+    font-family: "SF Pro Display Medium", sans-serif;
+
     display: flex;
     align-items: center;
     gap: 5px;

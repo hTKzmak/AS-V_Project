@@ -117,6 +117,39 @@ export default {
                         <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">
                         <ButtonElem title="Купить" addedItemStyle="false" />
                     </div>
+
+                    <nav>
+                        <ul>
+                            <li>
+                                <button id="discountBtn">
+                                    <img src="../../assets/icons/discount.svg" alt="#">
+                                    Купить в кредит
+                                </button>
+                            </li>
+                            <li>
+                                <img src="../../assets/icons/bike.svg" alt="#">
+                                <div class="title">
+                                    <p>Доставим в Санкт-Петербурге</p>
+                                    <span>сегодня до 15:16</span>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="../../assets/icons/bag.svg" alt="#">
+                                <div class="title">
+                                    <p>Самовызов</p>
+                                    <span>Лиговский проспект 33/35</span>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="../../assets/icons/truck.svg" alt="#">
+                                <div class="title">
+                                    <p>Доставим по России</p>
+                                    <span>до 22.12.2022</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+
                 </div>
 
             </div>
@@ -172,10 +205,12 @@ export default {
     .productData {
 
         margin-top: 120px;
+        width: 55%;
 
         h1 {
             font-family: "SF Pro Display Black", sans-serif;
             margin: 0;
+            text-align: start;
         }
 
 
@@ -183,6 +218,7 @@ export default {
 
             display: flex;
             justify-content: space-between;
+            gap: 63px;
 
             .productData-options {
 
@@ -244,7 +280,7 @@ export default {
 
             .productData-order {
 
-                width: 320px;
+                // width: 320px;
                 margin-top: 30px;
 
                 .product-info {
@@ -285,30 +321,83 @@ export default {
                     margin-bottom: 12px;
                 }
 
-                .buyInOneClick{
+                .btnStyle {
+                    font-family: 'SF Pro Display Bold', sans-serif;
+                    width: 100%;
+                }
+
+                .buyInOneClick {
 
                     position: relative;
                     border-radius: 8px;
                     border: 1px solid #1212124D;
+                    z-index: -1;
 
                     input {
                         font-size: 16px;
                         padding: 16px 0 16px 24px;
                         width: 50%;
-    
+
                         outline: none;
                         border: none;
                         background: transparent;
                     }
 
-                    button{
+                    button {
                         position: absolute;
                         font-size: 16px;
                         right: 16px;
-                        top: 3px;
+                        top: 5px;
+                        width: auto;
+                        
+                        border-radius: 8px;
+                        padding: 10px 8px;
+
+                        img{
+                            display: none;
+                        }
                     }
                 }
 
+                nav {
+                    ul {
+                        display: grid;
+                        row-gap: 14px;
+
+                        li {
+                            display: flex;
+                            gap: 12px;
+                            align-items: start;
+
+                            img {
+                                width: 24px;
+                            }
+
+                            .title {
+
+                                p,
+                                span {
+                                    margin: 0;
+                                }
+
+                                span{
+                                    color: #1877F2;
+                                }
+                            }
+
+                            #discountBtn {
+                                display: flex;
+                                align-items: center;
+                                padding: 0;
+                                
+                                gap: 12px;
+                                font-size: 16px;
+                                
+                                color: #1877F2;
+                            }
+                        }
+                    }
+                }
 
             }
         }
