@@ -24,140 +24,152 @@ export default {
 </script>
 
 <template>
-    <div class="container productInfo">
-        <div class="productImage">
-            <img src="../../assets/img.png" alt="product image">
-            <nav>
-                <ul>
-                    <li>
-                        <button>
-                            <img src="../../assets/img.png" alt="product image">
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            <img src="../../assets/img.png" alt="product image">
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            <img src="../../assets/img.png" alt="product image">
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            <img src="../../assets/img.png" alt="product image">
-                        </button>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+    <div class="container">
+        <div class="productInfo">
+            <h1 id="mobileTitle">Oculus Quest 2 White 128GB</h1>
+            <div class="productImage">
+                <img src="../../assets/img.png" alt="product image">
+                <nav>
+                    <ul>
+                        <li>
+                            <button>
+                                <img src="../../assets/img.png" alt="product image">
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                <img src="../../assets/img.png" alt="product image">
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                <img src="../../assets/img.png" alt="product image">
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                <img src="../../assets/img.png" alt="product image">
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
-        <div class="productData">
-            <h1>Oculus Quest 2 White 128GB</h1>
+            <div class="productData">
+                <h1>Oculus Quest 2 White 128GB</h1>
 
-            <div class="productData-optionsAndOrder">
+                <div class="productData-optionsAndOrder">
 
-                <div class="productData-options">
-                    <nav>
-                        <ul>
-                            <li>
-                                <button id="color">
-                                    <img src="../../assets/img.png" alt="product image">
-                                </button>
-                            </li>
-                            <li>
-                                <button id="color">
-                                    <img src="../../assets/img.png" alt="product image">
-                                </button>
-                            </li>
-                        </ul>
-                    </nav>
+                    <div class="productData-options">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <button id="color">
+                                        <img src="../../assets/img.png" alt="product image">
+                                    </button>
+                                </li>
+                                <li>
+                                    <button id="color">
+                                        <img src="../../assets/img.png" alt="product image">
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
 
-                    <h2>Объем памяти</h2>
+                        <h2>Объем памяти</h2>
 
-                    <nav>
-                        <ul>
-                            <li>
-                                <button id="memory">
-                                    128GB
-                                </button>
-                            </li>
-                            <li>
-                                <button id="memory">
-                                    256GB
-                                </button>
-                            </li>
-                        </ul>
-                    </nav>
+                        <nav>
+                            <ul>
+                                <li>
+                                    <button id="memory">
+                                        128GB
+                                    </button>
+                                </li>
+                                <li>
+                                    <button id="memory">
+                                        256GB
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
 
-                    <h2>Характеристики</h2>
+                        <h2>Характеристики</h2>
 
-                    <div class="characteristicsList">
-                        <div class="characteristicItem" v-for="elem in characteristics">
-                            <p>{{ elem.title }}</p>
-                            <p>{{ elem.text }}</p>
-                        </div>
-                        <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
-                    </div>
-                </div>
-
-                <div class="productData-order">
-                    <div class="product-info">
-                        <h4>48 000 ₽</h4>
-                        <div class="existence">
-                            <div class="existence-sign"></div>
-                            <p>Есть в наличии</p>
+                        <div class="characteristicsList">
+                            <div class="characteristicItem" v-for="elem in characteristics">
+                                <p>{{ elem.title }}</p>
+                                <p>{{ elem.text }}</p>
+                            </div>
+                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
                         </div>
                     </div>
-                    <h3>44 290 ₽</h3>
-                    <ButtonElem title="Добавить в корзину" addedItemStyle="false" />
-                    <p>Купить в 1 клик</p>
-                    <div class="buyInOneClick">
-                        <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">
-                        <ButtonElem title="Купить" addedItemStyle="false" />
+
+                    <div class="productData-order">
+                        <div class="product-info">
+                            <h4>48 000 ₽</h4>
+                            <div class="existence">
+                                <div class="existence-sign"></div>
+                                <p>Есть в наличии</p>
+                            </div>
+                        </div>
+                        <h3>44 290 ₽</h3>
+                        <ButtonElem title="Добавить в корзину" addedItemStyle="false" />
+                        <p>Купить в 1 клик</p>
+                        <div class="buyInOneClick">
+                            <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">
+                            <ButtonElem title="Купить" addedItemStyle="false" />
+                        </div>
+
+                        <nav>
+                            <ul>
+                                <li>
+                                    <button id="discountBtn">
+                                        <img src="../../assets/icons/discount.svg" alt="#">
+                                        Купить в кредит
+                                    </button>
+                                </li>
+                                <li>
+                                    <img src="../../assets/icons/bike.svg" alt="#">
+                                    <div class="title">
+                                        <p>Доставим в Санкт-Петербурге</p>
+                                        <span>сегодня до 15:16</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="../../assets/icons/bag.svg" alt="#">
+                                    <div class="title">
+                                        <p>Самовызов</p>
+                                        <span>Лиговский проспект 33/35</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="../../assets/icons/truck.svg" alt="#">
+                                    <div class="title">
+                                        <p>Доставим по России</p>
+                                        <span>до 22.12.2022</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+
                     </div>
 
-                    <nav>
-                        <ul>
-                            <li>
-                                <button id="discountBtn">
-                                    <img src="../../assets/icons/discount.svg" alt="#">
-                                    Купить в кредит
-                                </button>
-                            </li>
-                            <li>
-                                <img src="../../assets/icons/bike.svg" alt="#">
-                                <div class="title">
-                                    <p>Доставим в Санкт-Петербурге</p>
-                                    <span>сегодня до 15:16</span>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="../../assets/icons/bag.svg" alt="#">
-                                <div class="title">
-                                    <p>Самовызов</p>
-                                    <span>Лиговский проспект 33/35</span>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="../../assets/icons/truck.svg" alt="#">
-                                <div class="title">
-                                    <p>Доставим по России</p>
-                                    <span>до 22.12.2022</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
-
                 </div>
-
             </div>
         </div>
     </div>
 </template>
 
 <style lang="scss">
+#mobileTitle {
+    display: none;
+
+    @media screen and (max-width: 1440px) {
+        display: flex;
+        justify-content: center;
+    }
+}
+
 .productInfo {
 
     display: flex;
@@ -172,6 +184,10 @@ export default {
 
         img {
             width: 100%;
+
+            @media screen and (max-width: 768px) {
+                width: 50%;
+            }
         }
 
         nav>ul {
@@ -191,6 +207,11 @@ export default {
                     img {
                         width: 100px;
                         height: 100px;
+                        
+                        @media screen and (max-width: 768px) {
+                            width: 72px;
+                            height: 72px;
+                        }
                     }
 
                     &:hover {
@@ -199,6 +220,11 @@ export default {
 
                 }
             }
+        }
+
+        @media screen and (max-width: 1440px) {
+            margin: 0 auto;
+
         }
     }
 
@@ -211,6 +237,10 @@ export default {
             font-family: "SF Pro Display Black", sans-serif;
             margin: 0;
             text-align: start;
+
+            @media screen and (max-width: 1440px) {
+                display: none;
+            }
         }
 
 
@@ -275,6 +305,10 @@ export default {
                         margin-top: 16px;
                     }
 
+                }
+
+                @media screen and (max-width: 1440px) {
+                    margin-top: 0;
                 }
             }
 
@@ -349,11 +383,11 @@ export default {
                         right: 16px;
                         top: 5px;
                         width: auto;
-                        
+
                         border-radius: 8px;
                         padding: 10px 8px;
 
-                        img{
+                        img {
                             display: none;
                         }
                     }
@@ -380,7 +414,7 @@ export default {
                                     margin: 0;
                                 }
 
-                                span{
+                                span {
                                     color: #1877F2;
                                 }
                             }
@@ -389,10 +423,10 @@ export default {
                                 display: flex;
                                 align-items: center;
                                 padding: 0;
-                                
+
                                 gap: 12px;
                                 font-size: 16px;
-                                
+
                                 color: #1877F2;
                             }
                         }
@@ -400,6 +434,15 @@ export default {
                 }
 
             }
+
+            @media screen and (max-width: 768px) {
+                display: grid;
+            }
+        }
+
+        @media screen and (max-width: 1440px) {
+            margin-top: 0;
+            width: auto;
         }
 
     }
@@ -421,5 +464,12 @@ export default {
             color: #FFF;
         }
     }
+
+    @media screen and (max-width: 1440px) {
+        display: grid;
+        justify-content: center;
+        margin: 80px 0;
+    }
+
 }
 </style>
