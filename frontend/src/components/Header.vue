@@ -259,6 +259,7 @@ header {
     padding-bottom: 5px;
     background-color: #FFF;
     box-shadow: 0px 4px 4px 0px #0000000D;
+    z-index: 1;
 
 
     .header-mobile {

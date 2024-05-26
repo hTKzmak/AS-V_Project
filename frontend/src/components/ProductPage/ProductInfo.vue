@@ -76,7 +76,7 @@ export default {
                             </ul>
                         </nav>
 
-                        <h2>Объем памяти</h2>
+                        <h2 id="title_memory">Объем памяти</h2>
 
                         <nav>
                             <ul>
@@ -93,7 +93,7 @@ export default {
                             </ul>
                         </nav>
 
-                        <h2>Характеристики</h2>
+                        <h2 id="title_characteristic">Характеристики</h2>
 
                         <div class="characteristicsList">
                             <div class="characteristicItem" v-for="elem in characteristics">
@@ -152,6 +152,16 @@ export default {
                             </ul>
                         </nav>
 
+                        <h2 id="title_characteristic">Характеристики</h2>
+
+                        <div class="characteristicsList">
+                            <div class="characteristicItem" v-for="elem in characteristics">
+                                <p>{{ elem.title }}</p>
+                                <p>{{ elem.text }}</p>
+                            </div>
+                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
+                        </div>
+
                     </div>
 
                 </div>
@@ -183,49 +193,71 @@ export default {
         width: fit-content;
 
         img {
-            width: 100%;
+            width: 400px;
+            margin: 0 auto;
+            display: flex;
+
+            @media screen and (min-width: 769px) and (max-width: 1440px) {
+                width: 600px;
+            }
 
             @media screen and (max-width: 768px) {
-                width: 50%;
+                width: 288px;
             }
         }
 
-        nav>ul {
+        nav {
 
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
 
-            li {
+            ul {
+
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                li {
 
 
-                button {
+                    button {
 
-                    border-radius: 8px;
-                    transition: 0.3s;
-                    border: 2px solid transparent;
+                        border-radius: 8px;
+                        transition: 0.3s;
+                        border: 2px solid transparent;
 
-                    img {
-                        width: 100px;
-                        height: 100px;
-                        
-                        @media screen and (max-width: 768px) {
-                            width: 72px;
-                            height: 72px;
+                        img {
+                            width: 100px;
+                            height: 100px;
+
+                            @media screen and (max-width: 768px) {
+                                width: 72px;
+                                height: 72px;
+                            }
                         }
-                    }
 
-                    &:hover {
-                        border: 2px solid #1877F2;
-                    }
+                        &:hover {
+                            border: 2px solid #1877F2;
+                        }
 
+                    }
                 }
+
+                @media screen and (max-width: 1440px) {
+                    margin: 0 auto;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                margin: 0 auto;
+                width: 21rem;
             }
         }
 
         @media screen and (max-width: 1440px) {
             margin: 0 auto;
-
         }
+
     }
 
     .productData {
@@ -257,6 +289,7 @@ export default {
                 nav>ul {
 
                     display: flex;
+                    flex-wrap: wrap;
                     gap: 8px;
 
                     li {
@@ -276,6 +309,12 @@ export default {
                 h2 {
                     font-size: 18px;
                     font-family: "SF Pro Display Medium", sans-serif;
+                }
+
+                #title_characteristic {
+                    @media screen and (max-width: 768px) {
+                        display: none;
+                    }
                 }
 
                 .characteristicsList {
@@ -305,6 +344,10 @@ export default {
                         margin-top: 16px;
                     }
 
+                    @media screen and (max-width: 768px) {
+                        display: none;
+                    }
+
                 }
 
                 @media screen and (max-width: 1440px) {
@@ -314,7 +357,7 @@ export default {
 
             .productData-order {
 
-                // width: 320px;
+                width: 270px;
                 margin-top: 30px;
 
                 .product-info {
@@ -365,7 +408,6 @@ export default {
                     position: relative;
                     border-radius: 8px;
                     border: 1px solid #1212124D;
-                    z-index: -1;
 
                     input {
                         font-size: 16px;
@@ -433,10 +475,55 @@ export default {
                     }
                 }
 
+                #title_characteristic {
+                    display: none;
+                    font-size: 18px;
+                    margin-top: 62px;
+
+                    @media screen and (max-width: 768px) {
+                        display: flex;
+                    }
+                }
+
+                .characteristicsList {
+
+                    width: 320px;
+                    display: none;
+
+                    .characteristicItem {
+
+                        p {
+
+                            font-size: 16px;
+                            margin-top: 6px;
+                            margin-bottom: 6px;
+
+                            &:first-child {
+                                color: #121212B2;
+                            }
+                        }
+                    }
+
+                    a {
+                        margin-top: 16px;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        display: grid;
+                    }
+
+                }
+
+
+                @media screen and (max-width: 768px) {
+                    width: 22rem;
+                }
+
             }
 
             @media screen and (max-width: 768px) {
                 display: grid;
+                gap: 0;
             }
         }
 
