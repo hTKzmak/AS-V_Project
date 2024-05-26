@@ -209,7 +209,7 @@ export default {
                                         <span>от 31 480₽</span>
                                     </div>
                                 </div>
-                                <RouterLink to="/ban">
+                                <RouterLink to="/ban" @click="activateCatalog = false">
                                     Смотреть все товары
                                 </RouterLink>
                             </div>

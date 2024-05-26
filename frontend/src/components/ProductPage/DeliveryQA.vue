@@ -172,6 +172,7 @@ export default {
     .advantages {
         display: flex;
         justify-content: space-between;
+        align-items: baseline;
         margin-top: 24px;
         margin-bottom: 24px;
 
