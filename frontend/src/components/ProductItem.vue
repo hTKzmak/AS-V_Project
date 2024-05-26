@@ -1,16 +1,61 @@
-<script>
+<script setup>
+import { useModalStore } from '@/stores/ModalStore';
+import { useCurrentProductStore } from '@/stores/CurrentProductStore';
 import ButtonElem from './UI/ButtonElem.vue';
+// import ButtonElem from './UI/ButtonElem.vue';
 
-export default {
-    components: {
-        ButtonElem
-    },
-    props: ['id', 'title', 'price', 'image', 'rating', 'discount']
+// export default {
+//   components: {
+//     ButtonElem
+//   }
+// }
+
+const modalStore = useModalStore()
+const currentProductStore = useCurrentProductStore()
+
+const changeHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal = 'Better'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    modalStore.changeModal('Better')
 }
+const oneClickHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal = 'Better'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    currentProductStore.image = props.image
+    currentProductStore.price = props.price
+    currentProductStore.oldPrice = props.price
+    currentProductStore.name = props.title
+    modalStore.changeModal('oneClick')
+}
+const tradeInHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal = 'Better'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    currentProductStore.image = props.image
+    currentProductStore.price = props.price
+    currentProductStore.oldPrice = props.price
+    currentProductStore.name = props.title
+    modalStore.changeModal('tradeIn')
+}
+
+
+
+    // props: ['id', 'title', 'price', 'image', 'rating', 'discount']
+    const props = defineProps({
+        id: Number,
+        title: String,
+        price: Number,
+        image: String,
+        raring: Number,
+        discount: Number
+    });
+
 </script>
 
 <template>
-    <div class="product-item" :id='id'>
+    <div class="product-item" :id='props.id'>
         <div class="rating-and-settings">
             <div class="star-rating">
                 <span class="fa fa-star checked"></span>
@@ -27,8 +72,8 @@ export default {
             </div>
         </div>
 
-        <h3>{{title}}</h3>
-        <img class="product-image" :src="image" alt="img">
+        <h3>{{props.title}}</h3>
+        <img class="product-image" :src="props.image" alt="img">
 
         <div class="product-item-info">
             <div class="product-info">
@@ -36,17 +81,17 @@ export default {
                     <div class="existence-sign"></div>
                     <p>Есть в наличии</p>
                 </div>
-                <p>Гарантия 1 год</p>
+                <p @click="tradeInHandle">Гарантия 1 год</p>
             </div>
 
             <div class="price-info">
-                <h4>{{ price }} ₽</h4>
+                <h4>{{ props.price }} ₽</h4>
                 <!-- мобильная версия кнопки для покупки  -->
-                <ButtonElem :title="price + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'/>
+                <ButtonElem :title="props.price + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'/>
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
-                <h3>{{ price }} ₽</h3>
+                <h3>{{ props.price }} ₽</h3>
             </div>
 
             <!-- ПК версия кнопки для покупки  -->
@@ -56,8 +101,8 @@ export default {
             <!-- <button class="buttonElem buttonCartAdded"><img src="../assets/icons/cart-added.svg">в корзине</button> -->
 
             <div class="other">
-                <a href="#!">Хочу дешевле</a>
-                <a class="oneCLick" href="#!">Купить в 1 клик</a>
+                <a href="#!" @click="changeHandle">Хочу дешевле</a>
+                <a class="oneCLick" @click="oneClickHandle" href="#!">Купить в 1 клик</a>
             </div>
         </div>
 

@@ -2,6 +2,7 @@
 import { RouterLink } from 'vue-router'
 import Search from '../components/HomePage/Search.vue'
 import { useCounterStore } from '@/stores/AppleStore';
+import { useModalStore } from '@/stores/ModalStore';
 
 import iPhoneIcon from '../assets/icons/header/gadgets/iphone.svg'
 import iPadIcon from '../assets/icons/header/gadgets/ipad.svg'
@@ -31,8 +32,10 @@ export default {
     },
     setup() {
         const appleStore = useCounterStore()
+        const modalStore = useModalStore()
         return {
-            appleStore,
+
+            appleStore, modalStore
             // categories нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             categories: [
                 { id: 1, title: 'iPhone', image: iPhoneIcon },
@@ -42,6 +45,7 @@ export default {
                 { id: 5, title: 'Гаджеты', image: gadgetsIcon },
                 { id: 6, title: 'Аксессуары', image: toolsIcon },
             ]
+
         }
     },
     methods: {
@@ -63,12 +67,32 @@ export default {
             this.showButtons = false
         },
 
+        showMenuFunc() {
+            this.showMenu = !this.showMenu
+        },
+                changeHandle() {
+        // modalStore.isShown = true
+        // modalStore.typeModal.value = 'Bucket'
+        // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+        this.modalStore.changeModal('Bucket')
+        },
+        callbackHandle() {
+        this.modalStore.changeModal('Callback')
+        console.log('callback comes in')
+        },
+        nightHandle(){
+        this.modalStore.changeModal('night')
+        console.log('night comes in')
+        }
         // функция для отображения товаров выбранного каталога (эту функцию будет нужно доработать, если появится бекенд)
         showCatalogToolsList(catalog) {
             showProducts = !showProducts
             console.log(catalog)
+
         }
+
     }
+
 }
 </script>
 
@@ -180,7 +204,7 @@ export default {
                     <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812
                         561 96
                         62</a>
-                    <a href="#!" class="recall">Вам перезвонить?</a>
+                    <a @click="callbackHandle()" class="recall">Вам перезвонить?</a>
                 </div>
             </div>
 
@@ -225,7 +249,9 @@ export default {
                 <Search />
 
                 <a href="#!"><img src="../assets/icons/header/heart.svg" alt=""></a>
-                <button class="buttonElem basketBtn">
+
+                <button class="buttonElem basketBtn" @click="changeHandle">
+
                     <img src="../assets/icons/header/basket.svg" alt="">
                     в корзине
                     <div class="basketCount">
@@ -251,6 +277,8 @@ export default {
 
         </div>
     </header>
+
+    
 </template>
 
 <style lang="scss">
