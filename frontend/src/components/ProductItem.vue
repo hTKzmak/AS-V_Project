@@ -69,9 +69,6 @@ const tradeInHandle = () => {
                 <button>
                     <img src="../assets/icons/header/heart.svg">
                 </button>
-                <button>
-                    <img src="../assets/icons/header/filters.svg">
-                </button>
             </div>
         </div>
 

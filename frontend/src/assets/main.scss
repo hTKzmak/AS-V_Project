@@ -54,6 +54,14 @@ body {
         color: $link-font-color;
     }
 
+    ul{
+        padding-left: 0;
+
+        li{
+            list-style-type: none;
+        }
+    }
+
     .buttonElem {
         border-radius: 16px;
         padding: 13px 16px;
