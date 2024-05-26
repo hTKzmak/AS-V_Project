@@ -43,6 +43,14 @@ export default {
         // modalStore.typeModal.value = 'Bucket'
         // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
         this.modalStore.changeModal('Bucket')
+        },
+        callbackHandle() {
+        this.modalStore.changeModal('Callback')
+        console.log('callback comes in')
+        },
+        nightHandle(){
+        this.modalStore.changeModal('night')
+        console.log('night comes in')
         }
 
     }
@@ -65,9 +73,9 @@ export default {
             </p>
 
             <div class="social-media">
-                <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
-                <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
-                <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
+                <a href="#!" @click="nightHandle()" ><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
+                <a href="#!" @click="nightHandle()" ><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
+                <a href="#!" @click="nightHandle()" ><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
             </div>
         </div>
     </div>
@@ -77,7 +85,7 @@ export default {
 
         <!-- меню для планшета и телефона -->
         <div v-show="showMenu" class="menuModal container">
-            <a href="#!" class="recall">Вам перезвонить?</a>
+            <button @click="callbackHandle()" class="recall">Вам перезвонить?</button>
             <p>Ваш город:
                 <select name="select-city" id="city">
                     <option value="Moscow">Москва</option>
@@ -185,7 +193,7 @@ export default {
                     <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812
                         561 96
                         62</a>
-                    <a href="#!" class="recall">Вам перезвонить?</a>
+                    <a @click="callbackHandle()" class="recall">Вам перезвонить?</a>
                 </div>
             </div>
 

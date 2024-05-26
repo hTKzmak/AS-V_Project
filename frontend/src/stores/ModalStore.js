@@ -4,11 +4,12 @@ import { ref } from 'vue'
 
 export const useModalStore = defineStore('modal', () => {
   let isShown = ref(false)
-  let typeModal = ref('Success')
+  let typeModal = ref('noProduct')
+  
   console.log('Started to '+ typeModal.value + ' is shown: ' + isShown.value)
 
     const changeModal = (newModal) => {
-        isShown.value = !isShown.value
+        isShown.value = true
         typeModal.value = newModal
         console.log('Changed to '+ typeModal.value + ' is shown: ' + isShown.value)
     }

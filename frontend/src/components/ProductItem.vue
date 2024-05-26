@@ -1,5 +1,6 @@
 <script setup>
 import { useModalStore } from '@/stores/ModalStore';
+import { useCurrentProductStore } from '@/stores/CurrentProductStore';
 import ButtonElem from './UI/ButtonElem.vue';
 // import ButtonElem from './UI/ButtonElem.vue';
 
@@ -10,6 +11,7 @@ import ButtonElem from './UI/ButtonElem.vue';
 // }
 
 const modalStore = useModalStore()
+const currentProductStore = useCurrentProductStore()
 
 const changeHandle = () => {
     // modalStore.isShown = true
@@ -17,6 +19,27 @@ const changeHandle = () => {
     // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
     modalStore.changeModal('Better')
 }
+const oneClickHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal = 'Better'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    currentProductStore.image = props.image
+    currentProductStore.price = props.price
+    currentProductStore.oldPrice = props.price
+    currentProductStore.name = props.title
+    modalStore.changeModal('oneClick')
+}
+const tradeInHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal = 'Better'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    currentProductStore.image = props.image
+    currentProductStore.price = props.price
+    currentProductStore.oldPrice = props.price
+    currentProductStore.name = props.title
+    modalStore.changeModal('tradeIn')
+}
+
 
 
     // props: ['id', 'title', 'price', 'image', 'rating', 'discount']
@@ -61,7 +84,7 @@ const changeHandle = () => {
                     <div class="existence-sign"></div>
                     <p>Есть в наличии</p>
                 </div>
-                <p>Гарантия 1 год</p>
+                <p @click="tradeInHandle">Гарантия 1 год</p>
             </div>
 
             <div class="price-info">
@@ -82,7 +105,7 @@ const changeHandle = () => {
 
             <div class="other">
                 <a href="#!" @click="changeHandle">Хочу дешевле</a>
-                <a class="oneCLick" href="#!">Купить в 1 клик</a>
+                <a class="oneCLick" @click="oneClickHandle" href="#!">Купить в 1 клик</a>
             </div>
         </div>
 

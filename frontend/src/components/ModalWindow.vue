@@ -3,7 +3,14 @@
 import { useModalStore } from '@/stores/ModalStore'
 import BucketModal from '../modals/BucketModal.vue'
 import BetterPrice from '../modals/BetterPrice.vue'
+import CallbackModal from '../modals/CallbackModal.vue'
+import AcceptCall from '../modals/AcceptCall.vue'
 import BucketSucces from '@/modals/BucketSucces.vue';
+import NightModal from '@/modals/NightModal.vue'
+import OneClick from '@/modals/OneClick.vue'
+import CreditModal from '@/modals/CreditModal.vue'
+import TradeInModal from '@/modals/TradeInModal.vue'
+import NoProuct from '@/modals/NoProuct.vue'
 // import { onMounted } from 'vue';
 
     // onMounted(() => {
@@ -44,7 +51,7 @@ import BucketSucces from '@/modals/BucketSucces.vue';
 
 <template>
     <div :class='modalStore.isShown ? "overlay" : "overlay hidden"' >
-    <div v-if='modalStore.isShown' class="window">
+    <div v-if='modalStore.isShown' :class='modalStore.typeModal == "night" ? "window night" : "window"'>
         <button class='close' @click="closeHandle()"><img src="..\assets\icons\modals\close.png" alt=""></button>
         <div class="container" v-if='modalStore.typeModal=="Bucket"'>
             <BucketModal/>
@@ -54,6 +61,27 @@ import BucketSucces from '@/modals/BucketSucces.vue';
         </div>
         <div class="container" v-if='modalStore.typeModal=="Success"'>
             <BucketSucces/>
+        </div>
+        <div class="container" v-if='modalStore.typeModal=="Callback"'>
+            <CallbackModal/>
+        </div>
+        <div class="container" v-if='modalStore.typeModal=="AcceptedCall"'>
+            <AcceptCall/>
+        </div>
+        <div class="container" v-if='modalStore.typeModal=="night"'>
+            <NightModal/>
+        </div>
+        <div class="container" v-if='modalStore.typeModal=="oneClick"'>
+            <OneClick/>
+        </div>
+        <div class="container" v-if='modalStore.typeModal=="credit"'>
+            <CreditModal/>
+        </div>
+        <div class="container" v-if='modalStore.typeModal=="tradeIn"'>
+            <TradeInModal/>
+        </div>
+        <div class="container" v-if='modalStore.typeModal=="noProduct"'>
+            <NoProuct/>
         </div>
     </div>
 </div>
@@ -95,10 +123,16 @@ import BucketSucces from '@/modals/BucketSucces.vue';
 
         @media screen and (max-width: 768px) {
             align-items: start;
-            max-width: 400px;
+            max-width: 380px;
             max-height: 90%;
             margin-left: -200px;
             overflow: scroll;
+        }
+    }
+    .night{
+       background: linear-gradient(112.87deg, #0E1114 35.17%, #102944 98.59%);
+        .close{
+            filter: brightness(100%);
         }
     }
     .hidden{
@@ -114,6 +148,10 @@ import BucketSucces from '@/modals/BucketSucces.vue';
         background-image: url('..\assets\icons\modals\close.svg');
         border: none;
         background-color: transparent;
+        @media screen and (max-width: 768px) {
+            right: 5px;
+            top: 5px;
+        }
     }
     .container{
         margin: 0;
@@ -122,6 +160,7 @@ import BucketSucces from '@/modals/BucketSucces.vue';
         min-height: 100px;
         max-height: 520px;
         @media screen and (max-width: 768px) {
+            width: 340px;
             max-height: 100%;
             // overflow: scroll;
         }

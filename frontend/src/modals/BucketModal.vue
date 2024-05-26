@@ -1,64 +1,35 @@
 <script setup>
-import { ref } from 'vue';
-   let bucket = ref([
-    {
-        id:0,
-        title: 'Apple iPhone 8 256 ГБ Серебристый',
-        lastPrice: 16500,
-        oldPrice: 42500,
-        image: '@/assets/icons/modals/buckphone.png',
-        count: 1
-    },
-    {
-        id:1,
-        title: 'Apple iPhone 8 256 ГБ Серебристый',
-        lastPrice: 16500,
-        oldPrice: 42500,
-        image: '@/assets/icons/modals/buckphone.png',
-        count: 1
-    },
-    {
-        id:2,
-        title: 'Apple iPhone 8 256 ГБ Серебристый',
-        lastPrice: 16500,
-        oldPrice: 42500,
-        image: '@/assets/icons/modals/buckphone.png',
-        count: 1
-    },
-    {
-        id:3,
-        title: 'Apple iPhone 8 256 ГБ Серебристый',
-        lastPrice: 16500,
-        oldPrice: 42500,
-        image: '@/assets/icons/modals/buckphone.png',
-        count: 1
-    },
-   ])
-   let totPrice = ref(0);
-    bucket.value.forEach(element => {
-        totPrice.value+=element.lastPrice
-    });
+import { useModalStore } from '@/stores/ModalStore'
+import { useBucketStore } from '@/stores/BucketStore';
+import EmptyBucket from './EmptyBucket.vue';
+const modalStore = useModalStore()
+const bucketStore = useBucketStore()
     function deleteItem(id){
-        bucket.value = bucket.value.filter((item)=> +item.id != id)
-        totPrice.value=0
-        bucket.value.forEach(element => {
-        totPrice.value+=element.lastPrice
-        });
-        console.log(id)
-        console.log(bucket.value)
+        bucketStore.deleteItem(id)
     }
+
+
+    function changeHandle() {
+        // modalStore.isShown = true
+        // modalStore.typeModal.value = 'Bucket'
+        // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+        modalStore.changeModal('Success')
+        console.log(modalStore.typeModal)
+        }
     
     
 </script>
 
 <template>
-    <div class="bucket">
+    <!-- v-if="bucket.value.length()!=0" -->
+    <EmptyBucket v-if="bucketStore.buckLength==0"/>
+    <div v-if="bucketStore.buckLength!=0" class="bucket">
         <h1>Оформление заказа</h1>
         <div class="bucket_contain">
             <div class="list">
-                <div v-for="(item, index) in bucket" :key="index" class="product_card">
+                <div v-for="(item, index) in bucketStore.bucket" :key="index" class="product_card">
                     <button class='close' @click="deleteItem(item.id)"><img src="..\assets\icons\modals\close.png" alt=""></button>
-                    <img class="prod_img" src='@/assets/icons/modals/buckphone.png'>
+                    <img class="prod_img" :src="item.image">
                     <div class="text-field">
                         <p>{{item.title}}</p>
                         <div style="display: flex; gap: 10px;"><p style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
@@ -73,8 +44,8 @@ import { ref } from 'vue';
                 <form>
                     <div class="info_field">
                         <div class="cost"><p>Доставка:</p><p>0₽</p></div>
-                        <div class="cost"><p>Cумма заказа:</p><p>{{totPrice}}₽</p></div>
-                        <div class="cost bald"><p>Итого:</p><p>{{totPrice}}₽</p></div>
+                        <div class="cost"><p>Cумма заказа:</p><p>{{bucketStore.totPrice}}₽</p></div>
+                        <div class="cost bald"><p>Итого:</p><p>{{bucketStore.totPrice}}₽</p></div>
                     </div>
                     <div class="info_field">
                         <h3>Выберите способ оплаты</h3>
@@ -103,7 +74,7 @@ import { ref } from 'vue';
                         <h3>Введите email</h3>
                         <input placeholder="необязательно" class="text_input" type="email">
                     </div> 
-                    <input value="оформить заказ" type="submit" class="buttonElem">
+                    <input @click="changeHandle()" value="оформить заказ" type="submit" class="buttonElem">
                 </form>
                 <div class="last-info">
                     <p>либо позвоните или напишите нам</p>
