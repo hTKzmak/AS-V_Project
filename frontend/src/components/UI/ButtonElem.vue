@@ -6,7 +6,7 @@ export default {
 
 <template>
     <button v-on:click="action" :class="[addedItemStyle === 'false' ? 'btnStyle mainColor' : 'btnStyle addedItemStyle']">
-        <img :src=img>
+        <img v-if="img" :src=img>
         {{ title }}
     </button>
 </template>

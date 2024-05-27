@@ -65,6 +65,13 @@
     justify-content: center;
     align-items: start;
     gap: 34px;
+    padding-bottom: 54px;
+
+    img {
+        @media screen and (max-width: 768px) {
+            margin: 0 auto;
+        }
+    }
 
     .title {
         margin-top: 16px;
@@ -76,27 +83,54 @@
             @media screen and (max-width: 1440px) {
                 width: 365px;
             }
-        }
 
+            @media screen and (max-width: 768px) {
+                text-align: center;
+                font-size: 24px;
+            }
+        }
+        
         h2 {
             font-weight: 400;
+            
+            @media screen and (max-width: 768px) {
+                font-size: 16px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            text-align: center;
+            ;
         }
     }
 
-    // @media screen and (max-width: 1440px) {
-    //     width: 365px;
-    // }
+    @media screen and (max-width: 768px) {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 0;
+        padding-bottom: 0;
+    }
 }
 
 .nothing-blocks-list {
 
     display: grid;
 
-    
+
     .nothing-block,
     .nothing-second-block {
         display: flex;
         align-items: center;
+
+        img {
+            @media screen and (max-width: 1440px) {
+                width: 550px;
+            }
+
+            @media screen and (max-width: 768px) {
+                width: auto;
+            }
+        }
 
         .title {
             width: 419px;
@@ -114,20 +148,35 @@
                 margin-top: 8px;
                 margin-bottom: 8px;
             }
-            
+
             @media screen and (max-width: 1440px) {
                 margin-top: 0;
+            }
+
+            @media screen and (max-width: 768px) {
+                width: auto;
             }
         }
 
         @media screen and (max-width: 1440px) {
             flex-direction: column;
             align-items: unset;
+
+            margin-top: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 320px;
         }
     }
-    
+
     .nothing-block {
         gap: 56px;
+
+        @media screen and (max-width: 768px) {
+            gap: 26px;
+        }
     }
 
     .nothing-second-block {
@@ -135,11 +184,17 @@
 
         @media screen and (max-width: 1440px) {
             flex-direction: column-reverse;
+            gap: 56px;
+        }
+
+        @media screen and (max-width: 768px) {
+            gap: 26px;
         }
     }
-    
+
     @media screen and (max-width: 1440px) {
         padding: 24px 90px;
+        justify-content: center;
     }
 }
 </style>
