@@ -1,9 +1,9 @@
 <script>
-import qualityImg from './assets/quality.svg';
-import speedImg from './assets/speed.svg';
-import cashImg from './assets/cash.svg';
-import bankImg from './assets/bank.svg';
-import sequrityImg from './assets/sequrity.svg';
+import qualityImg from './assets/icons/quality.svg';
+import speedImg from './assets/icons/speed.svg';
+import cashImg from './assets/icons/cash.svg';
+import bankImg from './assets/icons/bank.svg';
+import sequrityImg from './assets/icons/sequrity.svg';
 
 export default {
     data() {
@@ -100,6 +100,7 @@ export default {
                 }
 
                 h3 {
+                    font-weight: 700;
                     margin-top: 8px;
                     margin-bottom: 8px;
                 }
@@ -144,6 +145,7 @@ export default {
                 width: 288px;
 
                 h3 {
+                    font-weight: 700;
                     font-size: 24px;
                     margin: 0;
                 }
@@ -182,6 +184,7 @@ export default {
 
             .imgAndTitle {
                 h3 {
+                    font-weight: 700;
                     margin: 0;
                 }
 

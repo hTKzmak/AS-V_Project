@@ -370,6 +370,7 @@ export default {
                         text-decoration: line-through;
                         font-size: 20px;
                         margin: 0;
+                        font-weight: 700;
                     }
 
                     .existence {
@@ -396,6 +397,7 @@ export default {
                     font-size: 32px;
                     margin-top: 4px;
                     margin-bottom: 12px;
+                    font-weight: 700;
                 }
 
                 .btnStyle {
