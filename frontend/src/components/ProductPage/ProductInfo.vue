@@ -151,7 +151,20 @@ export default {
                                 </li>
                             </ul>
                         </nav>
+                        <!-- 
+                        <h2 id="title_characteristic">Характеристики</h2>
 
+                        <div class="characteristicsList">
+                            <div class="characteristicItem" v-for="elem in characteristics">
+                                <p>{{ elem.title }}</p>
+                                <p>{{ elem.text }}</p>
+                            </div>
+                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
+                        </div> -->
+
+                    </div>
+
+                    <div class="characteristics_mobile">
                         <h2 id="title_characteristic">Характеристики</h2>
 
                         <div class="characteristicsList">
@@ -161,7 +174,6 @@ export default {
                             </div>
                             <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
                         </div>
-
                     </div>
 
                 </div>
@@ -357,7 +369,12 @@ export default {
 
             .productData-order {
 
+                background-color: #12121205;
+
                 width: 270px;
+                border-radius: 16px;
+
+                padding: 24px;
                 margin-top: 30px;
 
                 .product-info {
@@ -477,6 +494,19 @@ export default {
                     }
                 }
 
+
+                
+                
+                @media screen and (max-width: 768px) {
+                    width: 22rem;
+                }
+                
+            }
+            
+            .characteristics_mobile{
+
+                display: none;
+
                 #title_characteristic {
                     display: none;
                     font-size: 18px;
@@ -516,11 +546,9 @@ export default {
 
                 }
 
-
                 @media screen and (max-width: 768px) {
-                    width: 22rem;
+                    display: grid;
                 }
-
             }
 
             @media screen and (max-width: 768px) {
