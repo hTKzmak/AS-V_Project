@@ -28,7 +28,7 @@ const appleStore = useCounterStore();
     position: absolute;
     padding: 0;
     right: 50%;
-    left: 19.5%;
+    left: 22%;
     top: 50px;
     width: 46vw;
     max-width: 706px;

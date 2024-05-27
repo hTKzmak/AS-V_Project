@@ -93,6 +93,7 @@ export default {
     h1 {
       margin: 0;
       text-align: start;
+      font-weight: 700;
 
       @media screen and (max-width: 768px) {
         font-size: 20px;

@@ -6,7 +6,7 @@ export default {
 
 <template>
     <button v-on:click="action" :class="[addedItemStyle === 'false' ? 'btnStyle mainColor' : 'btnStyle addedItemStyle']">
-        <img :src=img>
+        <img v-if="img" :src=img>
         {{ title }}
     </button>
 </template>
@@ -18,6 +18,8 @@ export default {
     font-size: 20px;
     border: none;
     color: #FFF;
+
+    font-family: "SF Pro Display Medium", sans-serif;
 
     display: flex;
     align-items: center;

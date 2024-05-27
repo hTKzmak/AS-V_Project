@@ -172,6 +172,10 @@ const tradeInHandle = () => {
         text-align: center;
         margin-top: 9px;
         margin-bottom: 9px;
+
+        @media screen and (max-width: 1440px) {
+            font-weight: 700;
+        }
     }
 
     .product-image {

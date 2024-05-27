@@ -93,6 +93,7 @@ export default {
             h3 {
                 font-size: 24px;
                 margin: 16px auto 8px;
+                font-weight: 700;
             }
 
             p {

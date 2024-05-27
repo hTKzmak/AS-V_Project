@@ -18,3 +18,10 @@
     font-style: normal;
     font-weight: 600;
 }
+
+@font-face {
+    font-family: 'SF Pro Display Black';
+    src: url('./fonts/SF-Pro-Display-Black.otf') format('opentype');
+    font-style: normal;
+    font-weight: 900;
+}
