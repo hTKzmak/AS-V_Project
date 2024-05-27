@@ -41,7 +41,7 @@ export default {
                     <div class="delivery-item">
                         <h3>Самовызов</h3>
                         <div class="delivery-location">
-                            <select>
+                            <select id="selectLocation">
                                 <option value="#">ул Барклая 8</option>
                             </select>
                             <p><span>сегодня в 22:00</span> или в другой удобный вам день</p>
@@ -129,7 +129,7 @@ export default {
                     display: grid;
                     gap: 4px;
 
-                    select {
+                    #selectLocation {
                         width: inherit;
                         font-size: 20px;
                         border: none;
@@ -137,18 +137,19 @@ export default {
                         padding: 0;
                         position: relative;
 
-                        &::after {
-                            content: "";
-                            position: absolute;
-                            top: 50%;
-                            right: 10px;
-                            transform: translateY(-50%);
-                            width: 0;
-                            height: 0;
-                            border-left: 8px solid transparent;
-                            border-right: 8px solid transparent;
-                            border-top: 10px solid #ff0000;
-                        }
+                        cursor: pointer;
+                        
+                        -webkit-appearance: none;
+                        /* Убираем стандартную стрелку в Chrome и Safari */
+                        -moz-appearance: none;
+                        /* Убираем стандартную стрелку в Firefox */
+                        appearance: none;
+                        padding-right: 20px;
+                        /* Добавляем немного отступа справа для новой стрелки */
+                        background-image: url('../../assets/icons/arrow.svg');
+                        /* Добавляем свою собственную стрелку */
+                        background-repeat: no-repeat;
+                        background-position: right center;
 
                         @media screen and (max-width: 768px) {
                             -webkit-appearance: none;
