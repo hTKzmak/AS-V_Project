@@ -85,10 +85,18 @@ export default {
             console.log('night comes in')
         },
         // функция для отображения товаров выбранного каталога (эту функцию будет нужно доработать, если появится бекенд)
-        showCatalogToolsList(catalog) {
-            showProducts = !showProducts
-            console.log(catalog)
 
+        // Не используется, но на всякий случай оставлю
+
+        // showCatalogToolsList(catalog) {
+        //     showProducts = !showProducts
+        //     console.log(catalog)
+        // },
+
+        // функция для отображения или прекращения показа окна каталога и прекращение отображения продуктов выбранной категории
+        activateCatalogFunc(){
+            this.activateCatalog = !this.activateCatalog
+            this.showProducts = false
         }
 
     }
@@ -211,19 +219,19 @@ export default {
 
             <div class="header-search">
                 <div class="catalogNavigation">
-                    <button @click="activateCatalog = !activateCatalog"
+                    <button @click="activateCatalogFunc()"
                         :class="[!activateCatalog ? 'buttonElem' : 'buttonElem catalogBtn']"><img
                             src="../assets/icons/header/dots.svg" alt="">Каталог товаров</button>
 
                     <div class="catalog">
                         <div v-show="activateCatalog" class="catalogModal">
                             <ul class="catalogToolsList">
-                                <li id="1" @click="showProducts = !showProducts">Смартфоны</li>
-                                <li id="2" @click="showProducts = !showProducts">Планшеты</li>
-                                <li id="3" @click="showProducts = !showProducts">Компьютеры</li>
-                                <li id="4" @click="showProducts = !showProducts">Часы</li>
-                                <li id="5" @click="showProducts = !showProducts">Аксессуары</li>
-                                <li id="6" @click="showProducts = !showProducts">Акции</li>
+                                <li id="1" @mouseenter="showProducts = true">Смартфоны</li>
+                                <li id="2" @mouseenter="showProducts = true">Планшеты</li>
+                                <li id="3" @mouseenter="showProducts = true">Компьютеры</li>
+                                <li id="4" @mouseenter="showProducts = true">Часы</li>
+                                <li id="5" @mouseenter="showProducts = true">Аксессуары</li>
+                                <li id="6" @mouseenter="showProducts = true">Акции</li>
                             </ul>
                             <div v-show="showProducts" class="catalogItemsList">
                                 <div class="catalogItem" v-for="index in 12" :id=index>
@@ -464,6 +472,9 @@ header {
 
                                 padding: 8px;
                                 border-radius: 8px;
+
+                                display: flex;
+                                align-items: center;
 
                                 cursor: pointer;
 

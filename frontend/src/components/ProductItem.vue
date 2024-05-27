@@ -1,5 +1,9 @@
 <script setup>
 import { useModalStore } from '@/stores/ModalStore';
+
+// Добавил AppleStore
+import { useCounterStore } from '@/stores/AppleStore';
+
 import { useCurrentProductStore } from '@/stores/CurrentProductStore';
 import ButtonElem from './UI/ButtonElem.vue';
 // import ButtonElem from './UI/ButtonElem.vue';
@@ -11,7 +15,14 @@ import ButtonElem from './UI/ButtonElem.vue';
 // }
 
 const modalStore = useModalStore()
+
+// Добавил appleStore
+const appleStore = useCounterStore()
+
 const currentProductStore = useCurrentProductStore()
+
+// Используется базовый url с бекенда
+let BASE_URL = appleStore.BASE_URL
 
 const changeHandle = () => {
     // modalStore.isShown = true
@@ -28,6 +39,7 @@ const oneClickHandle = () => {
     currentProductStore.oldPrice = props.price
     currentProductStore.name = props.title
     modalStore.changeModal('oneClick')
+
 }
 const tradeInHandle = () => {
     // modalStore.isShown = true
@@ -41,7 +53,7 @@ const tradeInHandle = () => {
 }
 
 
-
+props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
     // props: ['id', 'title', 'price', 'image', 'rating', 'discount']
     const props = defineProps({
         id: Number,
@@ -49,7 +61,8 @@ const tradeInHandle = () => {
         price: Number,
         image: String,
         raring: Number,
-        discount: Number
+        discount: Number,
+        is_available: Boolean
     });
 
 </script>
@@ -57,13 +70,16 @@ const tradeInHandle = () => {
 <template>
     <div class="product-item" :id='props.id'>
         <div class="rating-and-settings">
+
+            <!-- надо будет переделать систему отображения звёздочек (в зависимости от рейтинга) -->
+
             <div class="star-rating">
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star missed"></span>
-                <a href="#!">(14)</a>
+                <a href="#!">({{rating}})</a>
             </div>
             <div class="settings">
                 <button>
@@ -72,10 +88,13 @@ const tradeInHandle = () => {
             </div>
         </div>
 
-        <h3>{{props.title}}</h3>
-        <img class="product-image" :src="props.image" alt="img">
 
-        <div class="product-item-info">
+        <h3>{{title}}</h3>
+        <img class="product-image" :src="BASE_URL + image" alt="img">
+
+        <!-- если товар есть в наличии -->
+
+        <div v-if="is_available" class="product-item-info">
             <div class="product-info">
                 <div class="existence">
                     <div class="existence-sign"></div>
@@ -85,13 +104,13 @@ const tradeInHandle = () => {
             </div>
 
             <div class="price-info">
-                <h4>{{ props.price }} ₽</h4>
+                <h4>{{ discount === null ? price : discount }} ₽</h4>
                 <!-- мобильная версия кнопки для покупки  -->
-                <ButtonElem :title="props.price + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'/>
+                <ButtonElem :title="discount === null ? price : discount + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'/>
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
-                <h3>{{ props.price }} ₽</h3>
+                <h3>{{ discount === null ? price : discount }} ₽</h3>
             </div>
 
             <!-- ПК версия кнопки для покупки  -->
@@ -108,7 +127,7 @@ const tradeInHandle = () => {
 
         <!-- если товара нет в наличии -->
 
-        <!-- <div class="absent">
+        <div v-else class="absent">
             <div class="product-info">
                 <div class="existence">
                     <div class="absent-sign"></div>
@@ -117,7 +136,7 @@ const tradeInHandle = () => {
             </div>
             <p class="text-info">Мы можем сообщить вам, когда товар появится в наличии</p>
             <button class="buttonElem">сообщить о поступлении</button>
-        </div> -->
+        </div>
 
     </div>
 </template>
