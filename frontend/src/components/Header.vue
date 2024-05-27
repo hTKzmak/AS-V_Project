@@ -35,7 +35,7 @@ export default {
         const modalStore = useModalStore()
         return {
 
-            appleStore, modalStore
+            appleStore, modalStore,
             // categories нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             categories: [
                 { id: 1, title: 'iPhone', image: iPhoneIcon },
@@ -70,20 +70,20 @@ export default {
         showMenuFunc() {
             this.showMenu = !this.showMenu
         },
-                changeHandle() {
-        // modalStore.isShown = true
-        // modalStore.typeModal.value = 'Bucket'
-        // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
-        this.modalStore.changeModal('Bucket')
+        changeHandle() {
+            // modalStore.isShown = true
+            // modalStore.typeModal.value = 'Bucket'
+            // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+            this.modalStore.changeModal('Bucket')
         },
         callbackHandle() {
-        this.modalStore.changeModal('Callback')
-        console.log('callback comes in')
+            this.modalStore.changeModal('Callback')
+            console.log('callback comes in')
         },
-        nightHandle(){
-        this.modalStore.changeModal('night')
-        console.log('night comes in')
-        }
+        nightHandle() {
+            this.modalStore.changeModal('night')
+            console.log('night comes in')
+        },
         // функция для отображения товаров выбранного каталога (эту функцию будет нужно доработать, если появится бекенд)
         showCatalogToolsList(catalog) {
             showProducts = !showProducts
@@ -278,7 +278,7 @@ export default {
         </div>
     </header>
 
-    
+
 </template>
 
 <style lang="scss">
