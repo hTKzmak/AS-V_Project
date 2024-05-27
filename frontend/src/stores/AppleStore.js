@@ -5,30 +5,38 @@ import { reactive, ref } from 'vue';
 // Здесь ещё находится функция по поиску товаров (43 строка кода - searchFunc)
 
 
-let BASE_URL = 'https://dummyjson.com/products'
+// Старые данные
+// let BASE_URL = 'https://dummyjson.com/products'
+
+// Новые данные (Бекенд Арсена)
+let BASE_URL = 'http://localhost:1452/api/products/'
 
 let productsList = reactive([])
 
 fetch(BASE_URL)
     .then(res => res.json())
     .then(json => {
-        json.products.map(elem => {
+        json.map(elem => {
             let res = {
                 id: elem.id,
-                title: elem.title,
+                title: 'Название продукта',
                 price: elem.price,
                 image: elem.images[0],
                 rating: elem.rating,
-                discount: elem.discountPercentage,
+                discount: elem.discount_price,
+                is_available: elem.is_available,
+                category: elem.category,
+                // Если что-то ещё надо, то можно ещё что-то добавить
             }
             productsList.push(res)
         })
     })
-
+    
 export const useCounterStore = defineStore('appleStore', {
     state: () => ({
         data: productsList,
         inputValue: '',
+        BASE_URL: 'http://localhost:1452/',
         searchData: reactive([])
     }),
 
@@ -52,6 +60,8 @@ export const useCounterStore = defineStore('appleStore', {
             else {
                 this.searchData = []
             }
+
+            console.log(filteredProducts)
         }
     }
 })

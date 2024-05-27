@@ -4,18 +4,18 @@ import { reactive, ref } from 'vue';
 
 const appleStore = useCounterStore();
 
+let BASE_URL = appleStore.BASE_URL
+
 </script>
 
-<template>
-    <!-- <button @click="console.log(appleStore.searchData)">show menu</button> -->
-    
+<template>    
     <ul class="searchList">
         <li class="searchItem" v-for="index in appleStore.searchData" :key="index">
             <div class="search-product-info">
-                <div class="img" :style="{ backgroundImage: `url('${index.image}')` }"></div>
+                <div class="img" :style="{ backgroundImage: `url('${BASE_URL + index.image}')` }"></div>
                 <div class="product-title">
                     <p class="title">{{ index.title }}</p>
-                    <span class="price">{{ index.price }} ₽</span>
+                    <span class="price">{{ index.discount === null ? index.price : index.discount }} ₽</span>
                 </div>
             </div>
             <RouterLink to="/404">Подробнее</RouterLink>

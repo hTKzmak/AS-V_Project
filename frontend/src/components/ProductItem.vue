@@ -1,24 +1,35 @@
 <script>
+import { useCounterStore } from '@/stores/AppleStore';
 import ButtonElem from './UI/ButtonElem.vue';
 
 export default {
     components: {
         ButtonElem
     },
-    props: ['id', 'title', 'price', 'image', 'rating', 'discount']
+    setup(){
+        const appleStore = useCounterStore()
+        return{
+            appleStore,
+            BASE_URL: appleStore.BASE_URL
+        }
+    },
+    props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
 }
 </script>
 
 <template>
     <div class="product-item" :id='id'>
         <div class="rating-and-settings">
+
+            <!-- надо будет переделать систему отображения звёздочек (в зависимости от рейтинга) -->
+
             <div class="star-rating">
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star missed"></span>
-                <a href="#!">(14)</a>
+                <a href="#!">({{rating}})</a>
             </div>
             <div class="settings">
                 <button>
@@ -28,9 +39,11 @@ export default {
         </div>
 
         <h3>{{title}}</h3>
-        <img class="product-image" :src="image" alt="img">
+        <img class="product-image" :src="BASE_URL + image" alt="img">
 
-        <div class="product-item-info">
+        <!-- если товар есть в наличии -->
+
+        <div v-if="is_available" class="product-item-info">
             <div class="product-info">
                 <div class="existence">
                     <div class="existence-sign"></div>
@@ -40,13 +53,13 @@ export default {
             </div>
 
             <div class="price-info">
-                <h4>{{ price }} ₽</h4>
+                <h4>{{ discount === null ? price : discount }} ₽</h4>
                 <!-- мобильная версия кнопки для покупки  -->
-                <ButtonElem :title="price + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'/>
+                <ButtonElem :title="discount === null ? price : discount + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'/>
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
-                <h3>{{ price }} ₽</h3>
+                <h3>{{ discount === null ? price : discount }} ₽</h3>
             </div>
 
             <!-- ПК версия кнопки для покупки  -->
@@ -63,7 +76,7 @@ export default {
 
         <!-- если товара нет в наличии -->
 
-        <!-- <div class="absent">
+        <div v-else class="absent">
             <div class="product-info">
                 <div class="existence">
                     <div class="absent-sign"></div>
@@ -72,7 +85,7 @@ export default {
             </div>
             <p class="text-info">Мы можем сообщить вам, когда товар появится в наличии</p>
             <button class="buttonElem">сообщить о поступлении</button>
-        </div> -->
+        </div>
 
     </div>
 </template>
