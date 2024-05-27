@@ -4,10 +4,11 @@ import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import Menu from './components/Menu.vue'
 import CatalogTab from './components/CatalogTab.vue'
+import ModalWindow from './components/ModalWindow.vue'
 
 export default {
   components: {
-    Header, Footer, CatalogTab, Menu
+    Header, Footer, CatalogTab, Menu, ModalWindow
   },
   data() {
     return {
@@ -22,11 +23,12 @@ export default {
     }
   }
 }
-
 </script>
 
 <template>
-  <Header />
+
+  <Header/>
+  <ModalWindow/>
 
   <main>
     <RouterView />
@@ -38,4 +40,9 @@ export default {
 
 </template>
 
-<style></style>
+
+<style>
+body{
+  position: relative;
+}
+</style>

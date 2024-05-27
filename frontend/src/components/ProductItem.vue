@@ -1,24 +1,74 @@
-<script>
-import { useCounterStore } from '@/stores/AppleStore';
-import ButtonElem from './UI/ButtonElem.vue';
+<script setup>
+import { useModalStore } from '@/stores/ModalStore';
 
-export default {
-    components: {
-        ButtonElem
-    },
-    setup(){
-        const appleStore = useCounterStore()
-        return{
-            appleStore,
-            BASE_URL: appleStore.BASE_URL
-        }
-    },
-    props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
+// Добавил AppleStore
+import { useCounterStore } from '@/stores/AppleStore';
+
+import { useCurrentProductStore } from '@/stores/CurrentProductStore';
+import ButtonElem from './UI/ButtonElem.vue';
+// import ButtonElem from './UI/ButtonElem.vue';
+
+// export default {
+//   components: {
+//     ButtonElem
+//   }
+// }
+
+const modalStore = useModalStore()
+
+// Добавил appleStore
+const appleStore = useCounterStore()
+
+const currentProductStore = useCurrentProductStore()
+
+// Используется базовый url с бекенда
+let BASE_URL = appleStore.BASE_URL
+
+const changeHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal = 'Better'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    modalStore.changeModal('Better')
 }
+const oneClickHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal = 'Better'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    currentProductStore.image = props.image
+    currentProductStore.price = props.price
+    currentProductStore.oldPrice = props.price
+    currentProductStore.name = props.title
+    modalStore.changeModal('oneClick')
+
+}
+const tradeInHandle = () => {
+    // modalStore.isShown = true
+    // modalStore.typeModal = 'Better'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    currentProductStore.image = props.image
+    currentProductStore.price = props.price
+    currentProductStore.oldPrice = props.price
+    currentProductStore.name = props.title
+    modalStore.changeModal('tradeIn')
+}
+
+
+props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
+    // props: ['id', 'title', 'price', 'image', 'rating', 'discount']
+    const props = defineProps({
+        id: Number,
+        title: String,
+        price: Number,
+        image: String,
+        raring: Number,
+        discount: Number,
+        is_available: Boolean
+    });
+
 </script>
 
 <template>
-    <div class="product-item" :id='id'>
+    <div class="product-item" :id='props.id'>
         <div class="rating-and-settings">
 
             <!-- надо будет переделать систему отображения звёздочек (в зависимости от рейтинга) -->
@@ -38,6 +88,7 @@ export default {
             </div>
         </div>
 
+
         <h3>{{title}}</h3>
         <img class="product-image" :src="BASE_URL + image" alt="img">
 
@@ -49,7 +100,7 @@ export default {
                     <div class="existence-sign"></div>
                     <p>Есть в наличии</p>
                 </div>
-                <p>Гарантия 1 год</p>
+                <p @click="tradeInHandle">Гарантия 1 год</p>
             </div>
 
             <div class="price-info">
@@ -69,8 +120,8 @@ export default {
             <!-- <button class="buttonElem buttonCartAdded"><img src="../assets/icons/cart-added.svg">в корзине</button> -->
 
             <div class="other">
-                <a href="#!">Хочу дешевле</a>
-                <a class="oneCLick" href="#!">Купить в 1 клик</a>
+                <a href="#!" @click="changeHandle">Хочу дешевле</a>
+                <a class="oneCLick" @click="oneClickHandle" href="#!">Купить в 1 клик</a>
             </div>
         </div>
 
