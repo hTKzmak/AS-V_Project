@@ -53,14 +53,14 @@ const tradeInHandle = () => {
 }
 
 
-props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
-    // props: ['id', 'title', 'price', 'image', 'rating', 'discount']
+    // props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
+
     const props = defineProps({
         id: Number,
         title: String,
         price: Number,
         image: String,
-        raring: Number,
+        rating: Number,
         discount: Number,
         is_available: Boolean
     });
