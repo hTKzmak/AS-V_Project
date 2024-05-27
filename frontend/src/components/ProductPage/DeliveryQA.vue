@@ -40,9 +40,16 @@ export default {
                     </div>
                     <div class="delivery-item">
                         <h3>Самовызов</h3>
-                        <select>
-                            <option value="">lol</option>
-                        </select>
+                        <div class="delivery-location">
+                            <select>
+                                <option value="#">ул Барклая 8</option>
+                            </select>
+                            <p><span>сегодня в 22:00</span> или в другой удобный вам день</p>
+                            <div class="time-and-metro">
+                                <p id="time"><img src="../../assets/icons/stickman.svg" alt="#"> 5 минут от</p>
+                                <p id="metro"><img src="../../assets/icons/metro.svg" alt="#">Багратионовская</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="delivery-item">
                         <h3>Курьером в Москве</h3>
@@ -111,6 +118,83 @@ export default {
 
                 p {
                     color: #585656;
+                }
+
+                .delivery-location {
+                    width: 384px;
+                    padding: 8px 16px;
+                    background-color: #fff;
+                    border-radius: 16px;
+
+                    display: grid;
+                    gap: 4px;
+
+                    select {
+                        width: inherit;
+                        font-size: 20px;
+                        border: none;
+                        background: transparent;
+                        padding: 0;
+                        position: relative;
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            top: 50%;
+                            right: 10px;
+                            transform: translateY(-50%);
+                            width: 0;
+                            height: 0;
+                            border-left: 8px solid transparent;
+                            border-right: 8px solid transparent;
+                            border-top: 10px solid #ff0000;
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            appearance: none;
+                        }
+                    }
+
+                    p {
+                        @media screen and (max-width: 768px) {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 4px;
+                        }
+                    }
+
+                    .time-and-metro {
+
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+
+                        background-color: #F9F9F9;
+                        width: 253px;
+                        justify-content: center;
+
+                        border-radius: 16px;
+
+                        #time,
+                        #metro {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        #time {
+                            color: #282626;
+                        }
+
+                        #metro {
+                            color: #585656;
+                        }
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        width: auto;
+                    }
                 }
 
                 @media screen and (max-width: 768px) {
