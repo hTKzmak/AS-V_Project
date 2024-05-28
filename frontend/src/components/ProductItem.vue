@@ -34,7 +34,7 @@ const oneClickHandle = () => {
     // modalStore.isShown = true
     // modalStore.typeModal = 'Better'
     // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
-    currentProductStore.image = props.image
+    currentProductStore.image = BASE_URL + props.image
     currentProductStore.price = props.price
     currentProductStore.oldPrice = props.price
     currentProductStore.name = props.title
