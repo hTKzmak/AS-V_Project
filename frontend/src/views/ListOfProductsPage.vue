@@ -2,20 +2,43 @@
 import InfoBlocks from '../components/ListOfProducts/InfoBlocks.vue'
 import TagsAndSort from '../components/ListOfProducts/TagsAndSort.vue'
 
+import speedImg from '../components/ProductPage/assets/icons/speed.svg';
+import cashImg from '../components/ProductPage/assets/icons/cash.svg';
+import bankImg from '../components/ProductPage/assets/icons/bank.svg';
+import sequrityImg from '../components/ProductPage/assets/icons/sequrity.svg';
+
 export default {
     components: {
         InfoBlocks,
         TagsAndSort
+    },
+    data() {
+        return {
+            advantagesData: [
+                { id: 1, img: speedImg, title: 'Доставка за 2 часа', text: 'Быстро и бесплатно доставляем все заказы по Москве' },
+                { id: 2, img: cashImg, title: 'Удобная оплата', text: 'Все виды наличного и безналичного расчета' },
+                { id: 3, img: bankImg, title: 'Кредит', text: 'Выгодные кредитные предложения от самых популярных банков' },
+                { id: 4, img: sequrityImg, title: 'Гарантия', text: 'Предоставляем целый год сервисного обслуживания' },
+            ],
+        }
     }
 }
 </script>
 
 <template>
     <InfoBlocks />
-    <TagsAndSort/>
+    <TagsAndSort />
 
 
-
+    <div class="advantages container">
+        <div class="advantage-item" v-for="elem in advantagesData" :id=elem.id>
+            <div class="imgAndTitle">
+                <img :src=elem.img alt="#">
+                <h3>{{ elem.title }}</h3>
+            </div>
+            <p>{{ elem.text }}</p>
+        </div>
+    </div>
 
     <div class="info container">
         <h1>Новые модели Айфонов по выгодным ценам</h1>
@@ -37,4 +60,62 @@ export default {
     </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.advantages {
+    display: none;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    .advantage-item {
+        text-align: center;
+        width: 250px;
+
+        .imgAndTitle {
+
+            img{
+                width: 60px;
+
+                @media screen and (max-width: 768px) {
+                    width: 35px;
+                }
+            }
+
+            h3 {
+                font-weight: 700;
+                margin: 0;
+            }
+
+            @media screen and (max-width: 768px) {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+
+        }
+
+
+        p {
+            color: #585656;
+            margin-top: 4px;
+        }
+
+        @media screen and (max-width: 768px) {
+            text-align: start;
+            width: 265px;
+        }
+    }
+
+    @media screen and (max-width: 1440px) {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    @media screen and (max-width: 768px) {
+        display: grid;
+        justify-content: start;
+        gap: 16px;
+    }
+}
+</style>

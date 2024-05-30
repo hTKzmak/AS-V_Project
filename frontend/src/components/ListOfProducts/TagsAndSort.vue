@@ -134,16 +134,52 @@ h2 {
         justify-content: space-between;
         align-items: center;
 
-        button {
-            font-size: 16px;
+        .filter-item {
+
             display: none;
             align-items: center;
-            gap: 8px;
+            gap: 16px;
+
+            button {
+                font-size: 16px;
+                display: none;
+                align-items: center;
+                gap: 8px;
+
+                @media screen and (max-width: 1440px) {
+                    display: flex;
+                }
+            }
+
+            .erase-filter {
+
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                .count {
+                    color: #fff;
+                    background-color: #0071E4;
+                    border-radius: 100px;
+                    padding: 8px 13px;
+                    font-size: 16px;
+                    width: fit-content;
+                    text-align: center;
+                }
+
+                button {
+                    color: #0071E4;
+                    background: transparent;
+                    border: none;
+                    text-align: start;
+                }
+            }
 
             @media screen and (max-width: 1440px) {
                 display: flex;
             }
         }
+
 
         .sort {
             display: flex;
