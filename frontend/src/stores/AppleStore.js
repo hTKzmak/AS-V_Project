@@ -19,19 +19,21 @@ fetch(BASE_URL)
         json.map(elem => {
             let res = {
                 id: elem.id,
-                title: 'Название продукта',
+                title: elem.name,
                 price: elem.price,
                 image: elem.images[0],
                 rating: elem.rating,
                 discount: elem.discount_price,
                 is_available: elem.is_available,
                 category: elem.category,
+                guarantee: elem.guarantee,
+                count_review: elem.count_review,
                 // Если что-то ещё надо, то можно ещё что-то добавить
             }
             productsList.push(res)
         })
     })
-    
+
 export const useCounterStore = defineStore('appleStore', {
     state: () => ({
         data: productsList,
@@ -50,7 +52,7 @@ export const useCounterStore = defineStore('appleStore', {
         },
         searchFunc(value) {
             let filteredProducts = this.data.filter(elem => elem.title.toLowerCase().includes(value.toLowerCase()))
-            
+
             if (filteredProducts && value) {
                 this.searchData = filteredProducts
             }
