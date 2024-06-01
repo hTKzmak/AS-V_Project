@@ -1,16 +1,21 @@
 <script>
 import InfoBlocks from '../components/ListOfProducts/InfoBlocks.vue'
 import TagsAndSort from '../components/ListOfProducts/TagsAndSort.vue'
+import Filter from '../components/ListOfProducts/Filter.vue';
+import ProductsList from '../components/ProductsList.vue';
 
 import speedImg from '../components/ProductPage/assets/icons/speed.svg';
 import cashImg from '../components/ProductPage/assets/icons/cash.svg';
 import bankImg from '../components/ProductPage/assets/icons/bank.svg';
 import sequrityImg from '../components/ProductPage/assets/icons/sequrity.svg';
+import { useCounterStore } from '@/stores/AppleStore';
 
 export default {
     components: {
         InfoBlocks,
-        TagsAndSort
+        TagsAndSort,
+        Filter,
+        ProductsList
     },
     data() {
         return {
@@ -21,6 +26,13 @@ export default {
                 { id: 4, img: sequrityImg, title: 'Гарантия', text: 'Предоставляем целый год сервисного обслуживания' },
             ],
         }
+    },
+    setup() {
+        const appleStore = useCounterStore()
+        return {
+            appleStore,
+            count: 12
+        }
     }
 }
 </script>
@@ -28,6 +40,12 @@ export default {
 <template>
     <InfoBlocks />
     <TagsAndSort />
+
+    <div class="fff">
+        <Filter></Filter>
+        <ProductsList :count="count" :data="appleStore.data" />
+    </div>
+
 
 
     <div class="advantages container">
@@ -61,6 +79,11 @@ export default {
 </template>
 
 <style lang="scss">
+
+.fff{
+    display: flex;
+}
+
 .advantages {
     display: none;
     justify-content: space-between;
@@ -74,7 +97,7 @@ export default {
 
         .imgAndTitle {
 
-            img{
+            img {
                 width: 60px;
 
                 @media screen and (max-width: 768px) {

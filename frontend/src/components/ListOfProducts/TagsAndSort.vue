@@ -33,7 +33,7 @@ export default {
                 </div>
             </div>
 
-            <div class="filter">
+            <div class="filterAndSort">
                 <div class="filter-item">
                     <button>
                         <img src="../../assets/icons/filter.svg" alt="#">
@@ -128,7 +128,7 @@ h2 {
         }
     }
 
-    .filter {
+    .filterAndSort {
 
         display: flex;
         justify-content: space-between;
@@ -190,7 +190,9 @@ h2 {
                 padding: 8px;
                 background: transparent;
                 border: none;
+                border-radius: 8px;
                 font-size: 16px;
+                background-color: #F9F9F9;
 
                 width: 150px;
 
