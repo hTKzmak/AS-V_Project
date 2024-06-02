@@ -82,6 +82,11 @@ export default {
 
 .fff{
     display: flex;
+    flex-direction: row;
+
+    .products-list{
+        justify-content: center;
+    }
 }
 
 .advantages {
