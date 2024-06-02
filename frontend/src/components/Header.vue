@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router'
 import Search from '../components/HomePage/Search.vue'
 import { useCounterStore } from '@/stores/AppleStore';
 import { useModalStore } from '@/stores/ModalStore';
+import { useBucketStore } from '@/stores/BucketStore';
 
 import iPhoneIcon from '../assets/icons/header/gadgets/iphone.svg'
 import iPadIcon from '../assets/icons/header/gadgets/ipad.svg'
@@ -33,9 +34,10 @@ export default {
     setup() {
         const appleStore = useCounterStore()
         const modalStore = useModalStore()
+        const bucketStore = useBucketStore()
         return {
 
-            appleStore, modalStore,
+            appleStore, modalStore, bucketStore,
             // categories нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             categories: [
                 { id: 1, title: 'iPhone', image: iPhoneIcon },
@@ -256,14 +258,14 @@ export default {
                 <!-- Окно с результатом поиска -->
                 <Search />
 
-                <a href="#!"><img src="../assets/icons/header/heart.svg" alt=""></a>
+                <RouterLink to="/favourite" @click="activateCatalog = false"><img src="../assets/icons/header/heart.svg" alt=""></RouterLink>
 
                 <button class="buttonElem basketBtn" @click="changeHandle">
 
                     <img src="../assets/icons/header/basket.svg" alt="">
                     в корзине
                     <div class="basketCount">
-                        1
+                        {{ bucketStore.buckLength }}
                     </div>
                 </button>
             </div>
