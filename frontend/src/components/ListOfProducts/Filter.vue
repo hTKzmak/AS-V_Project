@@ -3,23 +3,46 @@ export default {
     data() {
         return {
             rostlerData: [
-                {id: 1, title: 'title', list: [
-                    {id: 1, text: 'text'},
-                    {id: 2, text: 'text'},
-                    {id: 3, text: 'text'},
-                ]},
-                {id: 2, title: 'title', list: [
-                    {id: 1, text: 'text'},
-                    {id: 2, text: 'text'},
-                    {id: 3, text: 'text'},
-                    {id: 4, text: 'text'},
-                    {id: 5, text: 'text'},
-                ]},
+                {
+                    id: 1, title: 'title', list: [
+                        { id: 1, text: 'text' },
+                        { id: 2, text: 'text' },
+                        { id: 3, text: 'text' },
+                    ]
+                },
+                {
+                    id: 2, title: 'title', list: [
+                        { id: 1, text: 'text' },
+                        { id: 2, text: 'text' },
+                        { id: 3, text: 'text' },
+                        { id: 4, text: 'text' },
+                        { id: 5, text: 'text' },
+                    ]
+                },
             ],
 
             // делай для отображения функцию, как в CatalogTab
-            showRosterList: true
+            showRosterList: true,
 
+            // выбранные категории, в которых хранятся id выбранных нами категории (нужен для стилизации текста и иконки)
+            choosenRoster: [],
+            // отображение продуктов выбранной нами категории
+            showCheckboxList: {},
+
+        }
+    },
+    methods: {
+        showCheckboxListFunc(elem) {
+            this.showCheckboxList[elem.id] = !this.showCheckboxList[elem.id];
+            if (this.showCheckboxList[elem.id] === true && !this.choosenRoster.includes(elem.id)) {
+                this.choosenRoster.push(elem.id)
+            }
+            else {
+                const filteredNumbers = this.choosenRoster.filter((number) => number !== elem.id);
+                this.choosenRoster = filteredNumbers
+            }
+
+            console.log(this.choosenRoster)
         }
     }
 }
@@ -38,18 +61,20 @@ export default {
             </div>
             <div class="rosters-list">
                 <div class="roster-item" v-for="elem in rostlerData">
-                    <div class="rostler-item-main" :id="elem.id" @click="showRosterList = !showRosterList">
+                    <div class="rostler-item-main" :id="elem.id" @click="showCheckboxListFunc(elem)">
                         <div class="title">
-                            <p>{{elem.title}}</p>
+                            <p>{{ elem.title }}</p>
                         </div>
                         <button>
-                            <i class="arrow up"></i>
+                            <i v-if="!showCheckboxList[elem.id]" class="arrow down"></i>
+                            <i v-else class="arrow up"></i>
                         </button>
                     </div>
-                    <ul v-show="showRosterList" class="rostler-item-list" v-for="index in elem.list" :id="index.id">
+                    <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list"
+                        :id="index.id">
                         <li>
                             <input type="checkbox" name="" id="">
-                            <p>{{index.text}}</p>
+                            <p>{{ index.text }}</p>
                         </li>
                     </ul>
                 </div>
@@ -65,7 +90,7 @@ export default {
     // width: 60rem;
 
     .filter-info {
-        padding: 32px 24px 0 140px;
+        padding: 32px 24px 32px 140px;
 
         .price-range {
 
@@ -107,33 +132,33 @@ export default {
 
             .roster-item {
 
-                .rostler-item-main{
+                .rostler-item-main {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-    
+
                     padding-left: 24px;
                     padding-right: 24px;
-    
+
                     background-color: #FFFFFF;
                     border-radius: 8px;
                 }
 
 
                 .rostler-item-list {
-    
+
                     margin: 0;
                     padding-left: 24px;
                     padding-right: 24px;
-    
+
                     background-color: #FFFFFF;
-    
+
                     li {
                         display: flex;
                         align-items: center;
                         gap: 8px;
                         height: 45px;
-    
+
                         input[type="checkbox"] {
                             width: 24px;
                             height: 24px;
@@ -164,7 +189,7 @@ export default {
 }
 
 .down {
-    border-color: #706E6E;
+    border-color: #0071E4;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 }

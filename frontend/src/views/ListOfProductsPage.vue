@@ -79,13 +79,16 @@ export default {
 </template>
 
 <style lang="scss">
-
-.fff{
+.fff {
     display: flex;
     flex-direction: row;
 
-    .products-list{
+    .products-list {
         justify-content: center;
+        // width: 50%;
+        max-width: 80%;
+        margin: 0 auto;
+        padding: 30px 100px 30px 30px;
     }
 }
 
