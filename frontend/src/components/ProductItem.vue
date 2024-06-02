@@ -94,6 +94,10 @@ onMounted(() => {
 
     // props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
 
+
+    // props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available', 'category', 'guarantee', 'count_review']
+    // props: ['id', 'title', 'price', 'image', 'rating', 'discount']
+
     const props = defineProps({
         id: Number,
         title: String,
@@ -101,7 +105,10 @@ onMounted(() => {
         image: String,
         rating: Number,
         discount: Number,
-        is_available: Boolean
+        is_available: Boolean,
+        category: String,
+        guarantee: Number,
+        count_review: Number,
     });
 
 </script>
@@ -118,7 +125,7 @@ onMounted(() => {
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star missed"></span>
-                <a href="#!">({{rating}})</a>
+                <a href="#!">({{count_review}})</a>
             </div>
             <div class="settings">
                 <button @click="addToFav">
@@ -152,7 +159,11 @@ onMounted(() => {
                     <div class="existence-sign"></div>
                     <p>Есть в наличии</p>
                 </div>
-                <p @click="tradeInHandle">Гарантия 1 год</p>
+
+                <p v-if="guarantee > 5" @click="tradeInHandle">Гарантия {{ guarantee }} лет</p>
+                <p v-else-if="guarantee < 4" @click="tradeInHandle">Гарантия {{ guarantee }} года</p>
+                <p v-else @click="tradeInHandle">Гарантия {{ guarantee }} год</p>
+
             </div>
 
             <div class="price-info">
@@ -201,7 +212,8 @@ onMounted(() => {
 .product-item {
 
     // width: 282px;
-    width: 260px;
+    // width: 260px;
+    width: 280px;
     box-shadow: 0px 4px 8px 0px #0000000D;
     padding: 20px 10px;
     border-radius: 16px;

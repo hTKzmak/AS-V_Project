@@ -68,8 +68,20 @@ export default {
 
             &:hover {
                 color: #0071E4;
+
+                img{
+                    filter: brightness(0) saturate(100%) invert(40%) sepia(58%) saturate(7056%) hue-rotate(198deg) brightness(95%) contrast(101%);
+                }
             }
 
+            &:focus-within {
+                color: #282626;
+
+                img{
+                    filter: brightness(0) saturate(100%) invert(84%) sepia(33%) saturate(3901%) hue-rotate(48deg) brightness(88%) contrast(95%);
+                }
+            }
+            
             img {
                 @media screen and (max-width: 768px) {
                     display: block;

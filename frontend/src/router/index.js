@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProductPage from '../views/ProductPage.vue'
+import ListOfProductsPage from '../views/ListOfProductsPage.vue'
 import ErrorPage from '../views/NotFoundView.vue'
 import LikeView from '@/views/LikeView.vue'
 
@@ -16,6 +17,11 @@ const router = createRouter({
       path: '/product',
       name: 'product',
       component: ProductPage
+    },
+    {
+      path: '/list_of_products',
+      name: 'list_of_products',
+      component: ListOfProductsPage
     },
     {
       path: '/:pathMatch(.*)*',
