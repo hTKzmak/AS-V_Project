@@ -40,12 +40,12 @@ export default {
             appleStore, modalStore, bucketStore,
             // categories нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             categories: [
-                { id: 1, title: 'iPhone', image: iPhoneIcon },
-                { id: 2, title: 'iPad', image: iPadIcon },
-                { id: 3, title: 'MacBook и iMac', image: iMacIcon },
-                { id: 4, title: 'Watch', image: watchIcon },
-                { id: 5, title: 'Гаджеты', image: gadgetsIcon },
-                { id: 6, title: 'Аксессуары', image: toolsIcon },
+                { id: 1, title: 'iPhone', image: iPhoneIcon, link: '/list_of_products' },
+                { id: 2, title: 'iPad', image: iPadIcon, link: '/list_of_products' },
+                { id: 3, title: 'MacBook и iMac', image: iMacIcon, link: '/list_of_products' },
+                { id: 4, title: 'Watch', image: watchIcon, link: '/list_of_products' },
+                { id: 5, title: 'Гаджеты', image: gadgetsIcon, link: '/list_of_products' },
+                { id: 6, title: 'Аксессуары', image: toolsIcon, link: '/list_of_products' },
             ]
 
         }
@@ -274,10 +274,10 @@ export default {
             <div class="header-categories">
                 <ul>
                     <li v-for="(category) in this.categories">
-                        <a href="#!">
+                        <RouterLink :to="category.link">
                             <img :src="category.image">
                             {{ category.title }}
-                        </a>
+                        </RouterLink>
                     </li>
                 </ul>
 

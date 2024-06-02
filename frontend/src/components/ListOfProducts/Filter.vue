@@ -1,4 +1,12 @@
 <script>
+import DualRangeInput from 'https://unpkg.com/dual-range-input@latest/script.js';
+
+import speedImg from '../../components/ProductPage/assets/icons/speed.svg';
+import cashImg from '../../components/ProductPage/assets/icons/cash.svg';
+import bankImg from '../../components/ProductPage/assets/icons/bank.svg';
+import sequrityImg from '../../components/ProductPage/assets/icons/sequrity.svg';
+
+
 export default {
     data() {
         return {
@@ -21,12 +29,16 @@ export default {
                 },
             ],
 
-            // делай для отображения функцию, как в CatalogTab
-            showRosterList: true,
+            advantagesData: [
+                { id: 1, img: cashImg, title: 'Оплата', text: 'Все виды наличного и безналичного расчета' },
+                { id: 2, img: speedImg, title: 'Доставка за 2 часа', text: 'Быстро и бесплатно доставляем все заказы по Москве' },
+                { id: 3, img: bankImg, title: 'Кредит', text: 'Выгодные кредитные предложения от самых популярных банков' },
+                { id: 4, img: sequrityImg, title: 'Гарантия', text: 'Предоставляем целый год сервисного обслуживания' },
+            ],
 
-            // выбранные категории, в которых хранятся id выбранных нами категории (нужен для стилизации текста и иконки)
+            // выбранные списки, в которых хранятся id выбранных нами категории (нужен для отображения выьранного фильтра)
             choosenRoster: [],
-            // отображение продуктов выбранной нами категории
+            // отображение чек-боксов выбранного нами фильтра
             showCheckboxList: {},
 
         }
@@ -80,6 +92,17 @@ export default {
                 </div>
 
             </div>
+
+            <!-- тут преимущества (бери готовый с list of products page) -->
+            <div class="advantages-filter">
+                <div class="advantage-filter-item" v-for="elem in advantagesData" :id=elem.id>
+                    <img :src=elem.img alt="#">
+                    <div class="title">
+                        <h3>{{ elem.title }}</h3>
+                        <p>{{ elem.text }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -120,6 +143,47 @@ export default {
                     text-align: center;
 
                     font-size: 16px;
+                }
+            }
+
+
+
+        }
+
+        .advantages-filter {
+
+            display: grid;
+            gap: 8px;
+            margin-top: 100px;
+
+            .advantage-filter-item {
+
+                background-color: #fff;
+                border-radius: 8px;
+                padding: 16px 24px;
+
+                display: flex;
+                gap: 8px;
+                align-items: center;
+
+                img{
+                    width: 45px;
+                }
+
+                .title{
+                    h3, p{
+                        margin: 0;
+                    }
+
+                    h3{
+                        font-weight: 700;
+                    }
+
+                    p{
+                        font-size: 14px;
+                        color: #585656;
+                        margin-top: 4px;
+                    }
                 }
             }
         }
