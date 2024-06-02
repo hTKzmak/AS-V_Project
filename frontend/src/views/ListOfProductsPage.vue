@@ -41,12 +41,14 @@ export default {
     <InfoBlocks />
     <TagsAndSort />
 
-    <div class="fff">
+    <div class="lop-main">
         <Filter></Filter>
         <ProductsList :count="count" :data="appleStore.data" />
     </div>
 
-
+    <div class="pagination">
+        <p style="text-align: center; font-size: 24px;">тут пагинация</p>
+    </div>
 
     <div class="advantages container">
         <div class="advantage-item" v-for="elem in advantagesData" :id=elem.id>
@@ -79,7 +81,7 @@ export default {
 </template>
 
 <style lang="scss">
-.fff {
+.lop-main {
     display: flex;
     flex-direction: row;
 
@@ -89,6 +91,18 @@ export default {
         max-width: 80%;
         margin: 0 auto;
         padding: 30px 100px 30px 30px;
+
+        @media screen and (max-width: 1440px) {
+            max-width: none;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .filter-desktop {
+        @media screen and (max-width: 1440px) {
+            display: none;
+        }
     }
 }
 
