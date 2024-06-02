@@ -28,7 +28,7 @@ export default {
             </RouterLink>
         </div>
         <div class="menu-item">
-            <RouterLink to="/">
+            <RouterLink to="/favourite">
                 <img src="../assets/icons/menu/heart.svg" alt="">
                 избранное
             </RouterLink>
