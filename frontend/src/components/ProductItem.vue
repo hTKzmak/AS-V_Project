@@ -3,9 +3,12 @@ import { useModalStore } from '@/stores/ModalStore';
 
 // Добавил AppleStore
 import { useCounterStore } from '@/stores/AppleStore';
-
 import { useCurrentProductStore } from '@/stores/CurrentProductStore';
+import { useLikeStore } from '@/stores/LikeStore';
+import { useBucketStore } from '@/stores/BucketStore';
 import ButtonElem from './UI/ButtonElem.vue';
+import { onMounted } from 'vue';
+import { ref } from 'vue';
 // import ButtonElem from './UI/ButtonElem.vue';
 
 // export default {
@@ -20,6 +23,10 @@ const modalStore = useModalStore()
 const appleStore = useCounterStore()
 
 const currentProductStore = useCurrentProductStore()
+
+const likeStore = useLikeStore()
+
+const bucketStore = useBucketStore()
 
 // Используется базовый url с бекенда
 let BASE_URL = appleStore.BASE_URL
@@ -52,6 +59,38 @@ const tradeInHandle = () => {
     modalStore.changeModal('tradeIn')
 }
 
+function addToBucket(){
+    bucketStore.addToBucket(props.id, props.title, props.price, props.discount === null ? props.price : props.discount, BASE_URL+props.image, 1)
+}
+
+function addToFav(){
+    likeStore.addFavourite(props.id, props.title, 
+    props.price, props.image, props.rating, props.discount, props.is_available)
+    isInFav.value = !isInFav.value
+    if(isInFav.value == true){
+        console.log(props.id + ' added to fav')
+    }else{
+        console.log(props.id + ' removed from fav')
+    }
+    console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
+}
+
+
+// ФУНКЦИОНАЛ ОТОБРАЖЕНИЯ ДОБАВЛЕННОСТИ В ИЗБРАННОЕ/КОРЗИНУ
+
+const isInFav = ref(false)
+onMounted(() => {
+
+  if(likeStore.likedProducts.find((e) => e.id === props.id) != undefined){
+    console.log(likeStore.likedProducts.find((e) => e.id === props.id) != undefined)
+    isInFav.value = true
+    console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
+}
+// else{
+//     isInFav.value = false
+// }
+})
+
 
     // props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
 
@@ -82,9 +121,22 @@ const tradeInHandle = () => {
                 <a href="#!">({{rating}})</a>
             </div>
             <div class="settings">
-                <button>
-                    <img src="../assets/icons/header/heart.svg">
+                <button @click="addToFav">
+                    <img :class="isInFav==true ? 'blue-heart' : 'standart'"  src="../assets/icons/header/heart.svg">
                 </button>
+
+
+                <!-- <button @click="addToFav">
+                    <img :class="likeStore.likedProducts.find((e) => e.id === props.id) == undefined ? 'standart' : 'pink'"  src="../assets/icons/header/heart.svg">
+                </button> -->
+
+
+                <!-- <button v-if="likeStore.likedProducts.find((e) => e.id === props.id) == undefined" @click="addToFav">
+                    <img class=""  src="../assets/icons/header/heart.svg">
+                </button>
+                <button v-if="likeStore.likedProducts.find((e) => e.id === props.id) != undefined" @click="addToFav">
+                    <img class="pink"  src="../assets/icons/header/heart.svg">
+                </button> -->
             </div>
         </div>
 
@@ -114,7 +166,8 @@ const tradeInHandle = () => {
             </div>
 
             <!-- ПК версия кнопки для покупки  -->
-            <ButtonElem title="в корзину" img='/cart.svg' addedItemStyle='false' />
+            <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined" title="в корзину" img='/cart.svg' addedItemStyle='false' :action="addToBucket"/>
+            <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" title="в корзине" img='/inCart.svg' addedItemStyle='true' :action="addToBucket"/>
 
             <!-- ПК версия кнопки для показа, что товар положен в корзину  -->
             <!-- <button class="buttonElem buttonCartAdded"><img src="../assets/icons/cart-added.svg">в корзине</button> -->
@@ -142,6 +195,9 @@ const tradeInHandle = () => {
 </template>
 
 <style lang="scss">
+.blue-heart{
+    filter: brightness(0) saturate(100%) invert(40%) sepia(58%) saturate(7056%) hue-rotate(198deg) brightness(95%) contrast(101%);
+}
 .product-item {
 
     // width: 282px;
