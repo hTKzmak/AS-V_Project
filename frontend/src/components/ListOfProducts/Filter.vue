@@ -184,294 +184,296 @@ export default {
 </template>
 
 <style lang="scss">
-// ПК ВЕРСИЯ ФИЛЬТРА
-
-.filter-desktop {
+.filter-main {
     background-color: #F9F9F9;
 
-    .filter-info {
-        padding: 32px 24px 32px 140px;
+    // ПК ВЕРСИЯ ФИЛЬТРА
+    .filter-desktop {
 
-        .price-range {
+        .filter-info {
+            padding: 32px 24px 32px 140px;
 
-            h3 {
-                margin: 0 0 16px 0;
-                font-size: 20px;
-                font-weight: 500;
-            }
+            .price-range {
 
-            input[type="range"] {
-                width: 100%;
-            }
+                h3 {
+                    margin: 0 0 16px 0;
+                    font-size: 20px;
+                    font-weight: 500;
+                }
 
-            .price-count {
-                display: flex;
-                justify-content: space-between;
-                gap: 10px;
+                input[type="range"] {
+                    width: 100%;
+                }
 
-                .price-text-count {
+                .price-count {
                     display: flex;
-                    align-items: end;
-                    gap: 4px;
-                    overflow: hidden;
+                    justify-content: space-between;
+                    gap: 10px;
 
-                    width: 95px;
-                    padding: 10px 16px;
+                    .price-text-count {
+                        display: flex;
+                        align-items: end;
+                        gap: 4px;
+                        overflow: hidden;
 
-                    background-color: #FFF;
-                    border: 1px solid #E7E7E7;
-                    border-radius: 8px;
+                        width: 95px;
+                        padding: 10px 16px;
 
-                    text-align: center;
+                        background-color: #FFF;
+                        border: 1px solid #E7E7E7;
+                        border-radius: 8px;
 
-                    font-size: 16px;
-
-                    input[type="text"] {
-                        background: transparent;
-                        border: none;
-                        outline: none;
+                        text-align: center;
 
                         font-size: 16px;
-                        color: #100E0E;
 
-                        width: 55px;
+                        input[type="text"] {
+                            background: transparent;
+                            border: none;
+                            outline: none;
+
+                            font-size: 16px;
+                            color: #100E0E;
+
+                            width: 55px;
+                        }
                     }
+                }
+
+
+            }
+
+            .advantages-filter {
+
+                display: grid;
+                gap: 8px;
+                margin-top: 100px;
+
+                .advantage-filter-item {
+
+                    background-color: #fff;
+                    border-radius: 8px;
+                    padding: 16px 24px;
+
+                    display: flex;
+                    gap: 8px;
+                    align-items: center;
+
+                    img {
+                        width: 45px;
+                    }
+
+                    .title {
+
+                        h3,
+                        p {
+                            margin: 0;
+                        }
+
+                        h3 {
+                            font-weight: 700;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            color: #585656;
+                            margin-top: 4px;
+                        }
+                    }
+                }
+
+                @media screen and (max-width: 1440px) {
+                    display: none;
                 }
             }
 
+            .rosters-list {
 
-        }
+                margin-top: 24px;
+                display: grid;
+                row-gap: 8px;
 
-        .advantages-filter {
+                .roster-item {
 
-            display: grid;
-            gap: 8px;
-            margin-top: 100px;
+                    .rostler-item-main {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
 
-            .advantage-filter-item {
+                        padding-left: 24px;
+                        padding-right: 24px;
 
-                background-color: #fff;
-                border-radius: 8px;
-                padding: 16px 24px;
+                        background-color: #FFFFFF;
+                        border-radius: 8px;
+                    }
 
-                display: flex;
-                gap: 8px;
-                align-items: center;
 
-                img {
-                    width: 45px;
-                }
+                    .rostler-item-list {
 
-                .title {
-
-                    h3,
-                    p {
                         margin: 0;
-                    }
+                        padding-left: 24px;
+                        padding-right: 24px;
 
-                    h3 {
-                        font-weight: 700;
-                    }
+                        background-color: #FFFFFF;
 
-                    p {
-                        font-size: 14px;
-                        color: #585656;
-                        margin-top: 4px;
+                        li {
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            height: 45px;
+                        }
                     }
                 }
+
             }
 
             @media screen and (max-width: 1440px) {
-                display: none;
+                padding: 24px;
+                overflow-y: auto;
+                max-height: 424px;
             }
-        }
-
-        .rosters-list {
-
-            margin-top: 24px;
-            display: grid;
-            row-gap: 8px;
-
-            .roster-item {
-
-                .rostler-item-main {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    padding-left: 24px;
-                    padding-right: 24px;
-
-                    background-color: #FFFFFF;
-                    border-radius: 8px;
-                }
-
-
-                .rostler-item-list {
-
-                    margin: 0;
-                    padding-left: 24px;
-                    padding-right: 24px;
-
-                    background-color: #FFFFFF;
-
-                    li {
-                        display: flex;
-                        align-items: center;
-                        gap: 8px;
-                        height: 45px;
-                    }
-                }
-            }
-
         }
 
         @media screen and (max-width: 1440px) {
+            display: none;
+        }
+
+
+    }
+
+
+
+    // МОБИЛЬНАЯ ВЕРСИЯ ФИЛЬТРА
+    .filter-mobile {
+
+        display: none;
+
+        background-color: #F9F9F9;
+
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        border-radius: 16px;
+
+        width: 352px;
+
+        .mobile-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 24px;
+
+            span {
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            button {
+                img {
+                    filter: brightness(0) saturate(100%) invert(54%) sepia(1%) saturate(597%) hue-rotate(13deg) brightness(99%) contrast(89%);
+                }
+            }
+        }
+
+        .filter-info {
+            padding: 0 24px 24px;
             overflow-y: auto;
             max-height: 424px;
-        }
-    }
 
-    @media screen and (max-width: 1440px) {
-        display: none;
-    }
+            .price-range {
 
+                h3 {
+                    margin: 0 0 16px 0;
+                    font-size: 20px;
+                    font-weight: 500;
+                }
 
-}
+                input[type="range"] {
+                    width: 100%;
+                }
 
-
-
-// МОБИЛЬНАЯ ВЕРСИЯ ФИЛЬТРА
-.filter-mobile {
-
-    display: none;
-
-    background-color: #F9F9F9;
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    border-radius: 16px;
-
-    width: 352px;
-
-    .mobile-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 24px 24px 0;
-
-        span {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        button {
-            img {
-                filter: brightness(0) saturate(100%) invert(54%) sepia(1%) saturate(597%) hue-rotate(13deg) brightness(99%) contrast(89%);
-            }
-        }
-    }
-
-    .filter-info {
-        padding: 24px;
-        overflow-y: auto;
-        max-height: 424px;
-
-        .price-range {
-
-            h3 {
-                margin: 0 0 16px 0;
-                font-size: 20px;
-                font-weight: 500;
-            }
-
-            input[type="range"] {
-                width: 100%;
-            }
-
-            .price-count {
-                display: flex;
-                justify-content: space-between;
-                gap: 10px;
-
-                .price-text-count {
+                .price-count {
                     display: flex;
-                    align-items: end;
-                    gap: 4px;
-                    overflow: hidden;
+                    justify-content: space-between;
+                    gap: 10px;
 
-                    width: 95px;
-                    padding: 10px 16px;
+                    .price-text-count {
+                        display: flex;
+                        align-items: end;
+                        gap: 4px;
+                        overflow: hidden;
 
-                    background-color: #FFF;
-                    border: 1px solid #E7E7E7;
-                    border-radius: 8px;
+                        width: 95px;
+                        padding: 10px 16px;
 
-                    text-align: center;
+                        background-color: #FFF;
+                        border: 1px solid #E7E7E7;
+                        border-radius: 8px;
 
-                    font-size: 16px;
-
-                    input[type="text"] {
-                        background: transparent;
-                        border: none;
-                        outline: none;
+                        text-align: center;
 
                         font-size: 16px;
-                        color: #100E0E;
 
-                        width: 55px;
+                        input[type="text"] {
+                            background: transparent;
+                            border: none;
+                            outline: none;
+
+                            font-size: 16px;
+                            color: #100E0E;
+
+                            width: 55px;
+                        }
                     }
                 }
             }
-        }
 
-        .rosters-list {
+            .rosters-list {
 
-            margin-top: 24px;
-            display: grid;
-            row-gap: 8px;
+                margin-top: 24px;
+                display: grid;
+                row-gap: 8px;
 
-            .roster-item {
+                .roster-item {
 
-                .rostler-item-main {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    padding-left: 24px;
-                    padding-right: 24px;
-
-                    background-color: #FFFFFF;
-                    border-radius: 8px;
-                }
-
-
-                .rostler-item-list {
-
-                    margin: 0;
-                    padding-left: 24px;
-                    padding-right: 24px;
-
-                    background-color: #FFFFFF;
-
-                    li {
+                    .rostler-item-main {
                         display: flex;
                         align-items: center;
-                        gap: 8px;
-                        height: 45px;
+                        justify-content: space-between;
+
+                        padding-left: 24px;
+                        padding-right: 24px;
+
+                        background-color: #FFFFFF;
+                        border-radius: 8px;
+                    }
+
+
+                    .rostler-item-list {
+
+                        margin: 0;
+                        padding-left: 24px;
+                        padding-right: 24px;
+
+                        background-color: #FFFFFF;
+
+                        li {
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            height: 45px;
+                        }
                     }
                 }
+
             }
-
         }
-    }
 
-    @media screen and (max-width: 1440px) {
-        display: block;
+        @media screen and (max-width: 1440px) {
+            display: block;
+        }
     }
 }
 
