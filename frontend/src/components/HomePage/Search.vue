@@ -8,7 +8,7 @@ let BASE_URL = appleStore.BASE_URL
 
 </script>
 
-<template>    
+<template>
     <ul class="searchList">
         <li class="searchItem" v-for="index in appleStore.searchData" :key="index">
             <div class="search-product-info">
@@ -26,15 +26,21 @@ let BASE_URL = appleStore.BASE_URL
 <style lang="scss">
 .searchList {
     position: absolute;
-    padding: 0;
     right: 50%;
     left: 22%;
     top: 50px;
+    
+    padding: 0;
+    
     width: 46vw;
     max-width: 706px;
+    height: 480px;
+    
     background-color: #FFF;
     border-radius: 16px;
     z-index: 1;
+
+    overflow-y: auto;
 
     .searchItem {
         display: flex;
