@@ -78,8 +78,18 @@ export default {
                 <h3>Цена</h3>
                 <input type="range" name="price-range">
                 <div class="price-count">
-                    <input type="text" name="price-min-count" placeholder="от 33 400₽">
-                    <input type="text" name="price-max-count" placeholder="до 127 400₽">
+                    <!-- <input type="text" name="price-min-count" placeholder="от 33 400₽">
+                    <input type="text" name="price-max-count" placeholder="до 127 400₽"> -->
+                    <div class="price-text-count">
+                        <label>от</label>
+                        <input type="text" value="100">
+                        <label>₽</label>
+                    </div>
+                    <div class="price-text-count">
+                        <label>до</label>
+                        <input type="text" value="100">
+                        <label>₽</label>
+                    </div>
                 </div>
             </div>
             <div class="rosters-list">
@@ -169,18 +179,47 @@ export default {
                 justify-content: space-between;
                 gap: 10px;
 
-                input[type="text"] {
+                // input[type="text"] {
+                //     width: 95px;
+                //     padding: 10px 16px;
+
+                //     background-color: #FFF;
+
+                //     border: 1px solid #E7E7E7;
+                //     border-radius: 8px;
+
+                //     text-align: center;
+
+                //     font-size: 16px;
+                // }
+
+                .price-text-count {
+                    display: flex;
+                    align-items: end;
+                    gap: 4px;
+                    overflow: hidden;
+
                     width: 95px;
                     padding: 10px 16px;
 
                     background-color: #FFF;
-
                     border: 1px solid #E7E7E7;
                     border-radius: 8px;
 
                     text-align: center;
 
                     font-size: 16px;
+
+                    input[type="text"] {
+                        background: transparent;
+                        border: none;
+                        outline: none;
+                        
+                        font-size: 16px;
+                        color: #100E0E;
+                        
+                        width: 55px;
+                    }
                 }
             }
 
