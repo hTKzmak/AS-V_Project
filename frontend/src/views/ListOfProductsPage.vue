@@ -26,7 +26,8 @@ export default {
                 { id: 4, img: sequrityImg, title: 'Гарантия', text: 'Предоставляем целый год сервисного обслуживания' },
             ],
 
-        showFilter: true,
+            // значение для отображения мобильной версии фильтра
+            showFilter: false,
         }
     },
     setup() {
@@ -37,6 +38,7 @@ export default {
         }
     },
     methods: {
+        // функция для отображения мобильной версии фильтра
         toggleFilter() {
             this.showFilter = !this.showFilter
         }
@@ -47,7 +49,7 @@ export default {
 <template>
 
     <InfoBlocks />
-    <TagsAndSort :showFilter="showFilter" @toggle-filter="toggleFilter"/>
+    <TagsAndSort :showFilter="showFilter" @toggle-filter="toggleFilter" />
 
     <div class="lop-main">
         <Filter :showFilter="showFilter" @toggle-filter="toggleFilter"></Filter>

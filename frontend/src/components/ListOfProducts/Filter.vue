@@ -65,99 +65,129 @@ export default {
 </script>
 
 <template>
-    <div v-show="showFilter" class="filter-main">
 
-        <div class="mobile-title">
-            <span>Применить фильтры</span>
-            <button @click="showFilterFunc"><img src="../../assets/icons/header/close.svg" alt="X"></button>
-        </div>
+    <div class="filter-main">
 
-        <div class="filter-info">
+        <div class="filter-desktop">
 
-            <div class="price-range">
-                <h3>Цена</h3>
-                <input type="range" name="price-range">
-                <div class="price-count">
-                    <!-- <input type="text" name="price-min-count" placeholder="от 33 400₽">
-                    <input type="text" name="price-max-count" placeholder="до 127 400₽"> -->
-                    <div class="price-text-count">
-                        <label>от</label>
-                        <input type="text" value="100">
-                        <label>₽</label>
-                    </div>
-                    <div class="price-text-count">
-                        <label>до</label>
-                        <input type="text" value="100">
-                        <label>₽</label>
-                    </div>
-                </div>
-            </div>
-            <div class="rosters-list">
-                <div class="roster-item" v-for="elem in rostlerData">
-                    <div class="rostler-item-main" :id="elem.id" @click="showCheckboxListFunc(elem)">
-                        <div class="title">
-                            <p>{{ elem.title }}</p>
+            <div class="filter-info">
+
+                <div class="price-range">
+                    <h3>Цена</h3>
+                    <input type="range" name="price-range">
+                    <div class="price-count">
+                        <div class="price-text-count">
+                            <label>от</label>
+                            <input type="text" value="100">
+                            <label>₽</label>
                         </div>
-                        <button>
-                            <i v-if="!showCheckboxList[elem.id]" class="arrow down"></i>
-                            <i v-else class="arrow up"></i>
-                        </button>
+                        <div class="price-text-count">
+                            <label>до</label>
+                            <input type="text" value="100">
+                            <label>₽</label>
+                        </div>
                     </div>
-                    <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list"
-                        :id="index.id">
-                        <li>
-                            <!-- <input type="checkbox" name="" id=""> -->
-                            <label class="b-contain">
-                                <span>{{ index.text }}</span>
-                                <input type="checkbox" />
-                                <div class="b-input"></div>
-                            </label>
-                        </li>
-                    </ul>
+                </div>
+                <div class="rosters-list">
+                    <div class="roster-item" v-for="elem in rostlerData">
+                        <div class="rostler-item-main" :id="elem.id" @click="showCheckboxListFunc(elem)">
+                            <div class="title">
+                                <p>{{ elem.title }}</p>
+                            </div>
+                            <button>
+                                <i v-if="!showCheckboxList[elem.id]" class="arrow down"></i>
+                                <i v-else class="arrow up"></i>
+                            </button>
+                        </div>
+                        <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list"
+                            :id="index.id">
+                            <li>
+                                <!-- <input type="checkbox" name="" id=""> -->
+                                <label class="b-contain">
+                                    <span>{{ index.text }}</span>
+                                    <input type="checkbox" />
+                                    <div class="b-input"></div>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
 
-            </div>
-
-            <!-- тут преимущества (бери готовый с list of products page) -->
-            <div class="advantages-filter">
-                <div class="advantage-filter-item" v-for="elem in advantagesData" :id=elem.id>
-                    <img :src=elem.img alt="#">
-                    <div class="title">
-                        <h3>{{ elem.title }}</h3>
-                        <p>{{ elem.text }}</p>
+                <!-- тут преимущества (бери готовый с list of products page) -->
+                <div class="advantages-filter">
+                    <div class="advantage-filter-item" v-for="elem in advantagesData" :id=elem.id>
+                        <img :src=elem.img alt="#">
+                        <div class="title">
+                            <h3>{{ elem.title }}</h3>
+                            <p>{{ elem.text }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div v-show="showFilter" class="filter-mobile">
+
+            <div class="mobile-title">
+                <span>Применить фильтры</span>
+                <button @click="showFilterFunc"><img src="../../assets/icons/header/close.svg" alt="X"></button>
+            </div>
+
+            <div class="filter-info">
+
+                <div class="price-range">
+                    <h3>Цена</h3>
+                    <input type="range" name="price-range">
+                    <div class="price-count">
+                        <div class="price-text-count">
+                            <label>от</label>
+                            <input type="text" value="100">
+                            <label>₽</label>
+                        </div>
+                        <div class="price-text-count">
+                            <label>до</label>
+                            <input type="text" value="100">
+                            <label>₽</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="rosters-list">
+                    <div class="roster-item" v-for="elem in rostlerData">
+                        <div class="rostler-item-main" :id="elem.id" @click="showCheckboxListFunc(elem)">
+                            <div class="title">
+                                <p>{{ elem.title }}</p>
+                            </div>
+                            <button>
+                                <i v-if="!showCheckboxList[elem.id]" class="arrow down"></i>
+                                <i v-else class="arrow up"></i>
+                            </button>
+                        </div>
+                        <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list"
+                            :id="index.id">
+                            <li>
+                                <!-- <input type="checkbox" name="" id=""> -->
+                                <label class="b-contain">
+                                    <span>{{ index.text }}</span>
+                                    <input type="checkbox" />
+                                    <div class="b-input"></div>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <style lang="scss">
-.filter-main {
+// ПК ВЕРСИЯ ФИЛЬТРА
+
+.filter-desktop {
     background-color: #F9F9F9;
-    // width: 60rem;
-
-    .mobile-title {
-        display: none;
-        justify-content: space-between;
-        align-items: center;
-        padding: 24px 24px 0;
-
-        span {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        button {
-            img {
-                filter: brightness(0) saturate(100%) invert(54%) sepia(1%) saturate(597%) hue-rotate(13deg) brightness(99%) contrast(89%);
-            }
-        }
-
-        @media screen and (max-width: 1440px) {
-            display: flex;
-        }
-    }
 
     .filter-info {
         padding: 32px 24px 32px 140px;
@@ -178,20 +208,6 @@ export default {
                 display: flex;
                 justify-content: space-between;
                 gap: 10px;
-
-                // input[type="text"] {
-                //     width: 95px;
-                //     padding: 10px 16px;
-
-                //     background-color: #FFF;
-
-                //     border: 1px solid #E7E7E7;
-                //     border-radius: 8px;
-
-                //     text-align: center;
-
-                //     font-size: 16px;
-                // }
 
                 .price-text-count {
                     display: flex;
@@ -214,10 +230,10 @@ export default {
                         background: transparent;
                         border: none;
                         outline: none;
-                        
+
                         font-size: 16px;
                         color: #100E0E;
-                        
+
                         width: 55px;
                     }
                 }
@@ -304,105 +320,6 @@ export default {
                         align-items: center;
                         gap: 8px;
                         height: 45px;
-
-                        .b-contain *,
-                        .b-contain *::before,
-                        .b-contain *::after {
-                            box-sizing: content-box !important;
-                        }
-
-                        .b-contain input {
-                            position: absolute;
-                            z-index: -1;
-                            opacity: 0;
-                        }
-
-                        .b-contain span {
-                            line-height: 1.5;
-                            font-size: 1rem;
-                            font-family: inherit;
-                            color: #282626;
-                        }
-
-                        .b-contain {
-                            display: table;
-                            position: relative;
-                            padding-left: 2rem;
-                            cursor: pointer;
-                            margin-bottom: 0.4rem;
-                        }
-
-                        .b-contain input[type="checkbox"]~.b-input {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            height: 1.5rem;
-                            width: 1.5rem;
-                            background: rgb(255, 255, 255);
-                            transition: background 250ms;
-                            border: 1px solid rgb(135, 135, 135);
-                            border-radius: 0.5rem;
-                        }
-
-
-
-                        .b-contain input[type="checkbox"]~.b-input::after {
-                            content: "";
-                            position: absolute;
-                            display: none;
-                            left: 9px;
-                            top: 4px;
-                            width: 0.3rem;
-                            height: 0.6rem;
-                            border: solid #ffffff;
-                            border-width: 0 2px 2px 0;
-                            transition: background 250ms;
-                            transform: rotate(45deg);
-                        }
-
-
-
-                        .b-contain input[type="checkbox"]:disabled~.b-input::after {
-                            border-color: #ffffff;
-                        }
-
-                        .b-contain input:checked~.b-input::after {
-                            display: block;
-                        }
-
-                        .b-contain:hover input[type="checkbox"]:not([disabled])~.b-input,
-                        .b-contain input[type="checkbox"]:focus~.b-input {
-                            background: #e2e8f0;
-                            border-color: #64748b;
-                        }
-
-
-
-                        .b-contain input:focus~.b-input {
-                            box-shadow: 0 0 0 2px #60a5fa;
-                        }
-
-                        .b-contain input[type="checkbox"]:checked~.b-input {
-                            background: rgb(0, 113, 228);
-                            border-color: rgb(0, 113, 228);
-                        }
-
-
-
-                        .b-contain input[type="checkbox"]:disabled~.b-input {
-                            opacity: 0.5;
-                            cursor: not-allowed;
-                        }
-
-
-
-                        .b-contain:hover input[type="checkbox"]:not([disabled]):checked~.b-input,
-                        .b-contain input[type="checkbox"]:checked:focus~.b-input {
-                            background: #2563eb;
-                            border-color: #1e40af;
-                        }
-
-
                     }
                 }
             }
@@ -417,17 +334,149 @@ export default {
     }
 
     @media screen and (max-width: 1440px) {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        border-radius: 16px;
-
-        width: 352px;
+        display: none;
     }
 
+
 }
+
+
+
+// МОБИЛЬНАЯ ВЕРСИЯ ФИЛЬТРА
+.filter-mobile {
+
+    display: none;
+
+    background-color: #F9F9F9;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 16px;
+
+    width: 352px;
+
+    .mobile-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 24px 0;
+
+        span {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        button {
+            img {
+                filter: brightness(0) saturate(100%) invert(54%) sepia(1%) saturate(597%) hue-rotate(13deg) brightness(99%) contrast(89%);
+            }
+        }
+    }
+
+    .filter-info {
+        padding: 24px;
+        overflow-y: auto;
+        max-height: 424px;
+
+        .price-range {
+
+            h3 {
+                margin: 0 0 16px 0;
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            input[type="range"] {
+                width: 100%;
+            }
+
+            .price-count {
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+
+                .price-text-count {
+                    display: flex;
+                    align-items: end;
+                    gap: 4px;
+                    overflow: hidden;
+
+                    width: 95px;
+                    padding: 10px 16px;
+
+                    background-color: #FFF;
+                    border: 1px solid #E7E7E7;
+                    border-radius: 8px;
+
+                    text-align: center;
+
+                    font-size: 16px;
+
+                    input[type="text"] {
+                        background: transparent;
+                        border: none;
+                        outline: none;
+
+                        font-size: 16px;
+                        color: #100E0E;
+
+                        width: 55px;
+                    }
+                }
+            }
+        }
+
+        .rosters-list {
+
+            margin-top: 24px;
+            display: grid;
+            row-gap: 8px;
+
+            .roster-item {
+
+                .rostler-item-main {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    padding-left: 24px;
+                    padding-right: 24px;
+
+                    background-color: #FFFFFF;
+                    border-radius: 8px;
+                }
+
+
+                .rostler-item-list {
+
+                    margin: 0;
+                    padding-left: 24px;
+                    padding-right: 24px;
+
+                    background-color: #FFFFFF;
+
+                    li {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        height: 45px;
+                    }
+                }
+            }
+
+        }
+    }
+
+    @media screen and (max-width: 1440px) {
+        display: block;
+    }
+}
+
+
+
 
 .arrow {
     border: solid #706E6E;
@@ -447,5 +496,102 @@ export default {
     border-color: #0071E4;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+.b-contain *,
+.b-contain *::before,
+.b-contain *::after {
+    box-sizing: content-box !important;
+}
+
+.b-contain input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.b-contain span {
+    line-height: 1.5;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #282626;
+}
+
+.b-contain {
+    display: table;
+    position: relative;
+    padding-left: 2rem;
+    cursor: pointer;
+    margin-bottom: 0.4rem;
+}
+
+.b-contain input[type="checkbox"]~.b-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    background: rgb(255, 255, 255);
+    transition: background 250ms;
+    border: 1px solid rgb(135, 135, 135);
+    border-radius: 0.5rem;
+}
+
+
+
+.b-contain input[type="checkbox"]~.b-input::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 9px;
+    top: 4px;
+    width: 0.3rem;
+    height: 0.6rem;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transition: background 250ms;
+    transform: rotate(45deg);
+}
+
+
+
+.b-contain input[type="checkbox"]:disabled~.b-input::after {
+    border-color: #ffffff;
+}
+
+.b-contain input:checked~.b-input::after {
+    display: block;
+}
+
+.b-contain:hover input[type="checkbox"]:not([disabled])~.b-input,
+.b-contain input[type="checkbox"]:focus~.b-input {
+    background: #e2e8f0;
+    border-color: #64748b;
+}
+
+
+
+.b-contain input:focus~.b-input {
+    box-shadow: 0 0 0 2px #60a5fa;
+}
+
+.b-contain input[type="checkbox"]:checked~.b-input {
+    background: rgb(0, 113, 228);
+    border-color: rgb(0, 113, 228);
+}
+
+
+
+.b-contain input[type="checkbox"]:disabled~.b-input {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+
+.b-contain:hover input[type="checkbox"]:not([disabled]):checked~.b-input,
+.b-contain input[type="checkbox"]:checked:focus~.b-input {
+    background: #2563eb;
+    border-color: #1e40af;
 }
 </style>
