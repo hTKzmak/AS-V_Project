@@ -1,6 +1,4 @@
 <script>
-import DualRangeInput from 'https://unpkg.com/dual-range-input@latest/script.js';
-
 import speedImg from '../../components/ProductPage/assets/icons/speed.svg';
 import cashImg from '../../components/ProductPage/assets/icons/cash.svg';
 import bankImg from '../../components/ProductPage/assets/icons/bank.svg';
@@ -8,6 +6,7 @@ import sequrityImg from '../../components/ProductPage/assets/icons/sequrity.svg'
 
 
 export default {
+    props: ['showFilter'],
     data() {
         return {
             rostlerData: [
@@ -55,14 +54,26 @@ export default {
             }
 
             console.log(this.choosenRoster)
+        },
+
+        // ф-ия для закрытия фильтра, чтобы она не отображалась
+        showFilterFunc() {
+            this.$emit('toggle-filter')
         }
     }
 }
 </script>
 
 <template>
-    <div class="filter-desktop">
+    <div v-show="showFilter" class="filter-main">
+
+        <div class="mobile-title">
+            <span>Применить фильтры</span>
+            <button @click="showFilterFunc"><img src="../../assets/icons/header/close.svg" alt="X"></button>
+        </div>
+
         <div class="filter-info">
+
             <div class="price-range">
                 <h3>Цена</h3>
                 <input type="range" name="price-range">
@@ -85,8 +96,12 @@ export default {
                     <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list"
                         :id="index.id">
                         <li>
-                            <input type="checkbox" name="" id="">
-                            <p>{{ index.text }}</p>
+                            <!-- <input type="checkbox" name="" id=""> -->
+                            <label class="b-contain">
+                                <span>{{ index.text }}</span>
+                                <input type="checkbox" />
+                                <div class="b-input"></div>
+                            </label>
                         </li>
                     </ul>
                 </div>
@@ -108,9 +123,31 @@ export default {
 </template>
 
 <style lang="scss">
-.filter-desktop {
+.filter-main {
     background-color: #F9F9F9;
     // width: 60rem;
+
+    .mobile-title {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 24px 0;
+
+        span {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        button {
+            img {
+                filter: brightness(0) saturate(100%) invert(54%) sepia(1%) saturate(597%) hue-rotate(13deg) brightness(99%) contrast(89%);
+            }
+        }
+
+        @media screen and (max-width: 1440px) {
+            display: flex;
+        }
+    }
 
     .filter-info {
         padding: 32px 24px 32px 140px;
@@ -129,7 +166,8 @@ export default {
 
             .price-count {
                 display: flex;
-                gap: 52px;
+                justify-content: space-between;
+                gap: 10px;
 
                 input[type="text"] {
                     width: 95px;
@@ -145,7 +183,6 @@ export default {
                     font-size: 16px;
                 }
             }
-
 
 
         }
@@ -166,25 +203,31 @@ export default {
                 gap: 8px;
                 align-items: center;
 
-                img{
+                img {
                     width: 45px;
                 }
 
-                .title{
-                    h3, p{
+                .title {
+
+                    h3,
+                    p {
                         margin: 0;
                     }
 
-                    h3{
+                    h3 {
                         font-weight: 700;
                     }
 
-                    p{
+                    p {
                         font-size: 14px;
                         color: #585656;
                         margin-top: 4px;
                     }
                 }
+            }
+
+            @media screen and (max-width: 1440px) {
+                display: none;
             }
         }
 
@@ -223,17 +266,126 @@ export default {
                         gap: 8px;
                         height: 45px;
 
-                        input[type="checkbox"] {
-                            width: 24px;
-                            height: 24px;
-                            border: 1px solid #878787;
-                            border-radius: 8px;
+                        .b-contain *,
+                        .b-contain *::before,
+                        .b-contain *::after {
+                            box-sizing: content-box !important;
                         }
+
+                        .b-contain input {
+                            position: absolute;
+                            z-index: -1;
+                            opacity: 0;
+                        }
+
+                        .b-contain span {
+                            line-height: 1.5;
+                            font-size: 1rem;
+                            font-family: inherit;
+                            color: #282626;
+                        }
+
+                        .b-contain {
+                            display: table;
+                            position: relative;
+                            padding-left: 2rem;
+                            cursor: pointer;
+                            margin-bottom: 0.4rem;
+                        }
+
+                        .b-contain input[type="checkbox"]~.b-input {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            height: 1.5rem;
+                            width: 1.5rem;
+                            background: rgb(255, 255, 255);
+                            transition: background 250ms;
+                            border: 1px solid rgb(135, 135, 135);
+                            border-radius: 0.5rem;
+                        }
+
+
+
+                        .b-contain input[type="checkbox"]~.b-input::after {
+                            content: "";
+                            position: absolute;
+                            display: none;
+                            left: 9px;
+                            top: 4px;
+                            width: 0.3rem;
+                            height: 0.6rem;
+                            border: solid #ffffff;
+                            border-width: 0 2px 2px 0;
+                            transition: background 250ms;
+                            transform: rotate(45deg);
+                        }
+
+
+
+                        .b-contain input[type="checkbox"]:disabled~.b-input::after {
+                            border-color: #ffffff;
+                        }
+
+                        .b-contain input:checked~.b-input::after {
+                            display: block;
+                        }
+
+                        .b-contain:hover input[type="checkbox"]:not([disabled])~.b-input,
+                        .b-contain input[type="checkbox"]:focus~.b-input {
+                            background: #e2e8f0;
+                            border-color: #64748b;
+                        }
+
+
+
+                        .b-contain input:focus~.b-input {
+                            box-shadow: 0 0 0 2px #60a5fa;
+                        }
+
+                        .b-contain input[type="checkbox"]:checked~.b-input {
+                            background: rgb(0, 113, 228);
+                            border-color: rgb(0, 113, 228);
+                        }
+
+
+
+                        .b-contain input[type="checkbox"]:disabled~.b-input {
+                            opacity: 0.5;
+                            cursor: not-allowed;
+                        }
+
+
+
+                        .b-contain:hover input[type="checkbox"]:not([disabled]):checked~.b-input,
+                        .b-contain input[type="checkbox"]:checked:focus~.b-input {
+                            background: #2563eb;
+                            border-color: #1e40af;
+                        }
+
+
                     }
                 }
             }
 
         }
+
+        @media screen and (max-width: 1440px) {
+            padding: 24px;
+            overflow-y: auto;
+            max-height: 424px;
+        }
+    }
+
+    @media screen and (max-width: 1440px) {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        border-radius: 16px;
+
+        width: 352px;
     }
 
 }

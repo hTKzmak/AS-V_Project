@@ -25,6 +25,8 @@ export default {
                 { id: 3, img: bankImg, title: 'Кредит', text: 'Выгодные кредитные предложения от самых популярных банков' },
                 { id: 4, img: sequrityImg, title: 'Гарантия', text: 'Предоставляем целый год сервисного обслуживания' },
             ],
+
+        showFilter: true,
         }
     },
     setup() {
@@ -33,16 +35,22 @@ export default {
             appleStore,
             count: 12
         }
+    },
+    methods: {
+        toggleFilter() {
+            this.showFilter = !this.showFilter
+        }
     }
 }
 </script>
 
 <template>
+
     <InfoBlocks />
-    <TagsAndSort />
+    <TagsAndSort :showFilter="showFilter" @toggle-filter="toggleFilter"/>
 
     <div class="lop-main">
-        <Filter></Filter>
+        <Filter :showFilter="showFilter" @toggle-filter="toggleFilter"></Filter>
         <ProductsList :count="count" :data="appleStore.data" />
     </div>
 
@@ -74,10 +82,12 @@ export default {
             <li>Все способы оплаты!</li>
             <li>Товары, представленные на официальном сайте Istoreapple.ru, сертифицированы. Мы занимаемся продажей
                 айфонов с
-                2013 года. Вы всегда можете прочитать отзывы о покупке наших клиентов, позвонить в магазин и получить
+                2013 года. Вы всегда можете прочитать отзывы о покупке наших клиентов, позвонить в магазин и
+                получить
                 консультацию по любой модели Apple.</li>
         </ul>
     </div>
+
 </template>
 
 <style lang="scss">
@@ -96,12 +106,6 @@ export default {
             max-width: none;
             margin: 0;
             padding: 0;
-        }
-    }
-
-    .filter-desktop {
-        @media screen and (max-width: 1440px) {
-            display: none;
         }
     }
 }
