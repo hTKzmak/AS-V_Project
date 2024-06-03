@@ -218,7 +218,8 @@ display: none;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        overflow-y: scroll;
+        // overflow-y: scroll;
+        overflow-y: auto;
         @media screen and (max-width: 768px) {
             max-height: 100%;
             width: 100%;

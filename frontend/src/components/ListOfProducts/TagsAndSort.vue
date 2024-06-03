@@ -19,6 +19,12 @@ export default {
                 { id: 14, title: 'iPhone 13 Pro' },
             ]
         }
+    },
+    methods: {
+        // ф-ия для закрытия фильтра, чтобы она не отображалась
+        showFilterFunc() {
+            this.$emit('toggle-filter')
+        }
     }
 }
 </script>
@@ -35,7 +41,7 @@ export default {
 
             <div class="filterAndSort">
                 <div class="filter-item">
-                    <button>
+                    <button @click="showFilterFunc">
                         <img src="../../assets/icons/filter.svg" alt="#">
                         Фильтр
                     </button>

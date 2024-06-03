@@ -25,17 +25,18 @@ export default {
     align-items: center;
     gap: 5px;
 
-    cursor: pointer;
-
+    
     width: inherit;
     justify-content: center;
 }
 
 .mainColor {
     background-color: #0071E4;
+    cursor: pointer;
 }
 
 .addedItemStyle {
     background-color: #52D116;
+    cursor: not-allowed;
 }
 </style>

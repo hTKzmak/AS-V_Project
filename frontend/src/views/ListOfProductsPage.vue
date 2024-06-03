@@ -21,10 +21,13 @@ export default {
         return {
             advantagesData: [
                 { id: 1, img: speedImg, title: 'Доставка за 2 часа', text: 'Быстро и бесплатно доставляем все заказы по Москве' },
-                { id: 2, img: cashImg, title: 'Удобная оплата', text: 'Все виды наличного и безналичного расчета' },
+                { id: 2, img: cashImg, title: 'Оплата', text: 'Все виды наличного и безналичного расчета' },
                 { id: 3, img: bankImg, title: 'Кредит', text: 'Выгодные кредитные предложения от самых популярных банков' },
                 { id: 4, img: sequrityImg, title: 'Гарантия', text: 'Предоставляем целый год сервисного обслуживания' },
             ],
+
+            // значение для отображения мобильной версии фильтра
+            showFilter: false,
         }
     },
     setup() {
@@ -33,59 +36,105 @@ export default {
             appleStore,
             count: 12
         }
+    },
+    methods: {
+        // функция для отображения мобильной версии фильтра
+        toggleFilter() {
+            this.showFilter = !this.showFilter
+        }
     }
 }
 </script>
 
 <template>
-    <InfoBlocks />
-    <TagsAndSort />
 
-    <div class="fff">
-        <Filter></Filter>
-        <ProductsList :count="count" :data="appleStore.data" />
+    <div :class="[showFilter ? 'blur' : 'blur-none']">
+        <InfoBlocks />
+        <TagsAndSort :showFilter="showFilter" @toggle-filter="toggleFilter" />
     </div>
 
+    <div class="lop-main">
+        <Filter :showFilter="showFilter" @toggle-filter="toggleFilter"></Filter>
 
-
-    <div class="advantages container">
-        <div class="advantage-item" v-for="elem in advantagesData" :id=elem.id>
-            <div class="imgAndTitle">
-                <img :src=elem.img alt="#">
-                <h3>{{ elem.title }}</h3>
-            </div>
-            <p>{{ elem.text }}</p>
+        <div :class="[showFilter ? 'blur' : 'blur-none']">
+            <ProductsList :count="count" :data="appleStore.data" />
         </div>
     </div>
 
-    <div class="info container">
-        <h1>Новые модели Айфонов по выгодным ценам</h1>
-        <ul>
-            <p>Для тех, кто хочет приобрести новый телефон магазин Istoreapple.ru предлагает:</p>
-            <li>Низкие цены на все виды устройств, недорогие аксессуары;</li>
-            <li>Оригинальные подарки бренда;</li>
-            <li>Новая линейка смартфонов и проверенные старые модели;</li>
-            <li>Лаконичный дизайн, большой выбор цветов и оттенков;</li>
-            <li>Все товары в каталоге есть в наличии и доступны для покупки в кредит и рассрочку;</li>
-            <li>Быстрая доставка по Санкт-Петербургу и области;</li>
-            <li>Гарантия на все модели телефонов;</li>
-            <li>Все способы оплаты!</li>
-            <li>Товары, представленные на официальном сайте Istoreapple.ru, сертифицированы. Мы занимаемся продажей
-                айфонов с
-                2013 года. Вы всегда можете прочитать отзывы о покупке наших клиентов, позвонить в магазин и получить
-                консультацию по любой модели Apple.</li>
-        </ul>
+    <div :class="[showFilter ? 'blur' : 'blur-none']">
+        <div class="pagination">
+            <p style="text-align: center; font-size: 24px;">тут пагинация</p>
+        </div>
+
+        <div class="advantages container">
+            <div class="advantage-item" v-for="elem in advantagesData" :id=elem.id>
+                <div class="imgAndTitle">
+                    <img :src=elem.img alt="#">
+                    <h3>{{ elem.title }}</h3>
+                </div>
+                <p>{{ elem.text }}</p>
+            </div>
+        </div>
+
+        <div class="info container">
+            <h1>Новые модели Айфонов по выгодным ценам</h1>
+            <ul>
+                <p>Для тех, кто хочет приобрести новый телефон магазин Istoreapple.ru предлагает:</p>
+                <li>Низкие цены на все виды устройств, недорогие аксессуары;</li>
+                <li>Оригинальные подарки бренда;</li>
+                <li>Новая линейка смартфонов и проверенные старые модели;</li>
+                <li>Лаконичный дизайн, большой выбор цветов и оттенков;</li>
+                <li>Все товары в каталоге есть в наличии и доступны для покупки в кредит и рассрочку;</li>
+                <li>Быстрая доставка по Санкт-Петербургу и области;</li>
+                <li>Гарантия на все модели телефонов;</li>
+                <li>Все способы оплаты!</li>
+                <li>Товары, представленные на официальном сайте Istoreapple.ru, сертифицированы. Мы занимаемся продажей
+                    айфонов с
+                    2013 года. Вы всегда можете прочитать отзывы о покупке наших клиентов, позвонить в магазин и
+                    получить
+                    консультацию по любой модели Apple.</li>
+            </ul>
+        </div>
     </div>
+
+
 </template>
 
 <style lang="scss">
 
-.fff{
+.blur{
+    @media screen and (max-width: 1440px) {
+        filter: blur(2px);
+    }
+}
+
+.blur-none{
+    @media screen and (max-width: 1440px) {
+        filter: blur(-1px);
+    }
+}
+
+.lop-main {
     display: flex;
     flex-direction: row;
 
-    .products-list{
+    .products-list {
         justify-content: center;
+        
+        // max-width: 80%;
+        max-width: 100%;
+        margin: 0 auto;
+        
+        // padding: 30px 100px 30px 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 40px;
+        
+        @media screen and (max-width: 1440px) {
+            max-width: none;
+            margin: 0;
+            padding: 30px 0 16px;
+        }
     }
 }
 
