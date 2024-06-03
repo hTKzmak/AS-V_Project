@@ -120,15 +120,20 @@ export default {
 
     .products-list {
         justify-content: center;
-        // width: 50%;
-        max-width: 80%;
+        
+        // max-width: 80%;
+        max-width: 100%;
         margin: 0 auto;
-        padding: 30px 100px 30px 30px;
-
+        
+        // padding: 30px 100px 30px 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 40px;
+        
         @media screen and (max-width: 1440px) {
             max-width: none;
             margin: 0;
-            padding: 0;
+            padding: 30px 0 16px;
         }
     }
 }

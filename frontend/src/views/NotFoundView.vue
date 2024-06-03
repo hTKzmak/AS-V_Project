@@ -60,5 +60,9 @@ export default {
     }
   }
 
+  @media screen and (max-width: 1440px) {
+    margin-top: 144px;
+  }
+
 }
 </style>
