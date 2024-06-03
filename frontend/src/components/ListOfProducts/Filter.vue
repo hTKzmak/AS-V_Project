@@ -11,19 +11,19 @@ export default {
         return {
             rostlerData: [
                 {
-                    id: 1, title: 'title', list: [
-                        { id: 1, text: 'text' },
-                        { id: 2, text: 'text' },
-                        { id: 3, text: 'text' },
+                    id: 1, title: 'title 1', list: [
+                        { id: 1, text: 'text 1' },
+                        { id: 2, text: 'text 2' },
+                        { id: 3, text: 'text 3' },
                     ]
                 },
                 {
-                    id: 2, title: 'title', list: [
-                        { id: 1, text: 'text' },
-                        { id: 2, text: 'text' },
-                        { id: 3, text: 'text' },
-                        { id: 4, text: 'text' },
-                        { id: 5, text: 'text' },
+                    id: 2, title: 'title 2', list: [
+                        { id: 1, text: 'text 1' },
+                        { id: 2, text: 'text 2' },
+                        { id: 3, text: 'text 3' },
+                        { id: 4, text: 'text 4' },
+                        { id: 5, text: 'text 5' },
                     ]
                 },
             ],
@@ -358,6 +358,8 @@ export default {
         border-radius: 16px;
 
         width: 352px;
+
+        z-index: 1;
 
         .mobile-title {
             display: flex;
