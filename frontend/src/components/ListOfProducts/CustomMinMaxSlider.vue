@@ -92,10 +92,6 @@ const onInput = ({ target }) => {
         <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="maxValue" :step="step"
             @input="onInput" />
     </div>
-    <!-- <div class="minmax-inputs">
-        <input type="number" :step="step" v-model="sliderMinValue" />
-        <input type="number" :step="step" v-model="sliderMaxValue" />
-    </div> -->
 </template>
 
 <style>
@@ -143,7 +139,7 @@ const onInput = ({ target }) => {
     position: relative;
     width: 24px;
     height: 24px;
-    top: -5px;
+    top: -10px;
     margin-top: calc((var(--trackHeight) - var(--thumbRadius)) / 2);
     background: #0071E4;
     border: 1px solid #0071E4;
