@@ -105,6 +105,7 @@ export default {
 .blur{
     @media screen and (max-width: 1440px) {
         filter: blur(2px);
+        pointer-events: none;
     }
 }
 

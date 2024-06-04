@@ -4,11 +4,18 @@ import cashImg from '../../components/ProductPage/assets/icons/cash.svg';
 import bankImg from '../../components/ProductPage/assets/icons/bank.svg';
 import sequrityImg from '../../components/ProductPage/assets/icons/sequrity.svg';
 
+import CustomMinMaxSlider from '../ListOfProducts/CustomMinMaxSlider.vue'
+import { ref } from 'vue';
+
 
 export default {
+    components: {
+        CustomMinMaxSlider
+    },
     props: ['showFilter'],
     data() {
         return {
+            // список для фильтрации товаров
             rostlerData: [
                 {
                     id: 1, title: 'title 1', list: [
@@ -28,6 +35,7 @@ export default {
                 },
             ],
 
+            // для отображения преимуществ
             advantagesData: [
                 { id: 1, img: cashImg, title: 'Оплата', text: 'Все виды наличного и безналичного расчета' },
                 { id: 2, img: speedImg, title: 'Доставка за 2 часа', text: 'Быстро и бесплатно доставляем все заказы по Москве' },
@@ -40,9 +48,18 @@ export default {
             // отображение чек-боксов выбранного нами фильтра
             showCheckboxList: {},
 
+
+            // значения ползунков (мин и макс) (сюда надо вставить мин и макс цену из всех товаров)
+            sliderMin: ref(0),
+            sliderMax: ref(100),
+            
+            // булевое значение для отслеживания разрешения экрана (для двойного ползунка)
+            isDesktop: window.innerWidth > 1440,
+
         }
     },
     methods: {
+        // ф-ия показа списка чекбоксов определённого списка
         showCheckboxListFunc(elem) {
             this.showCheckboxList[elem.id] = !this.showCheckboxList[elem.id];
             if (this.showCheckboxList[elem.id] === true && !this.choosenRoster.includes(elem.id)) {
@@ -60,7 +77,13 @@ export default {
         showFilterFunc() {
             this.$emit('toggle-filter')
         }
-    }
+    },
+    // ф-ия для отслеживания разрешения экрана (нужен для двойного ползунка)
+    mounted() {
+        window.addEventListener("resize", () => {
+            this.isDesktop = window.innerWidth > 1440;
+        });
+    },
 }
 </script>
 
@@ -68,27 +91,45 @@ export default {
 
     <div class="filter-main">
 
+        <!-- ПК версия фильтрации -->
+
         <div class="filter-desktop">
 
             <div class="filter-info">
 
                 <div class="price-range">
                     <h3>Цена</h3>
-                    <input type="range" name="price-range">
+
+                    <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
+                    <!-- в :max вставит максимальную цену, а в :min минимальную -->
+                    <div v-if="isDesktop">
+                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                            v-model:max-value="sliderMax" />
+                    </div>
+                    <div v-else>
+                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                            v-model:max-value="sliderMax" />
+                    </div>
+
+
                     <div class="price-count">
                         <div class="price-text-count">
                             <label>от</label>
-                            <input type="text" value="100">
+                            <input type="number" :value="sliderMin">
                             <label>₽</label>
                         </div>
                         <div class="price-text-count">
                             <label>до</label>
-                            <input type="text" value="100">
+                            <input type="number" :value="sliderMax">
                             <label>₽</label>
                         </div>
                     </div>
+
                 </div>
                 <div class="rosters-list">
+
+                    <!-- объект для отображения списка -->
+
                     <div class="roster-item" v-for="elem in rostlerData">
                         <div class="rostler-item-main" :id="elem.id" @click="showCheckboxListFunc(elem)">
                             <div class="title">
@@ -99,10 +140,12 @@ export default {
                                 <i v-else class="arrow up"></i>
                             </button>
                         </div>
+
+                        <!-- список чекбоксов для фильтрации -->
+
                         <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list"
                             :id="index.id">
                             <li>
-                                <!-- <input type="checkbox" name="" id=""> -->
                                 <label class="b-contain">
                                     <span>{{ index.text }}</span>
                                     <input type="checkbox" />
@@ -127,6 +170,9 @@ export default {
             </div>
         </div>
 
+
+        <!-- мобильная версия фильтрации -->
+
         <div v-show="showFilter" class="filter-mobile">
 
             <div class="mobile-title">
@@ -138,21 +184,35 @@ export default {
 
                 <div class="price-range">
                     <h3>Цена</h3>
-                    <input type="range" name="price-range">
+
+                    <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
+                    <!-- в :max вставит максимальную цену, а в :min минимальную -->
+                    <div v-if="isDesktop">
+                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                            v-model:max-value="sliderMax" />
+                    </div>
+                    <div v-else>
+                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                            v-model:max-value="sliderMax" />
+                    </div>
+
                     <div class="price-count">
                         <div class="price-text-count">
                             <label>от</label>
-                            <input type="text" value="100">
+                            <input type="number" :value="sliderMin">
                             <label>₽</label>
                         </div>
                         <div class="price-text-count">
                             <label>до</label>
-                            <input type="text" value="100">
+                            <input type="number" :value="sliderMax">
                             <label>₽</label>
                         </div>
                     </div>
                 </div>
                 <div class="rosters-list">
+
+                    <!-- объект для отображения списка -->
+
                     <div class="roster-item" v-for="elem in rostlerData">
                         <div class="rostler-item-main" :id="elem.id" @click="showCheckboxListFunc(elem)">
                             <div class="title">
@@ -163,6 +223,9 @@ export default {
                                 <i v-else class="arrow up"></i>
                             </button>
                         </div>
+
+                        <!-- списко чекбоксов для фильтрации -->
+
                         <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list"
                             :id="index.id">
                             <li>
@@ -202,7 +265,7 @@ export default {
                 }
 
                 input[type="range"] {
-                    width: 100%;
+                    // width: 100%;
                 }
 
                 .price-count {
@@ -227,7 +290,8 @@ export default {
 
                         font-size: 16px;
 
-                        input[type="text"] {
+                        input[type="text"],
+                        input[type="number"] {
                             background: transparent;
                             border: none;
                             outline: none;
@@ -393,7 +457,7 @@ export default {
                 }
 
                 input[type="range"] {
-                    width: 100%;
+                    // width: 100%;
                 }
 
                 .price-count {
@@ -418,7 +482,8 @@ export default {
 
                         font-size: 16px;
 
-                        input[type="text"] {
+                        input[type="text"],
+                        input[type="number"] {
                             background: transparent;
                             border: none;
                             outline: none;
@@ -481,6 +546,7 @@ export default {
 
 
 
+// стилизация стрелки
 
 .arrow {
     border: solid #706E6E;
@@ -501,6 +567,9 @@ export default {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 }
+
+
+// стилизация checkbox
 
 .b-contain *,
 .b-contain *::before,
