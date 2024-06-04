@@ -34,7 +34,7 @@ let BASE_URL = appleStore.BASE_URL
     
     width: 46vw;
     max-width: 706px;
-    height: 480px;
+    max-height: 480px;
     
     background-color: #FFF;
     border-radius: 16px;
