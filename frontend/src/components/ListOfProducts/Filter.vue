@@ -4,8 +4,14 @@ import cashImg from '../../components/ProductPage/assets/icons/cash.svg';
 import bankImg from '../../components/ProductPage/assets/icons/bank.svg';
 import sequrityImg from '../../components/ProductPage/assets/icons/sequrity.svg';
 
+import CustomMinMaxSlider from '../ListOfProducts/CustomMinMaxSlider.vue'
+import { ref } from 'vue';
+
 
 export default {
+    components: {
+        CustomMinMaxSlider
+    },
     props: ['showFilter'],
     data() {
         return {
@@ -39,6 +45,10 @@ export default {
             choosenRoster: [],
             // отображение чек-боксов выбранного нами фильтра
             showCheckboxList: {},
+
+
+            sliderMin: ref(65),
+            sliderMax: ref(150),
 
         }
     },
@@ -74,16 +84,22 @@ export default {
 
                 <div class="price-range">
                     <h3>Цена</h3>
-                    <input type="range" name="price-range">
+                    <!-- <input type="range" name="price-range"> -->
+
+                    <CustomMinMaxSlider :min="65" :max="368" v-model:min-value="sliderMin"
+                        v-model:max-value="sliderMax" />
+
                     <div class="price-count">
                         <div class="price-text-count">
                             <label>от</label>
-                            <input type="text" value="100">
+                            <!-- <input type="text" :value="sliderMin"> -->
+                            <input type="number" :value="sliderMin">
                             <label>₽</label>
                         </div>
                         <div class="price-text-count">
                             <label>до</label>
-                            <input type="text" value="100">
+                            <!-- <input type="text" :value="sliderMax"> -->
+                            <input type="number" :value="sliderMax">
                             <label>₽</label>
                         </div>
                     </div>
@@ -138,16 +154,22 @@ export default {
 
                 <div class="price-range">
                     <h3>Цена</h3>
-                    <input type="range" name="price-range">
+                    <!-- <input type="range" name="price-range"> -->
+
+                    <CustomMinMaxSlider :min="65" :max="368" v-model:min-value="sliderMin"
+                        v-model:max-value="sliderMax" />
+
                     <div class="price-count">
                         <div class="price-text-count">
                             <label>от</label>
-                            <input type="text" value="100">
+                            <!-- <input type="text" :value="sliderMin"> -->
+                            <input type="number" :value="sliderMin">
                             <label>₽</label>
                         </div>
                         <div class="price-text-count">
                             <label>до</label>
-                            <input type="text" value="100">
+                            <!-- <input type="text" :value="sliderMax"> -->
+                            <input type="number" :value="sliderMax">
                             <label>₽</label>
                         </div>
                     </div>
@@ -202,7 +224,7 @@ export default {
                 }
 
                 input[type="range"] {
-                    width: 100%;
+                    // width: 100%;
                 }
 
                 .price-count {
@@ -227,7 +249,8 @@ export default {
 
                         font-size: 16px;
 
-                        input[type="text"] {
+                        input[type="text"],
+                        input[type="number"] {
                             background: transparent;
                             border: none;
                             outline: none;
@@ -393,7 +416,7 @@ export default {
                 }
 
                 input[type="range"] {
-                    width: 100%;
+                    // width: 100%;
                 }
 
                 .price-count {
@@ -418,7 +441,8 @@ export default {
 
                         font-size: 16px;
 
-                        input[type="text"] {
+                        input[type="text"],
+                        input[type="number"] {
                             background: transparent;
                             border: none;
                             outline: none;
@@ -481,6 +505,7 @@ export default {
 
 
 
+// стилизация стрелки
 
 .arrow {
     border: solid #706E6E;
@@ -501,6 +526,9 @@ export default {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 }
+
+
+// стилизация checkbox
 
 .b-contain *,
 .b-contain *::before,
