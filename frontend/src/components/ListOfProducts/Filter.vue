@@ -101,6 +101,7 @@ export default {
                     <h3>Цена</h3>
 
                     <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
+                    <!-- в :max вставит максимальную цену, а в :min минимальную -->
                     <div v-if="isDesktop">
                         <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
                             v-model:max-value="sliderMax" />
@@ -185,6 +186,7 @@ export default {
                     <h3>Цена</h3>
 
                     <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
+                    <!-- в :max вставит максимальную цену, а в :min минимальную -->
                     <div v-if="isDesktop">
                         <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
                             v-model:max-value="sliderMax" />
