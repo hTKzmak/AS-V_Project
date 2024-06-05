@@ -178,7 +178,7 @@ onMounted(() => {
 
             <!-- ПК версия кнопки для покупки  -->
             <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined" title="в корзину" img='/cart.svg' addedItemStyle='false' :action="addToBucket"/>
-            <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" title="в корзине" img='/inCart.svg' addedItemStyle='true' :action="addToBucket"/>
+            <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" title="в корзине" img='/inCart.svg' addedItemStyle='true'/>
 
             <!-- ПК версия кнопки для показа, что товар положен в корзину  -->
             <!-- <button class="buttonElem buttonCartAdded"><img src="../assets/icons/cart-added.svg">в корзине</button> -->

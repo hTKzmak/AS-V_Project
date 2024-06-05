@@ -1,6 +1,5 @@
 <script setup>
 import { useCounterStore } from '@/stores/AppleStore';
-import { reactive, ref } from 'vue';
 
 const appleStore = useCounterStore();
 
@@ -32,6 +31,7 @@ let BASE_URL = appleStore.BASE_URL
     top: 50px;
     width: 46vw;
     max-width: 706px;
+    max-height: 480px;
     background-color: #FFF;
     border-radius: 16px;
     z-index: 1;

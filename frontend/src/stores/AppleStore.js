@@ -9,11 +9,14 @@ import { reactive, ref } from 'vue';
 // let BASE_URL = 'https://dummyjson.com/products'
 
 // Новые данные (Бекенд Арсена)
-let BASE_URL = 'http://localhost:1452/api/products/'
+// let BASE_URL = 'http://localhost:1452/api/products/'
+let BASE_URL = 'http://localhost:1452/'
 
 let productsList = reactive([])
+let categoriesList = reactive([])
 
-fetch(BASE_URL)
+// получение всех товаров
+fetch(BASE_URL + 'api/products/')
     .then(res => res.json())
     .then(json => {
         json.map(elem => {
@@ -33,6 +36,20 @@ fetch(BASE_URL)
             productsList.push(res)
         })
     })
+
+// получение всех категориев товаров (???)
+for (let i = 0; i <= 7; i++) {
+    fetch(BASE_URL + `api/category/${i}`)
+        .then(res => res.json())
+        .then(json => {
+            for (let i of json) {
+                if(!categoriesList.includes(i.category)){
+                    categoriesList.push(i.category)
+                    console.log(categoriesList)
+                }
+            }
+        })
+}
 
 export const useCounterStore = defineStore('appleStore', {
     state: () => ({
