@@ -59,17 +59,17 @@ const tradeInHandle = () => {
     modalStore.changeModal('tradeIn')
 }
 
-function addToBucket(){
-    bucketStore.addToBucket(props.id, props.title, props.price, props.discount === null ? props.price : props.discount, BASE_URL+props.image, 1)
+function addToBucket() {
+    bucketStore.addToBucket(props.id, props.title, props.price, props.discount === null ? props.price : props.discount, BASE_URL + props.image, 1)
 }
 
-function addToFav(){
-    likeStore.addFavourite(props.id, props.title, 
-    props.price, props.image, props.rating, props.discount, props.is_available)
+function addToFav() {
+    likeStore.addFavourite(props.id, props.title,
+        props.price, props.image, props.rating, props.discount, props.is_available)
     isInFav.value = !isInFav.value
-    if(isInFav.value == true){
+    if (isInFav.value == true) {
         console.log(props.id + ' added to fav')
-    }else{
+    } else {
         console.log(props.id + ' removed from fav')
     }
     console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
@@ -81,35 +81,35 @@ function addToFav(){
 const isInFav = ref(false)
 onMounted(() => {
 
-  if(likeStore.likedProducts.find((e) => e.id === props.id) != undefined){
-    console.log(likeStore.likedProducts.find((e) => e.id === props.id) != undefined)
-    isInFav.value = true
-    console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
-}
-// else{
-//     isInFav.value = false
-// }
+    if (likeStore.likedProducts.find((e) => e.id === props.id) != undefined) {
+        console.log(likeStore.likedProducts.find((e) => e.id === props.id) != undefined)
+        isInFav.value = true
+        console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
+    }
+    // else{
+    //     isInFav.value = false
+    // }
 })
 
 
-    // props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
+// props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
 
 
-    // props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available', 'category', 'guarantee', 'count_review']
-    // props: ['id', 'title', 'price', 'image', 'rating', 'discount']
+// props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available', 'category', 'guarantee', 'count_review']
+// props: ['id', 'title', 'price', 'image', 'rating', 'discount']
 
-    const props = defineProps({
-        id: Number,
-        title: String,
-        price: Number,
-        image: String,
-        rating: Number,
-        discount: Number,
-        is_available: Boolean,
-        category: String,
-        guarantee: Number,
-        count_review: Number,
-    });
+const props = defineProps({
+    id: Number,
+    title: String,
+    price: Number,
+    image: String,
+    rating: Number,
+    discount: Number,
+    is_available: Boolean,
+    category: String,
+    guarantee: Number,
+    count_review: Number,
+});
 
 </script>
 
@@ -125,11 +125,11 @@ onMounted(() => {
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star missed"></span>
-                <a href="#!">({{count_review}})</a>
+                <a href="#!">({{ count_review }})</a>
             </div>
             <div class="settings">
                 <button @click="addToFav">
-                    <img :class="isInFav==true ? 'blue-heart' : 'standart'"  src="../assets/icons/header/heart.svg">
+                    <img :class="isInFav == true ? 'blue-heart' : 'standart'" src="../assets/icons/header/heart.svg">
                 </button>
 
 
@@ -148,9 +148,9 @@ onMounted(() => {
         </div>
 
 
-        <h3>{{title}}</h3>
-        <img class="product-image" :src="BASE_URL + image" alt="img">
-
+        <h3>{{ title }}</h3>
+        <!-- <img class="product-image" :src="BASE_URL + image" alt="img"> -->
+        <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
         <!-- если товар есть в наличии -->
 
         <div v-if="is_available" class="product-item-info">
@@ -169,7 +169,8 @@ onMounted(() => {
             <div class="price-info">
                 <h4>{{ discount === null ? price : discount }} ₽</h4>
                 <!-- мобильная версия кнопки для покупки  -->
-                <ButtonElem :title="discount === null ? price : discount + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'/>
+                <ButtonElem :title="discount === null ? price : discount + ' ' + '₽'" img='/cart.svg'
+                    addedItemStyle='false' />
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
@@ -177,8 +178,10 @@ onMounted(() => {
             </div>
 
             <!-- ПК версия кнопки для покупки  -->
-            <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined" title="в корзину" img='/cart.svg' addedItemStyle='false' :action="addToBucket"/>
-            <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" title="в корзине" img='/inCart.svg' addedItemStyle='true'/>
+            <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined" title="в корзину"
+                img='/cart.svg' addedItemStyle='false' :action="addToBucket" />
+            <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" title="в корзине"
+                img='/inCart.svg' addedItemStyle='true' />
 
             <!-- ПК версия кнопки для показа, что товар положен в корзину  -->
             <!-- <button class="buttonElem buttonCartAdded"><img src="../assets/icons/cart-added.svg">в корзине</button> -->
@@ -206,9 +209,10 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-.blue-heart{
+.blue-heart {
     filter: brightness(0) saturate(100%) invert(40%) sepia(58%) saturate(7056%) hue-rotate(198deg) brightness(95%) contrast(101%);
 }
+
 .product-item {
 
     // width: 282px;
@@ -268,6 +272,10 @@ onMounted(() => {
     .product-image {
         width: inherit;
         height: 300px;
+
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
     }
 
     .product-item-info {

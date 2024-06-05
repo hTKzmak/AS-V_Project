@@ -34,6 +34,7 @@ let BASE_URL = appleStore.BASE_URL
     max-height: 480px;
     background-color: #FFF;
     border-radius: 16px;
+    overflow-y: auto;
     z-index: 1;
 
     .searchItem {

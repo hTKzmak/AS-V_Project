@@ -45,7 +45,6 @@ for (let i = 0; i <= 7; i++) {
             for (let i of json) {
                 if(!categoriesList.includes(i.category)){
                     categoriesList.push(i.category)
-                    console.log(categoriesList)
                 }
             }
         })
@@ -54,6 +53,7 @@ for (let i = 0; i <= 7; i++) {
 export const useCounterStore = defineStore('appleStore', {
     state: () => ({
         data: productsList,
+        categoriesData: categoriesList,
         inputValue: '',
         BASE_URL: 'http://localhost:1452/',
         searchData: reactive([])
