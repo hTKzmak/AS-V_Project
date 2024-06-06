@@ -110,16 +110,18 @@ export default {
         // функция по отображению товаров определённой категории
         showProductsFunc(elem) {
             // Получение списка всех товаров
-            const url = `${this.appleStore.BASE_URL}api/products/`;
-            fetch(url)
-                .then((res) => res.json())
-                .then((data) => {
-                    // Фильтрация товаров по категории и вывод в catalogItemsList
-                    const filteredProducts = data.filter((product) => product.category === elem);
-                    this.showProducts = true;
-                    this.filteredProducts = filteredProducts;
-                    console.log(this.filteredProducts)
-                });
+            // const url = `${this.appleStore.BASE_URL}api/products/`;
+            // fetch(url)
+            //     .then((res) => res.json())
+            //     .then((data) => {
+
+            const data = this.appleStore.data;
+            // Фильтрация товаров по категории и вывод в catalogItemsList
+            const filteredProducts = data.filter((product) => product.category === elem);
+            this.showProducts = true;
+            this.filteredProducts = filteredProducts;
+            console.log(this.filteredProducts)
+            // });
         }
 
     }
@@ -255,13 +257,16 @@ export default {
                             <div v-show="showProducts" class="catalogItemsList">
                                 <div class="catalogItem" v-for="product in filteredProducts.slice(0, 12)"
                                     :id=product.id>
-                                    <img :src="appleStore.BASE_URL + product.images[0]">
+                                    
+                                    <img :src="appleStore.BASE_URL + product.image">
+
                                     <div class="title">
-                                        <p>{{ product.name }}</p>
+                                        <p>{{ product.title }}</p>
                                         <span>от {{ product.price }}₽</span>
                                     </div>
                                 </div>
-                                <RouterLink v-show="filteredProducts.length > 0" to="/ban" @click="activateCatalog = false">
+                                <RouterLink v-show="filteredProducts.length > 0" to="/ban"
+                                    @click="activateCatalog = false">
                                     Смотреть все товары
                                 </RouterLink>
                             </div>
