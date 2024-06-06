@@ -1,19 +1,26 @@
-<script>
+<script setup>
 import ProductInfo from '../components/ProductPage/ProductInfo.vue';
 import DeliveryQA from '../components/ProductPage/DeliveryQA.vue';
 import Nothing from '../components/ProductPage/Nothing.vue';
 import Watched from '../components/ProductPage/Watched.vue'
 import ButtonElem from '../components/UI/ButtonElem.vue'
+import { useSingleProductStore } from '@/stores/SingleProductStore';
 
-export default {
-    components: {
-        ProductInfo,
-        DeliveryQA,
-        Nothing,
-        Watched,
-        ButtonElem
-    }
-}
+const singleProductStore = useSingleProductStore()
+
+// export default {
+//     data(){
+        
+//         return(singleProductStore)
+//     },
+//     components: {
+//         ProductInfo,
+//         DeliveryQA,
+//         Nothing,
+//         Watched,
+//         ButtonElem
+//     }
+// }
 </script>
 
 <template>
@@ -23,7 +30,7 @@ export default {
 
     <div class="lastChance container">
         <img src="../assets/img.png" alt="Product">
-        <h1>Oculus Quest 2</h1>
+        <h1>{{singleProductStore.neededProd.name}}</h1>
         <p>Уже почти ваш</p>
         <ButtonElem title="Выбрать модель" addedItemStyle="false"/>
     </div>

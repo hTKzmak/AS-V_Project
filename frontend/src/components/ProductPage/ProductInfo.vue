@@ -1,23 +1,74 @@
 <script>
-import { RouterLink } from 'vue-router'
 import ButtonElem from '../UI/ButtonElem.vue';
+import { useSingleProductStore } from '@/stores/SingleProductStore';
+import { useCounterStore } from '@/stores/AppleStore';
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router'
+import { useRecentStore } from '@/stores/RecentStore';
+import { useBucketStore } from '@/stores/BucketStore';
+import { useModalStore } from '@/stores/ModalStore';
+import { useCurrentProductStore } from '@/stores/CurrentProductStore';
+
+
+
+
 
 export default {
     components: {
         ButtonElem
     },
     setup() {
+        const recentStore = useRecentStore()
+        const singleProductStore = useSingleProductStore()
+        const appleStore = useCounterStore()
+        const bucketStore = useBucketStore()
+        const modalStore = useModalStore()
+        const currentProductStore = useCurrentProductStore()
+
+
+        const route = useRoute()
+
+        let productId = 0
+
+        //------------------------------------ ФУНКЦИОНАЛ КНОПОК -------------------------
+
+        function buyInOneClick(){
+            currentProductStore.name = singleProductStore.name
+            currentProductStore.image = appleStore.BASE_URL+singleProductStore.images[0]
+            currentProductStore.price = singleProductStore.price
+            currentProductStore.oldPrice = singleProductStore.price
+            modalStore.changeModal('oneClick')
+
+        }
+
+        function addToBucket(){
+            bucketStore.addToBucket(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.discount === null ? singleProductStore.price : singleProductStore.discount, appleStore.BASE_URL+singleProductStore.images[0], 1)
+        }
+
+        function buyInCredit(){
+            currentProductStore.name = singleProductStore.name
+            currentProductStore.image = appleStore.BASE_URL+singleProductStore.images[0]
+            currentProductStore.price = singleProductStore.price
+            currentProductStore.oldPrice = singleProductStore.price
+            modalStore.changeModal('credit')
+        }
+
+        //--------------------------------------------------------------------------------
+
+
+        onMounted(() => {
+            
+            productId = route.params.id;
+            singleProductStore.findProd(productId)
+            recentStore.addToRecent(productId, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+        }
+
+        )
         return {
+            singleProductStore, appleStore, productId, bucketStore,
+             modalStore, currentProductStore, buyInOneClick, addToBucket, buyInCredit,
             // characteristics нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
-            characteristics: [
-                { id: 1, title: 'Тип', text: 'Очки виртуальной реальности' },
-                { id: 2, title: 'Цвет', text: 'Белый' },
-                { id: 3, title: 'Разрешение экрана', text: '3840x2160' },
-                { id: 4, title: 'Угол обзора', text: '90°' },
-                { id: 5, title: 'Питание', text: 'От аккумулятора' },
-                { id: 6, title: 'Бренд', text: 'Oculus' },
-                { id: 7, title: 'Страна производитель', text: 'Китай' },
-            ]
+            characteristics: singleProductStore.characteristics
         }
     },
 }
@@ -26,29 +77,14 @@ export default {
 <template>
     <div class="container">
         <div class="productInfo">
-            <h1 id="mobileTitle">Oculus Quest 2 White 128GB</h1>
+            <h1 id="mobileTitle">{{ singleProductStore.name }}</h1>
             <div class="productImage">
-                <img src="../../assets/img.png" alt="product image">
+                <img :src="appleStore.BASE_URL + singleProductStore.images[0]" alt="product image">
                 <nav>
                     <ul>
-                        <li>
+                        <li v-for="image in singleProductStore.images" :key="image">
                             <button>
-                                <img src="../../assets/img.png" alt="product image">
-                            </button>
-                        </li>
-                        <li>
-                            <button>
-                                <img src="../../assets/img.png" alt="product image">
-                            </button>
-                        </li>
-                        <li>
-                            <button>
-                                <img src="../../assets/img.png" alt="product image">
-                            </button>
-                        </li>
-                        <li>
-                            <button>
-                                <img src="../../assets/img.png" alt="product image">
+                                <img :src="appleStore.BASE_URL + image" alt="product image">
                             </button>
                         </li>
                     </ul>
@@ -56,7 +92,7 @@ export default {
             </div>
 
             <div class="productData">
-                <h1>Oculus Quest 2 White 128GB</h1>
+                <h1>{{ singleProductStore.name }}</h1>
 
                 <div class="productData-optionsAndOrder">
 
@@ -96,9 +132,10 @@ export default {
                         <h2 id="title_characteristic">Характеристики</h2>
 
                         <div class="characteristicsList">
-                            <div class="characteristicItem" v-for="elem in characteristics">
-                                <p>{{ elem.title }}</p>
-                                <p>{{ elem.text }}</p>
+                            <div class="characteristicItem" v-for="elem in singleProductStore.characteristics" :key="elem.characteristic">
+                                <p>{{ elem.characteristic }}</p>
+                                <p v-if="elem.unit_type!='значение'">{{ elem.value }} {{ elem.unit_type }}</p>
+                                <p v-else>{{ elem.value }}</p>
                             </div>
                             <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
                         </div>
@@ -106,24 +143,25 @@ export default {
 
                     <div class="productData-order">
                         <div class="product-info">
-                            <h4>48 000 ₽</h4>
+                            <h4>{{ singleProductStore.discount_price }}</h4>
                             <div class="existence">
                                 <div class="existence-sign"></div>
                                 <p>Есть в наличии</p>
                             </div>
                         </div>
-                        <h3>44 290 ₽</h3>
-                        <ButtonElem title="Добавить в корзину" addedItemStyle="false" />
+                        <h3>{{ singleProductStore.price }} ₽</h3>
+                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined" title="Добавить в корзину" addedItemStyle="false" :action="addToBucket"/>
+                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined" title="В корзине" img='/inCart.svg' addedItemStyle='true' :action="addToBucket"/>
                         <p>Купить в 1 клик</p>
                         <div class="buyInOneClick">
                             <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">
-                            <ButtonElem title="Купить" addedItemStyle="false" />
+                            <ButtonElem title="Купить" addedItemStyle="false" :action="buyInOneClick" />
                         </div>
 
                         <nav>
                             <ul>
                                 <li>
-                                    <button id="discountBtn">
+                                    <button id="discountBtn" @click="buyInCredit">
                                         <img src="../../assets/icons/discount.svg" alt="#">
                                         Купить в кредит
                                     </button>
@@ -168,7 +206,7 @@ export default {
                         <h2 id="title_characteristic">Характеристики</h2>
 
                         <div class="characteristicsList">
-                            <div class="characteristicItem" v-for="elem in characteristics">
+                            <div class="characteristicItem" v-for="elem in characteristics" :key="elem">
                                 <p>{{ elem.title }}</p>
                                 <p>{{ elem.text }}</p>
                             </div>

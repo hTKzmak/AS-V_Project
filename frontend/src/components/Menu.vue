@@ -1,14 +1,27 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
+import { useModalStore } from '@/stores/ModalStore';
 
 export default {
+    setup() {
+        const modalStore = useModalStore()
+        return{
+            modalStore
+        }
+    },
     props: ['showCatalog'],
     methods: {
         // ф-ия для отображения CatalogTab (это отдельный компонент для мобильной и планшетной версии каталогов) 
         showCatalogFunc() {
             this.$emit('toggle-catalog')
             console.log(this.showCatalog)
-        }
+        },
+        changeHandle() {
+            // modalStore.isShown = true
+            // modalStore.typeModal.value = 'Bucket'
+            // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+            this.modalStore.changeModal('Bucket')
+        },
     }
 }
 </script>
@@ -21,7 +34,7 @@ export default {
                 каталог
             </button>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" @click="changeHandle">
             <RouterLink to="/">
                 <img src="../assets/icons/menu/bag.svg" alt="">
                 корзина
