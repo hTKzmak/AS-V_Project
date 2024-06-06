@@ -13,7 +13,7 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/product',
+      path: '/product/:id',
       name: 'product',
       component: ProductPage
     },
@@ -27,7 +27,11 @@ const router = createRouter({
       name: 'favourite',
       component: LikeView
     },
-  ]
+  ],
+  scrollBehavior() {
+    // Всегда прокручивает к началу страницы
+    return { top: 0 };
+  }
 })
 
 export default router

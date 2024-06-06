@@ -1,33 +1,16 @@
 <script setup>
 import { ref } from 'vue';
-    let last = ref([
-    {
-        name: 'iPhone 14 Pro Max Deep Purple',
-        image: '../assets/icons/modals/last.png'
-    },
-    {
-        name: 'iPhone 14 Pro Max Deep Purple',
-        image: '../assets/icons/modals/last.png'
-    },
-    {
-        name: 'iPhone 14 Pro Max Deep Purple',
-        image: '../assets/icons/modals/last.png'
-    },
-    {
-        name: 'iPhone 14 Pro Max Deep Purple',
-        image: '../assets/icons/modals/last.png'
-    },
-    {
-        name: 'iPhone 14 Pro Max Deep Purple',
-        image: '../assets/icons/modals/last.png'
-    }
-    ])
+import { useRecentStore } from '@/stores/RecentStore';
+import { useCounterStore } from '@/stores/AppleStore';
+import SeenProd from '@/components/EmptyBucket/SeenProd.vue'
+const recentStore = useRecentStore()
+const appleStore = useCounterStore()
 </script>
 
 <template >
     <div>
         <form>
-        <img src="../assets/icons/modals/box.png" alt="">
+        <img class="box" src="../assets/icons/modals/box.png" alt="">
         <div class="text_field">
         <h1>В корзине пока ничего нет</h1>
         <p class="info_text">Но вы можете легко это исправить</p>
@@ -35,9 +18,9 @@ import { ref } from 'vue';
         <input value="начать покупки" type="submit" class="buttonElem">
         <p class="check_last">Кстати, вы это смотрели</p>
         <div class="last">
-            <div v-for="(item, index) in last" :key="index" class="product_card">
-                <img src='../assets/icons/modals/last.png' alt="">
-                <p class="prodName">{{ item.name }}</p>
+        
+            <div v-for="(item, index) in recentStore.recentProducts.slice(1,5)" :key="index">
+                <SeenProd :id="+item.id" :title="item.title" :image="appleStore.BASE_URL+item.image"/>
             </div>
         </div>
     </form>
@@ -51,22 +34,8 @@ import { ref } from 'vue';
         font-size: 16px;
         }
 }
-.prodName{
-    margin: 0;
-    font-size: 14px;
-    text-align: center;
-    @media screen and (max-width: 768px) {
-        text-align: left;
-        }
-}
-.product_card{
-    width: 80px;
-    @media screen and (max-width: 768px) {
-        display: flex;
-        min-width: 175px;
-        height: 64px;
-        }
-}
+
+
 .last{
     display: flex;
     gap: 25px;
@@ -124,8 +93,9 @@ import { ref } from 'vue';
             font-size: 20px;
         }
     }
-    img{
-        width: 56px;
+
+    .box{
+        width: 108px;
         @media screen and (max-width: 768px) {
             width: 48px;
             height: 48px;

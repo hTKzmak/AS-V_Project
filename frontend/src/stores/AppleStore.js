@@ -19,7 +19,7 @@ fetch(BASE_URL)
         json.map(elem => {
             let res = {
                 id: elem.id,
-                title: 'Название продукта',
+                title: elem.name,
                 price: elem.price,
                 image: elem.images[0],
                 rating: elem.rating,

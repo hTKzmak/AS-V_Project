@@ -46,7 +46,7 @@ export const useBucketStore = defineStore('bucket', () => {
   let BuckExist = ref(bucket.value.length); 
   let totPrice = ref(0);
    bucket.value.forEach(element => {
-       totPrice.value+=element.lastPrice
+       totPrice.value+=element.lastPrice*element.count
    });
 
 
@@ -97,14 +97,53 @@ export const useBucketStore = defineStore('bucket', () => {
        });
        buckLength.value--
        localStorage.bucket = JSON.stringify(bucket.value)
-       console.log(id)
-       console.log(buckLength.value)
-       console.log('length ' + BuckExist.value)
-
-    
-       
+       console.log('Deleeted itemm with ID ' + id + ', now Bucket lenght is ' + buckLength.value)
    }
 
+    function countUp(id){
+        // bucket.value[id].count++
+        bucket.value.forEach(element => {
+            if (element.id == id){
+                element.count++
+                console.log('count of prod with id ' + id +' updated to ' + element.count)
+                localStorage.bucket = JSON.stringify(bucket.value)
+                totPrice.value=0
+                bucket.value.forEach(element => {
+                    totPrice.value+=element.lastPrice*element.count
+                });
+            }
+            });
+    }
 
-  return { bucket, buckLength, BuckExist, totPrice, deleteItem, addToBucket }
+    function countDown(id){
+        // bucket.value[id].count++
+        bucket.value.forEach(element => {
+            if (element.id == id){
+                if (element.count === 1){
+                    bucket.value = bucket.value.filter((item)=> +item.id != id)
+                    totPrice.value=0
+                    bucket.value.forEach(element => {
+                    totPrice.value+=element.lastPrice
+                    // BuckExist.value = BuckExist.value - 1
+                    });
+                    buckLength.value--
+                    localStorage.bucket = JSON.stringify(bucket.value)
+                    console.log('Deleeted itemm with ID ' + id + ', now Bucket lenght is ' + buckLength.value)
+                }else{
+                    element.count--
+                    console.log('count of prod with id ' + id +' updated to ' + element.count)
+                    localStorage.bucket = JSON.stringify(bucket.value)
+                    totPrice.value=0
+                    bucket.value.forEach(element => {
+                        totPrice.value+=element.lastPrice*element.count
+                    });
+                }
+
+            }
+            });
+
+    }
+
+
+  return { bucket, buckLength, BuckExist, totPrice, deleteItem, addToBucket, countUp, countDown }
 })

@@ -33,9 +33,9 @@ const bucketStore = useBucketStore()
                     <div class="text-field">
                         <p>{{item.title}}</p>
                         <div style="display: flex; gap: 10px;"><p style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
-                            <button class="change-count">-</button>
+                            <button @click="bucketStore.countDown(item.id)" class="change-count">-</button>
                             <p style="color: #0071E4;">{{item.count}}</p>
-                            <button class="change-count">+</button>
+                            <button @click="bucketStore.countUp(item.id)" class="change-count">+</button>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ const bucketStore = useBucketStore()
                     <div class="info_field">
                         <div class="cost"><p>Доставка:</p><p>0₽</p></div>
                         <div class="cost"><p>Cумма заказа:</p><p>{{bucketStore.totPrice}}₽</p></div>
-                        <div class="cost bald"><p>Итого:</p><p>{{bucketStore.totPrice}}₽</p></div>
+                        <div class="cost bald"><p class="bald">Итого:</p><p class="bald">{{bucketStore.totPrice}}₽</p></div>
                     </div>
                     <div class="info_field">
                         <h3>Выберите способ оплаты</h3>
@@ -91,6 +91,13 @@ const bucketStore = useBucketStore()
 </template>
 
 <style scoped lang="scss">
+    h3{
+        font-weight: 700;
+    }
+    p{
+        font-size: 20px;
+        font-weight: 500;
+    }
     h1{
         width: 100%;
         text-align: center;
@@ -158,13 +165,15 @@ const bucketStore = useBucketStore()
         height: 64px;
     }
     .product_card{
-        width: 320px;
         height: 100px;
         display: flex;
-        position: relative;
         width: 90%;
+        position: relative;
         align-items: center;
         justify-content: start;
+        p{
+            font-size: 16px;
+        }
     }
     .close{
         background: none;
