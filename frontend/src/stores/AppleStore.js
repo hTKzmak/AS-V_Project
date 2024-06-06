@@ -13,7 +13,7 @@ import { reactive, ref } from 'vue';
 let BASE_URL = 'http://localhost:1452/'
 
 let productsList = reactive([])
-let categoriesList = reactive([])
+let catalogsList = reactive([])
 
 // получение всех товаров
 fetch(BASE_URL + 'api/products/')
@@ -43,8 +43,8 @@ for (let i = 0; i <= 7; i++) {
         .then(res => res.json())
         .then(json => {
             for (let i of json) {
-                if(!categoriesList.includes(i.category)){
-                    categoriesList.push(i.category)
+                if(!catalogsList.includes(i.category)){
+                    catalogsList.push(i.category)
                 }
             }
         })
@@ -53,7 +53,7 @@ for (let i = 0; i <= 7; i++) {
 export const useCounterStore = defineStore('appleStore', {
     state: () => ({
         data: productsList,
-        categoriesData: categoriesList,
+        catalogData: catalogsList,
         inputValue: '',
         BASE_URL: 'http://localhost:1452/',
         searchData: reactive([])
@@ -61,7 +61,7 @@ export const useCounterStore = defineStore('appleStore', {
 
     actions: {
         getData() {
-            console.log(this.data)
+            console.log(this.catalogData)
         },
         getValue(value) {
             this.inputValue = value

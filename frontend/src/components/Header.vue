@@ -29,6 +29,12 @@ export default {
             activateCatalog: false,
             // для отображения другого окна с товарами, которые связанны с определённым каталогом (пока для ПК)
             showProducts: false,
+
+            // Все категории, которые есть у товаров
+            catalogsList: ['Смартфоны', 'Планшеты', 'Компьютеры', 'Часы', 'Акссесуары', 'Акции'],
+
+            // отфильтрованные товары для их отображения в каталоге товаров
+            filteredProducts: []
         }
     },
     setup() {
@@ -96,9 +102,24 @@ export default {
         // },
 
         // функция для отображения или прекращения показа окна каталога и прекращение отображения продуктов выбранной категории
-        activateCatalogFunc(){
+        activateCatalogFunc() {
             this.activateCatalog = !this.activateCatalog
             this.showProducts = false
+        },
+
+        // функция по отображению товаров определённой категории
+        showProductsFunc(elem) {
+            // Получение списка всех товаров
+            const url = `${this.appleStore.BASE_URL}api/products/`;
+            fetch(url)
+                .then((res) => res.json())
+                .then((data) => {
+                    // Фильтрация товаров по категории и вывод в catalogItemsList
+                    const filteredProducts = data.filter((product) => product.category === elem);
+                    this.showProducts = true;
+                    this.filteredProducts = filteredProducts;
+                    console.log(this.filteredProducts)
+                });
         }
 
     }
@@ -228,25 +249,23 @@ export default {
                     <div class="catalog">
                         <div v-show="activateCatalog" class="catalogModal">
                             <ul class="catalogToolsList">
-                                <li id="1" @mouseenter="showProducts = true">Смартфоны</li>
-                                <li id="2" @mouseenter="showProducts = true">Планшеты</li>
-                                <li id="3" @mouseenter="showProducts = true">Компьютеры</li>
-                                <li id="4" @mouseenter="showProducts = true">Часы</li>
-                                <li id="5" @mouseenter="showProducts = true">Аксессуары</li>
-                                <li id="6" @mouseenter="showProducts = true">Акции</li>
+                                <li @mouseenter="showProductsFunc(elem)" v-for="elem in catalogsList">{{ elem }}</li>
                             </ul>
+
                             <div v-show="showProducts" class="catalogItemsList">
-                                <div class="catalogItem" v-for="index in 12" :id=index>
-                                    <img src="../assets/img.png">
+                                <div class="catalogItem" v-for="product in filteredProducts.slice(0, 12)"
+                                    :id=product.id>
+                                    <img :src="appleStore.BASE_URL + product.images[0]">
                                     <div class="title">
-                                        <p>iPhone 14 Pro Max</p>
-                                        <span>от 31 480₽</span>
+                                        <p>{{ product.name }}</p>
+                                        <span>от {{ product.price }}₽</span>
                                     </div>
                                 </div>
-                                <RouterLink to="/ban" @click="activateCatalog = false">
+                                <RouterLink v-show="filteredProducts.length > 0" to="/ban" @click="activateCatalog = false">
                                     Смотреть все товары
                                 </RouterLink>
                             </div>
+
                         </div>
                     </div>
 
@@ -258,7 +277,8 @@ export default {
                 <!-- Окно с результатом поиска -->
                 <Search />
 
-                <RouterLink to="/favourite" @click="activateCatalog = false"><img src="../assets/icons/header/heart.svg" alt=""></RouterLink>
+                <RouterLink to="/favourite" @click="activateCatalog = false"><img src="../assets/icons/header/heart.svg"
+                        alt=""></RouterLink>
 
                 <button class="buttonElem basketBtn" @click="changeHandle">
 
@@ -494,7 +514,7 @@ header {
 
                             // overflow-y: auto;
 
-                            width: 53rem;
+                            // width: 53rem;
                             height: 18rem;
                             margin-left: 16px;
 
@@ -503,8 +523,9 @@ header {
                                 display: flex;
                                 align-items: center;
 
-                                // width: 206px;
+                                width: 206px;
                                 // height: 64px;
+
                                 padding: 8px 16px 8px;
 
                                 background-color: #F9F9F9;
@@ -525,6 +546,12 @@ header {
                                     p,
                                     span {
                                         margin: 0;
+
+                                        text-overflow: clip;
+                                        -webkit-line-clamp: 2;
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        overflow: hidden;
                                     }
 
                                     p {
@@ -547,7 +574,7 @@ header {
                             a {
                                 position: absolute;
                                 bottom: 15px;
-                                width: inherit;
+                                width: max-content;
                             }
                         }
 
