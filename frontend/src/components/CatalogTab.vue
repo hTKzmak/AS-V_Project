@@ -154,6 +154,7 @@ export default {
         width: 95%;
         padding-right: 45px;
         overflow-y: auto;
+        overflow-x: hidden;
         display: grid;
 
 
@@ -260,9 +261,9 @@ export default {
         display: flex;
     }
 
-    @media screen and (max-width: 768px) {
-        bottom: 75px;
-    }
+    // @media screen and (max-width: 768px) {
+    //     bottom: 75px;
+    // }
 
 }
 

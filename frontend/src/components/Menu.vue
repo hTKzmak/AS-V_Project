@@ -18,19 +18,19 @@ export default {
         <div class="menu-item">
             <button @click="showCatalogFunc">
                 <img src="../assets/icons/menu/catalog.svg" alt="">
-                каталог
+                <!-- каталог -->
             </button>
         </div>
         <div class="menu-item">
             <RouterLink to="/">
                 <img src="../assets/icons/menu/bag.svg" alt="">
-                корзина
+                <!-- корзина -->
             </RouterLink>
         </div>
         <div class="menu-item">
             <RouterLink to="/favourite">
                 <img src="../assets/icons/menu/heart.svg" alt="">
-                избранное
+                <!-- избранное -->
             </RouterLink>
         </div>
     </div>
@@ -53,7 +53,7 @@ export default {
     left: 0;
     right: 0;
 
-    z-index: 1;
+    z-index: 3;
 
     .menu-item {
 
@@ -74,7 +74,7 @@ export default {
                 }
             }
 
-            &:focus-within {
+            &:focus {
                 color: #282626;
 
                 img{
