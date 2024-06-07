@@ -1,3 +1,4 @@
+import EmptyBucket from '@/modals/EmptyBucket.vue';
 import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue';
 
@@ -61,7 +62,7 @@ export const useCounterStore = defineStore('appleStore', {
 
     actions: {
         getData() {
-            console.log(this.catalogData)
+            console.log(this.data)
         },
         getValue(value) {
             this.inputValue = value

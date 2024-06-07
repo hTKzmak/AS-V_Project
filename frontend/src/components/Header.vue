@@ -110,18 +110,20 @@ export default {
         // функция по отображению товаров определённой категории
         showProductsFunc(elem) {
             // Получение списка всех товаров
-            // const url = `${this.appleStore.BASE_URL}api/products/`;
-            // fetch(url)
-            //     .then((res) => res.json())
-            //     .then((data) => {
-
             const data = this.appleStore.data;
+
             // Фильтрация товаров по категории и вывод в catalogItemsList
-            const filteredProducts = data.filter((product) => product.category === elem);
+            if (elem !== 'Акции') {
+                const filteredProductsData = data.filter((product) => product.category === elem);
+                this.filteredProducts = filteredProductsData;
+            }
+            else {
+                const filteredProductsData = data.filter((product) => product.discount !== null);
+                this.filteredProducts = filteredProductsData;
+            }
             this.showProducts = true;
-            this.filteredProducts = filteredProducts;
-            console.log(this.filteredProducts)
-            // });
+
+
         }
 
     }
@@ -257,12 +259,13 @@ export default {
                             <div v-show="showProducts" class="catalogItemsList">
                                 <div class="catalogItem" v-for="product in filteredProducts.slice(0, 12)"
                                     :id=product.id>
-                                    
+
                                     <img :src="appleStore.BASE_URL + product.image">
 
                                     <div class="title">
                                         <p>{{ product.title }}</p>
-                                        <span>от {{ product.price }}₽</span>
+                                        <span>{{ product.discount === null ? 'от' + ' ' + product.price + '₽' : 'от'
+                                            + ' ' + product.discount + '₽' }}</span>
                                     </div>
                                 </div>
                                 <RouterLink v-show="filteredProducts.length > 0" to="/ban"
@@ -306,8 +309,13 @@ export default {
                     </li>
                 </ul>
 
-                <a href="#!" class="iPhone14_link">
-                </a>
+                <button class="trade-in">
+                    <img id="main" src="../assets/images/iphone.png" alt="#">
+                    <div class="trade-in-main">
+                        Трейд-ин
+                        <img id="arrow" src="../assets/icons/arrow_circle.svg" alt="#">
+                    </div>
+                </button>
             </div>
 
         </div>
@@ -518,6 +526,7 @@ header {
                             gap: 8px;
 
                             // overflow-y: auto;
+                            // overflow-x: hidden;
 
                             // width: 53rem;
                             height: 18rem;
@@ -669,14 +678,43 @@ header {
                 }
             }
 
-            .iPhone14_link {
-                background: linear-gradient(90deg, #000000 22.19%, #5E556B 100%);
-                background-image: url('../assets/icons/header/gadgets/banner.png');
-                border-radius: 8px;
-                height: 64px;
-                width: 280px;
+            .trade-in {
+                position: relative;
+
+                border: none;
+
+                background-image: linear-gradient(90deg, #000000 22.19%, #5E556B 100%);
                 background-repeat: no-repeat;
-                background-position: center center;
+                /* Перемещение и изменение размера фонового изображения */
+                background-blend-mode: multiply;
+
+                overflow: hidden;
+
+                width: 280px;
+                height: 64px;
+                border-radius: 8px;
+
+                font-size: 20px;
+                color: #FFFFFF;
+
+                #main {
+                    position: absolute;
+                    width: 45px;
+                    top: 0;
+                    left: 10px;
+                }
+
+                .trade-in-main {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    #arrow {
+                        position: absolute;
+                        right: 16px;
+                    }
+                }
             }
         }
 

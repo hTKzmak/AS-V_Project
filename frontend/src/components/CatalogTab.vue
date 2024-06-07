@@ -9,7 +9,9 @@ import gadgetsIcon from '../assets/icons/header/gadgets/airpods.svg'
 import toolsIcon from '../assets/icons/header/gadgets/tools.svg'
 
 import iPhoneImg from '../assets/img.png'
+import { useCounterStore } from '@/stores/AppleStore'
 
+// ТОВАРЫ НЕ ОТОБРАЖАЕМ. БУДЕТ ПРОСТО НАВИГАЦИЯ!!!
 
 export default {
     props: ['showCatalog'],
@@ -57,21 +59,40 @@ export default {
 
             // отображение продуктов выбранной нами категории
             showProductsList: {},
+
+            // Все категории, которые есть у товаров
+            catalogsList: ['Смартфоны', 'Планшеты', 'Компьютеры', 'Часы', 'Акссесуары', 'Акции'],
+
+            // отфильтрованные товары для их отображения в каталоге товаров
+            filteredProducts: []
+        }
+    },
+    setup() {
+        const appleStore = useCounterStore()
+        return {
+            appleStore
         }
     },
     methods: {
         // функция для отображения продуктов выбранной нами категории и для стилизации текста и иконок (правда сами иконки не перекрашиваются :/)
         showProductsFunc(category) {
+            // оставить код:
             this.showProductsList[category.id] = !this.showProductsList[category.id];
             if (this.showProductsList[category.id] === true && !this.choosenCategory.includes(category.id)) {
                 this.choosenCategory.push(category.id)
             }
-            else{
+            else {
                 const filteredNumbers = this.choosenCategory.filter((number) => number !== category.id);
                 this.choosenCategory = filteredNumbers
             }
 
-            console.log(this.choosenCategory)
+            // новый код:
+            // let data = this.appleStore.data;
+            // for (let i of data) {
+            //     if(i.title.includes(category.title)){
+            //         console.log('yes')
+            //     }
+            // }
         },
 
         // ф-ия для закрытия данного компонента CatalogTab, чтобы она не отображалась
@@ -95,7 +116,8 @@ export default {
 
                 <div class="catalogItem-elem">
                     <div class="title">
-                        <img :src=elem.image :style="{ filter: choosenCategory.includes(elem.id) ? 'brightness(0) saturate(100%) invert(40%) sepia(58%) saturate(7056%) hue-rotate(198deg) brightness(95%) contrast(101%)' : '' }">
+                        <img :src=elem.image
+                            :style="{ filter: choosenCategory.includes(elem.id) ? 'brightness(0) saturate(100%) invert(40%) sepia(58%) saturate(7056%) hue-rotate(198deg) brightness(95%) contrast(101%)' : '' }">
                         <p :style="{ color: choosenCategory.includes(elem.id) ? '#0071E4' : '' }">{{ elem.title }}</p>
                     </div>
                     <button @click="showProductsFunc(elem)">
@@ -173,10 +195,12 @@ export default {
                     display: flex;
                     gap: 8px;
 
-                    img, object, symbol {
+                    img,
+                    object,
+                    symbol {
                         width: 35px;
 
-                        svg{
+                        svg {
                             fill: red;
                         }
                     }
