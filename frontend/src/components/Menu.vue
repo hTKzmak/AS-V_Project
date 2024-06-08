@@ -4,12 +4,6 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useModalStore } from '@/stores/ModalStore';
 
 export default {
-    setup() {
-        const modalStore = useModalStore()
-        return{
-            modalStore
-        }
-    },
     props: ['showCatalog'],
     data() {
         return {
@@ -18,8 +12,9 @@ export default {
     },
     setup() {
         const bucketStore = useBucketStore()
+        const modalStore = useModalStore()
         return {
-            bucketStore
+            bucketStore, modalStore
         }
     },
     methods: {
@@ -32,30 +27,29 @@ export default {
         activateItemFunc(id) {
             if (this.activeItem !== id) {
                 this.activeItem = id; // Иначе устанавливаем activeItem в значение id
-                  if(id === 2){
+                if (id === 2) {
                     this.modalStore.changeModal('Bucket')
-                  }
+                }
             } else {
                 this.activeItem = null; // Если activeItem уже равен id, устанавливаем его в значение null
             }
         }
-            // console.log(this.showCatalog)
-        },
-        
-        //changeHandle() {
-            // modalStore.isShown = true
-            // modalStore.typeModal.value = 'Bucket'
-            // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
-            // this.modalStore.changeModal('Bucket')
-        // },
-        
-                // <div class="menu-item" @click="changeHandle">
-            // <RouterLink to="/">
-                // <img src="../assets/icons/menu/bag.svg" alt="">
-                // корзина
-            // </RouterLink>
-         // </div>
-    }
+        // console.log(this.showCatalog)
+    },
+
+    //changeHandle() {
+    // modalStore.isShown = true
+    // modalStore.typeModal.value = 'Bucket'
+    // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
+    // this.modalStore.changeModal('Bucket')
+    // },
+
+    // <div class="menu-item" @click="changeHandle">
+    // <RouterLink to="/">
+    // <img src="../assets/icons/menu/bag.svg" alt="">
+    // корзина
+    // </RouterLink>
+    // </div>
 }
 </script>
 
@@ -78,6 +72,7 @@ export default {
                     {{ bucketStore.buckLength }}
                 </div>
             </button>
+        </div>
 
         <!-- избранное -->
         <div id="3" class="menu-item" @click="activateItemFunc(3)">

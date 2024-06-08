@@ -79,7 +79,7 @@ function addToFav() {
     console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
 }
 
-function showAllProducts(id){
+function showAllProducts(id) {
     singleProductStore.findProd(id)
 }
 
@@ -90,17 +90,17 @@ const isInFav = ref(false)
 
 
 onMounted(() => {
-  if(likeStore.likedProducts.find((e) => e.id === props.id) != undefined){
-  console.log(likeStore.likedProducts.find((e) => e.id === props.id) != undefined)
-  isInFav.value = true
-  console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
-}
+    if (likeStore.likedProducts.find((e) => e.id === props.id) != undefined) {
+        console.log(likeStore.likedProducts.find((e) => e.id === props.id) != undefined)
+        isInFav.value = true
+        console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
+    }
 
 })
 
 const productLink = computed(() => ({
-  name: 'product',
-  params: { id: props.id }
+    name: 'product',
+    params: { id: props.id }
 }));
 
 
@@ -155,11 +155,11 @@ const props = defineProps({
         </div>
 
 
-<RouterLink :to="productLink">
-        <h3>{{title}}</h3>
-         <!-- <img class="product-image" :src="BASE_URL + image" alt="img"> -->
-        <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
-</RouterLink>
+        <RouterLink :to="productLink">
+            <h3>{{ title }}</h3>
+            <!-- <img class="product-image" :src="BASE_URL + image" alt="img"> -->
+            <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
+        </RouterLink>
 
 
         <!-- если товар есть в наличии -->
@@ -179,10 +179,13 @@ const props = defineProps({
 
             <div class="price-info">
                 <h4>{{ discount === null ? price : discount }} ₽</h4>
+                
                 <!-- мобильная версия кнопки для покупки  -->
-
-                <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined" :title="discount === null ? price : discount + ' ' + '₽'" img='/cart.svg' addedItemStyle='false' :action="addToBucket"/>
-                <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" :title="discount === null ? price : discount + ' ' + '₽'" img='/inCart.svg' addedItemStyle='true' :action="addToBucket"/>
+                <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined"
+                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'
+                    :action="addToBucket" />
+                <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined"
+                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/inCart.svg' addedItemStyle='true' />
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
@@ -351,6 +354,7 @@ const props = defineProps({
 
                 @media screen and (max-width: 1440px) {
                     display: flex;
+                    flex-direction: row-reverse;
                 }
             }
         }
