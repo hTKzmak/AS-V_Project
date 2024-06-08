@@ -221,6 +221,7 @@ const props = defineProps({
     box-shadow: 0px 4px 8px 0px #0000000D;
     padding: 20px 10px;
     border-radius: 16px;
+    display: grid;
 
     .rating-and-settings {
 

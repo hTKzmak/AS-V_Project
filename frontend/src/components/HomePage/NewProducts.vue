@@ -32,7 +32,20 @@ export default {
 
 <template>
     <div class="container">
-        <RouterLink to="/">Новинки</RouterLink>
+        <RouterLink id="products-link" to="/">Новинки</RouterLink>
         <ProductsList :data="sortedData" />
     </div>
 </template>
+
+<style lang="scss">
+#products-link {
+    font-size: 24px;
+    margin-bottom: 24px;
+    
+    @media screen and (max-width: 768px) {
+        font-size: 16px;
+        margin-top: 24px;
+        margin-bottom: 16px;
+    }
+}
+</style>
