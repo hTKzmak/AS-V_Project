@@ -36,7 +36,7 @@ export default {
     </div>
   </div>
 
-  <div class="info container">
+  <!-- <div class="info container">
     <h1>Новые модели Айфонов по выгодным ценам</h1>
     <ul>
       <p>Для тех, кто хочет приобрести новый телефон магазин Istoreapple.ru предлагает:</p>
@@ -52,7 +52,7 @@ export default {
         2013 года. Вы всегда можете прочитать отзывы о покупке наших клиентов, позвонить в магазин и получить
         консультацию по любой модели Apple.</li>
     </ul>
-  </div>
+  </div> -->
 
 </template>
 
@@ -85,6 +85,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 360px;
+  margin-bottom: 32px;
 
   .banner-title {
     text-align: start;

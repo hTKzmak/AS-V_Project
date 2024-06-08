@@ -1,6 +1,5 @@
 <script setup>
 import { useCounterStore } from '@/stores/AppleStore';
-import { reactive, ref } from 'vue';
 
 const appleStore = useCounterStore();
 
@@ -8,7 +7,7 @@ let BASE_URL = appleStore.BASE_URL
 
 </script>
 
-<template>    
+<template>
     <ul class="searchList">
         <li class="searchItem" v-for="index in appleStore.searchData" :key="index">
             <div class="search-product-info">
@@ -26,14 +25,20 @@ let BASE_URL = appleStore.BASE_URL
 <style lang="scss">
 .searchList {
     position: absolute;
-    padding: 0;
     right: 50%;
     left: 22%;
     top: 50px;
+    
+    padding: 0;
+    
     width: 46vw;
     max-width: 706px;
+    max-height: 480px;
+    
     background-color: #FFF;
     border-radius: 16px;
+    
+    overflow-y: auto;
     z-index: 1;
 
     .searchItem {

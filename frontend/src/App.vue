@@ -5,13 +5,16 @@ import Footer from './components/Footer.vue'
 import Menu from './components/Menu.vue'
 import CatalogTab from './components/CatalogTab.vue'
 import ModalWindow from './components/ModalWindow.vue'
+import { useModalStore } from './stores/ModalStore'
 
 export default {
   components: {
     Header, Footer, CatalogTab, Menu, ModalWindow
   },
   data() {
+    const modalStore = useModalStore()
     return {
+      modalStore,
       // для отображения CatalogTab (это отдельный компонент для мобильной и планшетной версии каталогов)
       showCatalog: false
     }
@@ -26,7 +29,6 @@ export default {
 </script>
 
 <template>
-
   <Header/>
   <ModalWindow/>
 
@@ -37,12 +39,12 @@ export default {
   <CatalogTab :showCatalog="showCatalog" @toggle-catalog="toggleCatalog"/>
   <Menu :showCatalog="showCatalog" @toggle-catalog="toggleCatalog"/>
   <Footer />
-
 </template>
 
 
 <style>
 body{
   position: relative;
+  
 }
 </style>

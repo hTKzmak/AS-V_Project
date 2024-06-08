@@ -11,9 +11,9 @@ export default {
 
 <template>
     <div class="products-list">
-        <div v-for="index of data.slice(0, count)" :key="index">
-            <ProductItem :id="index.id" :title="index.title" :price="index.price" :image="index.image" :rating="index.rating" :discount="index.discount" :is_available="index.is_available"/>
-        </div>
+        <ProductItem v-for="index of data.slice(0, count)" :id="index.id" :title="index.title" :price="index.price"
+            :image="index.image" :rating="index.rating" :discount="index.discount" :is_available="index.is_available"
+            :guarantee="index.guarantee" :count_review="index.count_review" />
     </div>
 </template>
 
