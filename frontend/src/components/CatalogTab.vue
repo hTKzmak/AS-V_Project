@@ -85,14 +85,6 @@ export default {
                 const filteredNumbers = this.choosenCategory.filter((number) => number !== category.id);
                 this.choosenCategory = filteredNumbers
             }
-
-            // новый код:
-            // let data = this.appleStore.data;
-            // for (let i of data) {
-            //     if(i.title.includes(category.title)){
-            //         console.log('yes')
-            //     }
-            // }
         },
 
         // ф-ия для закрытия данного компонента CatalogTab, чтобы она не отображалась
