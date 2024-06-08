@@ -1,3 +1,4 @@
+import EmptyBucket from '@/modals/EmptyBucket.vue';
 import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue';
 
@@ -9,11 +10,14 @@ import { reactive, ref } from 'vue';
 // let BASE_URL = 'https://dummyjson.com/products'
 
 // Новые данные (Бекенд Арсена)
-let BASE_URL = 'http://localhost:1452/api/products/'
+// let BASE_URL = 'http://localhost:1452/api/products/'
+let BASE_URL = 'http://localhost:1452/'
 
 let productsList = reactive([])
+let catalogsList = reactive([])
 
-fetch(BASE_URL)
+// получение всех товаров
+fetch(BASE_URL + 'api/products/')
     .then(res => res.json())
     .then(json => {
         json.map(elem => {
@@ -34,9 +38,23 @@ fetch(BASE_URL)
         })
     })
 
+// получение всех категориев товаров (???)
+for (let i = 0; i <= 7; i++) {
+    fetch(BASE_URL + `api/category/${i}`)
+        .then(res => res.json())
+        .then(json => {
+            for (let i of json) {
+                if(!catalogsList.includes(i.category)){
+                    catalogsList.push(i.category)
+                }
+            }
+        })
+}
+
 export const useCounterStore = defineStore('appleStore', {
     state: () => ({
         data: productsList,
+        catalogData: catalogsList,
         inputValue: '',
         BASE_URL: 'http://localhost:1452/',
         searchData: reactive([])

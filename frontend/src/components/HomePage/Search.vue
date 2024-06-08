@@ -1,6 +1,5 @@
 <script setup>
 import { useCounterStore } from '@/stores/AppleStore';
-import { reactive, ref } from 'vue';
 
 const appleStore = useCounterStore();
 
@@ -38,9 +37,9 @@ let BASE_URL = appleStore.BASE_URL
     
     background-color: #FFF;
     border-radius: 16px;
-    z-index: 1;
-
+    
     overflow-y: auto;
+    z-index: 1;
 
     .searchItem {
         display: flex;
