@@ -6,8 +6,9 @@ import { useCounterStore } from '@/stores/AppleStore';
 import { useCurrentProductStore } from '@/stores/CurrentProductStore';
 import { useLikeStore } from '@/stores/LikeStore';
 import { useBucketStore } from '@/stores/BucketStore';
+import { useSingleProductStore } from '@/stores/SingleProductStore';
 import ButtonElem from './UI/ButtonElem.vue';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { ref } from 'vue';
 // import ButtonElem from './UI/ButtonElem.vue';
 
@@ -27,6 +28,9 @@ const currentProductStore = useCurrentProductStore()
 const likeStore = useLikeStore()
 
 const bucketStore = useBucketStore()
+
+const singleProductStore = useSingleProductStore()
+
 
 // Используется базовый url с бекенда
 let BASE_URL = appleStore.BASE_URL
@@ -75,29 +79,32 @@ function addToFav() {
     console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
 }
 
+function showAllProducts(id){
+    singleProductStore.findProd(id)
+}
 
 // ФУНКЦИОНАЛ ОТОБРАЖЕНИЯ ДОБАВЛЕННОСТИ В ИЗБРАННОЕ/КОРЗИНУ
 
 const isInFav = ref(false)
-onMounted(() => {
 
-    if (likeStore.likedProducts.find((e) => e.id === props.id) != undefined) {
-        console.log(likeStore.likedProducts.find((e) => e.id === props.id) != undefined)
-        isInFav.value = true
-        console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
-    }
-    // else{
-    //     isInFav.value = false
-    // }
+
+
+onMounted(() => {
+  if(likeStore.likedProducts.find((e) => e.id === props.id) != undefined){
+  console.log(likeStore.likedProducts.find((e) => e.id === props.id) != undefined)
+  isInFav.value = true
+  console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
+}
+
 })
 
+const productLink = computed(() => ({
+  name: 'product',
+  params: { id: props.id }
+}));
 
-// props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available']
 
-
-// props: ['id', 'title', 'price', 'image', 'rating', 'discount', 'is_available', 'category', 'guarantee', 'count_review']
-// props: ['id', 'title', 'price', 'image', 'rating', 'discount']
-
+// получаемые пропы для товара
 const props = defineProps({
     id: Number,
     title: String,
@@ -148,9 +155,13 @@ const props = defineProps({
         </div>
 
 
-        <h3>{{ title }}</h3>
-        <!-- <img class="product-image" :src="BASE_URL + image" alt="img"> -->
+<RouterLink :to="productLink">
+        <h3>{{title}}</h3>
+         <!-- <img class="product-image" :src="BASE_URL + image" alt="img"> -->
         <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
+</RouterLink>
+
+
         <!-- если товар есть в наличии -->
 
         <div v-if="is_available" class="product-item-info">
@@ -169,8 +180,9 @@ const props = defineProps({
             <div class="price-info">
                 <h4>{{ discount === null ? price : discount }} ₽</h4>
                 <!-- мобильная версия кнопки для покупки  -->
-                <ButtonElem :title="discount === null ? price : discount + ' ' + '₽'" img='/cart.svg'
-                    addedItemStyle='false' />
+
+                <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined" :title="discount === null ? price : discount + ' ' + '₽'" img='/cart.svg' addedItemStyle='false' :action="addToBucket"/>
+                <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" :title="discount === null ? price : discount + ' ' + '₽'" img='/inCart.svg' addedItemStyle='true' :action="addToBucket"/>
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
@@ -264,6 +276,7 @@ const props = defineProps({
         text-align: center;
         margin-top: 9px;
         margin-bottom: 9px;
+        color: #100E0E;
 
         @media screen and (max-width: 1440px) {
             font-weight: 700;

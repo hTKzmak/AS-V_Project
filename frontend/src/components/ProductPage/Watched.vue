@@ -1,6 +1,7 @@
 <script>
 import ProductItem from '../ProductItem.vue';
 import { useCounterStore } from '@/stores/AppleStore';
+import { useRecentStore } from '@/stores/RecentStore';
 
 export default {
     components: {
@@ -8,8 +9,10 @@ export default {
     },
     setup() {
         const appleStore = useCounterStore()
+
+        const recentStore = useRecentStore()
         return {
-            appleStore,
+            appleStore, recentStore,
             count: 4
         }
     }
@@ -20,14 +23,14 @@ export default {
     <div class="watched container">
         <h2>Вы смотрели</h2>
         <div class="watchedList">
-            <div v-for="index of appleStore.data.slice(0, 4)" :key="index">
-                <ProductItem :id="index.id" :title="index.title" :price="index.price" :image="index.image" :rating="index.rating" :discount="index.discount" :is_available="index.is_available"/>
+            <div v-for="index of recentStore.recentProducts.slice(1, 5)" :key="index">
+                <ProductItem :id="+index.id" :title="index.title" :price="index.price" :image="index.image" :rating="index.rating" :discount="index.discount" :is_available="index.is_available"/>
             </div>
         </div>
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .watched {
     padding-top: 24px;
     padding-bottom: 40px;
