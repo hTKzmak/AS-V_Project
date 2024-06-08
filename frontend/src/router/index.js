@@ -4,6 +4,8 @@ import ProductPage from '../views/ProductPage.vue'
 import ListOfProductsPage from '../views/ListOfProductsPage.vue'
 import ErrorPage from '../views/NotFoundView.vue'
 import LikeView from '@/views/LikeView.vue'
+import RefundPage from '@/views/RefundPage.vue'
+import ContactsPage from '@/views/contactsPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +35,17 @@ const router = createRouter({
       name: 'favourite',
       component: LikeView
     },
+  {
+    path: '/refund',
+    name: 'RefundPage', 
+    component: RefundPage
+  },
+  {
+    path: '/contacts',
+    name: 'contactsPage', 
+    component: ContactsPage
+}
+
   ],
   scrollBehavior() {
     // Всегда прокручивает к началу страницы
