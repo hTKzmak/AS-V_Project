@@ -29,6 +29,12 @@ export default {
             activateCatalog: false,
             // для отображения другого окна с товарами, которые связанны с определённым каталогом (пока для ПК)
             showProducts: false,
+
+            // Все категории, которые есть у товаров
+            catalogsList: ['Смартфоны', 'Планшеты', 'Компьютеры', 'Часы', 'Акссесуары', 'Акции'],
+
+            // отфильтрованные товары для их отображения в каталоге товаров
+            filteredProducts: []
         }
     },
     setup() {
@@ -96,9 +102,28 @@ export default {
         // },
 
         // функция для отображения или прекращения показа окна каталога и прекращение отображения продуктов выбранной категории
-        activateCatalogFunc(){
+        activateCatalogFunc() {
             this.activateCatalog = !this.activateCatalog
             this.showProducts = false
+        },
+
+        // функция по отображению товаров определённой категории
+        showProductsFunc(elem) {
+            // Получение списка всех товаров
+            const data = this.appleStore.data;
+
+            // Фильтрация товаров по категории и вывод в catalogItemsList
+            if (elem !== 'Акции') {
+                const filteredProductsData = data.filter((product) => product.category === elem);
+                this.filteredProducts = filteredProductsData;
+            }
+            else {
+                const filteredProductsData = data.filter((product) => product.discount !== null);
+                this.filteredProducts = filteredProductsData;
+            }
+            this.showProducts = true;
+
+
         }
 
     }
@@ -228,25 +253,27 @@ export default {
                     <div class="catalog">
                         <div v-show="activateCatalog" class="catalogModal">
                             <ul class="catalogToolsList">
-                                <li id="1" @mouseenter="showProducts = true">Смартфоны</li>
-                                <li id="2" @mouseenter="showProducts = true">Планшеты</li>
-                                <li id="3" @mouseenter="showProducts = true">Компьютеры</li>
-                                <li id="4" @mouseenter="showProducts = true">Часы</li>
-                                <li id="5" @mouseenter="showProducts = true">Аксессуары</li>
-                                <li id="6" @mouseenter="showProducts = true">Акции</li>
+                                <li @mouseenter="showProductsFunc(elem)" v-for="elem in catalogsList">{{ elem }}</li>
                             </ul>
+
                             <div v-show="showProducts" class="catalogItemsList">
-                                <div class="catalogItem" v-for="index in 12" :id=index>
-                                    <img src="../assets/img.png">
+                                <div class="catalogItem" v-for="product in filteredProducts.slice(0, 12)"
+                                    :id=product.id>
+
+                                    <img :src="appleStore.BASE_URL + product.image">
+
                                     <div class="title">
-                                        <p>iPhone 14 Pro Max</p>
-                                        <span>от 31 480₽</span>
+                                        <p>{{ product.title }}</p>
+                                        <span>{{ product.discount === null ? 'от' + ' ' + product.price + '₽' : 'от'
+                                            + ' ' + product.discount + '₽' }}</span>
                                     </div>
                                 </div>
-                                <RouterLink to="/ban" @click="activateCatalog = false">
+                                <RouterLink v-show="filteredProducts.length > 0" to="/ban"
+                                    @click="activateCatalog = false">
                                     Смотреть все товары
                                 </RouterLink>
                             </div>
+
                         </div>
                     </div>
 
@@ -258,7 +285,8 @@ export default {
                 <!-- Окно с результатом поиска -->
                 <Search />
 
-                <RouterLink to="/favourite" @click="activateCatalog = false"><img src="../assets/icons/header/heart.svg" alt=""></RouterLink>
+                <RouterLink to="/favourite" @click="activateCatalog = false"><img src="../assets/icons/header/heart.svg"
+                        alt=""></RouterLink>
 
                 <button class="buttonElem basketBtn" @click="changeHandle">
 
@@ -281,8 +309,13 @@ export default {
                     </li>
                 </ul>
 
-                <a href="#!" class="iPhone14_link">
-                </a>
+                <button class="trade-in">
+                    <img id="main" src="../assets/images/iphone.png" alt="#">
+                    <div class="trade-in-main">
+                        Трейд-ин
+                        <img id="arrow" src="../assets/icons/arrow_circle.svg" alt="#">
+                    </div>
+                </button>
             </div>
 
         </div>
@@ -493,8 +526,9 @@ header {
                             gap: 8px;
 
                             // overflow-y: auto;
+                            // overflow-x: hidden;
 
-                            width: 53rem;
+                            // width: 53rem;
                             height: 18rem;
                             margin-left: 16px;
 
@@ -503,8 +537,9 @@ header {
                                 display: flex;
                                 align-items: center;
 
-                                // width: 206px;
+                                width: 206px;
                                 // height: 64px;
+
                                 padding: 8px 16px 8px;
 
                                 background-color: #F9F9F9;
@@ -525,6 +560,12 @@ header {
                                     p,
                                     span {
                                         margin: 0;
+
+                                        text-overflow: clip;
+                                        -webkit-line-clamp: 2;
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        overflow: hidden;
                                     }
 
                                     p {
@@ -547,7 +588,7 @@ header {
                             a {
                                 position: absolute;
                                 bottom: 15px;
-                                width: inherit;
+                                width: max-content;
                             }
                         }
 
@@ -637,14 +678,43 @@ header {
                 }
             }
 
-            .iPhone14_link {
-                background: linear-gradient(90deg, #000000 22.19%, #5E556B 100%);
-                background-image: url('../assets/icons/header/gadgets/banner.png');
-                border-radius: 8px;
-                height: 64px;
-                width: 280px;
+            .trade-in {
+                position: relative;
+
+                border: none;
+
+                background-image: linear-gradient(90deg, #000000 22.19%, #5E556B 100%);
                 background-repeat: no-repeat;
-                background-position: center center;
+                /* Перемещение и изменение размера фонового изображения */
+                background-blend-mode: multiply;
+
+                overflow: hidden;
+
+                width: 280px;
+                height: 64px;
+                border-radius: 8px;
+
+                font-size: 20px;
+                color: #FFFFFF;
+
+                #main {
+                    position: absolute;
+                    width: 45px;
+                    top: 0;
+                    left: 10px;
+                }
+
+                .trade-in-main {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    #arrow {
+                        position: absolute;
+                        right: 16px;
+                    }
+                }
             }
         }
 

@@ -32,7 +32,7 @@ export const useLikeStore = defineStore('like', () => {
 //    }
 
     let likedProductsLength = ref(likedProducts.length)
-    function addFavourite(id, title, price, image, rating, discount, is_available){
+    function addFavourite(id, title, price, image, rating, discount, is_available, count_review){
         let findIndex = likedProducts.findIndex(elem => elem.id === id)
         if (findIndex !== -1){
             
@@ -47,7 +47,7 @@ export const useLikeStore = defineStore('like', () => {
             return(false)
         }else{
             likedProducts.push({id: id, title: title, price: price,
-                image: image, rating: rating, discount: discount, is_available: is_available})
+                image: image, rating: rating, discount: discount, is_available: is_available, count_review: count_review})
                 localStorage.likedProducts = JSON.stringify(likedProducts)
                 console.log(likedProducts)
                 likedProductsLength.value++

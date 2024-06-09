@@ -39,6 +39,7 @@ import { RouterLink } from 'vue-router'
     background-color: #D0EAFC;
     padding-top: 50px;
     padding-bottom: 50px;
+    overflow: hidden;
 
     .slider-container {
         display: flex;
