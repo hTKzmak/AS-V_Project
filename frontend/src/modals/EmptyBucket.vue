@@ -19,7 +19,7 @@ const appleStore = useCounterStore()
         <p class="check_last">Кстати, вы это смотрели</p>
         <div class="last">
         
-            <div v-for="(item, index) in recentStore.recentProducts.slice(1,5)" :key="index">
+            <div v-for="(item, index) in recentStore.recentProducts.slice(0,5)" :key="index">
                 <SeenProd :id="+item.id" :title="item.title" :image="appleStore.BASE_URL+item.image"/>
             </div>
         </div>

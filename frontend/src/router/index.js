@@ -5,6 +5,7 @@ import ListOfProductsPage from '../views/ListOfProductsPage.vue'
 import ErrorPage from '../views/NotFoundView.vue'
 import LikeView from '@/views/LikeView.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -39,5 +40,6 @@ const router = createRouter({
     return { top: 0 };
   }
 })
+
 
 export default router

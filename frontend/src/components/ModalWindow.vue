@@ -129,6 +129,9 @@ import NoProuct from '@/modals/NoProuct.vue'
             max-height: 90%;
             margin-left: -200px;
             overflow: scroll;
+            // top: auto;
+            // bottom: 75px;
+            // border-radius: 16px 16px 0px 0px;
         }
     }
     .night{
