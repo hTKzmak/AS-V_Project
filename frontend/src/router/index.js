@@ -7,6 +7,7 @@ import LikeView from '@/views/LikeView.vue'
 import RefundPage from '@/views/RefundPage.vue'
 import ContactsPage from '@/views/contactsPage.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -52,5 +53,6 @@ const router = createRouter({
     return { top: 0 };
   }
 })
+
 
 export default router

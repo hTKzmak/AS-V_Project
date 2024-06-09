@@ -32,10 +32,13 @@ const bucketStore = useBucketStore()
                     <img class="prod_img" :src="item.image">
                     <div class="text-field">
                         <p>{{item.title}}</p>
-                        <div style="display: flex; gap: 10px;"><p style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
-                            <button @click="bucketStore.countDown(item.id)" class="change-count">-</button>
-                            <p style="color: #0071E4;">{{item.count}}</p>
-                            <button @click="bucketStore.countUp(item.id)" class="change-count">+</button>
+                        <div style="display: flex; gap: 10px;"><p v-if="item.oldPrice" style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
+                            <div class="counter-field">
+                                <button @click="bucketStore.countDown(item.id)" class="change-count">-</button>
+                                <p style="color: #0071E4;">{{item.count}}</p>
+                                <button @click="bucketStore.countUp(item.id)" class="change-count">+</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -49,22 +52,28 @@ const bucketStore = useBucketStore()
                     </div>
                     <div class="info_field">
                         <h3>Выберите способ оплаты</h3>
-                        <select>
+                        <select class="payment-select">
                             <option>Наличными</option>
                         </select>
                     </div>
                     <div class="info_field">
                         <h3>Выберите способ доставки</h3>
-                        <div style="display: flex;">
-                        <div>
-                            <input type="radio" id="delivery" name="delivery" checked />
-                            <label for="delivery">Доставка</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="self" name="self" />
-                            <label for="self">Самовывоз</label>
-                        </div>
-                        </div>
+
+
+
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="debt" value="yes">
+                                <p class="radio-answer">Самовывоз</p>
+                            </label>
+                            <label>
+                                <input type="radio" name="debt" value="no" checked>
+                                <p class="radio-answer">Доставка</p>
+                            </label>
+                            </div>
+
+
+
                     </div>
                     <div class="info_field">
                         <h3>Введите телефон</h3>
@@ -77,7 +86,7 @@ const bucketStore = useBucketStore()
                     <input @click="changeHandle()" value="оформить заказ" type="submit" class="buttonElem">
                 </form>
                 <div class="last-info">
-                    <p>либо позвоните или напишите нам</p>
+                    <p class="recall">либо позвоните или напишите нам</p>
                     <h2>+7 (812) 704-86-97</h2>
                     <div  class="social-media">
                         <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
@@ -91,6 +100,131 @@ const bucketStore = useBucketStore()
 </template>
 
 <style scoped lang="scss">
+// Исправляю селекторы и инпуты
+.payment-select-wrapper {
+            max-width: 300px;
+            margin: 20px;
+        }
+
+        .payment-select-wrapper label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .payment-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fafafa;
+            -webkit-appearance: none;  /* Remove default arrow in Webkit browsers */
+            -moz-appearance: none; /* Remove default arrow in Firefox */
+            appearance: none; /* Remove default arrow in modern browsers */
+            background-image: url('../assets/icons/modals/arrow.svg');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 24px 24px;
+        }
+
+        .payment-select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .radio-answer{
+    font-weight: 400;
+    font-size: 16px;
+}
+.radio-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.radio-container p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 8px;
+    accent-color: blue; /* Modern way to style radio button in many browsers */
+}
+
+/* Optional: Custom styling for radio buttons for better cross-browser support */
+.radio-group input[type="radio"] {
+    appearance: none;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: blue;
+}
+// 
+
+
+
+    .counter-field{
+        position: absolute;
+        right: 20px;
+        bottom: 5px;
+        align-self: flex-end;
+        display: flex;
+        align-items: center;
+        background-color: #FAFAFA;
+        gap: 10px;
+        padding: 5px;
+        border-radius: 8px;
+        p{
+            background-color: #FFF;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 22px;
+            height: 24px;
+            text-align: center;
+            padding: 5px
+        }
+    }
+    .recall{
+        font-size: 16px;
+        text-align: center
+    }
+    h2{
+        font-size: 24px;
+    }
     h3{
         font-weight: 700;
     }
@@ -147,7 +281,7 @@ const bucketStore = useBucketStore()
     .text_input{
         width: 226px;
         height: 19px;
-        padding: 20px;
+        padding: 15px;
         border: 1px solid #DBDBDB;
         border-radius: 8px;
     }
@@ -171,6 +305,9 @@ const bucketStore = useBucketStore()
         position: relative;
         align-items: center;
         justify-content: start;
+        box-shadow: 0px 4px 8px 0px #0000000D;
+        border-radius: 8px;
+        padding: 5px;
         p{
             font-size: 16px;
         }
@@ -206,12 +343,16 @@ display: none;
     }
     .bucket_contain{
         display: flex;
+        gap: 10px;
         @media screen and (max-width: 768px) {
             display: flex;
             flex-direction: column;
         }
     }
     .bucket{
+        @media screen and (max-width: 768px) {
+            max-height: 360px;
+        }
 
     }
     form{
@@ -229,6 +370,7 @@ display: none;
         align-items: flex-start;
         // overflow-y: scroll;
         overflow-y: auto;
+        gap: 20px;
         @media screen and (max-width: 768px) {
             max-height: 100%;
             width: 100%;

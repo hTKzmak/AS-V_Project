@@ -181,6 +181,7 @@ const props = defineProps({
                 <h4>{{ discount === null ? price : discount }} ₽</h4>
                 
                 <!-- мобильная версия кнопки для покупки  -->
+
                 <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined"
                     :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'
                     :action="addToBucket" />
@@ -193,6 +194,7 @@ const props = defineProps({
             </div>
 
             <!-- ПК версия кнопки для покупки  -->
+
             <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined" title="в корзину"
                 img='/cart.svg' addedItemStyle='false' :action="addToBucket" />
             <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" title="в корзине"
