@@ -71,10 +71,82 @@ export default {
                 </div>
             </div>
         </div>
+
+        <div class="credit-footer">
+            <div class="conditions">
+                <h3>Условия для получения кредита</h3>
+                <ul>
+                    <li>
+                        <div class="elipse">
+                            <div class="second-elipse"></div>
+                        </div>
+                        Возраст - от 18 до 69 лет
+                    </li>
+                    <li>
+                        <div class="elipse">
+                            <div class="second-elipse"></div>
+                        </div>
+                        Наличие постоянного источника дохода (работа, пенсия)
+                    </li>
+                    <li>
+                        <div class="elipse">
+                            <div class="second-elipse"></div>
+                        </div>
+                        Наличие паспорта гражданина РФ
+                    </li>
+                </ul>
+            </div>
+            <div class="window">
+                <div class="title">
+                    <h3>Не откладывайте покупки на потом</h3>
+                    <p>Купить желаемую технику в кредит на самых выгодных условиях</p>
+                    <ButtonElem title="заполнить заявку" addedItemStyle='false' />
+                </div>
+                <img src="../assets/images/credit/iphone.png" alt="#">
+            </div>
+        </div>
     </div>
 </template>
 
 <style lang="scss">
+@mixin titleStyle {
+    font-size: 32px;
+    color: #0071E4;
+    font-weight: 700;
+
+    @media screen and (max-width: 768px) {
+        font-size: 20px;
+        text-align: start;
+    }
+}
+
+.elipse {
+    padding: 16px;
+    background-color: #FFF;
+    border-radius: 100px;
+    border: 2px solid #0071E4;
+
+    position: relative;
+
+    .second-elipse {
+        padding: 10px;
+        background-color: #FFF;
+        border-radius: 100px;
+        border: 2px solid #0071E4;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+
+        @media screen and (max-width: 768px) {
+            padding: 7px;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: 13px;
+    }
+}
+
 .credit-banner {
     background: linear-gradient(269.84deg, #0071E4 0.08%, #7EBEFF 99.92%);
     color: #F9F9F9;
@@ -336,15 +408,8 @@ export default {
 .credit-ways {
 
     h3 {
-        font-size: 32px;
-        color: #0071E4;
-        font-weight: 700;
+        @include titleStyle;
         text-align: center;
-
-        @media screen and (max-width: 768px) {
-            font-size: 20px;
-            text-align: start;
-        }
     }
 
     .credit-list {
@@ -424,5 +489,113 @@ export default {
 
     }
 
+}
+
+.credit-footer {
+    margin-top: 88px;
+
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+
+    .conditions {
+        h3 {
+            @include titleStyle;
+            text-align: left;
+            margin-top: 0;
+
+            @media screen and (max-width: 1440px) {
+                font-size: 32px;
+                text-align: center;
+            }
+
+            @media screen and (max-width: 768px) {
+                font-size: 20px;
+                text-align: start;
+            }
+        }
+
+        ul {
+            display: grid;
+            gap: 12px;
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 20px;
+                text-align: start;
+            }
+        }
+    }
+
+    .window {
+        background-color: #F3F8FF;
+        padding: 32px;
+        overflow: hidden;
+
+        height: 258px;
+
+        display: flex;
+        gap: 80px;
+        align-items: center;
+        justify-content: space-between;
+
+        .title {
+            width: 288px;
+
+            span, h3 {
+                font-size: 32px;
+                font-weight: 600;
+                line-height: 37.5px;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 20px;
+                    line-height: 23.44px;
+                }
+            }
+
+            button {
+                width: 100%;
+                border-radius: 8px;
+                font-size: 16px;
+                padding: 18px;
+            }
+
+            @media screen and (max-width: 768px) {
+                width: 250px;
+            }
+        }
+
+        img {
+            margin-top: 17rem;
+
+            @media screen and (max-width: 768px) {
+                margin-top: -4rem;
+            }
+        }
+
+        @media screen and (max-width: 1440px) {
+            margin-top: 93px;
+        }
+
+        @media screen and (max-width: 768px) {
+            margin-top: 26px;
+            height: 294px;
+            flex-direction: column;
+
+            border-radius: 16px;
+        }
+    }
+
+    @media screen and (max-width: 1440px) {
+        align-items: unset;
+        flex-direction: column;
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 </style>
