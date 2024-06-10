@@ -139,14 +139,30 @@ export default {
         <div v-show="showMenu" class="menuModal container">
             <a href="#!" class="recall">Вам перезвонить?</a>
             <ul>
-                <li><a href="#!">Весь каталог</a></li>
-                <li><a href="#!" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</a></li>
-                <li><a href="#!">Гарантия</a></li>
-                <li><a href="#!">Политика возрата</a></li>
-                <li><a href="#!">Кредит</a></li>
-                <li><a href="#!">Доставка и оплата</a></li>
-                <li><a href="#!">Отзывы</a></li>
-                <li><a href="#!">Контакты</a></li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban">Весь каталог</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban">Гарантия</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban">Политика возрата</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/credit">Кредит</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban">Доставка и оплата</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban">Отзывы</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban">Контакты</RouterLink>
+                </li>
                 <div class="social-media">
                     <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
                     <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
@@ -226,14 +242,31 @@ export default {
                     <img src='../assets/logo.svg' alt="logo">
                 </RouterLink>
                 <ul>
-                    <li><a href="#!">Весь каталог</a></li>
-                    <li><a href="#!" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</a></li>
-                    <li><a href="#!">Гарантия</a></li>
-                    <li><a href="#!">Политика возрата</a></li>
-                    <li><a href="#!">Кредит</a></li>
-                    <li><a href="#!">Доставка и оплата</a></li>
-                    <li><a href="#!">Отзывы</a></li>
-                    <li><a href="#!">Контакты</a></li>
+                    <li>
+                        <RouterLink to="/ban">Весь каталог</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/ban" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции
+                        </RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/ban">Гарантия</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/ban">Политика возрата</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/credit">Кредит</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/ban">Доставка и оплата</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/ban">Отзывы</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/ban">Контакты</RouterLink>
+                    </li>
                 </ul>
                 <div class="phone">
                     <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812
