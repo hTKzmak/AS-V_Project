@@ -1,13 +1,15 @@
 
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+// import { useRecentStore } from './RecentStore'
+
+
 
 
 
 export const useSingleProductStore = defineStore('singleProduct', () => {
   // Для карточек в модалках
 
- 
 
   
 
@@ -63,7 +65,7 @@ export const useSingleProductStore = defineStore('singleProduct', () => {
 
       neededProd.value = json
       
-      
+      // recentStore.addToRecent(id.value, name.value, price.value, images.value[0], rating.value, discount_price.value, is_available.value)
       
       console.log(neededProd.value.category)
       console.log(characteristics.value)
