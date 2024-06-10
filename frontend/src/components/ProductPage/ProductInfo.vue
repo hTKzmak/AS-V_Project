@@ -336,6 +336,10 @@ export default {
 
                 margin-top: 50px;
 
+                h2{
+                    margin-left: 0;
+                }
+
                 nav>ul {
 
                     display: flex;
