@@ -596,6 +596,7 @@ export default {
     @media screen and (max-width: 768px) {
         flex-direction: column;
         text-align: center;
+        margin-top: 24px;
     }
 }
 </style>
