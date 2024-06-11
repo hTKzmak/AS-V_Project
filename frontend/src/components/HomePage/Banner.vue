@@ -117,6 +117,7 @@ export default {
           width: 100%;
           border-radius: 8px;
           font-size: 16px;
+          height: 40px;
         }
       }
 
@@ -125,7 +126,7 @@ export default {
       }
 
       @media screen and (max-width: 768px) {
-        margin: 15px 0 15px 24px;
+        margin: 17px 0 15px 14px;
       }
     }
 

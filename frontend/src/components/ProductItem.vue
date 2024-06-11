@@ -157,7 +157,6 @@ const props = defineProps({
 
         <RouterLink :to="productLink">
             <h3>{{ title }}</h3>
-            <!-- <img class="product-image" :src="BASE_URL + image" alt="img"> -->
             <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
         </RouterLink>
 
@@ -178,15 +177,20 @@ const props = defineProps({
             </div>
 
             <div class="price-info">
-                <h4>{{ discount === null ? price : discount }} ₽</h4>
-                
+                <!-- для отображения и скрытия скидки для пк версии -->
+                <h4 id="discount-desktop">{{ discount === null ? null : discount + ' ' + '₽' }}</h4>
+                <!-- для отображения и скрытия скидки для мобильной и планшетной версии -->
+                <h4 id="discount-adaptive" v-show="discount !== null">{{ discount + ' ' + '₽' }}</h4>
+
+
                 <!-- мобильная версия кнопки для покупки  -->
 
                 <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined"
-                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'
-                    :action="addToBucket" />
+                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/cart.svg'
+                    addedItemStyle='false' :action="addToBucket" />
                 <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined"
-                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/inCart.svg' addedItemStyle='true' />
+                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/inCart.svg'
+                    addedItemStyle='true' />
 
                 <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
                 <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
@@ -239,6 +243,7 @@ const props = defineProps({
     padding: 20px 10px;
     border-radius: 16px;
     display: grid;
+    justify-content: center;
 
     .rating-and-settings {
 
@@ -326,11 +331,29 @@ const props = defineProps({
             align-items: center;
             margin-bottom: 16px;
 
-            h4 {
+            #discount-desktop,
+            #discount-adaptive {
                 text-decoration: line-through;
                 font-size: 20px;
                 color: #878787;
                 margin: 0;
+            }
+
+            #discount-desktop {
+                display: flex;
+
+                @media screen and (max-width: 1440px) {
+                    display: none;
+                }
+            }
+
+            #discount-adaptive {
+                display: none;
+                
+                @media screen and (max-width: 1440px) {
+                    display: flex;
+                    width: 80%;
+                }
             }
 
             h3 {
@@ -342,21 +365,13 @@ const props = defineProps({
                 }
             }
 
-            // .buttonCart,
-            // .buttonCartAdded {
-            //     display: none;
-
-            //     @media screen and (max-width: 1440px) {
-            //         display: flex;
-            //     }
-            // }
-
             button {
                 display: none;
 
                 @media screen and (max-width: 1440px) {
                     display: flex;
                     flex-direction: row-reverse;
+                    width: 100%;
                 }
             }
         }
@@ -373,16 +388,6 @@ const props = defineProps({
             }
 
         }
-
-        // .buttonCart,
-        // .buttonCartAdded {
-        //     padding: 20px;
-        //     border-radius: 8px;
-
-        //     @media screen and (max-width: 1440px) {
-        //         display: none;
-        //     }
-        // }
 
         button {
             padding: 16px;

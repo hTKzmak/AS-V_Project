@@ -43,7 +43,7 @@ import { RouterLink } from 'vue-router'
                         <RouterLink to="/">Доставка и оплата</RouterLink>
                     </li>
                     <li>
-                        <RouterLink to="/">Отзывы</RouterLink>
+                        <RouterLink to="/review">Отзывы</RouterLink>
                     </li>
                     <li>
                         <RouterLink to="/contacts">Контакты</RouterLink>

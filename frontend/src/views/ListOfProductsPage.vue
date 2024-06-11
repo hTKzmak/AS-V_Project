@@ -57,7 +57,8 @@ export default {
         <Filter :showFilter="showFilter" @toggle-filter="toggleFilter"></Filter>
 
         <div :class="[showFilter ? 'blur' : 'blur-none']">
-            <ProductsList :count="count" :data="appleStore.data" />
+            <!-- <ProductsList :count="count" :data="appleStore.data" /> -->
+            <ProductsList :data="appleStore.data" />
         </div>
     </div>
 

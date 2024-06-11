@@ -99,4 +99,24 @@ body {
     input[type="number"] {
         -moz-appearance: textfield;
     }
+
+    // Arrow
+    .arrow {
+        border: solid #706e6e;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 5px;
+    }
+
+    .up {
+        border-color: #0071e4;
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .down {
+        border-color: #0071e4;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
 }

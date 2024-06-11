@@ -158,7 +158,7 @@ export default {
                     <RouterLink to="/ban">Доставка и оплата</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/ban">Отзывы</RouterLink>
+                    <RouterLink to="/review">Отзывы</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
                     <RouterLink to="/contacts">Контакты</RouterLink>
@@ -181,7 +181,7 @@ export default {
 
                 <div v-show="showSearch" class="input-search">
                     <img src="../assets/icons/header/search_active.svg"><input type="text" class="search"
-                        placeholder="Поиск по каталогу товаров" @input="appleStore.searchFunc($event.target.value)">
+                        placeholder="Введите запрос" @input="appleStore.searchFunc($event.target.value)">
                 </div>
             </div>
 
@@ -262,7 +262,7 @@ export default {
                         <RouterLink to="/ban">Доставка и оплата</RouterLink>
                     </li>
                     <li>
-                        <RouterLink to="/ban">Отзывы</RouterLink>
+                        <RouterLink to="/review">Отзывы</RouterLink>
                     </li>
                     <li>
                         <RouterLink to="/contacts">Контакты</RouterLink>
@@ -383,7 +383,7 @@ header {
                 margin-left: 18px;
 
                 input {
-                    width: 200px;
+                    width: 100%;
                     border: none;
                     outline: none;
                     font-size: 16px;
