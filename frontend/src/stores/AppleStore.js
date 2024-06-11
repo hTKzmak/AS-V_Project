@@ -81,7 +81,7 @@ export const useCounterStore = defineStore('appleStore', {
                 this.searchData = []
             }
 
-            console.log(filteredProducts)
+            console.log(value)
         }
     }
 })

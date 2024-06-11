@@ -149,7 +149,7 @@ export default {
                     <RouterLink to="/ban">Гарантия</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/ban">Политика возрата</RouterLink>
+                    <RouterLink to="/refund">Политика возрата</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
                     <RouterLink to="/credit">Кредит</RouterLink>
@@ -161,7 +161,7 @@ export default {
                     <RouterLink to="/ban">Отзывы</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/ban">Контакты</RouterLink>
+                    <RouterLink to="/contacts">Контакты</RouterLink>
                 </li>
                 <div class="social-media">
                     <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
@@ -181,7 +181,7 @@ export default {
 
                 <div v-show="showSearch" class="input-search">
                     <img src="../assets/icons/header/search_active.svg"><input type="text" class="search"
-                        placeholder="Поиск по каталогу товаров" @keydown="appleStore.searchFunc($event.target.value)">
+                        placeholder="Поиск по каталогу товаров" @input="appleStore.searchFunc($event.target.value)">
                 </div>
             </div>
 
@@ -213,7 +213,7 @@ export default {
                     <img v-if="showSearch == true" src="../assets/icons/header/search_active.svg">
                     <img v-else src="../assets/icons/header/search.svg">
                     <input type="text" class="search" placeholder="Поиск по каталогу товаров"
-                        @keydown="appleStore.searchFunc($event.target.value)" @click="openSearchTablet()">
+                        @input="appleStore.searchFunc($event.target.value)" @click="openSearchTablet()">
                 </div>
                 <button class="buttonIcons" @click="showSearchFunc()">
                     <img v-if="showButtons == false" src="../assets/icons/header/close.svg">
@@ -253,7 +253,7 @@ export default {
                         <RouterLink to="/ban">Гарантия</RouterLink>
                     </li>
                     <li>
-                        <RouterLink to="/ban">Политика возрата</RouterLink>
+                        <RouterLink to="/refund">Политика возрата</RouterLink>
                     </li>
                     <li>
                         <RouterLink to="/credit">Кредит</RouterLink>
@@ -265,7 +265,7 @@ export default {
                         <RouterLink to="/ban">Отзывы</RouterLink>
                     </li>
                     <li>
-                        <RouterLink to="/ban">Контакты</RouterLink>
+                        <RouterLink to="/contacts">Контакты</RouterLink>
                     </li>
                 </ul>
                 <div class="phone">
@@ -313,7 +313,7 @@ export default {
                 </div>
 
                 <input type="text" placeholder="Поиск по каталогу товаров"
-                    @keydown="appleStore.searchFunc($event.target.value)">
+                    @input="appleStore.searchFunc($event.target.value)">
 
                 <!-- Окно с результатом поиска -->
                 <Search />

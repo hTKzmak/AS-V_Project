@@ -1,4 +1,5 @@
 <script>
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -29,13 +30,27 @@
 
             <div class="footer-navigation">
                 <ul>
-                    <li><a href="#!">Гарантия</a></li>
-                    <li><a href="#!">Политика возрата</a></li>
-                    <li><a href="#!">Кредит</a></li>
-                    <li><a href="#!">Доставка и оплата</a></li>
-                    <li><a href="#!">Отзывы</a></li>
-                    <li><a href="#!">Контакты</a></li>
-                    <li><a href="#!">Политика конфеденциальности</a></li>
+                    <li>
+                        <RouterLink to="/">Гарантия</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/refund">Политика возрата</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/credit">Кредит</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/">Доставка и оплата</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/">Отзывы</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/contacts">Контакты</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/">Политика конфеденциальности</RouterLink>
+                    </li>
                 </ul>
                 <ul>
                     <li><a href="#!">iPhone</a></li>
@@ -221,6 +236,7 @@ footer {
                     @media screen and (min-width: 769px) and (max-width: 1440px) {
                         font-size: 32px;
                     }
+
                     @media screen and (max-width: 769px) {
                         font-size: 24px;
                     }
