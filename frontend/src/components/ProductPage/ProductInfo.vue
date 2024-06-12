@@ -152,7 +152,7 @@ export default {
 
                     <div class="productData-order">
                         <div class="product-info">
-                            <h4>{{ singleProductStore.discount_price + ' ' + '₽' }}</h4>
+                            <h4>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' : null}}</h4>
                             <div class="existence">
                                 <div class="existence-sign"></div>
                                 <p>Есть в наличии</p>
