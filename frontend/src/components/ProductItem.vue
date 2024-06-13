@@ -138,19 +138,6 @@ const props = defineProps({
                 <button @click="addToFav">
                     <img :class="isInFav == true ? 'blue-heart' : 'standart'" src="../assets/icons/header/heart.svg">
                 </button>
-
-
-                <!-- <button @click="addToFav">
-                    <img :class="likeStore.likedProducts.find((e) => e.id === props.id) == undefined ? 'standart' : 'pink'"  src="../assets/icons/header/heart.svg">
-                </button> -->
-
-
-                <!-- <button v-if="likeStore.likedProducts.find((e) => e.id === props.id) == undefined" @click="addToFav">
-                    <img class=""  src="../assets/icons/header/heart.svg">
-                </button>
-                <button v-if="likeStore.likedProducts.find((e) => e.id === props.id) != undefined" @click="addToFav">
-                    <img class="pink"  src="../assets/icons/header/heart.svg">
-                </button> -->
             </div>
         </div>
 
@@ -192,8 +179,6 @@ const props = defineProps({
                     :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/inCart.svg'
                     addedItemStyle='true' />
 
-                <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
-                <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
                 <h3>{{ discount === null ? price : discount }} ₽</h3>
             </div>
 
@@ -204,8 +189,6 @@ const props = defineProps({
             <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" title="в корзине"
                 img='/inCart.svg' addedItemStyle='true' />
 
-            <!-- ПК версия кнопки для показа, что товар положен в корзину  -->
-            <!-- <button class="buttonElem buttonCartAdded"><img src="../assets/icons/cart-added.svg">в корзине</button> -->
 
             <div class="other">
                 <a href="#!" @click="changeHandle">Хочу дешевле</a>

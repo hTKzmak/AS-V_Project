@@ -12,7 +12,7 @@ export default {
 <template>
     <div class="slider-content">
         <!-- margin-bottom: -135px; -->
-        <img :src="img" :style="{marginBottom: img.includes('mbp') ? '0' : '-75px'}">
+        <img :src="img" :style="{marginBottom: img.includes('mbp') ? '35px' : '-75px'}">
         <div class="title">
 
             <h1 v-if="title === 'iphone 14'">iPh<div class="oval"></div>ne 14</h1>

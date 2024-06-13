@@ -1,5 +1,8 @@
 <script>
+import RecSlider from '../components/ReviewPage/RecSlider.vue'
+
 export default {
+    components: { RecSlider },
     data() {
         return {
             reviewData: [
@@ -67,6 +70,7 @@ export default {
                         <p>Всем это понравилось. <br> Присмотритесь и вы</p>
                     </div>
                 </div>
+                <RecSlider />
             </div>
 
         </div>
@@ -197,6 +201,7 @@ export default {
     display: flex;
     align-items: center;
     gap: 2px;
+    font-size: 20px;
 
     .checked {
         color: #FFAD31;
@@ -254,32 +259,43 @@ export default {
 
 .recomendationWindow {
     position: absolute;
-    background-color: red;
+    background-color: #F3F8FF;
     border-radius: 32px;
     top: 100px;
     right: 0;
     padding: 24px;
 
-    .rec-head{
+    width: 394px;
+
+    .rec-head {
         display: flex;
         align-items: start;
-        justify-content: space-between;
+        justify-content: start;
         gap: 16px;
+        margin-bottom: 16px;
 
-        .title{
+        .title {
             display: grid;
             text-align: start;
             gap: 8px;
 
-            #rec-title{
+            #rec-title {
                 font-size: 24px;
                 font-weight: 600;
             }
 
-            p{
+            p {
                 margin: 0;
             }
         }
+    }
+
+    @media screen and (max-width: 1440px) {
+        position: initial;
+        top: 0;
+        right: 0;
+
+        width: inherit;
     }
 }
 </style>
