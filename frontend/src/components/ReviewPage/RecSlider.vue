@@ -61,6 +61,8 @@ export default {
                 <span id="name">{{ item.title }}</span>
                 <div class="img" :style="{ backgroundImage: `url('${BASE_URL + item.image}')` }">></div>
                 <span id="price">{{ item.price }} ₽</span>
+
+                <RouterLink id="productLink" :to="{ path: '/product/' + item.id }">подробнее</RouterLink>
             </div>
         </Slide>
 
@@ -112,6 +114,16 @@ export default {
         background-repeat: no-repeat;
         background-position: center center;
         background-size: contain;
+    }
+
+    #productLink {
+        padding: 18px;
+        font-size: 16px;
+        color: #FFF;
+        border-radius: 8px;
+        background-color: #0071E4;
+
+        height: 56px;
     }
 
     @media screen and (max-width: 1440px) {
