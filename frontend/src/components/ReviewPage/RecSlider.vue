@@ -5,12 +5,14 @@ import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import { useCounterStore } from '@/stores/AppleStore';
 import { useBucketStore } from '@/stores/BucketStore';
 import ButtonElem from '../UI/ButtonElem.vue';
+import { ref, watchEffect } from 'vue';
 
 export default {
     name: 'App',
     props: {
         data: Array,
-        changeSlider: Function
+        changeSlider: Function,
+        sortedData: Array,
     },
     components: {
         Carousel,
@@ -21,14 +23,20 @@ export default {
     setup() {
         const appleStore = useCounterStore();
         const bucketStore = useBucketStore();
+        const sortedData = ref([]);
+
+        watchEffect(() => {
+            sortedData.value = appleStore.data.filter((elem) => elem.rating > 4.3 && elem.count_review > 80)
+        })
+
         return {
             appleStore,
-            bucketStore
+            bucketStore,
+            sortedData
         }
     },
     data() {
         return {
-            data: this.appleStore.data.sort((elem) => elem.rating >= 4.5 && elem.count_review >= 100),
             BASE_URL: this.appleStore.BASE_URL
         }
     },
@@ -42,7 +50,7 @@ export default {
 
 <template>
     <Carousel :items-to-show="1" :wrap-around="true">
-        <Slide v-for="item in data.slice(0, 3)" :key="item.slide" :id="item.slide" @click="changeSlider">
+        <Slide v-for="item of sortedData.slice(0, 3)" :key="item.slide" :id="item.slide" @click="changeSlider">
             <div class="item">
 
                 <div class="review">
@@ -77,7 +85,7 @@ export default {
     justify-content: center;
     text-align: center;
 
-    .review{
+    .review {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -85,12 +93,12 @@ export default {
         margin-bottom: 10px;
     }
 
-    #name{
+    #name {
         font-size: 20px;
         font-weight: 400;
     }
 
-    #price{
+    #price {
         font-size: 32px;
         font-weight: 500;
     }
@@ -100,7 +108,7 @@ export default {
         height: 160px;
 
         margin: 16px auto;
-        
+
         background-repeat: no-repeat;
         background-position: center center;
         background-size: contain;
@@ -113,7 +121,7 @@ export default {
 
 .recomendationWindow {
 
-    .carousel__viewport{
+    .carousel__viewport {
         overflow-x: auto;
         padding-bottom: 24px;
     }

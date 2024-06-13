@@ -282,11 +282,27 @@ export default {
             #rec-title {
                 font-size: 24px;
                 font-weight: 600;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 20px;
+                }
             }
 
             p {
                 margin: 0;
             }
+
+        }
+
+        img {
+            @media screen and (max-width: 768px) {
+                width: 32px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            gap: 5px;
+            justify-content: start;
         }
     }
 
