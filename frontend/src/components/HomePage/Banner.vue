@@ -34,7 +34,8 @@ export default {
       <div class="banner-title">
         <h1>iPhone 14 Pro Max</h1>
         <p>по лучшей цене в Москве</p>
-        <ButtonElem title="подробнее" addedItemStyle="false" />
+        <!-- <ButtonElem title="подробнее" addedItemStyle="false" /> -->
+        <RouterLink to="/product/61">подробнее</RouterLink>
       </div>
     </div>
   </div>
@@ -108,10 +109,21 @@ export default {
         }
       }
 
-      button {
-        padding: 18px 40px;
+      a {
+        background-color: #0071E4;
+        color: #FFF;
+
+        display: ruby-text;
+        
         font-size: 16px;
+        font-family: "SF Pro Display Medium", sans-serif;
+        
+        border: none;
         border-radius: 8px;
+
+        cursor: pointer;
+
+        padding: 18px 40px;
 
         @media screen and (max-width: 768px) {
           width: 100%;

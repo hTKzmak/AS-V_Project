@@ -256,6 +256,10 @@ const props = defineProps({
             align-items: center;
             gap: 2px;
 
+            .fa{
+                font-size: 20px;
+            }
+
             .checked {
                 color: #FFAD31;
             }

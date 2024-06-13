@@ -4,11 +4,11 @@ import NewProducts from '../components/HomePage/NewProducts.vue'
 import Banner from '../components/HomePage/Banner.vue'
 import DiscountForm from '../components/HomePage/DiscountForm.vue'
 import Benefits from '../components/HomePage/Benefits.vue'
-import Slider from '../components/HomePage/Slider.vue'
+import SliderMain from '../components/HomePage/SliderCustom/SliderMain.vue'
 
 export default {
   components: {
-    Slider,
+    SliderMain,
     PopularProducts,
     Banner,
     NewProducts,
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-  <Slider/>
+  <SliderMain />
   <h1>купить iPhone в Москве</h1>
   <PopularProducts />
   <Banner />
