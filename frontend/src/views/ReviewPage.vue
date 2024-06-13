@@ -60,7 +60,7 @@ export default {
                 </div>
             </div>
 
-            тут пагинация :P
+            <div class="pag">тут пагинация :P</div>
 
             <div class="recomendationWindow">
                 <div class="rec-head">
@@ -83,6 +83,12 @@ export default {
     margin-top: 32px;
 
     position: relative;
+
+    .pag{
+        @media screen and (max-width: 1440px) {
+            text-align: center;
+        }
+    }
 
     .title {
 
@@ -310,6 +316,8 @@ export default {
         position: initial;
         top: 0;
         right: 0;
+
+        margin-top: 24px;
 
         width: inherit;
     }
