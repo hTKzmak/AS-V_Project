@@ -39,6 +39,7 @@ let ratingCount = Math.round(props.rating)
 
     a {
         margin-left: 8px;
+        font-size: 16px;
     }
 }
 </style>

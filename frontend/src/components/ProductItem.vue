@@ -11,13 +11,6 @@ import ButtonElem from './UI/ButtonElem.vue';
 import Rating from './UI/Rating.vue';
 import { computed, onMounted } from 'vue';
 import { ref } from 'vue';
-// import ButtonElem from './UI/ButtonElem.vue';
-
-// export default {
-//   components: {
-//     ButtonElem
-//   }
-// }
 
 const modalStore = useModalStore()
 

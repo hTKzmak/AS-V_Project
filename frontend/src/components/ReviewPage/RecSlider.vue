@@ -20,7 +20,7 @@ export default {
         Carousel,
         Slide,
         Navigation,
-        
+
         // компоненты с проекта
         ButtonElem,
         Rating,
@@ -46,8 +46,8 @@ export default {
         }
     },
     methods: {
-        addToBucket() {
-            this.bucketStore.addToBucket(props.id, props.title, props.price, props.discount === null ? props.price : props.discount, BASE_URL + props.image, 1)
+        addToBucket(id, title, lastPrice, oldPrice, image, count) {
+            this.bucketStore.addToBucket(id, title, lastPrice, oldPrice, image, count)
         }
     }
 }
@@ -59,13 +59,16 @@ export default {
             <div class="item">
 
                 <div class="review">
-                    <Rating :count_review="item.count_review" :rating="item.rating" :inSlider="true"/>
+                    <Rating :count_review="item.count_review" :rating="item.rating" :inSlider="true" />
                 </div>
 
                 <span id="name">{{ item.title }}</span>
                 <div class="img" :style="{ backgroundImage: `url('${BASE_URL + item.image}')` }">></div>
                 <span id="price">{{ item.price }} ₽</span>
 
+                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) == undefined" title="в корзину" img='/cart.svg' addedItemStyle='false' :action="() => addToBucket(item.id, item.title, item.price, item.discount === null ? item.price : item.discount, BASE_URL + item.image, 1)" />
+                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) != undefined" title="в корзине" img='/inCart.svg' addedItemStyle='true' />
+                    
                 <RouterLink id="productLink" :to="{ path: '/product/' + item.id }">подробнее</RouterLink>
             </div>
         </Slide>
@@ -79,6 +82,15 @@ export default {
 </template>
 
 <style lang="scss">
+@mixin btnAndLink {
+    padding: 18px;
+    font-size: 16px;
+    color: #FFF;
+    border-radius: 8px;
+
+    height: 56px;
+}
+
 .item {
     padding: 24px;
     width: 70%;
@@ -120,14 +132,24 @@ export default {
         background-size: contain;
     }
 
-    #productLink {
-        padding: 18px;
-        font-size: 16px;
-        color: #FFF;
-        border-radius: 8px;
-        background-color: #0071E4;
+    button{
+        @include btnAndLink;
+        width: auto;
 
-        height: 56px;
+        @media screen and (max-width: 1440px) {
+            display: none;
+        }
+    }
+
+    #productLink {
+        @include btnAndLink;
+        display: none;
+        
+        @media screen and (max-width: 1440px) {
+            display: flex;
+            justify-content: center;
+            background-color: #0071E4;
+        }
     }
 
     @media screen and (max-width: 1440px) {
