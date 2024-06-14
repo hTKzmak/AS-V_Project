@@ -5,6 +5,7 @@ import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import { useCounterStore } from '@/stores/AppleStore';
 import { useBucketStore } from '@/stores/BucketStore';
 import ButtonElem from '../UI/ButtonElem.vue';
+import Rating from '../UI/Rating.vue';
 import { ref, watchEffect } from 'vue';
 
 export default {
@@ -15,10 +16,14 @@ export default {
         sortedData: Array,
     },
     components: {
+        // компоненты для слайдера
         Carousel,
         Slide,
         Navigation,
-        ButtonElem
+        
+        // компоненты с проекта
+        ButtonElem,
+        Rating,
     },
     setup() {
         const appleStore = useCounterStore();
@@ -54,8 +59,7 @@ export default {
             <div class="item">
 
                 <div class="review">
-                    <span>Типа звёздочки</span>
-                    <RouterLink>{{ item.count_review }} отзывов</RouterLink>
+                    <Rating :count_review="item.count_review" :rating="item.rating" :inSlider="true"/>
                 </div>
 
                 <span id="name">{{ item.title }}</span>

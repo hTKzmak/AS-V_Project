@@ -469,7 +469,7 @@ header {
 
                         &:hover {
                             color: #0071E4;
-                            border-bottom: 1px solid #0071E4;
+                            border-bottom: 2px solid #0071E4;
                         }
                     }
                 }

@@ -8,6 +8,7 @@ import { useLikeStore } from '@/stores/LikeStore';
 import { useBucketStore } from '@/stores/BucketStore';
 import { useSingleProductStore } from '@/stores/SingleProductStore';
 import ButtonElem from './UI/ButtonElem.vue';
+import Rating from './UI/Rating.vue';
 import { computed, onMounted } from 'vue';
 import { ref } from 'vue';
 // import ButtonElem from './UI/ButtonElem.vue';
@@ -126,14 +127,8 @@ const props = defineProps({
 
             <!-- надо будет переделать систему отображения звёздочек (в зависимости от рейтинга) -->
 
-            <div class="star-rating">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star missed"></span>
-                <a href="#!">({{ count_review }})</a>
-            </div>
+            <Rating :count_review="count_review" :rating="rating"/>
+
             <div class="settings">
                 <button @click="addToFav">
                     <img :class="isInFav == true ? 'blue-heart' : 'standart'" src="../assets/icons/header/heart.svg">
