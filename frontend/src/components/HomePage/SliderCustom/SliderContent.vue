@@ -11,7 +11,6 @@ export default {
 
 <template>
     <div class="slider-content">
-        <!-- margin-bottom: -135px; -->
         <img :src="img" :style="{marginBottom: img.includes('mbp') ? '35px' : '-75px'}">
         <div class="title">
 
@@ -36,12 +35,12 @@ export default {
         margin-bottom: -50px;
 
         @media screen and (max-width: 1440px) {
-            margin: 0 auto -45px;
+            margin: 0 auto;
             width: 270px;
         }
 
         @media screen and (max-width: 768px) {
-            margin: 0 auto -21px;
+            margin: 0 auto;
             width: 173px;
         }
     }

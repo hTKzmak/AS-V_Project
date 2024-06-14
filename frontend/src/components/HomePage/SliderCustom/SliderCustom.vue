@@ -21,8 +21,8 @@ export default {
 
 <template>
     <div class="slider-container">
-        <Carousel :items-to-show="1" :wrap-around="true">
-            <Slide v-for="slide in data" :key="slide.slide" :id="slide.slide" @click="changeSlider">
+        <Carousel :items-to-show="1" :wrap-around="true" :transition="500">
+            <Slide v-for="slide in data" :key="slide.slide" :id="slide.slide" @click="changeSlider" @touchend="changeSlider">
                 <SliderContent :title="slide.title" :img="slide.img" :price="slide.price" :link="slide.link" />
             </Slide>
 

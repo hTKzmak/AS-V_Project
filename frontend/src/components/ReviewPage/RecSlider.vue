@@ -154,6 +154,7 @@ export default {
 
     @media screen and (max-width: 1440px) {
         width: 266px;
+        padding: 24px 0;
     }
 }
 
