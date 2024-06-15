@@ -69,7 +69,7 @@ function addToBucket() {
 
 function addToFav() {
     likeStore.addFavourite(props.id, props.title,
-        props.price, props.image, props.rating, props.discount, props.is_available)
+        props.price, props.image, props.rating, props.discount, props.is_available, props.count_review)
     isInFav.value = !isInFav.value
     if (isInFav.value == true) {
         console.log(props.id + ' added to fav')
@@ -155,7 +155,7 @@ const props = defineProps({
         </div>
 
 
-        <RouterLink :to="productLink">
+        <RouterLink  :to="is_available ? productLink : ''">
             <h3>{{ title }}</h3>
             <!-- <img class="product-image" :src="BASE_URL + image" alt="img"> -->
             <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>

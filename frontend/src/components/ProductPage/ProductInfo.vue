@@ -2,7 +2,7 @@
 import ButtonElem from '../UI/ButtonElem.vue';
 import { useSingleProductStore } from '@/stores/SingleProductStore';
 import { useCounterStore } from '@/stores/AppleStore';
-import { onMounted } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router'
 import { useRecentStore } from '@/stores/RecentStore';
 import { useBucketStore } from '@/stores/BucketStore';
@@ -28,7 +28,23 @@ export default {
 
         const route = useRoute()
 
-        let productId = 0
+        let productId = ref(0);
+
+        //------------------------------------ ФУНКЦИОНАЛ ОБНОВЛЕНИЯ КОМПОНЕНТА -------------------------
+
+
+        // Переменная для хранения ID
+        const idForWatch = ref(route.params.id);
+
+            // Следим за изменениями параметра id в маршруте
+            watch(
+            () => route.params.id,
+            (newId, oldId) => {
+                idForWatch.value = newId;
+                singleProductStore.findProd(idForWatch.value)
+                recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+            }
+        );
 
         //------------------------------------ ФУНКЦИОНАЛ КНОПОК -------------------------
 
@@ -57,12 +73,11 @@ export default {
 
 
         onMounted(() => {
-            
-            productId = route.params.id;
-            singleProductStore.findProd(productId)
-            recentStore.addToRecent(productId, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+            productId.value = route.params.id
+            console.log(productId.value)
+            singleProductStore.findProd(productId.value)
+            recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
         }
-
         )
         return {
             singleProductStore, appleStore, productId, bucketStore,

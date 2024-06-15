@@ -11,7 +11,7 @@ export const useRecentStore = defineStore('recent', () => {
     }
     function addToRecent(id, title, price, image, rating, discount, is_available){
         let findIndex = recentProducts.value.findIndex(elem => elem.id === id)
-        if (findIndex == -1){
+        if ((findIndex == -1) && (id != 0)){
         recentProducts.value.push({
             id: id,
             title: title,

@@ -1,4 +1,8 @@
-<script>
+<script setup>
+import { useModalStore } from '@/stores/ModalStore';
+import { useCounterStore } from '@/stores/AppleStore';
+const modalStore = useModalStore()
+const appleStore = useCounterStore()
 </script>
 
 <template>
@@ -29,21 +33,21 @@
 
             <div class="footer-navigation">
                 <ul>
-                    <li><a href="#!">Гарантия</a></li>
-                    <li><a href="#!">Политика возрата</a></li>
-                    <li><a href="#!">Кредит</a></li>
-                    <li><a href="#!">Доставка и оплата</a></li>
-                    <li><a href="#!">Отзывы</a></li>
-                    <li><a href="#!">Контакты</a></li>
-                    <li><a href="#!">Политика конфеденциальности</a></li>
+                    <li><RouterLink class="route" to="/">Гарантия</RouterLink></li>
+                    <li><RouterLink class="route" to="/refund">Политика конфеденциальности</RouterLink></li>
+                    <li><RouterLink class="route" to="/">Кредит</RouterLink></li>
+                    <li><RouterLink class="route" to="/">Доставка и оплата</RouterLink></li>
+                    <li><RouterLink class="route" to="/">Отзывы</RouterLink></li>
+                    <li><RouterLink class="route" to="/contacts">Контакты</RouterLink></li>
+                    <li><RouterLink class="route" to="/">Политика конфеденциальности</RouterLink></li>
                 </ul>
                 <ul>
-                    <li><a href="#!">iPhone</a></li>
-                    <li><a href="#!">iPad</a></li>
-                    <li><a href="#!">Macbook и iMac</a></li>
-                    <li><a href="#!">Watch</a></li>
-                    <li><a href="#!">Аксессуары</a></li>
-                    <li><a href="#!">Акции</a></li>
+                    <li @click="appleStore.changeCategory"><RouterLink class="route" to="/list_of_products/smartphones">iPhone</RouterLink></li>
+                    <li @click="appleStore.changeCategory"><RouterLink class="route" to="/list_of_products/pads">iPad</RouterLink></li>
+                    <li @click="appleStore.changeCategory"><RouterLink class="route" to="/list_of_products/laptops">Macbook и iMac</RouterLink></li>
+                    <li @click="appleStore.changeCategory"><RouterLink class="route" to="/list_of_products/watches">Watch</RouterLink></li>
+                    <li @click="appleStore.changeCategory"><RouterLink class="route" to="/list_of_products/accessories">Аксессуары</RouterLink></li>
+                    <li @click="appleStore.changeCategory"><RouterLink class="route" to="/list_of_products/smartphones">Акции</RouterLink></li>
                 </ul>
             </div>
 
@@ -64,7 +68,7 @@
                 </div>
 
                 <div class="callAndMedia">
-                    <a class="getCall" href="#!">Заказать звонок</a>
+                    <a class="getCall" @click="modalStore.changeModal('Callback')">Заказать звонок</a>
 
                     <div class="social-media">
                         <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>

@@ -1,9 +1,14 @@
 <script setup>
 import { useCounterStore } from '@/stores/AppleStore';
+import { computed } from 'vue';
 
 const appleStore = useCounterStore();
 
 let BASE_URL = appleStore.BASE_URL
+
+const productLink = computed(() => ({
+    name: '/product'
+}));
 
 </script>
 
@@ -17,7 +22,7 @@ let BASE_URL = appleStore.BASE_URL
                     <span class="price">{{ index.discount === null ? index.price : index.discount }} ₽</span>
                 </div>
             </div>
-            <RouterLink to="/404">Подробнее</RouterLink>
+            <RouterLink :to="productLink.name + '/' + index.id">Подробнее</RouterLink>
         </li>
     </ul>
 </template>

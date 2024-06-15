@@ -10,7 +10,7 @@
       </div>
       <div class="callback-section">
         <p class="callback-text">Можем позвонить мы</p>
-        <a href="#" class="callback-link">заказать звонок</a>
+        <a @click="modalStore.changeModal('Callback')" class="callback-link">заказать звонок</a>
       </div>
       <div class="contact-methods">
         <p class="write-text">Можно написать</p>
@@ -46,10 +46,9 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Contacts'
-}
+<script setup>
+import { useModalStore } from '@/stores/ModalStore';
+const modalStore = useModalStore()
 </script>
 
 <style scoped>
