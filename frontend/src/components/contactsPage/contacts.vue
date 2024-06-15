@@ -26,7 +26,7 @@
           </a>
           <a href="mailto:info@AppleShops.ru" class="email-text">info@AppleShops.ru</a>
         </div>
-        <div class="callback-section">
+        <!-- <div class="callback-section">
           <p class="callback-text">Можем позвонить мы</p>
           <a href="#" class="callback-link">заказать звонок</a>
         </div>
@@ -44,7 +44,7 @@
             </a>
             <a href="mailto:info@AppleShops.ru" class="email-text">info@AppleShops.ru</a>
           </div>
-        </div>
+        </div> -->
         </div>
       </section>
 
