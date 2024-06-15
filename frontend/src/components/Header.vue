@@ -139,7 +139,7 @@ export default {
 
         <!-- меню для планшета и телефона -->
         <div v-show="showMenu" class="menuModal container">
-            <RouterLink to="/"> class="recall">Вам перезвонить?</RouterLink>
+            <RouterLink class="recall" to="/">Вам перезвонить?</RouterLink>
             <ul>
                 <li @click="showMenuFunc()">
                     <RouterLink to="/list_of_products/all">Весь каталог</RouterLink>

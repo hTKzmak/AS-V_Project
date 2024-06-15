@@ -153,9 +153,9 @@ const props = defineProps({
 
             <div class="price-info">
                 <!-- для отображения и скрытия скидки для пк версии -->
-                <h4 id="discount-desktop">{{ discount === null ? null : discount + ' ' + '₽' }}</h4>
+                <h4 id="discount-desktop">{{ discount === null ? null : price + ' ' + '₽' }}</h4>
                 <!-- для отображения и скрытия скидки для мобильной и планшетной версии -->
-                <h4 id="discount-adaptive" v-show="discount !== null">{{ discount + ' ' + '₽' }}</h4>
+                <h4 id="discount-adaptive" v-show="discount !== null">{{ price + ' ' + '₽' }}</h4>
 
 
                 <!-- мобильная версия кнопки для покупки  -->

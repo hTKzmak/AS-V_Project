@@ -253,6 +253,8 @@ export default {
     // ПК ВЕРСИЯ ФИЛЬТРА
     .filter-desktop {
 
+    max-width: 420px;
+
         .filter-info {
             padding: 32px 24px 32px 140px;
 

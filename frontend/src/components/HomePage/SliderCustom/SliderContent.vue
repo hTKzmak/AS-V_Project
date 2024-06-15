@@ -11,7 +11,7 @@ export default {
 
 <template>
     <div class="slider-content">
-        <img :src="img" :style="{marginBottom: img.includes('mbp') ? '35px' : '-75px'}">
+        <img :src="img" :style="{ marginBottom: img.includes('mbp') ? '35px' : '-75px' }">
         <div class="title">
 
             <h1 v-if="title === 'iphone 14'">iPh<div class="oval"></div>ne 14</h1>
@@ -132,6 +132,12 @@ export default {
             cursor: pointer;
 
             padding: 18px 40px;
+
+            max-width: 160px;
+
+            @media screen and (max-width: 1440px) {
+                max-width: none;
+            }
 
             @media screen and (max-width: 768px) {
                 border-radius: 8px;
