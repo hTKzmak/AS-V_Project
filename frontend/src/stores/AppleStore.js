@@ -157,18 +157,18 @@ export const useCounterStore = defineStore('appleStore', {
             }
             console.log(menuListarr)
             console.log(totalItems)
-    
+
             console.log('Get filtered by ' + category)
             console.log(this.categoryData)
         },
-    
+
         goToPage(pageNumber) {
             currentPage.value = pageNumber;
             console.log('We are going to page ' + pageNumber)
             this.getVisibleRecipes()
             console.log(paginatedData.value)
         },
-    
+
         // перемещаемя на следующую страницу
         nextPage() {
             if (menuListarr.value.length != currentPage.value) {
@@ -176,7 +176,7 @@ export const useCounterStore = defineStore('appleStore', {
                 this.goToPage(currentPage.value)
             }
         },
-    
+
         // перемещаемя на предыдущую страницу
         previousPage() {
             if (menuListarr.value[0] != currentPage.value) {
@@ -184,15 +184,15 @@ export const useCounterStore = defineStore('appleStore', {
                 this.goToPage(currentPage.value)
             }
         },
-    
+
         // хз :P
         totalPages() {
             return Math.ceil(totalItems / itemsPerPage);
         },
-    
+
         // ф-ия для изменения значение curretnPage в виде числа
-    
-    
+
+
         // отображает данные в зависимости от: startIndex (сколько продуктов должно быть на странице, умножая на текущий номер страницы - 1) 
         // и от endIndex (прибавляем значение startIndex на кол-во нужных объектов на странице)
         getVisibleRecipes() {
@@ -200,5 +200,5 @@ export const useCounterStore = defineStore('appleStore', {
             const endIndex = startIndex + itemsPerPage;
             paginatedData.value = this.categoryData.slice(startIndex, endIndex);
         }
-    },
+    }
 })
