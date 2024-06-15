@@ -141,14 +141,30 @@ export default {
         <div v-show="showMenu" class="menuModal container">
             <RouterLink to="/"> class="recall">Вам перезвонить?</RouterLink>
             <ul>
-                <li><RouterLink to="/">>Весь каталог</RouterLink></li>
-                <li><RouterLink to="/"> id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink></li>
-                <li><RouterLink to="/">>Гарантия</RouterLink></li>
-                <li><RouterLink to="/">>Политика возрата</RouterLink></li>
-                <li><RouterLink to="/">>Кредит</RouterLink></li>
-                <li><RouterLink to="/">>Доставка и оплата</RouterLink></li>
-                <li><RouterLink to="/">>Отзывы</RouterLink></li>
-                <li><RouterLink to="/">>Контакты</RouterLink></li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/list_of_products/all">Весь каталог</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/list_of_products/smartphones" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban">Гарантия</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/refund">Политика возрата</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/credit">Кредит</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban">Доставка и оплата</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/ban">Отзывы</RouterLink>
+                </li>
+                <li @click="showMenuFunc()">
+                    <RouterLink to="/contacts">Контакты</RouterLink>
+                </li>
                 <div class="social-media">
                     <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
                     <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>

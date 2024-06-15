@@ -220,6 +220,15 @@ footer {
                     align-items: center;
                     gap: 16px;
                 }
+
+                p {
+                    @media screen and (min-width: 769px) and (max-width: 1440px) {
+                        font-size: 32px;
+                    }
+                    @media screen and (max-width: 769px) {
+                        font-size: 24px;
+                    }
+                }
             }
 
             @media screen and (min-width: 769px) and (max-width: 1440px) {
@@ -256,8 +265,8 @@ footer {
         }
     }
 
-    @media screen and (max-width: 768px) {  
-        padding: 30px 0 100px;    
+    @media screen and (max-width: 768px) {
+        padding: 30px 0 100px;
     }
 }
 </style>
