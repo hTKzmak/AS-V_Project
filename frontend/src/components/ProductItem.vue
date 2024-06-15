@@ -79,9 +79,9 @@ function addToFav() {
     console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
 }
 
-function showAllProducts(id) {
-    singleProductStore.findProd(id)
-}
+// function showAllProducts(id) {
+//     singleProductStore.findProd(id)
+// }
 
 // ФУНКЦИОНАЛ ОТОБРАЖЕНИЯ ДОБАВЛЕННОСТИ В ИЗБРАННОЕ/КОРЗИНУ
 

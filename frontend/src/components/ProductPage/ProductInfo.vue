@@ -2,11 +2,7 @@
 import ButtonElem from '../UI/ButtonElem.vue';
 import { useSingleProductStore } from '@/stores/SingleProductStore';
 import { useCounterStore } from '@/stores/AppleStore';
-<<<<<<< HEAD
-import { onMounted, ref, watch } from 'vue';
-=======
 import { onMounted, watch, ref } from 'vue';
->>>>>>> 37f890e0f0ad79e0f9e6b56c62deff510c8382dd
 import { useRoute } from 'vue-router'
 import { useRecentStore } from '@/stores/RecentStore';
 import { useBucketStore } from '@/stores/BucketStore';
@@ -78,28 +74,11 @@ export default {
 
 
         onMounted(() => {
-<<<<<<< HEAD
             productId.value = route.params.id
             console.log(productId.value)
             singleProductStore.findProd(productId.value)
             recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
         }
-=======
-            productId = route.params.id;
-            singleProductStore.findProd(productId)
-            console.log(productId)
-            recentStore.addToRecent(productId, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
-        },
-
-        // watch(productId, async (newProd, oldProd) => {
-        //     singleProductStore.findProd(productId)
-        //     console.log(singleProductStore.neededProd.value)
-        //     recentStore.addToRecent(productId, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
-        //     console.log(newProd)
-        //     console.log(oldProd)
-        // })
-
->>>>>>> 37f890e0f0ad79e0f9e6b56c62deff510c8382dd
         )
         return {
             singleProductStore, appleStore, productId, bucketStore,
