@@ -110,8 +110,6 @@ export const useCounterStore = defineStore('appleStore', {
                 this.searchData = []
             }
 
-        }
-            console.log(filteredProducts)
         },
         changeCategory(){
             currentPage.value = 1
@@ -202,5 +200,7 @@ getVisibleRecipes() {
     const endIndex = startIndex + itemsPerPage;
     paginatedData.value = this.categoryData.slice(startIndex, endIndex);
   }
+        },
+ 
     }
-})
+)
