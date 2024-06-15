@@ -7,6 +7,7 @@ import LikeView from '@/views/LikeView.vue'
 import CreditPage from '@/views/CreditPage.vue'
 import RefundPage from '@/views/RefundPage.vue'
 import ContactsPage from '@/views/contactsPage.vue'
+import ReviewPage from '@/views/ReviewPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
       path: '/contacts',
       name: 'contactsPage', 
       component: ContactsPage
+    },
+    {
+      path: '/review',
+      name: 'ReviewPage', 
+      component: ReviewPage
     },
     {
       path: '/:pathMatch(.*)*',

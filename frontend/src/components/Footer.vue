@@ -1,6 +1,7 @@
 <script setup>
 import { useModalStore } from '@/stores/ModalStore';
 import { useCounterStore } from '@/stores/AppleStore';
+import { RouterLink } from 'vue-router'
 const modalStore = useModalStore()
 const appleStore = useCounterStore()
 </script>
@@ -225,6 +226,7 @@ footer {
                     @media screen and (min-width: 769px) and (max-width: 1440px) {
                         font-size: 32px;
                     }
+
                     @media screen and (max-width: 769px) {
                         font-size: 24px;
                     }

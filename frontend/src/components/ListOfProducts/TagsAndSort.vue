@@ -54,9 +54,11 @@ export default {
 
                 <div class="sort">
                     Сортировать
-                    <select name="" id="">
-                        <option value="Base">По умолчанию</option>
-                    </select>
+                    <div class="custom-select">
+                        <select name="#" id="#">
+                            <option value="Base">По умолчанию</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -192,28 +194,50 @@ h2 {
             align-items: center;
             gap: 8px;
 
-            select {
-                padding: 8px;
-                background: transparent;
-                border: none;
-                border-radius: 8px;
-                font-size: 16px;
-                background-color: #F9F9F9;
+            .custom-select {
+                width: 170px;
+                position: relative;
 
-                width: 150px;
+                select {
+                    appearance: none;
+                    /*  safari  */
+                    -webkit-appearance: none;
+                    /*  other styles for aesthetics */
 
-                -webkit-appearance: none;
-                /* Убираем стандартную стрелку в Chrome и Safari */
-                -moz-appearance: none;
-                /* Убираем стандартную стрелку в Firefox */
-                appearance: none;
-                padding-right: 20px;
-                /* Добавляем немного отступа справа для новой стрелки */
-                background-image: url('../../assets/icons/arrow.svg');
-                /* Добавляем свою собственную стрелку */
-                background-repeat: no-repeat;
-                background-position: right center;
+                    width: 100%;
+                    font-size: 1.15rem;
+                    padding: 8px 16px;
+                    background-color: #F9F9F9;
+                    border: none;
+
+                    color: #100E0E;
+                    cursor: pointer;
+                    border-radius: 8px;
+                    font-size: 16px;
+                }
             }
+
+
+            .custom-select::after {
+                content: "";
+                position: absolute;
+                right: 1rem;
+                pointer-events: none;
+
+                border: solid #706e6e;
+                border-width: 0 3px 3px 0;
+                display: inline-block;
+                padding: 5px;
+            }
+
+            .custom-select::after {
+                top: 30%;
+
+                border-color: #0071e4;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+            }
+
         }
 
         @media screen and (max-width: 768px) {

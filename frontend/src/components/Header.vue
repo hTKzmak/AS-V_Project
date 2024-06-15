@@ -30,7 +30,7 @@ export default {
             showProducts: false,
 
             // Все категории, которые есть у товаров
-            catalogsList: ['Смартфоны', 'Планшеты', 'Компьютеры', 'Часы', 'Акссесуары', 'Акции'],
+            catalogsList: ['Смартфоны', 'Планшеты', 'Компьютеры', 'Часы', 'Аксессуары', 'Акции'],
 
             // отфильтрованные товары для их отображения в каталоге товаров
             filteredProducts: []
@@ -160,7 +160,7 @@ export default {
                     <RouterLink to="/ban">Доставка и оплата</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/ban">Отзывы</RouterLink>
+                    <RouterLink to="/review">Отзывы</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
                     <RouterLink to="/contacts">Контакты</RouterLink>
@@ -183,7 +183,7 @@ export default {
 
                 <div v-show="showSearch" class="input-search">
                     <img src="../assets/icons/header/search_active.svg"><input type="text" class="search"
-                        placeholder="Поиск по каталогу товаров" @keydown="appleStore.searchFunc($event.target.value)">
+                        placeholder="Введите запрос" @input="appleStore.searchFunc($event.target.value)">
                 </div>
             </div>
 
@@ -215,7 +215,7 @@ export default {
                     <img v-if="showSearch == true" src="../assets/icons/header/search_active.svg">
                     <img v-else src="../assets/icons/header/search.svg">
                     <input type="text" class="search" placeholder="Поиск по каталогу товаров"
-                        @keydown="appleStore.searchFunc($event.target.value)" @click="openSearchTablet()">
+                        @input="appleStore.searchFunc($event.target.value)" @click="openSearchTablet()">
                 </div>
                 <button class="buttonIcons" @click="showSearchFunc()">
                     <img v-if="showButtons == false" src="../assets/icons/header/close.svg">
@@ -248,9 +248,9 @@ export default {
                     <li><RouterLink class="route" to="/list_of_products/smartphones" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink></li>
                     <li><RouterLink class="route" to="/">Гарантия</RouterLink></li>
                     <li><RouterLink class="route" to="/refund">Политика возрата</RouterLink></li>
-                    <li><RouterLink class="route" to="/">Кредит</RouterLink></li>
+                    <li><RouterLink class="route" to="/credit">Кредит</RouterLink></li>
                     <li><RouterLink class="route" to="/">Доставка и оплата</RouterLink></li>
-                    <li><RouterLink class="route" to="/">Отзывы</RouterLink></li>
+                    <li><RouterLink class="route" to="/review">Отзывы</RouterLink></li>
                     <li><RouterLink class="route" to="/contacts">Контакты</RouterLink></li>
                 </ul>
                 <div class="phone">
@@ -298,7 +298,7 @@ export default {
                 </div>
 
                 <input type="text" placeholder="Поиск по каталогу товаров"
-                    @keydown="appleStore.searchFunc($event.target.value)">
+                    @input="appleStore.searchFunc($event.target.value)">
 
                 <!-- Окно с результатом поиска -->
                 <Search />
@@ -368,7 +368,7 @@ header {
                 margin-left: 18px;
 
                 input {
-                    width: 200px;
+                    width: 100%;
                     border: none;
                     outline: none;
                     font-size: 16px;
@@ -454,7 +454,7 @@ header {
 
                         &:hover {
                             color: #0071E4;
-                            border-bottom: 1px solid #0071E4;
+                            border-bottom: 2px solid #0071E4;
                         }
                     }
                 }

@@ -8,15 +8,9 @@ import { useLikeStore } from '@/stores/LikeStore';
 import { useBucketStore } from '@/stores/BucketStore';
 import { useSingleProductStore } from '@/stores/SingleProductStore';
 import ButtonElem from './UI/ButtonElem.vue';
+import Rating from './UI/Rating.vue';
 import { computed, onMounted } from 'vue';
 import { ref } from 'vue';
-// import ButtonElem from './UI/ButtonElem.vue';
-
-// export default {
-//   components: {
-//     ButtonElem
-//   }
-// }
 
 const modalStore = useModalStore()
 
@@ -126,38 +120,18 @@ const props = defineProps({
 
             <!-- надо будет переделать систему отображения звёздочек (в зависимости от рейтинга) -->
 
-            <div class="star-rating">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star missed"></span>
-                <a href="#!">({{ count_review }})</a>
-            </div>
+            <Rating :count_review="count_review" :rating="rating"/>
+
             <div class="settings">
                 <button @click="addToFav">
                     <img :class="isInFav == true ? 'blue-heart' : 'standart'" src="../assets/icons/header/heart.svg">
                 </button>
-
-
-                <!-- <button @click="addToFav">
-                    <img :class="likeStore.likedProducts.find((e) => e.id === props.id) == undefined ? 'standart' : 'pink'"  src="../assets/icons/header/heart.svg">
-                </button> -->
-
-
-                <!-- <button v-if="likeStore.likedProducts.find((e) => e.id === props.id) == undefined" @click="addToFav">
-                    <img class=""  src="../assets/icons/header/heart.svg">
-                </button>
-                <button v-if="likeStore.likedProducts.find((e) => e.id === props.id) != undefined" @click="addToFav">
-                    <img class="pink"  src="../assets/icons/header/heart.svg">
-                </button> -->
             </div>
         </div>
 
 
         <RouterLink  :to="is_available ? productLink : ''">
             <h3>{{ title }}</h3>
-            <!-- <img class="product-image" :src="BASE_URL + image" alt="img"> -->
             <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
         </RouterLink>
 
@@ -178,18 +152,21 @@ const props = defineProps({
             </div>
 
             <div class="price-info">
-                <h4>{{ discount === null ? price : discount }} ₽</h4>
-                
+                <!-- для отображения и скрытия скидки для пк версии -->
+                <h4 id="discount-desktop">{{ discount === null ? null : discount + ' ' + '₽' }}</h4>
+                <!-- для отображения и скрытия скидки для мобильной и планшетной версии -->
+                <h4 id="discount-adaptive" v-show="discount !== null">{{ discount + ' ' + '₽' }}</h4>
+
+
                 <!-- мобильная версия кнопки для покупки  -->
 
                 <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined"
-                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/cart.svg' addedItemStyle='false'
-                    :action="addToBucket" />
+                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/cart.svg'
+                    addedItemStyle='false' :action="addToBucket" />
                 <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined"
-                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/inCart.svg' addedItemStyle='true' />
+                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/inCart.svg'
+                    addedItemStyle='true' />
 
-                <!-- мобильная версия кнопки для показа, что товар положен в корзину  -->
-                <!-- <button class="buttonElem buttonCartAdded">137 900 ₽<img src="../assets/icons/cart-added.svg"></button> -->
                 <h3>{{ discount === null ? price : discount }} ₽</h3>
             </div>
 
@@ -200,8 +177,6 @@ const props = defineProps({
             <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" title="в корзине"
                 img='/inCart.svg' addedItemStyle='true' />
 
-            <!-- ПК версия кнопки для показа, что товар положен в корзину  -->
-            <!-- <button class="buttonElem buttonCartAdded"><img src="../assets/icons/cart-added.svg">в корзине</button> -->
 
             <div class="other">
                 <a href="#!" @click="changeHandle">Хочу дешевле</a>
@@ -239,6 +214,7 @@ const props = defineProps({
     padding: 20px 10px;
     border-radius: 16px;
     display: grid;
+    justify-content: center;
 
     .rating-and-settings {
 
@@ -250,6 +226,10 @@ const props = defineProps({
             display: flex;
             align-items: center;
             gap: 2px;
+
+            .fa{
+                font-size: 20px;
+            }
 
             .checked {
                 color: #FFAD31;
@@ -326,11 +306,29 @@ const props = defineProps({
             align-items: center;
             margin-bottom: 16px;
 
-            h4 {
+            #discount-desktop,
+            #discount-adaptive {
                 text-decoration: line-through;
                 font-size: 20px;
                 color: #878787;
                 margin: 0;
+            }
+
+            #discount-desktop {
+                display: flex;
+
+                @media screen and (max-width: 1440px) {
+                    display: none;
+                }
+            }
+
+            #discount-adaptive {
+                display: none;
+                
+                @media screen and (max-width: 1440px) {
+                    display: flex;
+                    width: 80%;
+                }
             }
 
             h3 {
@@ -342,21 +340,13 @@ const props = defineProps({
                 }
             }
 
-            // .buttonCart,
-            // .buttonCartAdded {
-            //     display: none;
-
-            //     @media screen and (max-width: 1440px) {
-            //         display: flex;
-            //     }
-            // }
-
             button {
                 display: none;
 
                 @media screen and (max-width: 1440px) {
                     display: flex;
                     flex-direction: row-reverse;
+                    width: 100%;
                 }
             }
         }
@@ -373,16 +363,6 @@ const props = defineProps({
             }
 
         }
-
-        // .buttonCart,
-        // .buttonCartAdded {
-        //     padding: 20px;
-        //     border-radius: 8px;
-
-        //     @media screen and (max-width: 1440px) {
-        //         display: none;
-        //     }
-        // }
 
         button {
             padding: 16px;
