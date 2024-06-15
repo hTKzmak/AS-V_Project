@@ -2,12 +2,17 @@
 import ButtonElem from '../UI/ButtonElem.vue';
 import { useSingleProductStore } from '@/stores/SingleProductStore';
 import { useCounterStore } from '@/stores/AppleStore';
+<<<<<<< HEAD
 import { onMounted, ref, watch } from 'vue';
+=======
+import { onMounted, watch, ref } from 'vue';
+>>>>>>> 37f890e0f0ad79e0f9e6b56c62deff510c8382dd
 import { useRoute } from 'vue-router'
 import { useRecentStore } from '@/stores/RecentStore';
 import { useBucketStore } from '@/stores/BucketStore';
 import { useModalStore } from '@/stores/ModalStore';
 import { useCurrentProductStore } from '@/stores/CurrentProductStore';
+
 
 
 
@@ -73,11 +78,28 @@ export default {
 
 
         onMounted(() => {
+<<<<<<< HEAD
             productId.value = route.params.id
             console.log(productId.value)
             singleProductStore.findProd(productId.value)
             recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
         }
+=======
+            productId = route.params.id;
+            singleProductStore.findProd(productId)
+            console.log(productId)
+            recentStore.addToRecent(productId, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+        },
+
+        // watch(productId, async (newProd, oldProd) => {
+        //     singleProductStore.findProd(productId)
+        //     console.log(singleProductStore.neededProd.value)
+        //     recentStore.addToRecent(productId, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+        //     console.log(newProd)
+        //     console.log(oldProd)
+        // })
+
+>>>>>>> 37f890e0f0ad79e0f9e6b56c62deff510c8382dd
         )
         return {
             singleProductStore, appleStore, productId, bucketStore,
@@ -166,7 +188,7 @@ export default {
                         </div>
                         <h3>{{ singleProductStore.price }} ₽</h3>
                         <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined" title="Добавить в корзину" addedItemStyle="false" :action="addToBucket"/>
-                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined" title="В корзине" img='/inCart.svg' addedItemStyle='true' :action="addToBucket"/>
+                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined" title="В корзине" img='/inCart.svg' addedItemStyle='true' />
                         <p>Купить в 1 клик</p>
                         <div class="buyInOneClick">
                             <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">

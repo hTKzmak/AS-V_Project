@@ -101,6 +101,7 @@ const bucketStore = useBucketStore()
 
 <style scoped lang="scss">
 // Исправляю селекторы и инпуты
+<<<<<<< HEAD
 .arrow {
     border: solid #706E6E;
     border-width: 0 3px 3px 0;
@@ -122,6 +123,8 @@ const bucketStore = useBucketStore()
 }
 
 
+=======
+>>>>>>> 37f890e0f0ad79e0f9e6b56c62deff510c8382dd
 .payment-select-wrapper {
             max-width: 300px;
             margin: 20px;
@@ -143,10 +146,17 @@ const bucketStore = useBucketStore()
             -webkit-appearance: none;  /* Remove default arrow in Webkit browsers */
             -moz-appearance: none; /* Remove default arrow in Firefox */
             appearance: none; /* Remove default arrow in modern browsers */
+<<<<<<< HEAD
             background-image: url('../assets/icons/arrow.svg');
             background-repeat: no-repeat;
             background-position: right 10px top 50%;
             background-size: 16px 16px;
+=======
+            background-image: url('../assets/icons/modals/arrow.svg');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 24px 24px;
+>>>>>>> 37f890e0f0ad79e0f9e6b56c62deff510c8382dd
         }
 
         .payment-select:focus {
