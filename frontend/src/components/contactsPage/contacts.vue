@@ -45,6 +45,7 @@
             <a href="mailto:info@AppleShops.ru" class="email-text">info@AppleShops.ru</a>
           </div>
         </div>
+        </div>
       </section>
 
       <section class="address-section">
@@ -64,7 +65,6 @@
         </div>
       </section>
     </div>
-  </div>
 </template>
 
 <script setup>
