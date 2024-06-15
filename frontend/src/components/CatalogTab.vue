@@ -6,17 +6,19 @@ import iPadIcon from '../assets/icons/header/gadgets/ipad.svg'
 import iMacIcon from '../assets/icons/header/gadgets/macbook.svg'
 import watchIcon from '../assets/icons/header/gadgets/applewatch.svg'
 import gadgetsIcon from '../assets/icons/header/gadgets/airpods.svg'
+import { useCounterStore } from '@/stores/AppleStore'
 
 export default {
     props: ['showCatalog'],
     data() {
         return {
+            appleStore: useCounterStore(),
             categories: [
-                { id: 1, title: 'Смартфоны', image: iPhoneIcon, link: '/ban' },
-                { id: 2, title: 'Планшеты', image: iPadIcon, link: '/ban' },
-                { id: 3, title: 'Компьютеры', image: iMacIcon, link: '/ban' },
-                { id: 4, title: 'Часы', image: watchIcon, link: '/ban' },
-                { id: 5, title: 'Акссесуары', image: gadgetsIcon, link: '/ban' },
+                { id: 1, title: 'Смартфоны', image: iPhoneIcon, link: '/list_of_products/smartphones' },
+                { id: 2, title: 'Планшеты', image: iPadIcon, link: '/list_of_products/pads' },
+                { id: 3, title: 'Компьютеры', image: iMacIcon, link: '/list_of_products/laptops' },
+                { id: 4, title: 'Часы', image: watchIcon, link: '/list_of_products/watches' },
+                { id: 5, title: 'Акссесуары', image: gadgetsIcon, link: '/list_of_products/accessories' },
             ]
         }
     },
@@ -36,11 +38,11 @@ export default {
         <div class="catalogMenu">
 
             <!-- список каталогов -->
-            <div class="catalogItem" v-for="elem in categories">
+            <div @click="appleStore.changeCategory" class="catalogItem" v-for="elem in categories">
 
                 <!-- сам каталог -->
 
-                <RouterLink @click="showCatalogFunc" class="catalogItem-elem" :to="elem.link">
+                <RouterLink  @click="showCatalogFunc" class="catalogItem-elem" :to="elem.link">
                     <div class="title">
                         <img :src=elem.image>
                         <p>{{ elem.title }}</p>

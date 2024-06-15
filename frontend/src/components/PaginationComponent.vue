@@ -2,8 +2,10 @@
 import { ref, computed } from 'vue';
 import { useCounterStore } from '@/stores/AppleStore';
 import { useLikeStore } from '@/stores/LikeStore';
+import { useReviewStore } from '@/stores/ReviewStore';
 const appleStore = useCounterStore();
 const likeStore = useLikeStore()
+const reviewStore = useReviewStore()
 const left_sign = "<";
 const right_sign = ">";
 
@@ -22,6 +24,9 @@ if (props.page == 'list'){
 } else if(props.page == 'like'){
     totalPages = computed(() => likeStore.menuListarr.length);
     console.log(totalPages.value)
+} else if(props.page == 'review'){
+  totalPages = computed(() => reviewStore.menuListarr.length);
+  console.log(totalPages.value)
 }
 
 
@@ -36,6 +41,9 @@ const nextPage = () => {
     } else if(props.page == 'like'){
         likeStore.goToPage(currentPage.value);
         console.log('We went to page ' + currentPage.value + ' in LIKE')
+    }else if(props.page == 'review'){
+        reviewStore.goToPage(currentPage.value);
+        console.log('We went to page ' + currentPage.value + ' in REVIEW')
     }
   }
 };
@@ -49,6 +57,9 @@ const previousPage = () => {
         console.log('We went to page ' + currentPage.value + ' in LIST')
     } else if(props.page == 'like'){
         likeStore.goToPage(currentPage.value);
+        console.log('We went to page ' + currentPage.value + ' in LIKE')
+    } else if(props.page == 'review'){
+      reviewStore.goToPage(currentPage.value);
         console.log('We went to page ' + currentPage.value + ' in LIKE')
     }
   }
@@ -122,7 +133,25 @@ const visiblePages = computed(() => {
     </div>
     <button @click="nextPage" class="arrow-button like">{{ right_sign }}</button>
   </div>
+
+  <div v-if="props.page=='review'" class="pagination for-review">
+    <button @click="previousPage" class="arrow-button like">{{ left_sign }}</button>
+    <div class="page-numbers like">
+      <button 
+        v-for="page in visiblePages" 
+        :key="page" 
+        @click="page !== '...' ? (currentPage = page, reviewStore.goToPage(page)) : null" 
+        :class="['page-button like', currentPage === page ? 'active' : '']" 
+        :disabled="page === '...'"
+      >
+        {{ page }}
+      </button>
+    </div>
+    <button @click="nextPage" class="arrow-button like">{{ right_sign }}</button>
+  </div>
 </template>
+
+
 
 <style lang="scss" scoped>
 .pagination {
@@ -131,6 +160,11 @@ const visiblePages = computed(() => {
   align-items: center;
   gap: 10px;
   height: 80px;
+}
+
+
+.for-review{
+  justify-content: left;
 }
 
 .page-numbers {

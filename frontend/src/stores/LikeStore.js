@@ -126,29 +126,34 @@ export const useLikeStore = defineStore('like', () => {
         likedProducts.sort((a, b) => a.id - b.id);
         localStorage.likedProducts = JSON.stringify(likedProducts)
         console.log('Sorted Array')
+        getVisibleRecipes()
     }
     function sortPriceUp(){
         likedProducts.sort((a, b) => a.price - b.price);
         localStorage.likedProducts = JSON.stringify(likedProducts)
         console.log('Sorted Array')
+        getVisibleRecipes()
         
     }
     function sortPriceDown(){
         likedProducts.sort((a, b) => b.price - a.price );
         localStorage.likedProducts = JSON.stringify(likedProducts)
         console.log('Sorted Array')
+        getVisibleRecipes()
 
     }
     function sortRateUp(){
         likedProducts.sort((a, b) => a.rating - b.rating);
         localStorage.likedProducts = JSON.stringify(likedProducts)
         console.log('Sorted Array')
+        getVisibleRecipes()
 
     }
     function sortRateDown(){
         likedProducts.sort((a, b) => b.rating - a.rating );
         localStorage.likedProducts = JSON.stringify(likedProducts)
         console.log('Sorted Array')
+        getVisibleRecipes()
 
     }
 

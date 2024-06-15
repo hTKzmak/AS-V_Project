@@ -59,7 +59,7 @@ export default {
         }
 
         function addToBucket(){
-            bucketStore.addToBucket(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.discount === null ? singleProductStore.price : singleProductStore.discount, appleStore.BASE_URL+singleProductStore.images[0], 1)
+            bucketStore.addToBucket(singleProductStore.id, singleProductStore.name, singleProductStore.discount_price === null ? singleProductStore.price : singleProductStore.discount_price, singleProductStore.discount_price === null ? null : singleProductStore.price, appleStore.BASE_URL+singleProductStore.images[0], 1)
         }
 
         function buyInCredit(){
@@ -159,13 +159,13 @@ export default {
 
                     <div class="productData-order">
                         <div class="product-info">
-                            <h4>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' : null}}</h4>
+                            <h4>{{ singleProductStore.discount_price ? singleProductStore.price + ' ' + '₽' : null}}</h4>
                             <div class="existence">
                                 <div class="existence-sign"></div>
                                 <p>Есть в наличии</p>
                             </div>
                         </div>
-                        <h3>{{ singleProductStore.price }} ₽</h3>
+                        <h3>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' : singleProductStore.price + ' ' + '₽'}}</h3>
                         <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined" title="Добавить в корзину" addedItemStyle="false" :action="addToBucket"/>
                         <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined" title="В корзине" img='/inCart.svg' addedItemStyle='true' />
                         <p>Купить в 1 клик</p>

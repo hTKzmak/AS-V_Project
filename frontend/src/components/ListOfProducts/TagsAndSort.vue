@@ -128,7 +128,6 @@ h2 {
 
         @media screen and (max-width: 768px) {
             display: ruby;
-
             overflow-x: auto;
             flex-wrap: nowrap;
             width: auto;
