@@ -22,15 +22,15 @@ body {
         margin: 0 auto;
         padding-left: 120px;
         padding-right: 120px;
+        
+        @media screen and (max-width: 1440px) {
+            max-width: 1440px;
+            padding: 5px 25px;
+        }
 
         @media screen and (max-width: 768px) {
             max-width: 768px;
             padding: 5px 20px;
-        }
-
-        @media screen and (max-width: 1440px) {
-            max-width: 1440px;
-            padding: 5px 25px;
         }
     }
 
@@ -98,5 +98,25 @@ body {
     /* Firefox */
     input[type="number"] {
         -moz-appearance: textfield;
+    }
+
+    // Arrow
+    .arrow {
+        border: solid #706e6e;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 5px;
+    }
+
+    .up {
+        border-color: #0071e4;
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .down {
+        border-color: #0071e4;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
     }
 }

@@ -24,11 +24,6 @@ export default {
             sortedData,
             count: 12
         }
-    },
-    methods: {
-        lol() {
-            console.log(this.sortedData)
-        }
     }
 }
 </script>

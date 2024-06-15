@@ -50,6 +50,7 @@ fetch(BASE_URL + 'api/products/')
                 category: elem.category,
                 guarantee: elem.guarantee,
                 count_review: elem.count_review,
+                createdAt: elem.createdAt,
                 // Если что-то ещё надо, то можно ещё что-то добавить
             }
             productsList.push(res)
@@ -109,6 +110,7 @@ export const useCounterStore = defineStore('appleStore', {
                 this.searchData = []
             }
 
+        }
             console.log(filteredProducts)
         },
         changeCategory(){

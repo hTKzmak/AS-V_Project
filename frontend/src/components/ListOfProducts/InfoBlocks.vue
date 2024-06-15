@@ -6,7 +6,7 @@ export default {
     data() {
         return {
             infoBlocksData: [
-                { id: 1, image: AppleImage, title: 'Только оригинальная продукция Appleс гарантией и бесплатной доставкой' },
+                { id: 1, image: AppleImage, title: 'Только оригинальная продукция Apple с гарантией и бесплатной доставкой' },
                 { id: 2, image: HelpImage, title: 'Мы работаем с 10:00 до 22:00', text: 'В это время доступна доставка, самовывоз и клиентский отдел. Создать заказ на сайте можно в любое время суток' },
             ]
         }
@@ -73,6 +73,10 @@ export default {
                     @media screen and (max-width: 1440px) {
                         @include textStyle(16px, 700, #0071E4);
                     }
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 14px;
+                    }
                 }
 
                 p {
@@ -87,6 +91,7 @@ export default {
             @media screen and (max-width: 768px) {
                 justify-content: center;
                 text-align: center;
+                gap: 10px;
             }
         }
 
@@ -114,19 +119,41 @@ export default {
             align-items: start;
             padding: 8px;
             gap: 4px;
+
+            img {
+                width: 20px;
+            }
         }
 
         &:first-child {
             @media screen and (max-width: 1440px) {
                 background: #EBF8FF;
 
-                .info-blocks-text{
-                    align-items: start;
-                    
+                .info-blocks-text {
+                    align-items: center;
+
                     .title {
                         display: flex;
                         gap: 24px;
-    
+
+                        h3 {
+                            @include textStyle(14px, 400, #0071E4);
+                        }
+                    }
+                }
+
+            }
+
+            @media screen and (max-width: 768px) {
+                background: #EBF8FF;
+
+                .info-blocks-text {
+                    align-items: start;
+
+                    .title {
+                        display: flex;
+                        gap: 0;
+
                         h3 {
                             @include textStyle(14px, 400, #0071E4);
                         }

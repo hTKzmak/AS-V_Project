@@ -12,19 +12,15 @@ export default {
         const appleStore = useCounterStore()
         const sortedData = ref([]);
 
-        // const categoriesList = appleStore.categoriesData
-        const categoriesList = ['Смартфоны', 'Планшеты', 'Часы', 'Компьютеры', 'Акссесуары']
-
+        // нужен для отображения новых товаров по дате (от большего к меньшему)
         watchEffect(() => {
-            categoriesList.forEach(category => {
-                sortedData.value = sortedData.value.concat(appleStore.data.filter(elem => elem.category === category).sort((a, b) => b.id - a.id).slice(0, 2));
-            });
+            sortedData.value = appleStore.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         });
 
         return {
             appleStore,
             sortedData,
-            // count: 8
+            count: 8
         }
     }
 }
@@ -33,7 +29,7 @@ export default {
 <template>
     <div class="container">
         <RouterLink id="products-link" to="/">Новинки</RouterLink>
-        <ProductsList :data="sortedData" />
+        <ProductsList :count="count" :data="sortedData" />
     </div>
 </template>
 
@@ -41,7 +37,7 @@ export default {
 #products-link {
     font-size: 24px;
     margin-bottom: 24px;
-    
+
     @media screen and (max-width: 768px) {
         font-size: 16px;
         margin-top: 24px;
