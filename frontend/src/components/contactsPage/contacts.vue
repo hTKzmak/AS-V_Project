@@ -1,14 +1,32 @@
 <template>
-  <div class="container">
-    <div class="contacts-container">
-      <section class="contact-info">
-        <h2 class="contacts-title">Контакты</h2>
-        <div class="phone-section">
-          <p class="phone-text">Можно позвонить</p>
-          <a href="tel:+78127048697" class="phone-number">+7 (812) 704-86-97</a>
-          <p class="availability">на связи с 10:00 до 22:00</p>
+  <div class="contacts-container container">
+    <section class="contact-info">
+      <h2 class="contacts-title">Контакты</h2>
+      <div class="phone-section">
+        <p class="contacts-title-mobile">Контакты</p>
+        <p class="phone-text">Можно позвонить</p>
+        <a href="tel:+78127048697" class="phone-number">+7 (812) 704-86-97</a>
+        <p class="availability">на связи с 10:00 до 22:00</p>
+      </div>
+      <div class="callback-section">
+        <p class="callback-text">Можем позвонить мы</p>
+        <a @click="modalStore.changeModal('Callback')" class="callback-link">заказать звонок</a>
+      </div>
+      <div class="contact-methods">
+        <p class="write-text">Можно написать</p>
+        <div class="icons">
+          <a href="https://wa.me/79123456789" aria-label="WhatsApp">
+            <img src="../../assets/icons/social_media/whatsapp.svg" alt="WhatsApp" class="icon-img">
+          </a>
+          <a href="https://t.me/username" aria-label="Telegram">
+            <img src="../../assets/icons/social_media/telegram.svg" alt="Telegram" class="icon-img">
+          </a>
+          <a href="https://vk.com/username" aria-label="VK">
+            <img src="../../assets/icons/social_media/vk.svg" alt="VK" class="icon-img">
+          </a>
+          <a href="mailto:info@AppleShops.ru" class="email-text">info@AppleShops.ru</a>
         </div>
-        <div class="callback-section">
+        <!-- <div class="callback-section">
           <p class="callback-text">Можем позвонить мы</p>
           <a href="#" class="callback-link">заказать звонок</a>
         </div>
@@ -26,6 +44,7 @@
             </a>
             <a href="mailto:info@AppleShops.ru" class="email-text">info@AppleShops.ru</a>
           </div>
+        </div> -->
         </div>
       </section>
 
@@ -46,13 +65,11 @@
         </div>
       </section>
     </div>
-  </div>
 </template>
 
-<script>
-export default {
-  name: 'Contacts'
-}
+<script setup>
+import { useModalStore } from '@/stores/ModalStore';
+const modalStore = useModalStore()
 </script>
 
 <style scoped lang="scss">

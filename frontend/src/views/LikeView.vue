@@ -1,14 +1,15 @@
 <script>
+import PaginationComponent from '@/components/PaginationComponent.vue';
 import ProductsList from '../components/ProductsList.vue'
 import { useCounterStore } from '@/stores/AppleStore';
 import { useLikeStore } from '@/stores/LikeStore';
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 
 
 export default {
     components: {
-        ProductsList
+        ProductsList, PaginationComponent
     },
     setup() {
         const appleStore = useCounterStore()
@@ -41,6 +42,11 @@ export default {
                 console.log(likeStore.likedProducts)
             }
         }, { deep: true });
+        onMounted(() => {
+            likeStore.getVisibleRecipes(),
+            console.log(likeStore.paginatedData)
+        }
+        )
         return {
             appleStore, likeStore, likeSort, checkLiked
         }
@@ -76,8 +82,11 @@ export default {
             </select>
         </div>
         <div class="container">
-            <ProductsList :data="likeStore.likedProducts" :count="likeStore.likedProductsLength" />
+            <ProductsList :data="likeStore.paginatedData" :count="6" />
         </div>
+    </div>
+    <div class="pagination">
+            <PaginationComponent page="like"/>
     </div>
 </template>
 

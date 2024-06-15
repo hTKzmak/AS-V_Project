@@ -3,19 +3,24 @@ import InfoBlocks from '../components/ListOfProducts/InfoBlocks.vue'
 import TagsAndSort from '../components/ListOfProducts/TagsAndSort.vue'
 import Filter from '../components/ListOfProducts/Filter.vue';
 import ProductsList from '../components/ProductsList.vue';
+import PaginationComponent from '../components/PaginationComponent.vue';
 
 import speedImg from '../components/ProductPage/assets/icons/speed.svg';
 import cashImg from '../components/ProductPage/assets/icons/cash.svg';
 import bankImg from '../components/ProductPage/assets/icons/bank.svg';
 import sequrityImg from '../components/ProductPage/assets/icons/sequrity.svg';
 import { useCounterStore } from '@/stores/AppleStore';
+import { useRoute } from 'vue-router'
+import { onMounted, ref, watch } from 'vue';
+
 
 export default {
     components: {
         InfoBlocks,
         TagsAndSort,
         Filter,
-        ProductsList
+        ProductsList,
+        PaginationComponent
     },
     data() {
         return {
@@ -32,8 +37,23 @@ export default {
     },
     setup() {
         const appleStore = useCounterStore()
+        const route = useRoute()
+
+        let category = appleStore.category
+
+        onMounted(() => {
+            console.log(category)
+            appleStore.changeCategory()
+            appleStore.filterByCategory(category)
+            appleStore.getVisibleRecipes()
+        })
+        // watch(category, async (newQuestion) => {
+        //     category.value = newQuestion;
+        //     console.log(category)
+        // })
+
         return {
-            appleStore,
+            appleStore, route, category,
             count: 12
         }
     },
@@ -57,17 +77,17 @@ export default {
         <Filter :showFilter="showFilter" @toggle-filter="toggleFilter"></Filter>
 
         <div :class="[showFilter ? 'blur' : 'blur-none']">
-            <ProductsList :count="count" :data="appleStore.data" />
+            <ProductsList :count="count" :data="appleStore.paginatedData" />
         </div>
     </div>
 
     <div :class="[showFilter ? 'blur' : 'blur-none']">
         <div class="pagination">
-            <p style="text-align: center; font-size: 24px;">тут пагинация</p>
+            <PaginationComponent page="list"/>
         </div>
 
         <div class="advantages container">
-            <div class="advantage-item" v-for="elem in advantagesData" :id=elem.id>
+            <div class="advantage-item" v-for="elem in advantagesData" :id=elem.id :key="elem.id">
                 <div class="imgAndTitle">
                     <img :src=elem.img alt="#">
                     <h3>{{ elem.title }}</h3>

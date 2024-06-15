@@ -1,5 +1,4 @@
 <script>
-import { RouterLink } from 'vue-router'
 import Search from '../components/HomePage/Search.vue'
 import { useCounterStore } from '@/stores/AppleStore';
 import { useModalStore } from '@/stores/ModalStore';
@@ -46,12 +45,12 @@ export default {
             appleStore, modalStore, bucketStore,
             // categories нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             categories: [
-                { id: 1, title: 'iPhone', image: iPhoneIcon, link: '/list_of_products' },
-                { id: 2, title: 'iPad', image: iPadIcon, link: '/list_of_products' },
-                { id: 3, title: 'MacBook и iMac', image: iMacIcon, link: '/list_of_products' },
-                { id: 4, title: 'Watch', image: watchIcon, link: '/list_of_products' },
-                { id: 5, title: 'Гаджеты', image: gadgetsIcon, link: '/list_of_products' },
-                { id: 6, title: 'Аксессуары', image: toolsIcon, link: '/list_of_products' },
+                { id: 1, title: 'iPhone', image: iPhoneIcon, link: '/list_of_products/smartphones' },
+                { id: 2, title: 'iPad', image: iPadIcon, link: '/list_of_products/pads' },
+                { id: 3, title: 'MacBook и iMac', image: iMacIcon, link: '/list_of_products/laptops' },
+                { id: 4, title: 'Watch', image: watchIcon, link: '/list_of_products/watches' },
+                { id: 5, title: 'Гаджеты', image: gadgetsIcon, link: '/list_of_products/gadgets' },
+                { id: 6, title: 'Аксессуары', image: toolsIcon, link: '/list_of_products/accessories' },
             ]
 
         }
@@ -59,6 +58,9 @@ export default {
     methods: {
         // функция для отображения поля ввода для поиска (ф-ия используется для мобильной и планшетной версии)
         // Эта функция используется для кнопки закрытия поиска 
+        findByCategory(category){
+            this.appleStore.filterByCategory(category)
+        },
         showSearchFunc() {
             this.showSearch = !this.showSearch
             this.showButtons = !this.showButtons
@@ -137,13 +139,13 @@ export default {
 
         <!-- меню для планшета и телефона -->
         <div v-show="showMenu" class="menuModal container">
-            <a href="#!" class="recall">Вам перезвонить?</a>
+            <RouterLink to="/"> class="recall">Вам перезвонить?</RouterLink>
             <ul>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/ban">Весь каталог</RouterLink>
+                    <RouterLink to="/list_of_products/all">Весь каталог</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/ban" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
+                    <RouterLink to="/list_of_products/smartphones" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
                     <RouterLink to="/ban">Гарантия</RouterLink>
@@ -242,31 +244,14 @@ export default {
                     <img src='../assets/logo.svg' alt="logo">
                 </RouterLink>
                 <ul>
-                    <li>
-                        <RouterLink to="/ban">Весь каталог</RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink to="/ban" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции
-                        </RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink to="/ban">Гарантия</RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink to="/refund">Политика возрата</RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink to="/credit">Кредит</RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink to="/ban">Доставка и оплата</RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink to="/review">Отзывы</RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink to="/contacts">Контакты</RouterLink>
-                    </li>
+                    <li><RouterLink class="route" to="/list_of_products/all">Весь каталог</RouterLink></li>
+                    <li><RouterLink class="route" to="/list_of_products/smartphones" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink></li>
+                    <li><RouterLink class="route" to="/">Гарантия</RouterLink></li>
+                    <li><RouterLink class="route" to="/refund">Политика возрата</RouterLink></li>
+                    <li><RouterLink class="route" to="/credit">Кредит</RouterLink></li>
+                    <li><RouterLink class="route" to="/">Доставка и оплата</RouterLink></li>
+                    <li><RouterLink class="route" to="/review">Отзывы</RouterLink></li>
+                    <li><RouterLink class="route" to="/contacts">Контакты</RouterLink></li>
                 </ul>
                 <div class="phone">
                     <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812
@@ -334,7 +319,7 @@ export default {
             <!-- здесь используется те самые categories (36 строка кода) -->
             <div class="header-categories">
                 <ul>
-                    <li v-for="(category) in this.categories">
+                    <li @click="appleStore.changeCategory" v-for="(category) in this.categories" :key="category">
                         <RouterLink :to="category.link">
                             <img :src="category.image">
                             {{ category.title }}
@@ -462,7 +447,7 @@ header {
                         border-radius: 8px;
                     }
 
-                    a {
+                    a, .route {
                         color: #000;
                         text-decoration: none;
 
@@ -667,7 +652,7 @@ header {
 
                     position: relative;
 
-                    a {
+                    a, .route {
                         display: flex;
                         align-items: center;
                         gap: 8px;
@@ -839,7 +824,7 @@ header {
                     width: fit-content;
                 }
 
-                a {
+                a, .route{
                     display: flex;
                     align-items: center;
                     gap: 8px;

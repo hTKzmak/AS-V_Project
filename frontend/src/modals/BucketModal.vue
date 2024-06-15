@@ -101,6 +101,27 @@ const bucketStore = useBucketStore()
 
 <style scoped lang="scss">
 // Исправляю селекторы и инпуты
+.arrow {
+    border: solid #706E6E;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+
+}
+
+.up-arr {
+    border-color: #0071E4;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down-arr {
+    border-color: #0071E4;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+
 .payment-select-wrapper {
             max-width: 300px;
             margin: 20px;
@@ -125,7 +146,7 @@ const bucketStore = useBucketStore()
             background-image: url('../assets/icons/modals/arrow.svg');
             background-repeat: no-repeat;
             background-position: right 10px top 50%;
-            background-size: 24px 24px;
+            background-size: 16px 16px;
         }
 
         .payment-select:focus {
@@ -380,6 +401,3 @@ display: none;
         }
     }
 </style>
-
-
-

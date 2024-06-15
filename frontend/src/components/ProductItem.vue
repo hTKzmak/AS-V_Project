@@ -63,7 +63,7 @@ function addToBucket() {
 
 function addToFav() {
     likeStore.addFavourite(props.id, props.title,
-        props.price, props.image, props.rating, props.discount, props.is_available)
+        props.price, props.image, props.rating, props.discount, props.is_available, props.count_review)
     isInFav.value = !isInFav.value
     if (isInFav.value == true) {
         console.log(props.id + ' added to fav')
@@ -73,9 +73,9 @@ function addToFav() {
     console.log(isInFav.value + ' - isInFav.value for prod with id ' + props.id)
 }
 
-function showAllProducts(id) {
-    singleProductStore.findProd(id)
-}
+// function showAllProducts(id) {
+//     singleProductStore.findProd(id)
+// }
 
 // ФУНКЦИОНАЛ ОТОБРАЖЕНИЯ ДОБАВЛЕННОСТИ В ИЗБРАННОЕ/КОРЗИНУ
 
@@ -130,7 +130,7 @@ const props = defineProps({
         </div>
 
 
-        <RouterLink :to="productLink">
+        <RouterLink  :to="is_available ? productLink : ''">
             <h3>{{ title }}</h3>
             <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
         </RouterLink>

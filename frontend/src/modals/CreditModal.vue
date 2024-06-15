@@ -1,5 +1,5 @@
 <script setup>
-    import { ref, onMounted } from 'vue';
+    import { ref, onMounted, computed } from 'vue';
     // import { useModalStore } from '@/stores/ModalStore'
     import { useCurrentProductStore } from '../stores/CurrentProductStore'
     import ButtonElem from '@/components/UI/ButtonElem.vue';
@@ -26,78 +26,150 @@
                     updateTooltip();
                 });
 
+                // Хранилище или состояние для данных
+const selectedBank = ref('Любой');
+const age = ref('');
+const phone = ref('');
+const debt = ref('no');
+
+let selectedBankGlow = ref(false);
+let ageGlow = ref(false);
+let phoneGlow = ref(false);
+let debtGlow = ref(false);
+
+// Валидация телефона
+const isValidPhone = (phone) => {
+  const phoneRegex = /^\+7\d{10}$/;
+  return phoneRegex.test(phone);
+};
+
+// Вычисляемое свойство для проверки всех условий
+const isFormValid = computed(() => {
+  return (
+    isValidPhone(phone.value) &&
+    +age.value >= 18 &&
+    debt.value === 'no' &&
+    selectedBank.value !== 'Любой'
+  );
+});
+
+// Функция для обработки отправки формы
+const handleSubmit = () => {
+  if (isFormValid.value) {
+    // Ваш код для обработки отправки формы
+    console.log('Форма отправлена');
+  } else {
+    console.log('Форма невалидна');
+  }
+};
+
+const handleNonSubmit = () => {
+  if (isFormValid.value) {
+    // Ваш код для обработки отправки формы
+    console.log('Форма отправлена');
+  } else {
+    console.log('Форма невалидна');
+    if (selectedBank.value == 'Любой'){
+        selectedBankGlow.value = true
+    }
+    if (age.value < 18){
+        ageGlow.value = true
+    }
+    if (phone.value == 'Любой'){
+        selectedBankGlow.value = true
+    }
+    if (selectedBank.value == 'Любой'){
+        selectedBankGlow.value = true
+    }
+  }
+};
+
+
 </script>
 
 <template>
     <div class="OneCLickContainer">
-        <img class="prodImg desk-credit" :src="CurrentProductStore.image" alt="">
-        <div class="textField">
-            <p class="smallInfo desk-credit">Купить в кредит</p>
-            <h2 class="desk-credit">{{ CurrentProductStore.name }}</h2>
-            <p class="oldPrice desk-credit">{{ CurrentProductStore.oldPrice }} ₽</p>
-            <p class="currPrice desk-credit">{{ CurrentProductStore.price }} ₽</p>
-            <!-- props: ['title', 'img', 'action', 'addedItemStyle'] -->
-            <div class="mobile-credit">
-                <img class="prodImg" :src="CurrentProductStore.image" alt="">
-
-                <div class="mobile-info">
-                    <p class="smallInfo">Купить в кредит</p>
-                    <h2>{{ CurrentProductStore.name }}</h2>
-                    <div class="mobile-price">
-                        <p class="oldPrice">{{ CurrentProductStore.oldPrice }} ₽</p>
-                        <p class="currPrice">{{ CurrentProductStore.price }} ₽</p>
-                    </div>
-
-                </div>
+      <img class="prodImg desk-credit" :src="CurrentProductStore.image" alt="">
+      <div class="textField">
+        <p class="smallInfo desk-credit">Купить в кредит</p>
+        <h2 class="desk-credit">{{ CurrentProductStore.name }}</h2>
+        <p class="oldPrice desk-credit">{{ CurrentProductStore.oldPrice }} ₽</p>
+        <p class="currPrice desk-credit">{{ CurrentProductStore.price }} ₽</p>
+  
+        <div class="mobile-credit">
+          <img class="prodImg" :src="CurrentProductStore.image" alt="">
+  
+          <div class="mobile-info">
+            <p class="smallInfo">Купить в кредит</p>
+            <h2>{{ CurrentProductStore.name }}</h2>
+            <div class="mobile-price">
+              <p class="oldPrice">{{ CurrentProductStore.oldPrice }} ₽</p>
+              <p class="currPrice">{{ CurrentProductStore.price }} ₽</p>
             </div>
-            <h4>Выберите банк</h4>
-            <select>
-                <option>Любой</option>
-            </select>
-            <h4>Срок кредита</h4>
-            <div class="slider-container">
-                    <input type="range" v-model="value" :min="min" :max="max" @input="updateTooltip" class="slider-range">
-                    <div class="slider-values">
-                        <span v-for="mark in marks" :key="mark">{{ mark }}</span>
-                    </div>
-                    <div class="slider-tooltip number-check" :style="{ left: tooltipPosition }">{{ value }}</div>
-                    <!-- <div class="slider-tooltip point" :style="{ left: tooltipPosition }"></div> -->
-                </div>
-            <h4>Приблизительный <br> ежемесячный платеж</h4>
-            <p class="MonthPayment">{{ Math.round(MonthPayment.value) }}₽</p>
-            <h4>Есть задолженность <br> по кредитам?</h4>
-
-            <div class="radio-group">
-            <label>
-                <input type="radio" name="debt" value="yes">
-                <p class="radio-answer">Да</p>
-            </label>
-            <label>
-                <input type="radio" name="debt" value="no" checked>
-                <p class="radio-answer">Нет</p>
-            </label>
-            </div>
-            <h4>Ваш возраст?</h4>
-            <input placeholder="" class="input_field age" type="number">
-            <h4>Напишите свой номер и мы позвоним<br>
-                 Вам в течение 5 минут</h4>
-            <input placeholder="+7" class="input_field" type="tel">
-            <div style="width: 256px; height: 56px;">
-                <ButtonElem title="отправить заявку" addedItemStyle="false"/>
-            </div>
-            <p class="smallInfo">Либо позвоните или напишите нам </p>
-            <div class="last-info">
-                        <h3>+7 (812) 704-86-97</h3>
-                        <div  class="social-media">
-                            <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
-                            <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
-                            <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
-                        </div>
-            </div>
+          </div>
         </div>
-
+  
+        <h4>Выберите банк</h4>
+        <div class="payment-select-wrapper">
+          <select class="payment-select" v-model="selectedBank">
+            <option>Любой</option>
+            <!-- Добавьте другие варианты банков здесь -->
+            <option>Банк 1</option>
+            <option>Банк 2</option>
+            <!-- ... -->
+          </select>
+        </div>
+  
+        <h4>Срок кредита</h4>
+        <div class="slider-container">
+          <input type="range" v-model="value" :min="min" :max="max" @input="updateTooltip" class="slider-range">
+          <div class="slider-values">
+            <span v-for="mark in marks" :key="mark">{{ mark }}</span>
+          </div>
+          <div class="slider-tooltip number-check" :style="{ left: tooltipPosition }">{{ value }}</div>
+        </div>
+  
+        <h4>Приблизительный <br> ежемесячный платеж</h4>
+        <p class="MonthPayment">{{ Math.round(MonthPayment.value) }}₽</p>
+  
+        <h4>Есть задолженность <br> по кредитам?</h4>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="debt" value="yes" v-model="debt">
+            <p class="radio-answer">Да</p>
+          </label>
+          <label>
+            <input type="radio" name="debt" value="no" v-model="debt">
+            <p class="radio-answer">Нет</p>
+          </label>
+        </div>
+  
+        <h4>Ваш возраст?</h4>
+        <input placeholder="" class="input_field age" type="number" v-model="age">
+  
+        <h4>Напишите свой номер и мы позвоним<br> Вам в течение 5 минут</h4>
+        <input placeholder="+7" class="input_field" type="tel" v-model="phone">
+  
+        <div style="width: 256px; height: 56px;">
+          <ButtonElem
+            title="отправить заявку"
+            addedItemStyle="false"
+            :action="isFormValid ? handleSubmit : handleNonSubmit"
+          />
+        </div>
+  
+        <p class="smallInfo">Либо позвоните или напишите нам </p>
+        <div class="last-info">
+          <h3>+7 (812) 704-86-97</h3>
+          <div class="social-media">
+            <a href="#!"><img src="../assets/icons/social_media/whatsapp.svg" alt="whatsapp"></a>
+            <a href="#!"><img src="../assets/icons/social_media/telegram.svg" alt="telegram"></a>
+            <a href="#!"><img src="../assets/icons/social_media/vk.svg" alt="vk"></a>
+          </div>
+        </div>
+      </div>
     </div>
-</template>
+  </template>
 
 <style scoped lang="scss">
 *{
@@ -105,6 +177,48 @@
     margin-bottom: 10px;
     padding: 0;
 }
+
+.glow-red{
+    box-shadow: 0 0 5px red
+}
+
+
+.payment-select-wrapper {
+            display: flex;
+            align-items: flex-start;
+            justify-content: left;
+            min-width: 280px;
+            max-width: 300px;
+        }
+
+        .payment-select-wrapper label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .payment-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fafafa;
+            -webkit-appearance: none;  /* Remove default arrow in Webkit browsers */
+            -moz-appearance: none; /* Remove default arrow in Firefox */
+            appearance: none; /* Remove default arrow in modern browsers */
+            background-image: url('../assets/icons/arrow.svg');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 16px 16px;
+        }
+
+        .payment-select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
 .desk-credit{
     @media screen and (max-width: 768px) {
         display: none;

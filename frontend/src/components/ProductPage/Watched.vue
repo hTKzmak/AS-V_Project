@@ -23,7 +23,7 @@ export default {
     <div class="watched container">
         <h2>Вы смотрели</h2>
         <div class="watchedList">
-            <div v-for="index of recentStore.recentProducts.slice(1, 5)" :key="index">
+            <div v-for="index of recentStore.recentProducts.slice(0, 4)" :key="index">
                 <ProductItem :id="+index.id" :title="index.title" :price="index.price" :image="index.image" :rating="index.rating" :discount="index.discount" :is_available="index.is_available"/>
             </div>
         </div>
