@@ -127,7 +127,7 @@ export const useCounterStore = defineStore('appleStore', {
                     this.categoryData = this.data.filter(prod => prod.category == 'Планшеты')
                     break;
                 case 'accessories':
-                    this.categoryData = this.data.filter(prod => prod.category == 'Акссесуары')
+                    this.categoryData = this.data.filter(prod => prod.category == 'Аксессуары')
                     break;
                 case 'gadgets':
                     this.categoryData = this.data
