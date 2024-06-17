@@ -66,7 +66,7 @@ export default {
                 <div class="img" :style="{ backgroundImage: `url('${BASE_URL + item.image}')` }">></div>
                 <span id="price">{{ item.price }} ₽</span>
 
-                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) == undefined" title="в корзину" img='/cart.svg' addedItemStyle='false' :action="() => addToBucket(item.id, item.title, item.price, item.discount === null ? item.price : item.discount, BASE_URL + item.image, 1)" />
+                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) == undefined" title="в корзину" img='/cart.svg' addedItemStyle='false' :action="() => addToBucket(item.id, item.title, item.discount === null ? item.price : item.discount, item.discount === null ? null : item.price, BASE_URL + item.image, 1)" />
                 <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) != undefined" title="в корзине" img='/inCart.svg' addedItemStyle='true' />
                     
                 <RouterLink id="productLink" :to="{ path: '/product/' + item.id }">подробнее</RouterLink>

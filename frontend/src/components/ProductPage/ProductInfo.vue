@@ -37,8 +37,8 @@ export default {
         // Переменная для хранения ID
         const idForWatch = ref(route.params.id);
 
-        // Следим за изменениями параметра id в маршруте
-        watch(
+            // Следим за изменениями параметра id в маршруте
+            watch(
             () => route.params.id,
             (newId, oldId) => {
                 idForWatch.value = newId;
@@ -49,22 +49,22 @@ export default {
 
         //------------------------------------ ФУНКЦИОНАЛ КНОПОК -------------------------
 
-        function buyInOneClick() {
+        function buyInOneClick(){
             currentProductStore.name = singleProductStore.name
-            currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
+            currentProductStore.image = appleStore.BASE_URL+singleProductStore.images[0]
             currentProductStore.price = singleProductStore.price
             currentProductStore.oldPrice = singleProductStore.price
             modalStore.changeModal('oneClick')
 
         }
 
-        function addToBucket() {
-            bucketStore.addToBucket(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.discount === null ? singleProductStore.price : singleProductStore.discount, appleStore.BASE_URL + singleProductStore.images[0], 1)
+        function addToBucket(){
+            bucketStore.addToBucket(singleProductStore.id, singleProductStore.name, singleProductStore.discount_price === null ? singleProductStore.price : singleProductStore.discount_price, singleProductStore.discount_price === null ? null : singleProductStore.price, appleStore.BASE_URL+singleProductStore.images[0], 1)
         }
 
-        function buyInCredit() {
+        function buyInCredit(){
             currentProductStore.name = singleProductStore.name
-            currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
+            currentProductStore.image = appleStore.BASE_URL+singleProductStore.images[0]
             currentProductStore.price = singleProductStore.price
             currentProductStore.oldPrice = singleProductStore.price
             modalStore.changeModal('credit')
@@ -82,7 +82,7 @@ export default {
         )
         return {
             singleProductStore, appleStore, productId, bucketStore,
-            modalStore, currentProductStore, buyInOneClick, addToBucket, buyInCredit,
+             modalStore, currentProductStore, buyInOneClick, addToBucket, buyInCredit,
             // characteristics нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             characteristics: singleProductStore.characteristics
         }
@@ -148,10 +148,9 @@ export default {
                         <h2 id="title_characteristic">Характеристики</h2>
 
                         <div class="characteristicsList">
-                            <div class="characteristicItem" v-for="elem in singleProductStore.characteristics"
-                                :key="elem.characteristic">
+                            <div class="characteristicItem" v-for="elem in singleProductStore.characteristics" :key="elem.characteristic">
                                 <p>{{ elem.characteristic }}</p>
-                                <p v-if="elem.unit_type != 'значение'">{{ elem.value }} {{ elem.unit_type }}</p>
+                                <p v-if="elem.unit_type!='значение'">{{ elem.value }} {{ elem.unit_type }}</p>
                                 <p v-else>{{ elem.value }}</p>
                             </div>
                             <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
@@ -160,18 +159,15 @@ export default {
 
                     <div class="productData-order">
                         <div class="product-info">
-                            <h4>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' :
-                                null}}</h4>
+                            <h4>{{ singleProductStore.discount_price ? singleProductStore.price + ' ' + '₽' : null}}</h4>
                             <div class="existence">
                                 <div class="existence-sign"></div>
                                 <p>Есть в наличии</p>
                             </div>
                         </div>
-                        <h3>{{ singleProductStore.price }} ₽</h3>
-                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined"
-                            title="Добавить в корзину" addedItemStyle="false" :action="addToBucket" />
-                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined"
-                            title="В корзине" img='/inCart.svg' addedItemStyle='true' />
+                        <h3>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' : singleProductStore.price + ' ' + '₽'}}</h3>
+                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined" title="Добавить в корзину" addedItemStyle="false" :action="addToBucket"/>
+                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined" title="В корзине" img='/inCart.svg' addedItemStyle='true' />
                         <p>Купить в 1 клик</p>
                         <div class="buyInOneClick">
                             <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">
@@ -209,6 +205,16 @@ export default {
                                 </li>
                             </ul>
                         </nav>
+                        <!-- 
+                        <h2 id="title_characteristic">Характеристики</h2>
+
+                        <div class="characteristicsList">
+                            <div class="characteristicItem" v-for="elem in characteristics">
+                                <p>{{ elem.title }}</p>
+                                <p>{{ elem.text }}</p>
+                            </div>
+                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
+                        </div> -->
 
                     </div>
 
@@ -216,11 +222,9 @@ export default {
                         <h2 id="title_characteristic">Характеристики</h2>
 
                         <div class="characteristicsList">
-                            <div class="characteristicItem" v-for="elem in singleProductStore.characteristics"
-                                :key="elem.characteristic">
-                                <p>{{ elem.characteristic }}</p>
-                                <p v-if="elem.unit_type != 'значение'">{{ elem.value }} {{ elem.unit_type }}</p>
-                                <p v-else>{{ elem.value }}</p>
+                            <div class="characteristicItem" v-for="elem in characteristics" :key="elem">
+                                <p>{{ elem.title }}</p>
+                                <p>{{ elem.text }}</p>
                             </div>
                             <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
                         </div>
@@ -348,7 +352,7 @@ export default {
 
                 margin-top: 50px;
 
-                h2 {
+                h2{
                     margin-left: 0;
                 }
 
@@ -549,15 +553,15 @@ export default {
                 }
 
 
-
-
+                
+                
                 @media screen and (max-width: 768px) {
                     width: 22rem;
                 }
-
+                
             }
-
-            .characteristics_mobile {
+            
+            .characteristics_mobile{
 
                 display: none;
 

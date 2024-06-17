@@ -50,7 +50,6 @@ fetch(BASE_URL + 'api/products/')
                 category: elem.category,
                 guarantee: elem.guarantee,
                 count_review: elem.count_review,
-                createdAt: elem.createdAt,
                 // Если что-то ещё надо, то можно ещё что-то добавить
             }
             productsList.push(res)
@@ -88,10 +87,33 @@ export const useCounterStore = defineStore('appleStore', {
         searchData: reactive([]),
         route: useRoute(),
     }),
-
     actions: {
         getData() {
-            console.log(this.data)
+
+            fetch(BASE_URL + 'api/products/')
+                .then(res => res.json())
+                .then(json => {
+                    json.map(elem => {
+                        let res = {
+                            id: elem.id,
+                            title: elem.name,
+                            price: elem.price,
+                            image: elem.images[0],
+                            rating: elem.rating,
+                            discount: elem.discount_price,
+                            is_available: elem.is_available,
+                            category: elem.category,
+                            guarantee: elem.guarantee,
+                            count_review: elem.count_review,
+                            // Если что-то ещё надо, то можно ещё что-то добавить
+                        }
+                        console.log(res)
+                        productsList.push(res)
+                    }),
+                        this.filterByCategory(this.route.params.category),
+                        console.log(this.data)
+                })
+
         },
         getValue(value) {
             this.inputValue = value
@@ -110,6 +132,7 @@ export const useCounterStore = defineStore('appleStore', {
                 this.searchData = []
             }
 
+            console.log(filteredProducts)
         },
         changeCategory() {
             currentPage.value = 1
@@ -117,6 +140,7 @@ export const useCounterStore = defineStore('appleStore', {
             // category.value = route.params.category;
             console.log(this.route.params.category)
             this.filterByCategory(this.route.params.category)
+
         },
         filterByCategory(category) {
             switch (category) {

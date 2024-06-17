@@ -39,10 +39,11 @@ export default {
         const appleStore = useCounterStore()
         const route = useRoute()
 
-        let category = appleStore.category
+        let category = route.params.category
 
         onMounted(() => {
             console.log(category)
+            appleStore.getData()
             appleStore.changeCategory()
             appleStore.filterByCategory(category)
             appleStore.getVisibleRecipes()
@@ -154,7 +155,6 @@ export default {
         @media screen and (max-width: 1440px) {
             max-width: none;
             margin: 0;
-            padding: 30px 0 16px;
         }
     }
 }
