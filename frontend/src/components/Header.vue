@@ -475,7 +475,7 @@ header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 15px;
+            // gap: 15px;
 
             position: relative;
 

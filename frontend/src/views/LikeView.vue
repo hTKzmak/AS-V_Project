@@ -44,7 +44,7 @@ export default {
         }, { deep: true });
         onMounted(() => {
             likeStore.getVisibleRecipes(),
-            console.log(likeStore.paginatedData)
+                console.log(likeStore.paginatedData)
         }
         )
         return {
@@ -84,9 +84,10 @@ export default {
         <div class="container">
             <ProductsList :data="likeStore.paginatedData" :count="6" />
         </div>
-    </div>
-    <div class="pagination">
-            <PaginationComponent page="like"/>
+
+        <div class="pagination">
+            <PaginationComponent page="like" />
+        </div>
     </div>
 </template>
 
@@ -139,8 +140,8 @@ export default {
 
     @media screen and (max-width: 769px) {
         flex-wrap: wrap;
-        
-        p{
+
+        p {
             margin: 0;
         }
     }

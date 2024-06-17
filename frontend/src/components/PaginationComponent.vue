@@ -4,11 +4,11 @@ import { useCounterStore } from '@/stores/AppleStore';
 import { useLikeStore } from '@/stores/LikeStore';
 const appleStore = useCounterStore();
 const likeStore = useLikeStore()
-const left_sign = "<";
-const right_sign = ">";
+// const left_sign = "<";
+// const right_sign = ">";
 
 const props = defineProps({
-    page: String,
+  page: String,
 });
 
 // Текущая страница
@@ -16,12 +16,12 @@ const currentPage = ref(1);
 let totalPages = ref(10)
 
 // Общее количество страниц
-if (props.page == 'list'){
-    totalPages = computed(() => appleStore.menuListarr.length);
-    console.log(totalPages.value)
-} else if(props.page == 'like'){
-    totalPages = computed(() => likeStore.menuListarr.length);
-    console.log(totalPages.value)
+if (props.page == 'list') {
+  totalPages = computed(() => appleStore.menuListarr.length);
+  console.log(totalPages.value)
+} else if (props.page == 'like') {
+  totalPages = computed(() => likeStore.menuListarr.length);
+  console.log(totalPages.value)
 }
 
 
@@ -30,12 +30,12 @@ const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value += 1;
 
-    if (props.page == 'list'){
-        appleStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in LIST')
-    } else if(props.page == 'like'){
-        likeStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in LIKE')
+    if (props.page == 'list') {
+      appleStore.goToPage(currentPage.value);
+      console.log('We went to page ' + currentPage.value + ' in LIST')
+    } else if (props.page == 'like') {
+      likeStore.goToPage(currentPage.value);
+      console.log('We went to page ' + currentPage.value + ' in LIKE')
     }
   }
 };
@@ -44,12 +44,12 @@ const nextPage = () => {
 const previousPage = () => {
   if (currentPage.value > 1) {
     currentPage.value -= 1;
-    if (props.page == 'list'){
-        appleStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in LIST')
-    } else if(props.page == 'like'){
-        likeStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in LIKE')
+    if (props.page == 'list') {
+      appleStore.goToPage(currentPage.value);
+      console.log('We went to page ' + currentPage.value + ' in LIST')
+    } else if (props.page == 'like') {
+      likeStore.goToPage(currentPage.value);
+      console.log('We went to page ' + currentPage.value + ' in LIKE')
     }
   }
 };
@@ -90,41 +90,61 @@ const visiblePages = computed(() => {
 </script>
 
 <template>
-  <div v-if="props.page=='list'" class="pagination">
-    <button @click="previousPage" class="arrow-button">{{ left_sign }}</button>
+  <div v-if="props.page == 'list'" class="pagination">
+    <button @click="previousPage" class="arrow-button">
+      <i class="arrow left"></i>
+    </button>
     <div class="page-numbers">
-      <button 
-        v-for="page in visiblePages" 
-        :key="page" 
-        @click="page !== '...' ? (currentPage = page, appleStore.goToPage(page)) : null" 
-        :class="['page-button', currentPage === page ? 'active' : '']" 
-        :disabled="page === '...'"
-      >
+      <button v-for="page in visiblePages" :key="page"
+        @click="page !== '...' ? (currentPage = page, appleStore.goToPage(page)) : null"
+        :class="['page-button', currentPage === page ? 'active' : '']" :disabled="page === '...'">
         {{ page }}
       </button>
     </div>
-    <button @click="nextPage" class="arrow-button">{{ right_sign }}</button>
+    <button @click="nextPage" class="arrow-button">
+      <i class="arrow right"></i>
+    </button>
   </div>
 
 
-  <div v-if="props.page=='like'" class="pagination">
-    <button @click="previousPage" class="arrow-button like">{{ left_sign }}</button>
+  <div v-if="props.page == 'like'" class="pagination">
+    <button @click="previousPage" class="arrow-button like">
+      <i class="arrow left"></i>
+    </button>
     <div class="page-numbers like">
-      <button 
-        v-for="page in visiblePages" 
-        :key="page" 
-        @click="page !== '...' ? (currentPage = page, likeStore.goToPage(page)) : null" 
-        :class="['page-button like', currentPage === page ? 'active' : '']" 
-        :disabled="page === '...'"
-      >
+      <button v-for="page in visiblePages" :key="page"
+        @click="page !== '...' ? (currentPage = page, likeStore.goToPage(page)) : null"
+        :class="['page-button like', currentPage === page ? 'active' : '']" :disabled="page === '...'">
         {{ page }}
       </button>
     </div>
-    <button @click="nextPage" class="arrow-button like">{{ right_sign }}</button>
+    <button @click="nextPage" class="arrow-button like">
+      <i class="arrow right"></i>
+    </button>
   </div>
 </template>
 
 <style lang="scss" scoped>
+
+.arrow {
+    border: solid #1a161685;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -138,13 +158,15 @@ const visiblePages = computed(() => {
   gap: 5px;
 }
 
-.page-button, .arrow-button {
+.page-button,
+.arrow-button {
   border: none;
   background: none;
   color: #333;
   font-size: 24px;
   font-weight: 400;
   cursor: pointer;
+  display: flex;
 }
 
 .page-button.active {
@@ -152,7 +174,8 @@ const visiblePages = computed(() => {
   font-weight: bold;
 }
 
-.page-button:hover, .arrow-button:hover {
+.page-button:hover,
+.arrow-button:hover {
   color: #007bff;
 }
 
