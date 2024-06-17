@@ -39,10 +39,11 @@ export default {
         const appleStore = useCounterStore()
         const route = useRoute()
 
-        let category = appleStore.category
+        let category = route.params.category
 
         onMounted(() => {
             console.log(category)
+            appleStore.getData()
             appleStore.changeCategory()
             appleStore.filterByCategory(category)
             appleStore.getVisibleRecipes()

@@ -10,6 +10,7 @@ import iMacIcon from '../assets/icons/header/gadgets/macbook.svg'
 import watchIcon from '../assets/icons/header/gadgets/applewatch.svg'
 import gadgetsIcon from '../assets/icons/header/gadgets/airpods.svg'
 import toolsIcon from '../assets/icons/header/gadgets/tools.svg'
+import { computed } from 'vue';
 
 export default {
     components: {
@@ -40,9 +41,12 @@ export default {
         const appleStore = useCounterStore()
         const modalStore = useModalStore()
         const bucketStore = useBucketStore()
+        const productLink = computed(() => ({
+            name: '/product'
+        }));
         return {
 
-            appleStore, modalStore, bucketStore,
+            appleStore, modalStore, bucketStore, productLink,
             // categories нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             categories: [
                 { id: 1, title: 'iPhone', image: iPhoneIcon, link: '/list_of_products/smartphones' },
@@ -261,7 +265,7 @@ export default {
                 </div>
             </div>
 
-
+<!---------------------------- КАТАЛОГ ------------------------------->
             <div class="header-search">
                 <div class="catalogNavigation">
                     <button @click="activateCatalogFunc()"
@@ -271,21 +275,23 @@ export default {
                     <div class="catalog">
                         <div v-show="activateCatalog" class="catalogModal">
                             <ul class="catalogToolsList">
-                                <li @mouseenter="showProductsFunc(elem)" v-for="elem in catalogsList">{{ elem }}</li>
+                                <li @mouseenter="showProductsFunc(elem)" v-for="elem in catalogsList" :key="elem">{{ elem }}</li>
                             </ul>
 
                             <div v-show="showProducts" class="catalogItemsList">
-                                <div class="catalogItem" v-for="product in filteredProducts.slice(0, 12)"
-                                    :id=product.id>
+                                <RouterLink :to="productLink.name + '/' + product.id" style="position: relative;" class="catalogItem" v-for="product in filteredProducts.slice(0, 12)"
+                                    :id=product.id :key="product.id">
 
-                                    <img :src="appleStore.BASE_URL + product.image">
+        
+                                        <img :src="appleStore.BASE_URL + product.image">
 
-                                    <div class="title">
-                                        <p>{{ product.title }}</p>
-                                        <span>{{ product.discount === null ? 'от' + ' ' + product.price + '₽' : 'от'
-                                            + ' ' + product.discount + '₽' }}</span>
-                                    </div>
-                                </div>
+                                        <div class="title">
+                                            <p>{{ product.title }}</p>
+                                            <span>{{ product.discount === null ? 'от' + ' ' + product.price + '₽' : 'от'
+                                                + ' ' + product.discount + '₽' }}</span>
+                                        </div>
+
+                                </RouterLink>
                                 <RouterLink v-show="filteredProducts.length > 0" to="/ban"
                                     @click="activateCatalog = false">
                                     Смотреть все товары
@@ -342,7 +348,7 @@ export default {
 
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 header {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -874,5 +880,9 @@ header {
         right: 0;
         background-color: #fff;
     }
+}
+
+.itemLink{
+    position: relative;
 }
 </style>

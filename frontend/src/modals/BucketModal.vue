@@ -32,7 +32,7 @@ const bucketStore = useBucketStore()
                     <img class="prod_img" :src="item.image">
                     <div class="text-field">
                         <p>{{item.title}}</p>
-                        <div style="display: flex; gap: 10px;"><p v-if="item.oldPrice" style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
+                        <div style="display: flex; gap: 10px;"><p v-if="item.oldPrice!==null" style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p v-if="item.lastPrice!==null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
                             <div class="counter-field">
                                 <button @click="bucketStore.countDown(item.id)" class="change-count">-</button>
                                 <p style="color: #0071E4;">{{item.count}}</p>
@@ -336,8 +336,8 @@ const bucketStore = useBucketStore()
     .close{
         background: none;
         border: none;
-        width: 24px;
-        height: 24px;
+        width: 16px;
+        height: 16px;
         position: absolute;
         top: 10px;
         right: 10px;
