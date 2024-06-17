@@ -548,13 +548,14 @@ header {
                             display: grid;
                             grid-template-columns: repeat(3, auto);
                             gap: 8px;
-
+                            
                             // overflow-y: auto;
                             // overflow-x: hidden;
-
+                            
                             // width: 53rem;
                             height: 18rem;
                             margin-left: 16px;
+                            margin-top: 15px;
 
 
                             .catalogItem {
@@ -582,7 +583,7 @@ header {
                                 .title {
 
                                     p,
-                                    span {
+                                    span, a {
                                         margin: 0;
 
                                         text-overflow: clip;
@@ -592,11 +593,12 @@ header {
                                         overflow: hidden;
                                     }
 
-                                    p {
+                                    p, a {
                                         font-size: 16px;
+                                        color: #100E0E;
                                     }
 
-                                    span {
+                                    span, a {
                                         font-size: 14px;
                                         color: #282626;
                                     }
@@ -611,7 +613,8 @@ header {
 
                             a {
                                 position: absolute;
-                                bottom: 15px;
+                                // bottom: 15px;
+                                bottom: 8px;
                                 width: max-content;
                             }
                         }
