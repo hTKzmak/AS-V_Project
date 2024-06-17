@@ -139,6 +139,10 @@ export default {
                 max-width: none;
             }
 
+            max-width: 160px;
+            @media screen and (max-width: 1440px) {
+                max-width: none;
+            }
             @media screen and (max-width: 768px) {
                 border-radius: 8px;
                 font-size: 16px;

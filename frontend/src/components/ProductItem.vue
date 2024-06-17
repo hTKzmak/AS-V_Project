@@ -58,7 +58,7 @@ const tradeInHandle = () => {
 }
 
 function addToBucket() {
-    bucketStore.addToBucket(props.id, props.title, props.price, props.discount === null ? props.price : props.discount, BASE_URL + props.image, 1)
+    bucketStore.addToBucket(props.id, props.title, props.discount === null ? props.price : props.discount, props.discount === null ? null : props.price, BASE_URL + props.image, 1)
 }
 
 function addToFav() {
