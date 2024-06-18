@@ -66,9 +66,12 @@ export default {
                 <div class="img" :style="{ backgroundImage: `url('${BASE_URL + item.image}')` }">></div>
                 <span id="price">{{ item.price }} ₽</span>
 
-                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) == undefined" title="в корзину" img='/cart.svg' addedItemStyle='false' :action="() => addToBucket(item.id, item.title, item.discount === null ? item.price : item.discount, item.discount === null ? null : item.price, BASE_URL + item.image, 1)" />
-                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) != undefined" title="в корзине" img='/inCart.svg' addedItemStyle='true' />
-                    
+                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) == undefined" title="в корзину"
+                    img='/cart.svg' addedItemStyle='false'
+                    :action="() => addToBucket(item.id, item.title, item.discount === null ? item.price : item.discount, item.discount === null ? null : item.price, BASE_URL + item.image, 1)" />
+                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) != undefined" title="в корзине"
+                    img='/inCart.svg' addedItemStyle='true' />
+
                 <RouterLink id="productLink" :to="{ path: '/product/' + item.id }">подробнее</RouterLink>
             </div>
         </Slide>
@@ -132,7 +135,7 @@ export default {
         background-size: contain;
     }
 
-    button{
+    button {
         @include btnAndLink;
         width: auto;
 
@@ -144,7 +147,7 @@ export default {
     #productLink {
         @include btnAndLink;
         display: none;
-        
+
         @media screen and (max-width: 1440px) {
             display: flex;
             justify-content: center;
@@ -163,6 +166,21 @@ export default {
     .carousel__viewport {
         overflow-x: auto;
         padding-bottom: 24px;
+
+        &::-webkit-scrollbar {
+            height: 8px;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #CDDDF5;
+            border-radius: 10px;
+
+            &:hover {
+                background-color: #b4cef5;
+            }
+        }
     }
 
     .carousel__prev,

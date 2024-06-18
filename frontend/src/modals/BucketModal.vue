@@ -26,7 +26,7 @@ function changeHandle() {
     <div v-if="bucketStore.buckLength != 0" class="bucket">
         <h1>Оформление заказа</h1>
         <div class="bucket_contain">
-            <div class="list">
+            <div class="list custom-scrollbar-min">
                 <div v-for="(item, index) in bucketStore.bucket" :key="index" class="product_card">
                     <button class='close' @click="deleteItem(item.id)"><img src="..\assets\icons\modals\close.png"
                             alt=""></button>
@@ -47,7 +47,7 @@ function changeHandle() {
                     </div>
                 </div>
             </div>
-            <div class="list">
+            <div class="list custom-scrollbar-min">
                 <form>
                     <div class="info_field">
                         <div class="cost">

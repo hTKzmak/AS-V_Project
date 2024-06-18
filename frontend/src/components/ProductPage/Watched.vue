@@ -24,7 +24,9 @@ export default {
         <h2>Вы смотрели</h2>
         <div class="watchedList">
             <div v-for="index of recentStore.recentProducts.slice(0, 4)" :key="index">
-                <ProductItem :id="+index.id" :title="index.title" :price="index.price" :image="index.image" :rating="index.rating" :discount="index.discount" :is_available="index.is_available" :category="index.category" :guarantee="index.guarantee" :count_review="index.count_review"/>
+                <ProductItem :id="+index.id" :title="index.title" :price="index.price" :image="index.image"
+                    :rating="index.rating" :discount="index.discount" :is_available="index.is_available"
+                    :category="index.category" :guarantee="index.guarantee" :count_review="index.count_review" />
             </div>
         </div>
     </div>
@@ -44,7 +46,7 @@ export default {
         }
     }
 
-    .watchedList{
+    .watchedList {
         display: flex;
         justify-content: space-between;
         gap: 16px;

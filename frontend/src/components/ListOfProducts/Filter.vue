@@ -52,7 +52,7 @@ export default {
             // значения ползунков (мин и макс) (сюда надо вставить мин и макс цену из всех товаров)
             sliderMin: ref(0),
             sliderMax: ref(100),
-            
+
             // булевое значение для отслеживания разрешения экрана (для двойного ползунка)
             isDesktop: window.innerWidth > 1440,
 
@@ -180,7 +180,7 @@ export default {
                 <button @click="showFilterFunc"><img src="../../assets/icons/header/close.svg" alt="X"></button>
             </div>
 
-            <div class="filter-info">
+            <div class="filter-info custom-scrollbar-min">
 
                 <div class="price-range">
                     <h3>Цена</h3>
@@ -253,7 +253,7 @@ export default {
     // ПК ВЕРСИЯ ФИЛЬТРА
     .filter-desktop {
 
-    max-width: 420px;
+        max-width: 420px;
 
         .filter-info {
             padding: 32px 24px 32px 140px;
@@ -445,10 +445,16 @@ export default {
             }
         }
 
+
         .filter-info {
+            // padding: 0 24px 24px;
+            // overflow-y: auto;
+            // max-height: 424px;
+
             padding: 0 24px 24px;
             overflow-y: auto;
             max-height: 424px;
+            margin-right: 40px;
 
             .price-range {
 

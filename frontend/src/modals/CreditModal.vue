@@ -90,7 +90,7 @@ const handleNonSubmit = () => {
 <template>
     <div class="OneCLickContainer">
       <img class="prodImg desk-credit" :src="CurrentProductStore.image" alt="">
-      <div class="textField">
+      <div class="textField custom-scrollbar-min">
         <p class="smallInfo desk-credit">Купить в кредит</p>
         <h2 class="desk-credit">{{ CurrentProductStore.name }}</h2>
         <p class="oldPrice desk-credit">{{ CurrentProductStore.oldPrice }} ₽</p>

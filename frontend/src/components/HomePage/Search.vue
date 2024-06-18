@@ -13,7 +13,7 @@ const productLink = computed(() => ({
 </script>
 
 <template>
-    <ul class="searchList">
+    <ul class="searchList custom-scrollbar">
         <li class="searchItem" v-for="index in appleStore.searchData" :key="index">
             <div class="search-product-info">
                 <div class="img" :style="{ backgroundImage: `url('${BASE_URL + index.image}')` }"></div>
