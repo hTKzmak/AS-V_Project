@@ -63,6 +63,10 @@ const singleProductStore = useSingleProductStore()
     img{
         width: 320px;
         margin: 0 auto;
+
+        @media screen and (max-width: 768px) {
+            width: auto;
+        }
     }
 
     button{

@@ -167,7 +167,8 @@
         }
 
         @media screen and (max-width: 768px) {
-            width: 320px;
+            // width: 320px;
+            width: auto;
         }
     }
 
@@ -195,6 +196,10 @@
     @media screen and (max-width: 1440px) {
         padding: 24px 90px;
         justify-content: center;
+    }
+
+    @media screen and (max-width: 768px) {
+        display: contents;
     }
 }
 </style>

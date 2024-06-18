@@ -211,9 +211,10 @@ export default {
                         <h2 id="title_characteristic">Характеристики</h2>
 
                         <div class="characteristicsList">
-                            <div class="characteristicItem" v-for="elem in characteristics" :key="elem">
-                                <p>{{ elem.title }}</p>
-                                <p>{{ elem.text }}</p>
+                            <div class="characteristicItem" v-for="elem in singleProductStore.characteristics" :key="elem.characteristic">
+                                <p>{{ elem.characteristic }}</p>
+                                <p v-if="elem.unit_type!='значение'">{{ elem.value }} {{ elem.unit_type }}</p>
+                                <p v-else>{{ elem.value }}</p>
                             </div>
                         </div>
                     </div>
@@ -339,7 +340,7 @@ export default {
             .productData-options {
 
                 margin-top: 50px;
-                max-width: 25rem;
+                // max-width: 25rem;
 
                 h2{
                     margin-left: 0;
@@ -347,6 +348,7 @@ export default {
 
                 nav>ul {
 
+                    max-width: 300px;
                     display: flex;
                     flex-wrap: wrap;
                     gap: 8px;
@@ -362,6 +364,10 @@ export default {
                                 border: 2px solid #1877F2;
                             }
                         }
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        max-width: auto;
                     }
                 }
 
@@ -541,7 +547,8 @@ export default {
                 
                 
                 @media screen and (max-width: 768px) {
-                    width: 22rem;
+                    // width: 22rem;
+                    width: auto;
                 }
                 
             }
@@ -584,7 +591,8 @@ export default {
                     }
 
                     @media screen and (max-width: 768px) {
-                        display: grid;
+                        // display: grid;
+                        display: inherit;
                     }
 
                 }
@@ -601,8 +609,9 @@ export default {
         }
 
         @media screen and (max-width: 1440px) {
-            margin-top: 0;
+            // margin-top: 0;
             width: auto;
+            margin: 0 auto;
         }
 
     }
@@ -628,7 +637,7 @@ export default {
     @media screen and (max-width: 1440px) {
         display: grid;
         justify-content: center;
-        margin: 80px 0;
+        margin: 80px 0 24px;
     }
 
 }
