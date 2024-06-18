@@ -153,7 +153,6 @@ export default {
                                 <p v-if="elem.unit_type!='значение'">{{ elem.value }} {{ elem.unit_type }}</p>
                                 <p v-else>{{ elem.value }}</p>
                             </div>
-                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
                         </div>
                     </div>
 
@@ -205,16 +204,6 @@ export default {
                                 </li>
                             </ul>
                         </nav>
-                        <!-- 
-                        <h2 id="title_characteristic">Характеристики</h2>
-
-                        <div class="characteristicsList">
-                            <div class="characteristicItem" v-for="elem in characteristics">
-                                <p>{{ elem.title }}</p>
-                                <p>{{ elem.text }}</p>
-                            </div>
-                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
-                        </div> -->
 
                     </div>
 
@@ -226,7 +215,6 @@ export default {
                                 <p>{{ elem.title }}</p>
                                 <p>{{ elem.text }}</p>
                             </div>
-                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
                         </div>
                     </div>
 
@@ -409,10 +397,6 @@ export default {
                                 color: #121212B2;
                             }
                         }
-                    }
-
-                    a {
-                        margin-top: 16px;
                     }
 
                     @media screen and (max-width: 768px) {
