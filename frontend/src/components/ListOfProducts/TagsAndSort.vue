@@ -129,7 +129,11 @@ h2 {
         }
 
         @media screen and (max-width: 768px) {
-            display: flex;
+            // для firefox
+            display: ruby;
+            // для chrome
+            display: -webkit-inline-box;
+
             overflow-x: auto;
             flex-wrap: inherit;
             width: auto;

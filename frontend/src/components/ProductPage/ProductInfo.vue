@@ -351,6 +351,7 @@ export default {
             .productData-options {
 
                 margin-top: 50px;
+                max-width: 25rem;
 
                 h2{
                     margin-left: 0;
