@@ -1,5 +1,6 @@
 <script setup>
 import { useCounterStore } from '@/stores/AppleStore';
+import { defineProps } from 'vue';
 import { computed } from 'vue';
 
 const appleStore = useCounterStore();
@@ -9,6 +10,10 @@ let BASE_URL = appleStore.BASE_URL
 const productLink = computed(() => ({
     name: '/product'
 }));
+
+const props = defineProps({
+    showSearch: Boolean
+})
 
 </script>
 

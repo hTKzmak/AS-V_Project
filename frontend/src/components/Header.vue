@@ -62,7 +62,7 @@ export default {
     methods: {
         // функция для отображения поля ввода для поиска (ф-ия используется для мобильной и планшетной версии)
         // Эта функция используется для кнопки закрытия поиска 
-        findByCategory(category){
+        findByCategory(category) {
             this.appleStore.filterByCategory(category)
         },
         showSearchFunc() {
@@ -149,7 +149,8 @@ export default {
                     <RouterLink to="/list_of_products/all">Весь каталог</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/list_of_products/smartphones" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
+                    <RouterLink to="/list_of_products/smartphones" id="fire"><img
+                            src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
                     <RouterLink to="/ban">Гарантия</RouterLink>
@@ -204,6 +205,7 @@ export default {
             </div>
 
             <!-- Окно с результатом поиска -->
+            <!-- <Search :showSearch="showSearch"/> -->
             <Search />
 
         </div>
@@ -236,6 +238,7 @@ export default {
             </div>
 
             <!-- Окно с результатом поиска -->
+            <!-- <Search :showSearch="showSearch"/> -->
             <Search />
 
         </div>
@@ -248,14 +251,31 @@ export default {
                     <img src='../assets/logo.svg' alt="logo">
                 </RouterLink>
                 <ul>
-                    <li><RouterLink class="route" to="/list_of_products/all">Весь каталог</RouterLink></li>
-                    <li><RouterLink class="route" to="/list_of_products/smartphones" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink></li>
-                    <li><RouterLink class="route" to="/">Гарантия</RouterLink></li>
-                    <li><RouterLink class="route" to="/refund">Политика возрата</RouterLink></li>
-                    <li><RouterLink class="route" to="/credit">Кредит</RouterLink></li>
-                    <li><RouterLink class="route" to="/">Доставка и оплата</RouterLink></li>
-                    <li><RouterLink class="route" to="/review">Отзывы</RouterLink></li>
-                    <li><RouterLink class="route" to="/contacts">Контакты</RouterLink></li>
+                    <li>
+                        <RouterLink class="route" to="/list_of_products/all">Весь каталог</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink class="route" to="/list_of_products/smartphones" id="fire"><img
+                                src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink class="route" to="/">Гарантия</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink class="route" to="/refund">Политика возрата</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink class="route" to="/credit">Кредит</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink class="route" to="/">Доставка и оплата</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink class="route" to="/review">Отзывы</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink class="route" to="/contacts">Контакты</RouterLink>
+                    </li>
                 </ul>
                 <div class="phone">
                     <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812
@@ -265,7 +285,7 @@ export default {
                 </div>
             </div>
 
-<!---------------------------- КАТАЛОГ ------------------------------->
+            <!---------------------------- КАТАЛОГ ------------------------------->
             <div class="header-search">
                 <div class="catalogNavigation">
                     <button @click="activateCatalogFunc()"
@@ -275,21 +295,23 @@ export default {
                     <div class="catalog">
                         <div v-show="activateCatalog" class="catalogModal">
                             <ul class="catalogToolsList">
-                                <li @mouseenter="showProductsFunc(elem)" v-for="elem in catalogsList" :key="elem">{{ elem }}</li>
+                                <li @mouseenter="showProductsFunc(elem)" v-for="elem in catalogsList" :key="elem">{{
+                                    elem }}</li>
                             </ul>
 
                             <div v-show="showProducts" class="catalogItemsList">
-                                <RouterLink :to="productLink.name + '/' + product.id" style="position: relative;" class="catalogItem" v-for="product in filteredProducts.slice(0, 12)"
-                                    :id=product.id :key="product.id">
+                                <RouterLink :to="productLink.name + '/' + product.id" style="position: relative;"
+                                    class="catalogItem" v-for="product in filteredProducts.slice(0, 12)" :id=product.id
+                                    :key="product.id" @click="activateCatalog = false">
 
-        
-                                        <img :src="appleStore.BASE_URL + product.image">
 
-                                        <div class="title">
-                                            <p>{{ product.title }}</p>
-                                            <span>{{ product.discount === null ? 'от' + ' ' + product.price + '₽' : 'от'
-                                                + ' ' + product.discount + '₽' }}</span>
-                                        </div>
+                                    <img :src="appleStore.BASE_URL + product.image">
+
+                                    <div class="title">
+                                        <p>{{ product.title }}</p>
+                                        <span>{{ product.discount === null ? 'от' + ' ' + product.price + '₽' : 'от'
+                                            + ' ' + product.discount + '₽' }}</span>
+                                    </div>
 
                                 </RouterLink>
                                 <RouterLink v-show="filteredProducts.length > 0" to="/ban"
@@ -307,10 +329,11 @@ export default {
                     @input="appleStore.searchFunc($event.target.value)">
 
                 <!-- Окно с результатом поиска -->
+                <!-- <Search :showSearch="showSearch"/> -->
                 <Search />
 
                 <RouterLink to="/favourite" @click="activateCatalog = false"><img src="../assets/icons/header/heart.svg"
-                        alt=""></RouterLink>
+                        alt="heart"></RouterLink>
 
                 <button class="buttonElem basketBtn" @click="changeHandle">
 
@@ -453,7 +476,8 @@ header {
                         border-radius: 8px;
                     }
 
-                    a, .route {
+                    a,
+                    .route {
                         color: #000;
                         text-decoration: none;
 
@@ -548,10 +572,10 @@ header {
                             display: grid;
                             grid-template-columns: repeat(3, auto);
                             gap: 8px;
-                            
+
                             // overflow-y: auto;
                             // overflow-x: hidden;
-                            
+
                             // width: 53rem;
                             height: 18rem;
                             margin-left: 16px;
@@ -583,7 +607,8 @@ header {
                                 .title {
 
                                     p,
-                                    span, a {
+                                    span,
+                                    a {
                                         margin: 0;
 
                                         text-overflow: clip;
@@ -593,12 +618,14 @@ header {
                                         overflow: hidden;
                                     }
 
-                                    p, a {
+                                    p,
+                                    a {
                                         font-size: 16px;
                                         color: #100E0E;
                                     }
 
-                                    span, a {
+                                    span,
+                                    a {
                                         font-size: 14px;
                                         color: #282626;
                                     }
@@ -661,7 +688,8 @@ header {
 
                     position: relative;
 
-                    a, .route {
+                    a,
+                    .route {
                         display: flex;
                         align-items: center;
                         gap: 8px;
@@ -833,7 +861,8 @@ header {
                     width: fit-content;
                 }
 
-                a, .route{
+                a,
+                .route {
                     display: flex;
                     align-items: center;
                     gap: 8px;
@@ -885,7 +914,7 @@ header {
     }
 }
 
-.itemLink{
+.itemLink {
     position: relative;
 }
 </style>

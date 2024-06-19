@@ -29,7 +29,7 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container" @click="console.log(sortedData)">
         <RouterLink id="products-link" to="/">Самое популярное</RouterLink>
         <ProductsList :count="count" :data="sortedData" />
     </div>

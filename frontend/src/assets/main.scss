@@ -4,7 +4,7 @@ $main-background-color: #fff;
 $main-font-color: #100e0e;
 $link-font-color: #0071e4;
 
-body {
+html, body {
     background: $main-background-color;
     color: $main-font-color;
     font-family: "SF Pro Display inherit", sans-serif;
@@ -12,6 +12,8 @@ body {
     // font-family: 'SF Pro Display Medium', sans-serif;
     // font-family: 'SF Pro Display Bold', sans-serif;
     // font-family: 'SF Pro Display Black', sans-serif;
+
+    // scroll-behavior: smooth;
 
     margin: 0;
     padding: 0;
