@@ -35,7 +35,7 @@ export default {
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .slider-container {
     max-width: 1440px;
     margin: 0 auto;

@@ -1,69 +1,98 @@
 <script>
+import { onMounted, ref, watch } from 'vue';
+import { useCounterStore } from '@/stores/AppleStore';
+import { useRoute } from 'vue-router';
+
 export default {
-    data() {
-        return {
-            tagsData: [
-                { id: 1, title: 'iPhone 13 Pro Max' },
-                { id: 2, title: 'iPhone 13' },
-                { id: 3, title: 'iPhone 13 Pro' },
-                { id: 4, title: 'iPhone 13 Pro Max' },
-                { id: 5, title: 'iPhone 13' },
-                { id: 6, title: 'iPhone 13 Pro' },
-                { id: 7, title: 'iPhone 13 Pro' },
-                { id: 8, title: 'iPhone 13 Pro Max' },
-                { id: 9, title: 'iPhone 13' },
-                { id: 10, title: 'iPhone 13 Pro' },
-                { id: 11, title: 'iPhone 13 Pro Max' },
-                { id: 12, title: 'iPhone 13' },
-                { id: 13, title: 'iPhone 13 Pro' },
-                { id: 14, title: 'iPhone 13 Pro' },
-            ]
-        }
-    },
-    methods: {
-        // ф-ия для закрытия фильтра, чтобы она не отображалась
-        showFilterFunc() {
-            this.$emit('toggle-filter')
-        }
+  setup() {
+    const appleStore = useCounterStore();
+    const listSort = ref('base');
+    let tagsData = ref([])
+    const route = useRoute()
+    let titlePage = ref('')
+
+    function getTags(route){
+        tagsData.value = appleStore.getTags(route)
     }
-}
+
+    watch(listSort, (newSort) => {
+      if (newSort === 'none' || newSort === 'base') {
+        appleStore.baseSort();
+      } else if (newSort === 'price_up') {
+        appleStore.sortPriceUp();
+      } else if (newSort === 'price_down') {
+        appleStore.sortPriceDown();
+      }
+    });
+
+    watch(
+            () => route.params.category,
+            (newRoute) => {
+              getTags(newRoute)
+              console.log(appleStore.titlePage)
+            }
+            
+        );
+
+    onMounted(() => {
+        console.log('On mounted tags')
+        console.log(appleStore.titlePage)
+        tagsData.value = appleStore.getOnMountedTags()
+    })
+    return {
+      appleStore,
+      listSort,
+      tagsData,
+        getTags
+    };
+  },
+  methods: {
+    showFilterFunc() {
+      this.$emit('toggle-filter');
+    },
+  },
+};
 </script>
 
 <template>
     <div class="container">
-        <h2>Смартфоны iPhone</h2>
-        <div class="tagsAndSort">
-            <div class="tags-list">
-                <div class="tag-item" v-for="elem in tagsData" :id="elem.id">
-                    {{ elem.title }}
-                </div>
-            </div>
-
-            <div class="filterAndSort">
-                <div class="filter-item">
-                    <button @click="showFilterFunc">
-                        <img src="../../assets/icons/filter.svg" alt="#">
-                        Фильтр
-                    </button>
-
-                    <div class="erase-filter">
-                        <div class="count">1</div>
-                        <button>Сбросить фильтр</button>
-                    </div>
-                </div>
-
-                <div class="sort">
-                    Сортировать
-                    <div class="custom-select">
-                        <select name="#" id="#">
-                            <option value="Base">По умолчанию</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+      <h2>{{ appleStore.titlePage }}</h2>
+      <div class="tagsAndSort">
+        <div class="tags-list">
+          <div class="tag-item" v-for="elem in tagsData" :key="elem.id" @click="appleStore.filterByName(elem.title)">
+            {{ elem.title }}
+          </div>
         </div>
+  
+        <div class="filterAndSort">
+          <div class="filter-item">
+            <button @click="showFilterFunc">
+              <img src="../../assets/icons/filter.svg" alt="#">
+              Фильтр
+            </button>
+  
+            <div class="erase-filter">
+              <div class="count">1</div>
+              <button>Сбросить фильтр</button>
+            </div>
+          </div>
+  
+          <div class="sort">
+            Сортировать
+            <div class="custom-select">
+              <select name="#" id="#" v-model="listSort">
+                <option class="like-option" value="none">по умолчанию</option>
+                <option class="like-option" value="price_up">цена вверх</option>
+                <option class="like-option" value="price_down">цена вниз</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</template>
+  </template>
+  
+
 
 <style lang="scss">
 h2 {

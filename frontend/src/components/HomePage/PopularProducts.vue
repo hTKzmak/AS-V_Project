@@ -2,7 +2,7 @@
 import ProductsList from '../../components/ProductsList.vue'
 import { RouterLink } from 'vue-router'
 import { useCounterStore } from '@/stores/AppleStore';
-import { ref, watchEffect } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 
 export default {
     components: {
@@ -17,8 +17,15 @@ export default {
             if (appleStore.data.length > 0) {
                 sortedData.value = [...appleStore.data].sort((a, b) => b.count_review - a.count_review);
             }
+            console.log(sortedData.value)
         });
-
+        onMounted(() =>{
+            if (appleStore.data.length > 0) {
+                sortedData.value = [...appleStore.data].sort((a, b) => b.count_review - a.count_review);
+            }
+            console.log(sortedData.value)
+        }
+        )
         return {
             appleStore,
             sortedData,

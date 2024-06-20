@@ -2,7 +2,7 @@
 import ButtonElem from '../UI/ButtonElem.vue';
 import { useSingleProductStore } from '@/stores/SingleProductStore';
 import { useCounterStore } from '@/stores/AppleStore';
-import { onMounted, watch, ref } from 'vue';
+import { onMounted, watch, ref, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router'
 import { useRecentStore } from '@/stores/RecentStore';
 import { useBucketStore } from '@/stores/BucketStore';
@@ -31,6 +31,12 @@ export default {
 
         let productId = ref(0);
 
+        let memo = ref('')
+
+        function changeMemo(count){
+            memo.value = count + ' ГБ'
+        }
+
         //------------------------------------ ФУНКЦИОНАЛ ОБНОВЛЕНИЯ КОМПОНЕНТА -------------------------
 
 
@@ -45,6 +51,7 @@ export default {
                 singleProductStore.findProd(idForWatch.value)
                 recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
             }
+            
         );
 
         //------------------------------------ ФУНКЦИОНАЛ КНОПОК -------------------------
@@ -59,7 +66,8 @@ export default {
         }
 
         function addToBucket(){
-            bucketStore.addToBucket(singleProductStore.id, singleProductStore.name, singleProductStore.discount_price === null ? singleProductStore.price : singleProductStore.discount_price, singleProductStore.discount_price === null ? null : singleProductStore.price, appleStore.BASE_URL+singleProductStore.images[0], 1)
+            bucketStore.addToBucket(singleProductStore.id, singleProductStore.name, singleProductStore.discount_price === null ? singleProductStore.price : singleProductStore.discount_price,
+             singleProductStore.discount_price === null ? null : singleProductStore.price, appleStore.BASE_URL+singleProductStore.images[0], 1, singleProductStore.color, memo.value)
         }
 
         function buyInCredit(){
@@ -70,22 +78,37 @@ export default {
             modalStore.changeModal('credit')
         }
 
+        function getMemoryValue(characteristics){
+            const memoryCharacteristic = characteristics.find(c => c.characteristic === 'Объем встроенной памяти');
+            return +memoryCharacteristic.value
+        }
+
         //--------------------------------------------------------------------------------
 
 
+        // onMounted(() => {
+        //     productId.value = route.params.id
+        //     console.log(productId.value)
+        //     singleProductStore.findProd(productId.value)
+        //     recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+        // }
+        // )
         onMounted(() => {
+            console.log('before mounted')
             productId.value = route.params.id
             console.log(productId.value)
             singleProductStore.findProd(productId.value)
             recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
-        }
-        )
+            console.log(appleStore.data.length)
+        });
+        console.log(appleStore.data.length)
         return {
             singleProductStore, appleStore, productId, bucketStore,
-             modalStore, currentProductStore, buyInOneClick, addToBucket, buyInCredit,
+             modalStore, currentProductStore, buyInOneClick, addToBucket, buyInCredit, memo, changeMemo, getMemoryValue,
             // characteristics нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             characteristics: singleProductStore.characteristics
         }
+        
     },
 }
 </script>
@@ -113,34 +136,28 @@ export default {
                 <div class="productData-optionsAndOrder">
 
                     <div class="productData-options">
-                        <nav>
+                        <nav class="close-prods">
                             <ul>
-                                <li>
+                                <li v-for="elem in singleProductStore.closeColor" :key="elem.id">
                                     <button id="color">
-                                        <img src="../../assets/img.png" alt="product image">
-                                    </button>
-                                </li>
-                                <li>
-                                    <button id="color">
-                                        <img src="../../assets/img.png" alt="product image">
-                                    </button>
+                                        <RouterLink :to="'/product/'+elem.id">
+                                            <img :src="appleStore.BASE_URL + elem.images[0]" alt="product image">
+                                        </RouterLink>
+                                     </button>
                                 </li>
                             </ul>
                         </nav>
 
-                        <h2 id="title_memory">Объем памяти</h2>
+                        <h2 v-if="singleProductStore.category !== 'Часы' && singleProductStore.category !== 'Аксессуары'" id="title_memory">Объем памяти</h2>
 
-                        <nav>
-                            <ul>
-                                <li>
-                                    <button id="memory">
-                                        128GB
-                                    </button>
-                                </li>
-                                <li>
-                                    <button id="memory">
-                                        256GB
-                                    </button>
+                        <nav v-if="singleProductStore.category !== 'Часы' && singleProductStore.category !== 'Аксессуары'">
+                            <ul >
+                                <li v-for="elem in singleProductStore.closeMemo" :key="elem.id">
+                                    <button id="memory" @click="changeMemo(getMemoryValue(elem.characteristics))">
+                                        <RouterLink :to="'/product/'+elem.id">
+                                            {{ getMemoryValue(elem.characteristics) }} ГБ
+                                        </RouterLink>
+                                     </button>
                                 </li>
                             </ul>
                         </nav>
@@ -324,6 +341,10 @@ export default {
             margin: 0 auto;
         }
 
+    }
+
+    .close-prods{
+        max-width: 320px;
     }
 
     .productData {
@@ -633,10 +654,16 @@ export default {
         padding: 16px;
         font-family: "SF Pro Display Medium", sans-serif;
         font-size: 16px;
+        a{
+            color: #121212;
+        }
 
         &:focus-within {
             background-color: #1877F2;
             color: #FFF;
+            a{
+                color: #FFF;
+            }
         }
     }
 

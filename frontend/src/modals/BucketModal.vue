@@ -28,10 +28,10 @@ const bucketStore = useBucketStore()
         <div class="bucket_contain">
             <div class="list">
                 <div v-for="(item, index) in bucketStore.bucket" :key="index" class="product_card">
-                    <button class='close' @click="deleteItem(item.id)"><img src="..\assets\icons\modals\close.png" alt=""></button>
+                    <button class="close" style="height: 16px;" @click="deleteItem(item.id)"><img style="height: 16px;" src="..\assets\icons\modals\close.png" alt=""></button>
                     <img class="prod_img" :src="item.image">
                     <div class="text-field">
-                        <p>{{item.title}}</p>
+                        <p>{{item.title}} {{ item.color }} {{  item.memo }}</p>
                         <div style="display: flex; gap: 10px;"><p v-if="item.oldPrice!==null" style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p v-if="item.lastPrice!==null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
                             <div class="counter-field">
                                 <button @click="bucketStore.countDown(item.id)" class="change-count">-</button>
