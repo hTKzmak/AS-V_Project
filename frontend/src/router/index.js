@@ -6,6 +6,9 @@ import ErrorPage from '../views/NotFoundView.vue'
 import LikeView from '@/views/LikeView.vue'
 import RefundPage from '@/views/RefundPage.vue'
 import ContactsPage from '@/views/contactsPage.vue'
+import warrantyPage from '@/views/warrantyPage.vue'
+import deliveryPage from '@/views/deliveryPage.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,7 +47,25 @@ const router = createRouter({
     path: '/contacts',
     name: 'contactsPage', 
     component: ContactsPage
+},
+{
+  path: '/delivery',
+  name: 'deliveryPage', 
+  component: deliveryPage
+},
+
+{
+  path: '/warranty',
+  name: 'warrantyPage', 
+  component: warrantyPage
+},
+{
+  path: '/refund',
+  name: 'RefundPage', 
+  component: RefundPage
 }
+
+
 
   ],
   scrollBehavior() {

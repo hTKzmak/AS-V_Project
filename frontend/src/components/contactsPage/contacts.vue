@@ -68,8 +68,6 @@ export default {
 }
 
 
-
-
 .contacts-title {
   font-size: 40px;
 
@@ -193,120 +191,65 @@ export default {
 
   height: auto;
   border-radius: 10px;
-
   height: 262px;
-
 
 }
 
 
+
 @media (min-width: 768px) and (max-width: 1440px) {
   .contacts-container {
-    flex-direction: column;
-    padding-top: 70px;
-
+    flex-direction: row;
   }
-
   .contact-info {
-    width: 100%; /* Полная ширина на мобильных устройства
+    width: 50%;
+    padding-right: 20px;
   }
-
-  .contact-info {
-    width: 100%; /* Полная ширина на мобильных устройствах */
-    margin-left: 0; /* Сбрасываем отступ слева */
-  }
-
   .address-section {
-    padding: 20px; /* Возвращаем отступы */
-    margin-top: 20px; /* Возвращаем отступ сверху */
+    width: 50%;
+    padding-left: 20px;
   }
-
-  .address-and-map {
-    flex-direction: column; /* Располагаем элементы столбцом */
-    align-items: flex-start; /* Выравниваем по левому краю */
-  }
-
   .address-list {
-    margin-right: 0; /* Сбрасываем отступ справа */
-    margin-bottom: 20px; /* Возвращаем отступ снизу */
-  }
-
-  .map-img {
-    min-width: 90vw; /* Занимает всю доступную ширину */
-    min-height: 260px ;
-    height: auto; /* Автоматическая высота */
+    min-width: auto;
   }
 }
 
 @media (min-width: 1440px) {
   .contacts-container {
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
   }
-
   .contact-info {
-    width: 40%;
-
+    width: 50%;
+    padding-right: 20px;
   }
-
   .address-section {
-    width: 74%;
-    padding: 20px;
-    margin-top: 0;
+    width: 50%;
+    padding-left: 20px;
   }
-
-  .address-and-map {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
   .address-list {
-    margin-right: 20px;
-  }
-
-  .map-img {
-    width: 500px;
-    height: 350px;
-  }
-
-  .contacts-title {
-    display: block;
+    min-width: auto;
   }
 }
 
 @media (max-width: 768px) {
+  .contacts-title {
+    font-size: 32px;
+  }
   .contacts-title-mobile {
     display: block;
-    font-size: 40px;
-    font-weight: 700;
-    line-height: 28.64px;
-    text-align: left;
-    margin-bottom: 10px;
-    
   }
-
-  .contacts-container {
-   padding-top: 70px;
-  justify-content: left;
-
+  .contact-info {
+    padding: 0;
   }
-
-.address-section {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: left;
-}
-.map-img {
-  content: url("../../assets/icons/map/Без названия_31-10-2022_14-41-22 1.png");
-  width: 90vw;
-  align-self: center;
-}
-.address-and-map{
- align-items: start;
-
-}
+  .address-section {
+    padding: 10px;
+  }
+  .address-list li {
+    font-size: 14px;
+  }
+  .map-img {
+    height: 200px;
+  }
 }
 
 
