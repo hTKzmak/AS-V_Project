@@ -104,19 +104,12 @@ function closeHandle() {
     z-index: 1;
 }
 
-// .overlay::before{
-
-// }
 .window {
     display: flex;
     align-self: center;
     position: fixed;
-    // left: 50%;
-    // top: 30%;
     top: 50%;
     left: 50%;
-    // margin-left: -350px;
-    // margin-top: -75px;
 
 
     background-color: white;
@@ -130,18 +123,15 @@ function closeHandle() {
 
     transform: translate(-50%, -50%);
     border-radius: 16px;
-    // width: 352px;
+
     z-index: 1;
 
     @media screen and (max-width: 768px) {
         align-items: start;
-        max-width: 380px;
+        max-width: 288px;
         max-height: 90%;
-        // margin-left: -200px;
         overflow-y: auto;
-        // top: auto;
-        // bottom: 75px;
-        // border-radius: 16px 16px 0px 0px;
+        overflow-x: hidden;
     }
 }
 
@@ -169,8 +159,8 @@ function closeHandle() {
     background-color: transparent;
 
     @media screen and (max-width: 768px) {
-        right: 5px;
-        top: 5px;
+        right: 10px;
+        top: 15px;
     }
 }
 
@@ -184,7 +174,7 @@ function closeHandle() {
     @media screen and (max-width: 768px) {
         width: 340px;
         max-height: 100%;
-        // overflow: scroll;
+        padding: 5px 20px;
     }
 }
 </style>

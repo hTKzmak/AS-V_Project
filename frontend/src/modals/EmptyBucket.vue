@@ -64,7 +64,7 @@ const appleStore = useCounterStore()
     }
 
     @media screen and (max-width: 768px) {
-        max-width: 380px;
+        max-width: 235px;
         overflow-x: scroll;
     }
 }
@@ -82,11 +82,14 @@ const appleStore = useCounterStore()
 }
 
 form {
-    width: 100%px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media screen and (max-width: 768px) {
+        width: 249px;
+    }
 }
 
 .inputs {

@@ -12,7 +12,7 @@ import { useRoute } from 'vue-router';
 
 // Новые данные (Бекенд Арсена)
 // let BASE_URL = 'http://localhost:1452/api/products/'
-let BASE_URL = 'http://localhost:1452/'
+let BASE_URL = 'https://angular-final-project-backend.onrender.com/'
 
 let productsList = reactive([])
 let catalogsList = reactive([])
@@ -84,7 +84,7 @@ export const useCounterStore = defineStore('appleStore', {
         data: productsList,
         catalogData: catalogsList,
         inputValue: '',
-        BASE_URL: 'http://localhost:1452/',
+        BASE_URL: 'https://angular-final-project-backend.onrender.com/',
         searchData: reactive([]),
         route: useRoute(),
     }),

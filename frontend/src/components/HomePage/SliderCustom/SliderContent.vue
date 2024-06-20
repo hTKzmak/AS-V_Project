@@ -11,7 +11,13 @@ export default {
 
 <template>
     <div class="slider-content">
-        <img :src="img" :style="{ marginBottom: img.includes('mbp') ? '35px' : '-75px' }">
+
+        <!-- old -->
+        <!-- <img :src="img" :style="{ marginBottom: img.includes('mbp') ? '35px' : '-75px' }"> -->
+        
+        <!-- new -->
+        <img :src="img" :class="[img.includes('mbp') ? 'style35px' : 'styleMin75px']">
+        
         <div class="title">
 
             <h1 v-if="title === 'iphone 14'">iPh<div class="oval"></div>ne 14</h1>
@@ -30,6 +36,18 @@ export default {
     justify-content: center;
     gap: 48px;
     width: 100%;
+
+    .styleMin75px {
+        margin-bottom: -75px;
+    }
+
+    .style35px {
+        margin-bottom: 35px;
+
+        @media screen and (max-width: 768px) {
+            margin-bottom: 0;
+        }
+    }
 
     img {
         margin-bottom: -50px;
@@ -140,9 +158,11 @@ export default {
             }
 
             max-width: 160px;
+
             @media screen and (max-width: 1440px) {
                 max-width: none;
             }
+
             @media screen and (max-width: 768px) {
                 border-radius: 8px;
                 font-size: 16px;

@@ -31,18 +31,25 @@ function changeHandle() {
                     <button class='close' @click="deleteItem(item.id)"><img src="..\assets\icons\modals\close.png"
                             alt=""></button>
                     <img class="prod_img" :src="item.image">
-                    <div class="text-field">
+
+                    <div class="mobileProductInfo">
+                        <img class="prod_img" :src="item.image">
                         <p>{{ item.title }}</p>
-                        <div style="display: flex; gap: 10px;">
-                            <p v-if="item.oldPrice !== null" style="text-decoration: line-through; color: grey;">{{
-                                item.oldPrice }}₽ </p>
-                            <p v-if="item.lastPrice !== null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
+                    </div>
+
+                    <div class="text-field">
+                        <p class="productTitle">{{ item.title }}</p>
+                        <div class="priceAndCount">
+                            <div class="price-field">
+                                <p v-if="item.oldPrice !== null" style="text-decoration: line-through; color: grey;">
+                                    {{ item.oldPrice }}₽ </p>
+                                <p v-if="item.lastPrice !== null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
+                            </div>
                             <div class="counter-field">
                                 <button @click="bucketStore.countDown(item.id)" class="change-count">-</button>
                                 <p style="color: #0071E4;">{{ item.count }}</p>
                                 <button @click="bucketStore.countUp(item.id)" class="change-count">+</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -65,9 +72,14 @@ function changeHandle() {
                     </div>
                     <div class="info_field">
                         <h3>Выберите способ оплаты</h3>
-                        <select class="payment-select">
+                        <!-- <select class="payment-select">
                             <option>Наличными</option>
-                        </select>
+                        </select> -->
+                        <div class="custom-select">
+                            <select name="" id="">
+                                <option value="All">Все модели</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="info_field">
                         <h3>Выберите способ доставки</h3>
@@ -113,6 +125,54 @@ function changeHandle() {
 </template>
 
 <style scoped lang="scss">
+// кастомный селект
+.custom-select {
+    // width: 280px;
+    position: relative;
+
+    select {
+        appearance: none;
+        /*  safari  */
+        -webkit-appearance: none;
+        /*  other styles for aesthetics */
+
+        width: 100%;
+        font-size: 1.15rem;
+        padding: 8px 16px;
+        background-color: #F9F9F9;
+        border: none;
+
+        width: 100%;
+
+        color: #100E0E;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+}
+
+
+.custom-select::after {
+    content: "";
+    position: absolute;
+    right: 1rem;
+    pointer-events: none;
+
+    border: solid #706e6e;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+}
+
+.custom-select::after {
+    top: 20%;
+
+    border-color: #0071e4;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+
 // Исправляю селекторы и инпуты
 .arrow {
     border: solid #706E6E;
@@ -192,7 +252,7 @@ function changeHandle() {
 
 .radio-group {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     gap: 20px;
 }
 
@@ -236,9 +296,9 @@ function changeHandle() {
 
 
 .counter-field {
-    position: absolute;
-    right: 20px;
-    bottom: 5px;
+    // position: absolute;
+    // right: 20px;
+    // bottom: 5px;
     align-self: flex-end;
     display: flex;
     align-items: center;
@@ -283,6 +343,11 @@ h1 {
     text-align: center;
     font-size: 32px;
     font-weight: 700;
+
+    @media screen and (max-width: 768px) {
+        font-size: 20px;
+        text-align: left;
+    }
 }
 
 select,
@@ -299,7 +364,7 @@ option {
 
 .last-info {
     margin-top: 30px;
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -310,6 +375,12 @@ option {
     div {
         padding: 0;
         margin: 0;
+    }
+
+    @media screen and (max-width: 768px) {
+        margin-top: 24px;
+        width: 120%;
+        margin-bottom: 26px;
     }
 }
 
@@ -331,11 +402,14 @@ option {
     align-items: center;
     gap: 5px;
 
+    width: auto;
+
     cursor: pointer;
 }
 
 .text_input {
-    width: 226px;
+    // width: 226px;
+    width: auto;
     height: 19px;
     padding: 15px;
     border: 1px solid #DBDBDB;
@@ -346,10 +420,34 @@ option {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 70%;
 
     p {
         padding: 0;
         margin: 0;
+    }
+
+    .productTitle{
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+    }
+
+    .price-field {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .priceAndCount {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
     }
 }
 
@@ -372,6 +470,38 @@ option {
     p {
         font-size: 16px;
     }
+
+    .mobileProductInfo {
+        display: none;
+
+        @media screen and (max-width:768px) {
+            display: flex;
+            align-items: start;
+            gap: 8px;
+        }
+
+        img {
+            display: none;
+
+            @media screen and (max-width:768px) {
+                display: flex;
+            }
+        }
+    }
+
+    img {
+        @media screen and (max-width:768px) {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: start;
+        padding: 8px 8px 16px;
+        gap: 6px;
+        width: 100%;
+    }
 }
 
 .close {
@@ -382,6 +512,8 @@ option {
     position: absolute;
     top: 10px;
     right: 10px;
+    top: 5px;
+    right: 20px;
 
     @media screen and (max-width: 768px) {
         display: none;
@@ -399,7 +531,8 @@ option {
 }
 
 .info_field {
-    width: 80%;
+    // width: 80%;
+    width: auto;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -423,12 +556,13 @@ option {
 .bucket {
     @media screen and (max-width: 768px) {
         max-height: 360px;
+        // width: 90%;
     }
 
 }
 
 form {
-    width: 100%;
+    // width: 90%;
     // height: 100%;
     display: flex;
     flex-direction: column;
@@ -447,7 +581,8 @@ form {
 
     @media screen and (max-width: 768px) {
         max-height: 100%;
-        width: 100%;
+        // width: 100%;
+        width: auto;
         overflow-y: visible;
         justify-content: center;
         align-items: center;
