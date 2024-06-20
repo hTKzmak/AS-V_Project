@@ -562,11 +562,15 @@ option {
 }
 
 form {
-    // width: 90%;
+    width: 90%;
     // height: 100%;
     display: flex;
     flex-direction: column;
     gap: 30px;
+
+    @media screen and (max-width: 768px){ 
+        width: auto;
+    }
 }
 
 .list {

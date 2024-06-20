@@ -3,7 +3,6 @@
     <section class="contact-info">
       <h2 class="contacts-title">Контакты</h2>
       <div class="phone-section">
-        <p class="contacts-title-mobile">Контакты</p>
         <p class="phone-text">Можно позвонить</p>
         <a href="tel:+78127048697" class="phone-number">+7 (812) 704-86-97</a>
         <p class="availability">на связи с 10:00 до 22:00</p>
