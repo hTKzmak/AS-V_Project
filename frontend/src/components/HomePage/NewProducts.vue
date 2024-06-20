@@ -9,7 +9,7 @@ export default {
         ProductsList
     },
     setup() {
-        const appleStore = useCounterStore()
+        const appleStore = useCounterStore();
         const sortedData = ref([]);
 
         // нужен для отображения новых товаров по дате (от большего к меньшему)

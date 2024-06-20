@@ -64,7 +64,7 @@ export default {
 
                 <span id="name">{{ item.title }}</span>
                 <div class="img" :style="{ backgroundImage: `url('${BASE_URL + item.image}')` }">></div>
-                <span id="price">{{ item.price }} ₽</span>
+                <span id="price">{{ item.discount === null ? item.price : item.discount }} ₽</span>
 
                 <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) == undefined" title="в корзину"
                     img='/cart.svg' addedItemStyle='false'

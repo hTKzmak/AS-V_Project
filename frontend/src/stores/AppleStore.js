@@ -63,7 +63,7 @@ for (let i = 0; i <= 7; i++) {
         .then(res => res.json())
         .then(json => {
             for (let i of json) {
-                if(!catalogsList.includes(i.category)){
+                if (!catalogsList.includes(i.category)) {
                     catalogsList.push(i.category)
                 }
             }
@@ -71,7 +71,7 @@ for (let i = 0; i <= 7; i++) {
 }
 
 export const useCounterStore = defineStore('appleStore', {
-    
+
     state: () => ({
         paginatedData: paginatedData,
         currentPage: currentPage,
@@ -109,7 +109,9 @@ export const useCounterStore = defineStore('appleStore', {
                             // Если что-то ещё надо, то можно ещё что-то добавить
                         }
                         console.log(res)
-                        productsList.push(res)
+
+                        // из-за этого метода дублировались товары в home page
+                        // productsList.push(res)
                     }),
                         this.filterByCategory(this.route.params.category),
                         console.log(this.data)
@@ -135,7 +137,7 @@ export const useCounterStore = defineStore('appleStore', {
 
             console.log(filteredProducts)
         },
-        changeCategory(){
+        changeCategory() {
             currentPage.value = 1
             menuListarr.value = []
             // category.value = route.params.category;
@@ -143,46 +145,46 @@ export const useCounterStore = defineStore('appleStore', {
             this.filterByCategory(this.route.params.category)
 
         },
-        filterByCategory(category){
+        filterByCategory(category) {
             switch (category) {
                 case 'smartphones':
                     this.categoryData = this.data.filter(prod => prod.category == 'Смартфоны')
-                  break;
+                    break;
                 case 'pads':
                     this.categoryData = this.data.filter(prod => prod.category == 'Планшеты')
-                  break;
-                  case 'accessories':
+                    break;
+                case 'accessories':
                     this.categoryData = this.data.filter(prod => prod.category == 'Аксессуары')
                     break;
                 case 'gadgets':
                     this.categoryData = this.data
-                break;
+                    break;
                 case 'all':
                     this.categoryData = this.data
-                break;
+                    break;
                 case 'laptops':
                     this.categoryData = this.data.filter(prod => prod.category == 'Компьютеры')
-                break;
+                    break;
                 case 'watches':
                     this.categoryData = this.data.filter(prod => prod.category == 'Часы')
-                break; 
+                    break;
                 default:
                     this.categoryData = this.data
-              }
-              menuListarr.value = []
-              this.getVisibleRecipes()
-              totalItems = this.categoryData.length;
-              if((totalItems/itemsPerPage) >= 1){
-                for (let i = 0; i < totalItems/itemsPerPage; i++) {
-                menuListarr.value.push(i)
-              }
-              }
-              if (totalItems/itemsPerPage < 1){
+            }
+            menuListarr.value = []
+            this.getVisibleRecipes()
+            totalItems = this.categoryData.length;
+            if ((totalItems / itemsPerPage) >= 1) {
+                for (let i = 0; i < totalItems / itemsPerPage; i++) {
+                    menuListarr.value.push(i)
+                }
+            }
+            if (totalItems / itemsPerPage < 1) {
                 menuListarr.value.push(1)
-              }
-              console.log(menuListarr)
-              console.log(totalItems)
-            
+            }
+            console.log(menuListarr)
+            console.log(totalItems)
+
             console.log('Get filtered by ' + category)
             console.log(this.categoryData)
         },
@@ -192,38 +194,38 @@ export const useCounterStore = defineStore('appleStore', {
             console.log('We are going to page ' + pageNumber)
             this.getVisibleRecipes()
             console.log(paginatedData.value)
-          },
+        },
 
         // перемещаемя на следующую страницу
- nextPage() {
-    if (menuListarr.value.length != currentPage.value) {
-      currentPage.value++
-      this.goToPage(currentPage.value)
-    }
-  },
-  
-  // перемещаемя на предыдущую страницу
-previousPage() {
-    if (menuListarr.value[0] != currentPage.value) {
-      currentPage.value = currentPage.value - 1
-      this.goToPage(currentPage.value)
-    }
-  },
-  
-  // хз :P
-totalPages() {
-    return Math.ceil(totalItems / itemsPerPage);
-  },
-  
-  // ф-ия для изменения значение curretnPage в виде числа
+        nextPage() {
+            if (menuListarr.value.length != currentPage.value) {
+                currentPage.value++
+                this.goToPage(currentPage.value)
+            }
+        },
 
-  
-  // отображает данные в зависимости от: startIndex (сколько продуктов должно быть на странице, умножая на текущий номер страницы - 1) 
-  // и от endIndex (прибавляем значение startIndex на кол-во нужных объектов на странице)
-getVisibleRecipes() {
-    const startIndex = (currentPage.value - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    paginatedData.value = this.categoryData.slice(startIndex, endIndex);
-  }
+        // перемещаемя на предыдущую страницу
+        previousPage() {
+            if (menuListarr.value[0] != currentPage.value) {
+                currentPage.value = currentPage.value - 1
+                this.goToPage(currentPage.value)
+            }
+        },
+
+        // хз :P
+        totalPages() {
+            return Math.ceil(totalItems / itemsPerPage);
+        },
+
+        // ф-ия для изменения значение curretnPage в виде числа
+
+
+        // отображает данные в зависимости от: startIndex (сколько продуктов должно быть на странице, умножая на текущий номер страницы - 1) 
+        // и от endIndex (прибавляем значение startIndex на кол-во нужных объектов на странице)
+        getVisibleRecipes() {
+            const startIndex = (currentPage.value - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            paginatedData.value = this.categoryData.slice(startIndex, endIndex);
+        }
     }
 })
