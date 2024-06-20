@@ -310,13 +310,14 @@ export default {
                     <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
                     <!-- в :max вставит максимальную цену, а в :min минимальную -->
                     <div v-if="isDesktop">
-                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                        <CustomMinMaxSlider :min="appleStore.minPrice" :max="appleStore.maxPrice" v-model:min-value="sliderMin"
                             v-model:max-value="sliderMax" />
                     </div>
                     <div v-else>
-                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                        <CustomMinMaxSlider :min="appleStore.minPrice" :max="appleStore.maxPrice" v-model:min-value="sliderMin"
                             v-model:max-value="sliderMax" />
                     </div>
+
 
                     <div class="price-count">
                         <div class="price-text-count">
@@ -330,12 +331,41 @@ export default {
                             <label>₽</label>
                         </div>
                     </div>
+
+                </div>
+                <div class="price-range" style="margin-top: 20px;">
+                <h3 v-if="category == 'smartphones' || category == 'pads'">Диагональ</h3>
+
+                <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
+                <!-- в :max вставит максимальную цену, а в :min минимальную -->
+                <div v-if="isDesktop">
+                    <CustomMinMaxSlider v-if="category == 'smartphones'" :target="'diag_smmartpads'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                    <CustomMinMaxSlider v-if="category == 'pads'" :target="'diag'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                </div>
+                <div v-else>
+                    <CustomMinMaxSlider v-if="category == 'smartphones'" :target="'diag_smmartpads'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                    <CustomMinMaxSlider v-if="category == 'pads'" :target="'diag'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                </div>
+                    <div v-if="category == 'smartphones' || category == 'pads'" class="price-count">
+                        <div class="price-text-count">
+                            <label>от</label>
+                            <input type="number" :value="sliderMinDiag">
+                        </div>
+                        <div class="price-text-count">
+                            <label>до</label>
+                            <input type="number" :value="sliderMaxDiag">
+                        </div>
+                    </div>
                 </div>
                 <div class="rosters-list">
 
                     <!-- объект для отображения списка -->
 
-                    <div class="roster-item" v-for="elem in rostlerData" :key="elem.id">
+                    <div class="roster-item" v-show="elem.forCategory && elem.forCategory.includes(category)" v-for="elem in rostlerData" :key="elem.id">
                         <div class="rostler-item-main" :id="elem.id" @click="showCheckboxListFunc(elem)">
                             <div class="title">
                                 <p>{{ elem.title }}</p>
@@ -346,20 +376,29 @@ export default {
                             </button>
                         </div>
 
-                        <!-- списко чекбоксов для фильтрации -->
+                        <!-- список чекбоксов для фильтрации -->
 
-                        <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list" :key="index.id"
-                            :id="index.id">
+                        <ul v-show="showCheckboxList[elem.id]"  class="rostler-item-list" v-for="index in elem.list"
+                            :id="index.id" :key="index.id">
                             <li>
-                                <!-- <input type="checkbox" name="" id=""> -->
                                 <label class="b-contain">
                                     <span>{{ index.text }}</span>
-                                    <input type="checkbox" />
+                                    <input v-if="elem.title=='Память'" type="checkbox"
+                                    @click="addInListMemo(index.value)"
+                                    />
+                                    <input v-if="elem.title=='Процессор'" type="checkbox"
+                                    @click="addInListProc(index.value)"
+                                    />
+                                    <input v-if="elem.title=='Ширина'" type="checkbox"
+                                    @click="addInListWidth(index.value)"
+                                    />
                                     <div class="b-input"></div>
                                 </label>
                             </li>
                         </ul>
                     </div>
+
+                        <!-- списко чекбоксов для фильтрации -->
 
                 </div>
             </div>

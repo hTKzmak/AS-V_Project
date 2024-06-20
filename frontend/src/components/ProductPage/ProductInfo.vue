@@ -78,6 +78,14 @@ export default {
             modalStore.changeModal('credit')
         }
 
+        function noProduct(){
+            currentProductStore.name = singleProductStore.name
+            currentProductStore.image = appleStore.BASE_URL+singleProductStore.images[0]
+            currentProductStore.price = singleProductStore.price
+            currentProductStore.oldPrice = singleProductStore.price
+            modalStore.changeModal('noProduct')
+        }
+
         function getMemoryValue(characteristics){
             const memoryCharacteristic = characteristics.find(c => c.characteristic === 'Объем встроенной памяти');
             return +memoryCharacteristic.value
@@ -104,7 +112,7 @@ export default {
         console.log(appleStore.data.length)
         return {
             singleProductStore, appleStore, productId, bucketStore,
-             modalStore, currentProductStore, buyInOneClick, addToBucket, buyInCredit, memo, changeMemo, getMemoryValue,
+             modalStore, currentProductStore, buyInOneClick, addToBucket, buyInCredit, memo, changeMemo, getMemoryValue, noProduct,
             // characteristics нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             characteristics: singleProductStore.characteristics
         }
@@ -178,13 +186,18 @@ export default {
                         <div class="product-info">
                             <h4>{{ singleProductStore.discount_price ? singleProductStore.price + ' ' + '₽' : null}}</h4>
                             <div class="existence">
-                                <div class="existence-sign"></div>
-                                <p>Есть в наличии</p>
+                                <div class="existence-sign" v-if="singleProductStore.is_available"></div>
+                                <div class="existence-sign" style="background-color: blue;" v-else></div>
+                                <p v-if="singleProductStore.is_available">Есть в наличии</p>
+                                <p v-else>Нет в наличии</p>
                             </div>
                         </div>
                         <h3>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' : singleProductStore.price + ' ' + '₽'}}</h3>
-                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined" title="Добавить в корзину" addedItemStyle="false" :action="addToBucket"/>
-                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined" title="В корзине" img='/inCart.svg' addedItemStyle='true' />
+                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined && singleProductStore.is_available" title="Добавить в корзину" addedItemStyle="false" :action="addToBucket"/>
+                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined && singleProductStore.is_available" title="В корзине" img='/inCart.svg' addedItemStyle='true' />
+                            <button v-if="!singleProductStore.is_available" id="discountBtn" style="color: #0071E4; align-self: center; width: 100%; font-size: 16px; height: 50px;" @click="noProduct">
+                                        Сообщить о поступлении
+                            </button>
                         <p>Купить в 1 клик</p>
                         <div class="buyInOneClick">
                             <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">
