@@ -256,42 +256,73 @@ function changeHandle() {
     gap: 20px;
 }
 
-.radio-group label {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
+// Стилизация radio
+
+.radio-group {
+    label {
+        display: flex;
+        justify-content: left;
+        gap: 10px;
+
+        input[name="debt"] {
+            margin: 0;
+        }
+    }
 }
 
-.radio-group input[type="radio"] {
-    margin-right: 8px;
-    accent-color: blue;
-    /* Modern way to style radio button in many browsers */
-}
-
-/* Optional: Custom styling for radio buttons for better cross-browser support */
-.radio-group input[type="radio"] {
-    appearance: none;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    position: relative;
-    cursor: pointer;
-}
-
-.radio-group input[type="radio"]:checked::before {
-    content: '';
+.radio-group input[type="radio"]~.b-input {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: blue;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background: #f1f5f9;
+    transition: background 250ms;
+    border: 1px solid #94a3b8;
+    border-radius: 9.98rem;
 }
 
-// 
+.radio-group input[type="radio"]~.b-input::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 3px;
+    top: 3px;
+    height: 24px;
+    width: 24px;
+    border-radius: 3rem;
+    background: rgb(0, 113, 228);
+    transition: background 250ms;
+}
+
+.radio-group input:checked~.b-input::after {
+    display: block;
+}
+
+.radio-group:hover input[type="radio"]:not([disabled])~.b-input,
+.radio-group input[type="radio"]:focus~.b-input {
+    background: #e2e8f0;
+    border-color: #64748b;
+}
+
+.radio-group input:focus~.b-input {
+    box-shadow: 0 0 0 0px #60a5fa;
+}
+
+.radio-group input[type="radio"]:checked~.b-input {
+    background: rgb(255, 255, 255);
+    border-color: #1d4ed8;
+}
+
+.radio-group input[type="radio"]:disabled~.b-input::after {
+    background: #ffffff;
+}
+
+.radio-group:hover input[type="radio"]:not([disabled]):checked~.b-input,
+.radio-group input[type="radio"]:checked:focus~.b-input {
+    background: rgba(37, 99, 235, 0.29);
+    border-color: rgba(30, 64, 175, 0.53);
+}
 
 
 
@@ -427,7 +458,7 @@ option {
         margin: 0;
     }
 
-    .productTitle{
+    .productTitle {
         @media screen and (max-width: 768px) {
             display: none;
         }
@@ -444,6 +475,10 @@ option {
         gap: 10px;
         align-items: center;
         justify-content: space-between;
+
+        @media screen and (max-width: 768px) {
+            margin-left: 20px;
+        }
     }
 
     @media screen and (max-width: 768px) {
@@ -568,8 +603,9 @@ form {
     flex-direction: column;
     gap: 30px;
 
-    @media screen and (max-width: 768px){ 
+    @media screen and (max-width: 768px) {
         width: auto;
+        margin-top: 16px;
     }
 }
 

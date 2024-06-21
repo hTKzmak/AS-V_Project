@@ -33,7 +33,7 @@ export default {
 
     @media screen and (max-width: 768px) {
 
-        gap: 8px;
+        gap: 4px;
 
         a>img {
             width: 24px;

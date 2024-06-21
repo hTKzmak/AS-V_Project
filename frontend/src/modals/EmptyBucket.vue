@@ -34,6 +34,7 @@ const appleStore = useCounterStore()
 
     @media screen and (max-width: 768px) {
         font-size: 16px;
+        margin: 0;
     }
 }
 
@@ -66,6 +67,7 @@ const appleStore = useCounterStore()
     @media screen and (max-width: 768px) {
         max-width: 235px;
         overflow-x: scroll;
+        margin-bottom: 24px;
     }
 }
 
@@ -77,7 +79,9 @@ const appleStore = useCounterStore()
     margin: 10px;
 
     @media screen and (max-width: 768px) {
-        width: 80%;
+        width: 100%;
+        margin-top: 18px;
+        margin-bottom: 32px;
     }
 }
 
@@ -126,6 +130,7 @@ h1 {
 
     @media screen and (max-width: 768px) {
         font-size: 20px;
+        width: 108%;
     }
 }
 
@@ -133,8 +138,8 @@ h1 {
     width: 108px;
 
     @media screen and (max-width: 768px) {
-        width: 48px;
-        height: 48px;
+        width: 60px;
+        height: 58px;
     }
 }
 
@@ -144,5 +149,10 @@ h1 {
     font-size: 16px;
     font-weight: 500;
     color: #585656;
+
+    @media screen and (max-width: 768px) {
+        font-size: 14px;
+        margin: 0;
+    }
 }
 </style>

@@ -99,7 +99,8 @@ function closeHandle() {
     right: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #FFFFFF4D;
+    backdrop-filter: blur(2px);
     /* Здесь можно изменить цвет и степень затемнения */
     z-index: 1;
 }

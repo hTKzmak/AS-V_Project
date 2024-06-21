@@ -13,7 +13,7 @@ function successHandle() {
             <p class="info_text">Менеджер позвонит вам через 3 минуты</p>
         </div>
         <div class="inputs">
-            <input placeholder="+7" class="input_field" style="width: 43%;" type="tel">
+            <input placeholder="+7" class="input_field" type="tel">
         </div>
         <input @click="successHandle()" value="заказать звонок" type="submit" class="buttonElem">
     </form>
@@ -26,6 +26,7 @@ function successHandle() {
     height: 56px;
     width: 43%;
     margin: 10px;
+    width: 48%;
 
     @media screen and (max-width: 768px) {
         width: 100%;
