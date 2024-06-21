@@ -42,10 +42,11 @@ export default {
         let category = route.params.category
 
         onMounted(() => {
+            appleStore.data = []
             console.log(category)
             appleStore.getData()
             appleStore.changeCategory()
-            appleStore.filterByCategory(category)
+            appleStore.getTags()
             appleStore.getVisibleRecipes()
         })
         // watch(category, async (newQuestion) => {

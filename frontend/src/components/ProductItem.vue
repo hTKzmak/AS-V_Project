@@ -40,8 +40,8 @@ const oneClickHandle = () => {
     // modalStore.typeModal = 'Better'
     // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
     currentProductStore.image = BASE_URL + props.image
-    currentProductStore.price = props.price
-    currentProductStore.oldPrice = props.price
+    currentProductStore.price = props.discount ? props.discount : props.price
+    currentProductStore.oldPrice = props.discount ? props.price : null
     currentProductStore.name = props.title
     modalStore.changeModal('oneClick')
 
@@ -51,19 +51,20 @@ const tradeInHandle = () => {
     // modalStore.typeModal = 'Better'
     // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
     currentProductStore.image = props.image
-    currentProductStore.price = props.price
-    currentProductStore.oldPrice = props.price
+    currentProductStore.price = props.discount ? props.discount : props.price
+    currentProductStore.oldPrice = props.discount ? props.price : null
     currentProductStore.name = props.title
     modalStore.changeModal('tradeIn')
 }
 
 function addToBucket() {
-    bucketStore.addToBucket(props.id, props.title, props.discount === null ? props.price : props.discount, props.discount === null ? null : props.price, BASE_URL + props.image, 1)
+    bucketStore.addToBucket(props.id, props.title, props.discount === null ? props.price : props.discount,
+     props.discount === null ? null : props.price, BASE_URL + props.image, 1, props.color,  props.memo === undefined ? undefined : props.memo.value + ' ' + props.memo.unit_type )
 }
 
 function addToFav() {
     likeStore.addFavourite(props.id, props.title,
-        props.price, props.image, props.rating, props.discount, props.is_available, props.count_review)
+        props.price, props.image, props.rating, props.discount, props.is_available, props.count_review, props.color,  props.memo)
     isInFav.value = !isInFav.value
     if (isInFav.value == true) {
         console.log(props.id + ' added to fav')
@@ -110,6 +111,8 @@ const props = defineProps({
     category: String,
     guarantee: Number,
     count_review: Number,
+    color: String,
+    memo: Object || undefined
 });
 
 </script>
@@ -131,7 +134,8 @@ const props = defineProps({
 
 
         <RouterLink  :to="is_available ? productLink : ''">
-            <h3>{{ title }}</h3>
+            <h3 v-if="memo!==undefined">{{ title }} {{ color }} {{  memo.value }} {{ memo.unit_type }}</h3>
+            <h3 v-if="memo==undefined">{{ title }} {{ color }}</h3>
             <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
         </RouterLink>
 
@@ -262,6 +266,12 @@ const props = defineProps({
         margin-top: 9px;
         margin-bottom: 9px;
         color: #100E0E;
+
+        text-overflow: clip;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
 
         @media screen and (max-width: 1440px) {
             font-weight: 700;

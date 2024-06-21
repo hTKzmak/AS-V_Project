@@ -125,6 +125,11 @@ export default {
 
         padding: 18px 40px;
 
+        max-width: 80px;
+          @media screen and (max-width: 1440px) {
+              max-width: none;
+          }
+
         @media screen and (max-width: 768px) {
           width: 100%;
           border-radius: 8px;

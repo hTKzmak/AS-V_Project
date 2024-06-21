@@ -61,7 +61,7 @@ export const useLikeStore = defineStore('like', () => {
 //    }
 
     let likedProductsLength = ref(likedProducts.length)
-    function addFavourite(id, title, price, image, rating, discount, is_available, count_review){
+    function addFavourite(id, title, price, image, rating, discount, is_available, count_review, color, memo){
         let findIndex = likedProducts.findIndex(elem => elem.id === id)
         if (findIndex !== -1){
             
@@ -88,7 +88,7 @@ export const useLikeStore = defineStore('like', () => {
             return(false)
         }else{
             likedProducts.push({id: id, title: title, price: price,
-                image: image, rating: rating, discount: discount, is_available: is_available, count_review: count_review})
+                image: image, rating: rating, discount: discount, is_available: is_available, count_review: count_review, color: color, memo: memo})
 
                 menuListarr.value = []
                   getVisibleRecipes()

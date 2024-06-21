@@ -5,6 +5,8 @@ import Banner from '../components/HomePage/Banner.vue'
 import DiscountForm from '../components/HomePage/DiscountForm.vue'
 import Benefits from '../components/HomePage/Benefits.vue'
 import SliderMain from '../components/HomePage/SliderCustom/SliderMain.vue'
+import { useCounterStore } from '@/stores/AppleStore'
+import { onMounted } from 'vue'
 
 export default {
   components: {
@@ -14,6 +16,17 @@ export default {
     NewProducts,
     Benefits,
     DiscountForm
+  },
+  setup(){
+    const appleStore = useCounterStore()
+
+    onMounted(()=>{
+      appleStore.data = []
+      appleStore.getData()
+    })
+    return {
+      appleStore
+    }
   }
 }
 </script>
@@ -23,7 +36,7 @@ export default {
   <h1>купить iPhone в Москве</h1>
   <PopularProducts />
   <Banner />
-  <NewProducts />
+  <NewProducts/>
   <Benefits />
   <DiscountForm />
 </template>

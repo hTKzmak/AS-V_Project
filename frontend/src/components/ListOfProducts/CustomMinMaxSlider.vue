@@ -1,8 +1,10 @@
 <script setup>
+import { useCounterStore } from "@/stores/AppleStore";
 import { computed, ref, watchEffect } from "vue";
 
+const appleStore = useCounterStore()
 // define component props for the slider component
-const { min, max, step, minValue, maxValue } = defineProps({
+const { min, max, step, minValue, maxValue, target } = defineProps({
     min: {
         type: Number,
         default: 0,
@@ -13,7 +15,7 @@ const { min, max, step, minValue, maxValue } = defineProps({
     },
     step: {
         type: Number,
-        default: 1,
+        default: 100,
     },
     minValue: {
         type: Number,
@@ -23,6 +25,10 @@ const { min, max, step, minValue, maxValue } = defineProps({
         type: Number,
         default: 80,
     },
+    target: {
+        type: String,
+        default: 'price'
+    }
 });
 
 // define emits for the slider component
@@ -34,6 +40,8 @@ const inputMin = ref(null);
 const inputMax = ref(null);
 const sliderMinValue = ref(minValue);
 const sliderMaxValue = ref(maxValue);
+let sliderStep = ref(step)
+const targetVal = ref(target)
 
 // function to get the percentage of a value between the min and max values
 const getPercent = (value, min, max) => {
@@ -51,6 +59,7 @@ const setCSSProps = (left, right) => {
     slider.value.style.setProperty("--progressRight", `${right}%`);
 };
 
+const totalFilters = localStorage.getItem('totalFilters')
 // watchEffect to emit the updated values, and update the css variables
 // when the slider values change
 watchEffect(() => {
@@ -60,8 +69,23 @@ watchEffect(() => {
         emit("update:maxValue", sliderMaxValue.value);
 
         // calculate values in percentages
-        const leftPercent = getPercent(sliderMinValue.value, min, max);
-        const rightPercent = 100 - getPercent(sliderMaxValue.value, min, max);
+        let leftPercent = 0
+        let rightPercent = 100
+        if( targetVal.value == 'price'){
+            leftPercent = getPercent(sliderMinValue.value, 6500, 198999);
+            rightPercent = 100 - getPercent(sliderMaxValue.value, 6500, 198999);
+            sliderStep.value = 100
+        } else if (targetVal.value == 'diag'){
+            leftPercent = getPercent(sliderMinValue.value, 0, 15);
+            rightPercent = 100 - getPercent(sliderMaxValue.value, 0, 15);
+            sliderStep.value = 0.1
+        }
+        else if (targetVal.value == 'diag_smmartpads'){
+            leftPercent = getPercent(sliderMinValue.value, 0, 15);
+            rightPercent = 100 - getPercent(sliderMaxValue.value, 0, 15);
+            sliderStep.value = 0.05
+        }
+
 
         // set the CSS variables
         setCSSProps(leftPercent, rightPercent);
@@ -74,12 +98,27 @@ const onInput = ({ target }) => {
         target.value > sliderMaxValue.value
             ? target.value = sliderMaxValue.value
             : sliderMinValue.value = parseFloat(target.value);
+            if (targetVal.value == 'price'){
+                appleStore.sortByPrice(sliderMinValue.value, sliderMaxValue.value)
+            } else if (targetVal.value == 'diag_smmartpads' || targetVal.value == 'diag'){
+                appleStore.sortByDiag(sliderMinValue.value, sliderMaxValue.value)
+                console.log(sliderMinValue.value)
+            }
+
+
     }
 
     if (target.name === 'max') {
         target.value < sliderMinValue.value
             ? target.value = sliderMinValue.value
             : sliderMaxValue.value = parseFloat(target.value);
+            if (targetVal.value == 'price'){
+                appleStore.sortByPrice(sliderMinValue.value, sliderMaxValue.value)
+            } else if (targetVal.value == 'diag_smmartpads' || targetVal.value == 'diag'){
+                appleStore.sortByDiag(sliderMinValue.value, sliderMaxValue.value)
+                console.log(sliderMaxValue.value)
+            }
+
     }
 };
 
@@ -87,9 +126,9 @@ const onInput = ({ target }) => {
 <template>
     <div ref="slider" class="custom-slider minmax">
         <div class="minmax-indicator"></div>
-        <input ref="inputMin" type="range" name="min" id="min" :min="min" :max="max" :value="minValue" :step="step"
+        <input ref="inputMin" type="range" name="min" id="min" :min="min" :max="max" :value="minValue" :step="sliderStep"
             @input="onInput" />
-        <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="maxValue" :step="step"
+        <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="maxValue" :step="sliderStep"
             @input="onInput" />
     </div>
 </template>
