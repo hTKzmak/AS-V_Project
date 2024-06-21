@@ -251,6 +251,7 @@ export default {
                     <img src='../assets/logo.svg' alt="logo">
                 </RouterLink>
                 <ul>
+
                     <li>
                         <RouterLink class="route" to="/list_of_products/all">Весь каталог</RouterLink>
                     </li>
@@ -276,6 +277,7 @@ export default {
                     <li>
                         <RouterLink class="route" to="/contacts">Контакты</RouterLink>
                     </li>
+
                 </ul>
                 <div class="phone">
                     <a class="phone-call" href="#!"><img src="../assets/icons/header/call_grey.svg" alt="#">+7 812

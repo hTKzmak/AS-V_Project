@@ -125,6 +125,7 @@ export default {
 
         padding: 18px 40px;
 
+
         max-width: 160px;
 
         @media screen and (max-width: 1440px) {

@@ -3,9 +3,11 @@ import speedImg from '../../components/ProductPage/assets/icons/speed.svg';
 import cashImg from '../../components/ProductPage/assets/icons/cash.svg';
 import bankImg from '../../components/ProductPage/assets/icons/bank.svg';
 import sequrityImg from '../../components/ProductPage/assets/icons/sequrity.svg';
+import { useCounterStore } from '@/stores/AppleStore';
 
 import CustomMinMaxSlider from '../ListOfProducts/CustomMinMaxSlider.vue'
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 
 export default {
@@ -18,19 +20,34 @@ export default {
             // список для фильтрации товаров
             rostlerData: [
                 {
-                    id: 1, title: 'title 1', list: [
-                        { id: 1, text: 'text 1' },
-                        { id: 2, text: 'text 2' },
-                        { id: 3, text: 'text 3' },
+                    id: 1, title: 'Память', forCategory:['pads','smartphones','laptops', ''], list: [
+                        { id: 1, value:64, text: '64 ГБ', filterType: 'memo' },
+                        { id: 2, value:128, text: '128 ГБ', filterType: 'memo' },
+                        { id: 3, value:256, text: '256 ГБ', filterType: 'memo' },
+                        { id: 4, value:512, text: '512 ГБ', filterType: 'memo' },
+                        { id: 3, value:1024, text: '1024 ГБ', filterType: 'memo' },
                     ]
                 },
                 {
-                    id: 2, title: 'title 2', list: [
-                        { id: 1, text: 'text 1' },
-                        { id: 2, text: 'text 2' },
-                        { id: 3, text: 'text 3' },
-                        { id: 4, text: 'text 4' },
-                        { id: 5, text: 'text 5' },
+                    id: 2, title: 'Процессор', forCategory:['watches','smartphones','laptops', ''],     list: [
+                        { id: 1, value:"A13 Bionic", text: "A13 Bionic"  },
+                        { id: 2, value:"A14 Bionic", text: "A14 Bionic"  },
+                        { id: 3, value:"A15 Bionic", text: "A15 Bionic"  },
+                        { id: 4, value:"Apple M1", text: "Apple M1"  },
+                        { id: 4, value:"Apple M2", text: "Apple M2"  },
+                        { id: 4, value:"Apple M3", text: "Apple M3"  },
+                        { id: 5, value:"S9 SiP", text: "S9 SiP"  },
+                        { id: 5, value:"Apple Intel Core i7", text: "Apple Intel Core i7"  },
+                        { id: 5, value:"Apple Intel Core i5", text: "Apple Intel Core i5"  },
+                        { id: 5, value:"Intel Core i9", text: "Intel Core i9"  },
+                        { id: 5, value:"Intel Core i5", text: "Intel Core i5"  },
+                    ]
+                },
+                {
+                    id: 3, title: 'Ширина', forCategory:['watches', ''], list: [
+                        { id: 1, value:41, text: '41мм', },
+                        { id: 2, value:45, text: '45мм', },
+                        { id: 3, value:49, text: '49мм', },
                     ]
                 },
             ],
@@ -48,13 +65,18 @@ export default {
             // отображение чек-боксов выбранного нами фильтра
             showCheckboxList: {},
 
-
+            
             // значения ползунков (мин и макс) (сюда надо вставить мин и макс цену из всех товаров)
-            sliderMin: ref(0),
-            sliderMax: ref(100),
+            appleStore: useCounterStore(),
+            sliderMin: ref(6500),
+            sliderMax: ref(198999),
+            sliderMinDiag: ref(0),
+            sliderMaxDiag: ref(10),
+            prices: ref([]),
 
             // булевое значение для отслеживания разрешения экрана (для двойного ползунка)
             isDesktop: window.innerWidth > 1440,
+
 
         }
     },
@@ -83,7 +105,84 @@ export default {
         window.addEventListener("resize", () => {
             this.isDesktop = window.innerWidth > 1440;
         });
+        this.sliderMin = this.appleStore.min,
+        this.sliderMax = this.appleStore.max,
+        this.prices = this.appleStore.prices
     },
+    setup() {
+        const route = useRoute()
+
+        let category = ref('')
+
+        let totalFilters = ref(0)
+
+        function totalFiltersAdd(){
+            totalFilters.value = 0
+            totalFilters.value += selectedItemsMemo.value.length + selectedItemsProc.value.length + selectedItemsWidth.value.length
+            appleStore.addFiltersCount(totalFilters.value)
+        }
+
+        console.log(route.params.category)
+
+        watch(
+            () => route.params.category,
+            (newCategory, oldCategory) => {
+                category.value = newCategory
+                selectedItemsMemo.value=[]
+                selectedItemsWidth.value=[]
+                selectedItemsProc.value=[]
+                totalFiltersAdd()
+                console.log(category.value)
+            }
+            
+        );
+
+        const appleStore =useCounterStore()
+        let selectedItemsMemo = ref([])
+        function addInListMemo(elem){
+            console.log('Memo')
+            if (!selectedItemsMemo.value.find(e => e == elem)){
+                selectedItemsMemo.value.push(elem)
+                console.log(selectedItemsMemo.value)
+                appleStore.getFilteredByMem(selectedItemsMemo.value)
+            } else {
+                selectedItemsMemo.value = selectedItemsMemo.value.filter(e => e != elem)
+                console.log(selectedItemsMemo.value)
+                appleStore.getFilteredByMem(selectedItemsMemo.value)
+            }
+            totalFiltersAdd()
+        }
+        let selectedItemsProc = ref([])
+        function addInListProc(elem){
+            console.log('Proccessor')
+            if (!selectedItemsProc.value.find(e => e == elem)){
+                selectedItemsProc.value.push(elem)
+                console.log(selectedItemsProc.value)
+                appleStore.getFilteredByProc(selectedItemsProc.value)
+            } else {
+                selectedItemsProc.value = selectedItemsProc.value.filter(e => e != elem)
+                console.log(selectedItemsProc.value)
+                appleStore.getFilteredByProc(selectedItemsProc.value)
+            }
+            totalFiltersAdd()
+        }
+        let selectedItemsWidth = ref([])
+        function addInListWidth(elem){
+            console.log('Proccessor')
+            if (!selectedItemsWidth.value.find(e => e == elem)){
+                selectedItemsWidth.value.push(elem)
+                console.log(selectedItemsWidth.value)
+                appleStore.getFilteredByWidth(selectedItemsWidth.value)
+            } else {
+                selectedItemsWidth.value = selectedItemsWidth.value.filter(e => e != elem)
+                console.log(selectedItemsWidth.value)
+                appleStore.getFilteredByWidth(selectedItemsWidth.value)
+            }
+            totalFiltersAdd()
+        }
+        return{  selectedItemsMemo, addInListMemo, selectedItemsProc, addInListProc, selectedItemsWidth, addInListWidth, category, totalFilters, totalFiltersAdd }
+    }
+
 }
 </script>
 
@@ -103,11 +202,11 @@ export default {
                     <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
                     <!-- в :max вставит максимальную цену, а в :min минимальную -->
                     <div v-if="isDesktop">
-                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                        <CustomMinMaxSlider :min="appleStore.minPrice" :max="appleStore.maxPrice" v-model:min-value="sliderMin"
                             v-model:max-value="sliderMax" />
                     </div>
                     <div v-else>
-                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                        <CustomMinMaxSlider :min="appleStore.minPrice" :max="appleStore.maxPrice" v-model:min-value="sliderMin"
                             v-model:max-value="sliderMax" />
                     </div>
 
@@ -126,11 +225,39 @@ export default {
                     </div>
 
                 </div>
+                <div v-if="category == 'smartphones' || category == 'pads'" class="price-range" style="margin-top: 20px;">
+                <h3>Диагональ</h3>
+
+                <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
+                <!-- в :max вставит максимальную цену, а в :min минимальную -->
+                <div v-if="isDesktop">
+                    <CustomMinMaxSlider v-if="category == 'smartphones'" :target="'diag_smmartpads'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                    <CustomMinMaxSlider v-if="category == 'pads'" :target="'diag'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                </div>
+                <div v-else>
+                    <CustomMinMaxSlider v-if="category == 'smartphones'" :target="'diag_smmartpads'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                    <CustomMinMaxSlider v-if="category == 'pads'" :target="'diag'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                </div>
+                    <div class="price-count">
+                        <div class="price-text-count">
+                            <label>от</label>
+                            <input type="number" :value="sliderMinDiag">
+                        </div>
+                        <div class="price-text-count">
+                            <label>до</label>
+                            <input type="number" :value="sliderMaxDiag">
+                        </div>
+                    </div>
+                </div>
                 <div class="rosters-list">
 
                     <!-- объект для отображения списка -->
 
-                    <div class="roster-item" v-for="elem in rostlerData">
+                    <div class="roster-item" v-show="elem.forCategory && elem.forCategory.includes(category)" v-for="elem in rostlerData" :key="elem.id">
                         <div class="rostler-item-main" :id="elem.id" @click="showCheckboxListFunc(elem)">
                             <div class="title">
                                 <p>{{ elem.title }}</p>
@@ -143,12 +270,20 @@ export default {
 
                         <!-- список чекбоксов для фильтрации -->
 
-                        <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list"
-                            :id="index.id">
+                        <ul v-show="showCheckboxList[elem.id]"  class="rostler-item-list" v-for="index in elem.list"
+                            :id="index.id" :key="index.id">
                             <li>
                                 <label class="b-contain">
                                     <span>{{ index.text }}</span>
-                                    <input type="checkbox" />
+                                    <input v-if="elem.title=='Память'" type="checkbox"
+                                    @click="addInListMemo(index.value)"
+                                    />
+                                    <input v-if="elem.title=='Процессор'" type="checkbox"
+                                    @click="addInListProc(index.value)"
+                                    />
+                                    <input v-if="elem.title=='Ширина'" type="checkbox"
+                                    @click="addInListWidth(index.value)"
+                                    />
                                     <div class="b-input"></div>
                                 </label>
                             </li>
@@ -156,10 +291,9 @@ export default {
                     </div>
 
                 </div>
-
                 <!-- тут преимущества (бери готовый с list of products page) -->
                 <div class="advantages-filter">
-                    <div class="advantage-filter-item" v-for="elem in advantagesData" :id=elem.id>
+                    <div class="advantage-filter-item" v-for="elem in advantagesData" :id=elem.id :key="elem.id">
                         <img :src=elem.img alt="#">
                         <div class="title">
                             <h3>{{ elem.title }}</h3>
@@ -171,7 +305,7 @@ export default {
         </div>
 
 
-        <!-- мобильная версия фильтрации -->
+        <!----------------------------------------------------------------- мобильная версия фильтрации --------------------------------------------------------------------------------->
 
         <div v-show="showFilter" class="filter-mobile">
 
@@ -188,13 +322,14 @@ export default {
                     <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
                     <!-- в :max вставит максимальную цену, а в :min минимальную -->
                     <div v-if="isDesktop">
-                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                        <CustomMinMaxSlider :min="appleStore.minPrice" :max="appleStore.maxPrice" v-model:min-value="sliderMin"
                             v-model:max-value="sliderMax" />
                     </div>
                     <div v-else>
-                        <CustomMinMaxSlider :min="0" :max="100" v-model:min-value="sliderMin"
+                        <CustomMinMaxSlider :min="appleStore.minPrice" :max="appleStore.maxPrice" v-model:min-value="sliderMin"
                             v-model:max-value="sliderMax" />
                     </div>
+
 
                     <div class="price-count">
                         <div class="price-text-count">
@@ -208,12 +343,41 @@ export default {
                             <label>₽</label>
                         </div>
                     </div>
+
+                </div>
+                <div class="price-range" style="margin-top: 20px;">
+                <h3 v-if="category == 'smartphones' || category == 'pads'">Диагональ</h3>
+
+                <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
+                <!-- в :max вставит максимальную цену, а в :min минимальную -->
+                <div v-if="isDesktop">
+                    <CustomMinMaxSlider v-if="category == 'smartphones'" :target="'diag_smmartpads'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                    <CustomMinMaxSlider v-if="category == 'pads'" :target="'diag'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                </div>
+                <div v-else>
+                    <CustomMinMaxSlider v-if="category == 'smartphones'" :target="'diag_smmartpads'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                    <CustomMinMaxSlider v-if="category == 'pads'" :target="'diag'" :min="0" :max="15" v-model:min-value="sliderMinDiag " :step="1"
+                    v-model:max-value="sliderMaxDiag" />
+                </div>
+                    <div v-if="category == 'smartphones' || category == 'pads'" class="price-count">
+                        <div class="price-text-count">
+                            <label>от</label>
+                            <input type="number" :value="sliderMinDiag">
+                        </div>
+                        <div class="price-text-count">
+                            <label>до</label>
+                            <input type="number" :value="sliderMaxDiag">
+                        </div>
+                    </div>
                 </div>
                 <div class="rosters-list">
 
                     <!-- объект для отображения списка -->
 
-                    <div class="roster-item" v-for="elem in rostlerData">
+                    <div class="roster-item" v-show="elem.forCategory && elem.forCategory.includes(category)" v-for="elem in rostlerData" :key="elem.id">
                         <div class="rostler-item-main" :id="elem.id" @click="showCheckboxListFunc(elem)">
                             <div class="title">
                                 <p>{{ elem.title }}</p>
@@ -224,20 +388,28 @@ export default {
                             </button>
                         </div>
 
-                        <!-- списко чекбоксов для фильтрации -->
-
-                        <ul v-show="showCheckboxList[elem.id]" class="rostler-item-list" v-for="index in elem.list"
-                            :id="index.id">
+                        <!-- список чекбоксов для фильтрации -->
+                        <ul v-show="showCheckboxList[elem.id]"  class="rostler-item-list" v-for="index in elem.list"
+                            :id="index.id" :key="index.id">
                             <li>
-                                <!-- <input type="checkbox" name="" id=""> -->
                                 <label class="b-contain">
                                     <span>{{ index.text }}</span>
-                                    <input type="checkbox" />
+                                    <input v-if="elem.title=='Память'" type="checkbox"
+                                    @click="addInListMemo(index.value)"
+                                    />
+                                    <input v-if="elem.title=='Процессор'" type="checkbox"
+                                    @click="addInListProc(index.value)"
+                                    />
+                                    <input v-if="elem.title=='Ширина'" type="checkbox"
+                                    @click="addInListWidth(index.value)"
+                                    />
                                     <div class="b-input"></div>
                                 </label>
                             </li>
                         </ul>
                     </div>
+
+                        <!-- списко чекбоксов для фильтрации -->
 
                 </div>
             </div>
@@ -252,7 +424,6 @@ export default {
 
     // ПК ВЕРСИЯ ФИЛЬТРА
     .filter-desktop {
-
         max-width: 420px;
 
         .filter-info {

@@ -79,29 +79,126 @@ export const useLikeStore = defineStore('like', () => {
         menuListarr.value.push(1)
       }
 
-      localStorage.setItem('likedProducts', JSON.stringify(likedProducts))
-      console.log(likedProducts)
-      likedProductsLength.value--
-      console.log(likedProductsLength)
-      // console.log(localStorage.getItem(JSON.stringify(('likedProducts'))))
-      // console.log(likedProducts)
-      return (false)
-    } else {
-      likedProducts.push({
-        id: id, title: title, price: price,
-        image: image, rating: rating, discount: discount, is_available: is_available, count_review: count_review
-      })
 
-      menuListarr.value = []
-      getVisibleRecipes()
-      totalItems = likedProducts.length;
-      console.log(Math.ceil(totalItems / itemsPerPage))
-      for (let i = 0; i < totalItems / itemsPerPage; i++) {
-        menuListarr.value.push(i)
-      }
-      if (totalItems / itemsPerPage < 1) {
-        menuListarr.value.push(1)
-      }
+              let menuListarr = ref([]);
+              menuListarr.value = []
+              getVisibleRecipes()
+              totalItems = likedProducts.length;
+              console.log(Math.ceil(totalItems/itemsPerPage))
+              if((totalItems/itemsPerPage) >= 1){
+                for (let i = 0; i < totalItems/itemsPerPage; i++) {
+                menuListarr.value.push(i)
+              }
+              }
+              if ((totalItems/itemsPerPage) < 1){
+                menuListarr.value.push(1)
+              }
+              console.log(menuListarr.value)
+              console.log(totalItems)
+
+    
+      
+
+//   let buckLength = ref('4')
+//   let BuckExist = ref(bucket.value.length); 
+//   let totPrice = ref(0);
+//    bucket.value.forEach(element => {
+//        totPrice.value+=element.lastPrice
+//    });
+//    function deleteItem(id){
+//        bucket.value = bucket.value.filter((item)=> +item.id != id)
+//        totPrice.value=0
+//        bucket.value.forEach(element => {
+//        totPrice.value+=element.lastPrice
+//        // BuckExist.value = BuckExist.value - 1
+//        });
+//        buckLength.value--
+//        console.log(id)
+//        console.log(buckLength.value)
+//        console.log('length ' + BuckExist.value)
+       
+//    }
+
+    let likedProductsLength = ref(likedProducts.length)
+    function addFavourite(id, title, price, image, rating, discount, is_available, count_review, color, memo){
+        let findIndex = likedProducts.findIndex(elem => elem.id === id)
+        if (findIndex !== -1){
+            
+            // localStorage.likedProducts = JSON.stringify(likedProducts)
+            likedProducts.splice(findIndex, 1)
+
+                menuListarr.value = []
+                getVisibleRecipes()
+                totalItems = likedProducts.length;
+                console.log(Math.ceil(totalItems/itemsPerPage))
+                for (let i = 0; i < totalItems/itemsPerPage; i++) {
+                  menuListarr.value.push(i)
+                }
+                if (totalItems/itemsPerPage < 1){
+                  menuListarr.value.push(1)
+                }
+                
+            localStorage.setItem('likedProducts', JSON.stringify(likedProducts))
+            console.log(likedProducts)
+            likedProductsLength.value--
+            console.log(likedProductsLength)
+            // console.log(localStorage.getItem(JSON.stringify(('likedProducts'))))
+            // console.log(likedProducts)
+            return(false)
+        }else{
+            likedProducts.push({id: id, title: title, price: price,
+                image: image, rating: rating, discount: discount, is_available: is_available, count_review: count_review, color: color, memo: memo})
+
+                menuListarr.value = []
+                  getVisibleRecipes()
+                  totalItems = likedProducts.length;
+                  console.log(Math.ceil(totalItems/itemsPerPage))
+                  for (let i = 0; i < totalItems/itemsPerPage; i++) {
+                    menuListarr.value.push(i)
+                  }
+                  if (totalItems/itemsPerPage < 1){
+                    menuListarr.value.push(1)
+                  }
+
+                localStorage.likedProducts = JSON.stringify(likedProducts)
+                console.log(likedProducts)
+                likedProductsLength.value++
+                console.log(likedProductsLength)
+                return(true)
+            //    console.log(localStorage.getItem(JSON.stringify('likedProducts')))
+        }
+
+        // if (findIndex !== -1){
+        //     likedProducts = likedProducts.filter(elem => elem.id !== id)
+        // }else{
+        //     likedProducts.push({id: id, title: title, price: price,
+        //         image: image, rating: rating, discount: discount, is_available: is_available})
+        //        console.log(likedProducts)
+        // }
+
+        // likedProducts.push({id: id, title: title, price: price,
+        //     image: image, rating: rating, discount: discount, is_available: is_available})
+        //    console.log(likedProducts)
+        
+    }
+    function baseSort(){
+        likedProducts.sort((a, b) => a.id - b.id);
+        localStorage.likedProducts = JSON.stringify(likedProducts)
+        console.log('Sorted Array')
+        getVisibleRecipes()
+    }
+    function sortPriceUp(){
+        likedProducts.sort((a, b) => a.price - b.price);
+        localStorage.likedProducts = JSON.stringify(likedProducts)
+        console.log('Sorted Array')
+        getVisibleRecipes()
+        
+    }
+    function sortPriceDown(){
+        likedProducts.sort((a, b) => b.price - a.price );
+        localStorage.likedProducts = JSON.stringify(likedProducts)
+        console.log('Sorted Array')
+        getVisibleRecipes()
 
       localStorage.likedProducts = JSON.stringify(likedProducts)
       console.log(likedProducts)

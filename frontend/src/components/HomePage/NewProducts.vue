@@ -1,8 +1,9 @@
-<script>
+<script setup>
 import ProductsList from '../../components/ProductsList.vue'
 import { RouterLink } from 'vue-router'
 import { useCounterStore } from '@/stores/AppleStore';
-import { ref, watchEffect } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
+
 
 export default {
     components: {
@@ -12,24 +13,34 @@ export default {
         const appleStore = useCounterStore();
         const sortedData = ref([]);
 
-        // нужен для отображения новых товаров по дате (от большего к меньшему)
-        watchEffect(() => {
-            sortedData.value = appleStore.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        });
 
-        return {
-            appleStore,
-            sortedData,
-            count: 8
+
+
+        const appleStore = useCounterStore();
+        let sortedData = ref([])
+
+        function sortData(){
+            sortedData.value = appleStore.getValue()
         }
-    }
-}
+        // нужен для отображения новых товаров по дате (от большего к меньшему)
+        watchEffect(() => { 
+            sortedData.value = [...appleStore.data].sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
+            sortedData.value.sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
+        });
+        onMounted(() =>{   
+            sortedData.value = [...appleStore.data].sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
+            sortedData.value.sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
+        }
+        )
+
+    
+
 </script>
 
 <template>
-    <div class="container">
+    <div class="container" @click="sortData">
         <RouterLink id="products-link" to="/">Новинки</RouterLink>
-        <ProductsList :count="count" :data="sortedData" />
+        <ProductsList :count="8" :data="sortedData" />
     </div>
 </template>
 

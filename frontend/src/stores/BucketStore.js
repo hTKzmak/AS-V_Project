@@ -50,7 +50,7 @@ export const useBucketStore = defineStore('bucket', () => {
     });
 
 
-    function addToBucket(id, title, lastPrice, oldPrice, image, count) {
+    function addToBucket(id, title, lastPrice, oldPrice, image, count, color, memo) {
         let findIndex = bucket.value.findIndex(elem => elem.id === id)
         if (findIndex !== -1) {
 
@@ -64,7 +64,7 @@ export const useBucketStore = defineStore('bucket', () => {
         } else {
             bucket.value.push({
                 id: id, title: title, lastPrice: lastPrice, oldPrice: oldPrice, count: count,
-                image: image
+                image: image, color: color, memo: memo
             })
             buckLength.value++
             localStorage.bucket = JSON.stringify(bucket.value)
