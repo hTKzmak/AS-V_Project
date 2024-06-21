@@ -40,8 +40,7 @@ function changeHandle() {
 
                     <div class="text-field">
 
-                        <!-- // <p class="productTitle">{{ item.title }}</p> -->
-                        <p class="productTitle">{{item.title}} {{ item.color }} {{  item.memo }}</p>
+                        <p>{{item.title}} {{ item.color }} {{  item.memo }}</p>
                         
                         <div class="priceAndCount">
                             <div class="price-field">
