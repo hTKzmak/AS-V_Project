@@ -4,20 +4,9 @@ import { RouterLink } from 'vue-router'
 import { useCounterStore } from '@/stores/AppleStore';
 import { onMounted, ref, watchEffect } from 'vue';
 
-
-export default {
-    components: {
-        ProductsList
-    },
-    setup() {
         const appleStore = useCounterStore();
         const sortedData = ref([]);
 
-
-
-
-        const appleStore = useCounterStore();
-        let sortedData = ref([])
 
         function sortData(){
             sortedData.value = appleStore.getValue()
@@ -33,7 +22,6 @@ export default {
         }
         )
 
-    
 
 </script>
 

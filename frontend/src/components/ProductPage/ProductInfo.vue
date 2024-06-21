@@ -49,7 +49,8 @@ export default {
             (newId, oldId) => {
                 idForWatch.value = newId;
                 singleProductStore.findProd(idForWatch.value)
-                recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+                console.log(singleProductStore.count_review)
+                recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available, 1, 1, singleProductStore.count_review)
             }
             
         );
@@ -59,8 +60,8 @@ export default {
         function buyInOneClick() {
             currentProductStore.name = singleProductStore.name
             currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
-            currentProductStore.price = singleProductStore.price
-            currentProductStore.oldPrice = singleProductStore.price
+            currentProductStore.price = singleProductStore.discount_price ? singleProductStore.discount_price : singleProductStore.price
+            currentProductStore.oldPrice = singleProductStore.discount_price ? singleProductStore.price : null
             modalStore.changeModal('oneClick')
 
         }
@@ -73,16 +74,16 @@ export default {
         function buyInCredit() {
             currentProductStore.name = singleProductStore.name
             currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
-            currentProductStore.price = singleProductStore.price
-            currentProductStore.oldPrice = singleProductStore.price
+            currentProductStore.price = singleProductStore.discount_price ? singleProductStore.discount_price : singleProductStore.price
+            currentProductStore.oldPrice = singleProductStore.discount_price ? singleProductStore.price : null
             modalStore.changeModal('credit')
         }
 
         function noProduct(){
             currentProductStore.name = singleProductStore.name
-            currentProductStore.image = appleStore.BASE_URL+singleProductStore.images[0]
-            currentProductStore.price = singleProductStore.price
-            currentProductStore.oldPrice = singleProductStore.price
+            currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
+            currentProductStore.price = singleProductStore.discount_price ? singleProductStore.discount_price : singleProductStore.price
+            currentProductStore.oldPrice = singleProductStore.discount_price ? singleProductStore.price : null
             modalStore.changeModal('noProduct')
         }
 
@@ -106,7 +107,7 @@ export default {
             productId.value = route.params.id
             console.log(productId.value)
             singleProductStore.findProd(productId.value)
-            recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+            recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available, 1, 1, singleProductStore.count_review)
             console.log(appleStore.data.length)
         });
         console.log(appleStore.data.length)
