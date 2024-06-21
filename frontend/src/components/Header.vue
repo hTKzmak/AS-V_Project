@@ -90,6 +90,9 @@ export default {
             // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
             this.modalStore.changeModal('Bucket')
         },
+        tradeInHandle(){
+            this.modalStore.changeModal('tradeIn')
+        },
         callbackHandle() {
             this.modalStore.changeModal('Callback')
             console.log('callback comes in')
@@ -358,7 +361,7 @@ export default {
                     </li>
                 </ul>
 
-                <button class="trade-in">
+                <button class="trade-in" @click="tradeInHandle">
                     <img id="main" src="../assets/images/iphone.png" alt="#">
                     <div class="trade-in-main">
                         Трейд-ин

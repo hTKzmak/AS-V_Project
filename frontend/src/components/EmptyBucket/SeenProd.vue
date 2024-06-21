@@ -1,23 +1,26 @@
-<template>
-    <div class="product_card">
-        <img :src="props.image" alt="">
-        <p class="prodName">{{ props.title }}</p>
-    </div>
-</template>
-
-
 <script setup>
-// import { computed } from 'vue';
+import { computed } from 'vue';
+
 const props = defineProps({
     id: Number,
     title: String,
     image: String,
 });
-// const productLink = computed(() => ({
-//     name: 'product',
-//     params: { id: props.id }
-// }));
+
+const productLink = computed(() => ({
+    name: 'product',
+    params: { id: props.id }
+}));
 </script>
+
+<template>
+    <RouterLink :to="productLink" class="product_card">
+        <img :src="props.image" alt="">
+        <p class="prodName">{{ props.title }}</p>
+    </RouterLink>
+</template>
+
+
 
 
 <style lang="scss" scoped>
@@ -40,6 +43,12 @@ const props = defineProps({
     font-size: 14px;
     text-align: center;
     color: #100E0E;
+
+    text-overflow: clip;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 
     @media screen and (max-width: 768px) {
         text-align: left;

@@ -40,8 +40,8 @@ function changeHandle() {
 
                     <div class="text-field">
 
-                        // <p class="productTitle">{{ item.title }}</p>
-                        <p>{{item.title}} {{ item.color }} {{  item.memo }}</p>
+                        <!-- // <p class="productTitle">{{ item.title }}</p> -->
+                        <p class="productTitle">{{item.title}} {{ item.color }} {{  item.memo }}</p>
                         
                         <div class="priceAndCount">
                             <div class="price-field">
@@ -50,7 +50,7 @@ function changeHandle() {
                                 <p v-if="item.lastPrice !== null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
                             </div>
 
-                       // <div style="display: flex; gap: 10px;"><p v-if="item.oldPrice!==null" style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p v-if="item.lastPrice!==null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
+                       <!-- // <div style="display: flex; gap: 10px;"><p v-if="item.oldPrice!==null" style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p v-if="item.lastPrice!==null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p> -->
 
                             <div class="counter-field">
                                 <button @click="bucketStore.countDown(item.id)" class="change-count">-</button>
@@ -508,6 +508,7 @@ option {
     box-shadow: 0px 4px 8px 0px #0000000D;
     border-radius: 8px;
     padding: 5px;
+    height: auto;
 
     p {
         font-size: 16px;

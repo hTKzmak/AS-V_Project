@@ -33,7 +33,7 @@ export default {
 
         let memo = ref('')
 
-        function changeMemo(count){
+        function changeMemo(count) {
             memo.value = count + ' ГБ'
         }
 
@@ -49,9 +49,10 @@ export default {
             (newId, oldId) => {
                 idForWatch.value = newId;
                 singleProductStore.findProd(idForWatch.value)
-                recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+                console.log(singleProductStore.count_review)
+                recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available, 1, 1, singleProductStore.count_review)
             }
-            
+
         );
 
         //------------------------------------ ФУНКЦИОНАЛ КНОПОК -------------------------
@@ -59,34 +60,34 @@ export default {
         function buyInOneClick() {
             currentProductStore.name = singleProductStore.name
             currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
-            currentProductStore.price = singleProductStore.price
-            currentProductStore.oldPrice = singleProductStore.price
+            currentProductStore.price = singleProductStore.discount_price ? singleProductStore.discount_price : singleProductStore.price
+            currentProductStore.oldPrice = singleProductStore.discount_price ? singleProductStore.price : null
             modalStore.changeModal('oneClick')
 
         }
 
-        function addToBucket(){
+        function addToBucket() {
             bucketStore.addToBucket(singleProductStore.id, singleProductStore.name, singleProductStore.discount_price === null ? singleProductStore.price : singleProductStore.discount_price,
-             singleProductStore.discount_price === null ? null : singleProductStore.price, appleStore.BASE_URL+singleProductStore.images[0], 1, singleProductStore.color, memo.value)
+                singleProductStore.discount_price === null ? null : singleProductStore.price, appleStore.BASE_URL + singleProductStore.images[0], 1, singleProductStore.color, memo.value)
         }
 
         function buyInCredit() {
             currentProductStore.name = singleProductStore.name
             currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
-            currentProductStore.price = singleProductStore.price
-            currentProductStore.oldPrice = singleProductStore.price
+            currentProductStore.price = singleProductStore.discount_price ? singleProductStore.discount_price : singleProductStore.price
+            currentProductStore.oldPrice = singleProductStore.discount_price ? singleProductStore.price : null
             modalStore.changeModal('credit')
         }
 
-        function noProduct(){
+        function noProduct() {
             currentProductStore.name = singleProductStore.name
-            currentProductStore.image = appleStore.BASE_URL+singleProductStore.images[0]
-            currentProductStore.price = singleProductStore.price
-            currentProductStore.oldPrice = singleProductStore.price
+            currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
+            currentProductStore.price = singleProductStore.discount_price ? singleProductStore.discount_price : singleProductStore.price
+            currentProductStore.oldPrice = singleProductStore.discount_price ? singleProductStore.price : null
             modalStore.changeModal('noProduct')
         }
 
-        function getMemoryValue(characteristics){
+        function getMemoryValue(characteristics) {
             const memoryCharacteristic = characteristics.find(c => c.characteristic === 'Объем встроенной памяти');
             return +memoryCharacteristic.value
         }
@@ -106,7 +107,7 @@ export default {
             productId.value = route.params.id
             console.log(productId.value)
             singleProductStore.findProd(productId.value)
-            recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available)
+            recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available, 1, 1, singleProductStore.count_review)
             console.log(appleStore.data.length)
         });
         console.log(appleStore.data.length)
@@ -118,7 +119,7 @@ export default {
             // characteristics нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             characteristics: singleProductStore.characteristics
         }
-        
+
     },
 }
 </script>
@@ -150,24 +151,26 @@ export default {
                             <ul>
                                 <li v-for="elem in singleProductStore.closeColor" :key="elem.id">
                                     <button id="color">
-                                        <RouterLink :to="'/product/'+elem.id">
+                                        <RouterLink :to="'/product/' + elem.id">
                                             <img :src="appleStore.BASE_URL + elem.images[0]" alt="product image">
                                         </RouterLink>
-                                     </button>
+                                    </button>
                                 </li>
                             </ul>
                         </nav>
 
-                        <h2 v-if="singleProductStore.category !== 'Часы' && singleProductStore.category !== 'Аксессуары'" id="title_memory">Объем памяти</h2>
+                        <h2 v-if="singleProductStore.category !== 'Часы' && singleProductStore.category !== 'Аксессуары'"
+                            id="title_memory">Объем памяти</h2>
 
-                        <nav v-if="singleProductStore.category !== 'Часы' && singleProductStore.category !== 'Аксессуары'">
-                            <ul >
+                        <nav
+                            v-if="singleProductStore.category !== 'Часы' && singleProductStore.category !== 'Аксессуары'">
+                            <ul>
                                 <li v-for="elem in singleProductStore.closeMemo" :key="elem.id">
                                     <button id="memory" @click="changeMemo(getMemoryValue(elem.characteristics))">
-                                        <RouterLink :to="'/product/'+elem.id">
+                                        <RouterLink :to="'/product/' + elem.id">
                                             {{ getMemoryValue(elem.characteristics) }} ГБ
                                         </RouterLink>
-                                     </button>
+                                    </button>
                                 </li>
                             </ul>
                         </nav>
@@ -196,12 +199,19 @@ export default {
                             </div>
                         </div>
 
-                        <h3>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' : singleProductStore.price + ' ' + '₽'}}</h3>
-                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined && singleProductStore.is_available" title="Добавить в корзину" addedItemStyle="false" :action="addToBucket"/>
-                        <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined && singleProductStore.is_available" title="В корзине" img='/inCart.svg' addedItemStyle='true' />
-                            <button v-if="!singleProductStore.is_available" id="discountBtn" style="color: #0071E4; align-self: center; width: 100%; font-size: 16px; height: 50px;" @click="noProduct">
-                                        Сообщить о поступлении
-                            </button>
+                        <h3>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' :
+                            singleProductStore.price + ' ' + '₽'}}</h3>
+                        <ButtonElem
+                            v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined && singleProductStore.is_available"
+                            title="Добавить в корзину" addedItemStyle="false" :action="addToBucket" />
+                        <ButtonElem
+                            v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined && singleProductStore.is_available"
+                            title="В корзине" img='/inCart.svg' addedItemStyle='true' />
+                        <button v-if="!singleProductStore.is_available" id="discountBtn"
+                            style="color: #0071E4; align-self: center; width: 100%; font-size: 16px; height: 50px;"
+                            @click="noProduct">
+                            Сообщить о поступлении
+                        </button>
 
                         <p>Купить в 1 клик</p>
                         <div class="buyInOneClick">
@@ -357,7 +367,7 @@ export default {
 
     }
 
-    .close-prods{
+    .close-prods {
         max-width: 320px;
     }
 
@@ -531,6 +541,10 @@ export default {
                         outline: none;
                         border: none;
                         background: transparent;
+
+                        @media screen and (max-width: 768px) {
+                            width: auto;
+                        }
                     }
 
                     button {
@@ -544,6 +558,10 @@ export default {
                         padding: 10px 8px;
 
                         img {
+                            display: none;
+                        }
+
+                        @media screen and (max-width: 1440px) {
                             display: none;
                         }
                     }
@@ -649,7 +667,7 @@ export default {
             }
 
             @media screen and (max-width: 768px) {
-                display: grid;
+                display: block;
                 gap: 0;
                 justify-content: unset;
             }
@@ -674,14 +692,16 @@ export default {
         padding: 16px;
         font-family: "SF Pro Display Medium", sans-serif;
         font-size: 16px;
-        a{
+
+        a {
             color: #121212;
         }
 
         &:focus-within {
             background-color: #1877F2;
             color: #FFF;
-            a{
+
+            a {
                 color: #FFF;
             }
         }
@@ -698,6 +718,7 @@ export default {
     }
 
     @media screen and (max-width: 380px) {
+        display: block;
         justify-content: center;
     }
 

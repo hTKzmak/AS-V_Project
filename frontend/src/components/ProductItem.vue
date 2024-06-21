@@ -59,12 +59,12 @@ const tradeInHandle = () => {
 
 function addToBucket() {
     bucketStore.addToBucket(props.id, props.title, props.discount === null ? props.price : props.discount,
-     props.discount === null ? null : props.price, BASE_URL + props.image, 1, props.color,  props.memo === undefined ? undefined : props.memo.value + ' ' + props.memo.unit_type )
+        props.discount === null ? null : props.price, BASE_URL + props.image, 1, props.color, props.memo === undefined ? undefined : props.memo.value + ' ' + props.memo.unit_type)
 }
 
 function addToFav() {
     likeStore.addFavourite(props.id, props.title,
-        props.price, props.image, props.rating, props.discount, props.is_available, props.count_review, props.color,  props.memo)
+        props.price, props.image, props.rating, props.discount, props.is_available, props.count_review, props.color, props.memo)
     isInFav.value = !isInFav.value
     if (isInFav.value == true) {
         console.log(props.id + ' added to fav')
@@ -123,7 +123,7 @@ const props = defineProps({
 
             <!-- надо будет переделать систему отображения звёздочек (в зависимости от рейтинга) -->
 
-            <Rating :count_review="count_review" :rating="rating"/>
+            <Rating :count_review="count_review" :rating="rating" />
 
             <div class="settings">
                 <button @click="addToFav">
@@ -133,9 +133,9 @@ const props = defineProps({
         </div>
 
 
-        <RouterLink  :to="is_available ? productLink : ''">
-            <h3 v-if="memo!==undefined">{{ title }} {{ color }} {{  memo.value }} {{ memo.unit_type }}</h3>
-            <h3 v-if="memo==undefined">{{ title }} {{ color }}</h3>
+        <RouterLink :to="is_available ? productLink : ''">
+            <h3 v-if="memo !== undefined">{{ title }} {{ color }} {{ memo.value }} {{ memo.unit_type }}</h3>
+            <h3 v-if="memo == undefined">{{ title }} {{ color }}</h3>
             <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
         </RouterLink>
 
@@ -231,7 +231,7 @@ const props = defineProps({
             align-items: center;
             gap: 2px;
 
-            .fa{
+            .fa {
                 font-size: 20px;
             }
 
@@ -334,7 +334,7 @@ const props = defineProps({
 
             #discount-adaptive {
                 display: none;
-                
+
                 @media screen and (max-width: 1440px) {
                     display: flex;
                     width: 80%;

@@ -440,7 +440,6 @@ export default {
             background-color: #F3F8FF;
 
             top: 20px;
-            z-index: -1;
 
 
             @media screen and (max-width: 1440px) {
@@ -451,6 +450,7 @@ export default {
         .credit-item {
             width: 288px;
             text-align: center;
+            z-index: 1;
 
             span {
                 font-size: 40px;

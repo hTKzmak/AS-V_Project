@@ -1,16 +1,17 @@
-<script>
+<script setup>
 import ProductsList from '../../components/ProductsList.vue'
 import { RouterLink } from 'vue-router'
 import { useCounterStore } from '@/stores/AppleStore';
 import { onMounted, ref, watchEffect } from 'vue';
 
-export default {
-    components: {
-        ProductsList
-    },
-    setup() {
+// export default {
+//     components: {
+//         ProductsList
+//     },
+//     setup() {
         const appleStore = useCounterStore();
         const sortedData = ref([]);
+        const count = 12;
 
         // нужен для отображения данных от большого значения count_review, до меньшего
         watchEffect(() => {
@@ -19,20 +20,21 @@ export default {
             }
             console.log(sortedData.value)
         });
-        onMounted(() =>{
-            if (appleStore.data.length > 0) {
-                sortedData.value = [...appleStore.data].sort((a, b) => b.count_review - a.count_review);
-            }
-            console.log(sortedData.value)
-        }
-        )
-        return {
-            appleStore,
-            sortedData,
-            count: 12
-        }
-    }
-}
+        // onMounted(() =>{
+        //     if (appleStore.data.length > 0) {
+        //         sortedData.value = [...appleStore.data].sort((a, b) => b.count_review - a.count_review);
+        //     }
+        //     console.log(sortedData.value)
+        // }
+        // )
+        
+        // return {
+        //     appleStore,
+        //     sortedData,
+        //     count: 12
+        // }
+    // }
+// }
 </script>
 
 <template>

@@ -72,6 +72,7 @@ export const useSingleProductStore = defineStore('singleProduct', () => {
       rating.value = json.rating
       color.value = json.color
       category.value = json.category
+      count_review.value = json.count_review
 
       neededProd.value = json
       
