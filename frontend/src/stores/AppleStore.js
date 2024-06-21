@@ -112,9 +112,18 @@ export const useCounterStore = defineStore('appleStore', {
         minDiag:ref(0),
         maxDiag:ref(10),
         prices:ref([]),
-        stableData:ref([])
+        stableData:ref([]),
+
+        totalFilters: ref(0)
     }),
     actions: {
+      addFiltersCount(num){
+        this.totalFilters = num;
+        console.log(num)
+      },
+
+
+
         getData() {
             categoryProducts.value = []
             this.categoryProducts = []
@@ -220,6 +229,9 @@ export const useCounterStore = defineStore('appleStore', {
                 break;
                 case 'watches':
                     this.categoryData = this.data.filter(prod => prod.category == 'Часы')
+                break; 
+                case 'onSale':
+                  this.categoryData = this.data.filter(prod => prod.discount != null)
                 break; 
                 default:
                     this.categoryData = this.data
@@ -527,7 +539,8 @@ getCloseProds(id){
     // this.closeProds = this.data.find(p => p.title == name)
     console.log(id)
     console.log(productsList[1])
-}
+},
+
 
 
     }

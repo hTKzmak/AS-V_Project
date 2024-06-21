@@ -117,12 +117,24 @@ export default {
 
         let category = ref('')
 
+        let totalFilters = ref(0)
+
+        function totalFiltersAdd(){
+            totalFilters.value = 0
+            totalFilters.value += selectedItemsMemo.value.length + selectedItemsProc.value.length + selectedItemsWidth.value.length
+            appleStore.addFiltersCount(totalFilters.value)
+        }
+
         console.log(route.params.category)
 
         watch(
             () => route.params.category,
             (newCategory, oldCategory) => {
                 category.value = newCategory
+                selectedItemsMemo.value=[]
+                selectedItemsWidth.value=[]
+                selectedItemsProc.value=[]
+                totalFiltersAdd()
                 console.log(category.value)
             }
             
@@ -141,6 +153,7 @@ export default {
                 console.log(selectedItemsMemo.value)
                 appleStore.getFilteredByMem(selectedItemsMemo.value)
             }
+            totalFiltersAdd()
         }
         let selectedItemsProc = ref([])
         function addInListProc(elem){
@@ -154,6 +167,7 @@ export default {
                 console.log(selectedItemsProc.value)
                 appleStore.getFilteredByProc(selectedItemsProc.value)
             }
+            totalFiltersAdd()
         }
         let selectedItemsWidth = ref([])
         function addInListWidth(elem){
@@ -167,8 +181,9 @@ export default {
                 console.log(selectedItemsWidth.value)
                 appleStore.getFilteredByWidth(selectedItemsWidth.value)
             }
+            totalFiltersAdd()
         }
-        return{  selectedItemsMemo, addInListMemo, selectedItemsProc, addInListProc, selectedItemsWidth, addInListWidth, category }
+        return{  selectedItemsMemo, addInListMemo, selectedItemsProc, addInListProc, selectedItemsWidth, addInListWidth, category, totalFilters, totalFiltersAdd }
     }
 
 }
@@ -213,7 +228,7 @@ export default {
                     </div>
 
                 </div>
-                <div class="price-range" style="margin-top: 20px;">
+                <div v-if="category == 'smartphones' || category == 'pads'" class="price-range" style="margin-top: 20px;">
                 <h3>Диагональ</h3>
 
                 <!-- двойной ползунок (используется здесь 2 компонента для отображения одних и тех=же данных в разных размерах экрана) -->
@@ -377,7 +392,6 @@ export default {
                         </div>
 
                         <!-- список чекбоксов для фильтрации -->
-
                         <ul v-show="showCheckboxList[elem.id]"  class="rostler-item-list" v-for="index in elem.list"
                             :id="index.id" :key="index.id">
                             <li>

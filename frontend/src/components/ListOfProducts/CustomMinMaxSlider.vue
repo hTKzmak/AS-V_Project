@@ -59,6 +59,7 @@ const setCSSProps = (left, right) => {
     slider.value.style.setProperty("--progressRight", `${right}%`);
 };
 
+const totalFilters = localStorage.getItem('totalFilters')
 // watchEffect to emit the updated values, and update the css variables
 // when the slider values change
 watchEffect(() => {

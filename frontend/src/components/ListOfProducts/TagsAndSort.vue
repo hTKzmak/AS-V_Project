@@ -10,6 +10,9 @@ export default {
     let tagsData = ref([])
     const route = useRoute()
     let titlePage = ref('')
+    let category = ref(route.params.category)
+
+    const totalFilters = ref(appleStore.totalFilters)
 
     function getTags(route){
         tagsData.value = appleStore.getTags(route)
@@ -26,9 +29,19 @@ export default {
     });
 
     watch(
+      () => appleStore.totalFilters, // Наблюдайте за изменениями в appleStore.totalFilters
+      (newFilters) => {
+        console.log(newFilters);
+        totalFilters.value = newFilters;
+      },
+      { deep: true }
+    );
+
+    watch(
             () => route.params.category,
             (newRoute) => {
               getTags(newRoute)
+              category.value = newRoute
               console.log(appleStore.titlePage)
             }
             
@@ -43,6 +56,8 @@ export default {
       appleStore,
       listSort,
       tagsData,
+      category,
+      totalFilters,
         getTags
     };
   },
@@ -50,18 +65,25 @@ export default {
     showFilterFunc() {
       this.$emit('toggle-filter');
     },
+    reRender() {
+      console.log('ReRend')
+      this.$router.go(0);
+      this.forceRenderKey++;
+    }
   },
 };
 </script>
 
-<template>
+<template :key="forceRenderKey">
     <div class="container">
       <h2>{{ appleStore.titlePage }}</h2>
       <div class="tagsAndSort">
         <div class="tags-list">
+          <div class="tags-list" v-if="category != 'onSale'">
           <div class="tag-item" v-for="elem in tagsData" :key="elem.id" @click="appleStore.filterByName(elem.title)">
             {{ elem.title }}
           </div>
+         </div>
         </div>
   
         <div class="filterAndSort">
@@ -72,8 +94,8 @@ export default {
             </button>
   
             <div class="erase-filter">
-              <div class="count">1</div>
-              <button>Сбросить фильтр</button>
+              <div class="count">{{ totalFilters }}</div>
+              <button @click="reRender">Сбросить фильтр</button>
             </div>
           </div>
   

@@ -249,7 +249,7 @@ export default {
                 </RouterLink>
                 <ul>
                     <li><RouterLink class="route" to="/list_of_products/all">Весь каталог</RouterLink></li>
-                    <li><RouterLink class="route" to="/list_of_products/smartphones" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink></li>
+                    <li><RouterLink class="route" to="/list_of_products/onSale" id="fire"><img src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink></li>
                     <li><RouterLink class="route" to="/">Гарантия</RouterLink></li>
                     <li><RouterLink class="route" to="/refund">Политика возрата</RouterLink></li>
                     <li><RouterLink class="route" to="/credit">Кредит</RouterLink></li>
