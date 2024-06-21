@@ -138,7 +138,7 @@ export default {
                         position: relative;
 
                         cursor: pointer;
-                        
+
                         -webkit-appearance: none;
                         /* Убираем стандартную стрелку в Chrome и Safari */
                         -moz-appearance: none;
@@ -211,6 +211,8 @@ export default {
 
         @media screen and (max-width: 768px) {
             padding: 24px 16px;
+            display: grid;
+            justify-content: center;
         }
     }
 
@@ -253,6 +255,8 @@ export default {
 
         @media screen and (max-width: 768px) {
             padding: 16px;
+            display: grid;
+            justify-content: center;
         }
     }
 

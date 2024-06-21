@@ -113,11 +113,11 @@ export default {
         background-color: #0071E4;
         color: #FFF;
 
-        display: ruby-text;
-        
+        display: inline-flex;
+
         font-size: 16px;
         font-family: "SF Pro Display Medium", sans-serif;
-        
+
         border: none;
         border-radius: 8px;
 
@@ -125,16 +125,16 @@ export default {
 
         padding: 18px 40px;
 
-        max-width: 80px;
-          @media screen and (max-width: 1440px) {
-              max-width: none;
-          }
+
+        max-width: 160px;
+
+        @media screen and (max-width: 1440px) {
+          max-width: none;
+        }
 
         @media screen and (max-width: 768px) {
-          width: 100%;
           border-radius: 8px;
           font-size: 16px;
-          height: 40px;
         }
       }
 

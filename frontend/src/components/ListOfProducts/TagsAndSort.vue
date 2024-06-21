@@ -157,6 +157,8 @@ h2 {
 
             transition: 0.3s;
 
+            width: max-content;
+
             &:hover {
                 background-color: #0071E4;
                 color: #FFF;
@@ -178,11 +180,14 @@ h2 {
         }
 
         @media screen and (max-width: 768px) {
+            // для firefox
             display: ruby;
-            overflow-x: auto;
-            flex-wrap: nowrap;
-            width: auto;
+            // для chrome
+            display: -webkit-inline-box;
 
+            overflow-x: auto;
+            flex-wrap: inherit;
+            width: auto;
         }
     }
 

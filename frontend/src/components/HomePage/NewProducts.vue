@@ -5,6 +5,15 @@ import { useCounterStore } from '@/stores/AppleStore';
 import { onMounted, ref, watchEffect } from 'vue';
 
 
+export default {
+    components: {
+        ProductsList
+    },
+    setup() {
+        const appleStore = useCounterStore();
+        const sortedData = ref([]);
+
+
 
 
         const appleStore = useCounterStore();

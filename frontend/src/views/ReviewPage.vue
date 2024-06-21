@@ -1,5 +1,5 @@
 <script>
-import PaginationComponent from '@/components/PaginationComponent.vue';
+import PaginationComponent from '../components/PaginationComponent.vue';
 import RecSlider from '../components/ReviewPage/RecSlider.vue'
 import { useReviewStore } from '@/stores/ReviewStore';
 
@@ -18,12 +18,7 @@ export default {
         <div class="review-content">
 
             <div class="title">
-                <h1>Отзывы о покупках <span>модель</span></h1>
-                <div class="custom-select">
-                    <select name="" id="">
-                        <option value="All">Все модели</option>
-                    </select>
-                </div>
+                <h1>Отзывы о покупках</h1>
             </div>
 
             <div class="reviews-list">
@@ -44,7 +39,7 @@ export default {
             </div>
 
 
-                <PaginationComponent page="review"></PaginationComponent>
+            <PaginationComponent page="review" />
 
 
             <div class="recomendationWindow">
@@ -69,7 +64,7 @@ export default {
 
     position: relative;
 
-    .pag{
+    .pag {
         @media screen and (max-width: 1440px) {
             text-align: center;
         }
@@ -86,24 +81,6 @@ export default {
             margin: 0;
 
             font-size: 40px;
-
-            span {
-                font-size: 24px;
-                color: #282626;
-                font-weight: 600;
-
-                margin-left: 16px;
-                margin-right: 24px;
-
-                @media screen and (max-width: 1440px) {
-                    margin-left: 4px;
-                    margin-right: 0;
-                }
-
-                @media screen and (max-width: 768px) {
-                    display: none;
-                }
-            }
 
             @media screen and (max-width: 1440px) {
                 font-size: 32px;
@@ -202,30 +179,6 @@ export default {
         color: #DBDBDB;
     }
 }
-
-.custom-select {
-    width: 280px;
-    position: relative;
-
-    select {
-        appearance: none;
-        /*  safari  */
-        -webkit-appearance: none;
-        /*  other styles for aesthetics */
-
-        width: 100%;
-        font-size: 1.15rem;
-        padding: 8px 16px;
-        background-color: #F9F9F9;
-        border: none;
-
-        color: #100E0E;
-        cursor: pointer;
-        border-radius: 8px;
-        font-size: 16px;
-    }
-}
-
 
 .custom-select::after {
     content: "";

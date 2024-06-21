@@ -43,8 +43,8 @@ export default {
         // Переменная для хранения ID
         const idForWatch = ref(route.params.id);
 
-            // Следим за изменениями параметра id в маршруте
-            watch(
+        // Следим за изменениями параметра id в маршруте
+        watch(
             () => route.params.id,
             (newId, oldId) => {
                 idForWatch.value = newId;
@@ -56,9 +56,9 @@ export default {
 
         //------------------------------------ ФУНКЦИОНАЛ КНОПОК -------------------------
 
-        function buyInOneClick(){
+        function buyInOneClick() {
             currentProductStore.name = singleProductStore.name
-            currentProductStore.image = appleStore.BASE_URL+singleProductStore.images[0]
+            currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
             currentProductStore.price = singleProductStore.price
             currentProductStore.oldPrice = singleProductStore.price
             modalStore.changeModal('oneClick')
@@ -70,9 +70,9 @@ export default {
              singleProductStore.discount_price === null ? null : singleProductStore.price, appleStore.BASE_URL+singleProductStore.images[0], 1, singleProductStore.color, memo.value)
         }
 
-        function buyInCredit(){
+        function buyInCredit() {
             currentProductStore.name = singleProductStore.name
-            currentProductStore.image = appleStore.BASE_URL+singleProductStore.images[0]
+            currentProductStore.image = appleStore.BASE_URL + singleProductStore.images[0]
             currentProductStore.price = singleProductStore.price
             currentProductStore.oldPrice = singleProductStore.price
             modalStore.changeModal('credit')
@@ -112,7 +112,9 @@ export default {
         console.log(appleStore.data.length)
         return {
             singleProductStore, appleStore, productId, bucketStore,
-             modalStore, currentProductStore, buyInOneClick, addToBucket, buyInCredit, memo, changeMemo, getMemoryValue, noProduct,
+
+            modalStore, currentProductStore, buyInOneClick, addToBucket, buyInCredit, memo, changeMemo, getMemoryValue, noProduct,
+
             // characteristics нужны были для модалки, чтобы при наведении на них появлялсись списки товаров (на всякий оставлю, тем более, они нужны для показа категорий товаров)
             characteristics: singleProductStore.characteristics
         }
@@ -173,18 +175,19 @@ export default {
                         <h2 id="title_characteristic">Характеристики</h2>
 
                         <div class="characteristicsList">
-                            <div class="characteristicItem" v-for="elem in singleProductStore.characteristics" :key="elem.characteristic">
+                            <div class="characteristicItem" v-for="elem in singleProductStore.characteristics"
+                                :key="elem.characteristic">
                                 <p>{{ elem.characteristic }}</p>
-                                <p v-if="elem.unit_type!='значение'">{{ elem.value }} {{ elem.unit_type }}</p>
+                                <p v-if="elem.unit_type != 'значение'">{{ elem.value }} {{ elem.unit_type }}</p>
                                 <p v-else>{{ elem.value }}</p>
                             </div>
-                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
                         </div>
                     </div>
 
                     <div class="productData-order">
                         <div class="product-info">
-                            <h4>{{ singleProductStore.discount_price ? singleProductStore.price + ' ' + '₽' : null}}</h4>
+                            <h4>{{ singleProductStore.discount_price ? singleProductStore.price + ' ' + '₽' : null }}
+                            </h4>
                             <div class="existence">
                                 <div class="existence-sign" v-if="singleProductStore.is_available"></div>
                                 <div class="existence-sign" style="background-color: blue;" v-else></div>
@@ -192,12 +195,14 @@ export default {
                                 <p v-else>Нет в наличии</p>
                             </div>
                         </div>
+
                         <h3>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' : singleProductStore.price + ' ' + '₽'}}</h3>
                         <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined && singleProductStore.is_available" title="Добавить в корзину" addedItemStyle="false" :action="addToBucket"/>
                         <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined && singleProductStore.is_available" title="В корзине" img='/inCart.svg' addedItemStyle='true' />
                             <button v-if="!singleProductStore.is_available" id="discountBtn" style="color: #0071E4; align-self: center; width: 100%; font-size: 16px; height: 50px;" @click="noProduct">
                                         Сообщить о поступлении
                             </button>
+
                         <p>Купить в 1 клик</p>
                         <div class="buyInOneClick">
                             <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">
@@ -235,16 +240,6 @@ export default {
                                 </li>
                             </ul>
                         </nav>
-                        <!-- 
-                        <h2 id="title_characteristic">Характеристики</h2>
-
-                        <div class="characteristicsList">
-                            <div class="characteristicItem" v-for="elem in characteristics">
-                                <p>{{ elem.title }}</p>
-                                <p>{{ elem.text }}</p>
-                            </div>
-                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
-                        </div> -->
 
                     </div>
 
@@ -252,11 +247,12 @@ export default {
                         <h2 id="title_characteristic">Характеристики</h2>
 
                         <div class="characteristicsList">
-                            <div class="characteristicItem" v-for="elem in characteristics" :key="elem">
-                                <p>{{ elem.title }}</p>
-                                <p>{{ elem.text }}</p>
+                            <div class="characteristicItem" v-for="elem in singleProductStore.characteristics"
+                                :key="elem.characteristic">
+                                <p>{{ elem.characteristic }}</p>
+                                <p v-if="elem.unit_type != 'значение'">{{ elem.value }} {{ elem.unit_type }}</p>
+                                <p v-else>{{ elem.value }}</p>
                             </div>
-                            <RouterLink to="/ban">Смотреть все характеристики</RouterLink>
                         </div>
                     </div>
 
@@ -281,7 +277,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: start;
-
 
     .productImage {
 
@@ -341,18 +336,24 @@ export default {
 
                 @media screen and (max-width: 1440px) {
                     margin: 0 auto;
+                    // margin: 0;
                 }
             }
 
             @media screen and (max-width: 768px) {
                 margin: 0 auto;
-                width: 21rem;
+                // margin: 0;
+                // width: 21rem;
             }
         }
 
         @media screen and (max-width: 1440px) {
             margin: 0 auto;
         }
+
+        // @media screen and (max-width: 370px) {
+        //     margin: 0;
+        // }
 
     }
 
@@ -363,7 +364,7 @@ export default {
     .productData {
 
         margin-top: 120px;
-        width: 55%;
+        // width: 55%;
 
         h1 {
             font-family: "SF Pro Display Black", sans-serif;
@@ -385,13 +386,15 @@ export default {
             .productData-options {
 
                 margin-top: 50px;
+                // max-width: 25rem;
 
-                h2{
+                h2 {
                     margin-left: 0;
                 }
 
                 nav>ul {
 
+                    max-width: 300px;
                     display: flex;
                     flex-wrap: wrap;
                     gap: 8px;
@@ -407,6 +410,10 @@ export default {
                                 border: 2px solid #1877F2;
                             }
                         }
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        max-width: auto;
                     }
                 }
 
@@ -442,10 +449,6 @@ export default {
                                 color: #121212B2;
                             }
                         }
-                    }
-
-                    a {
-                        margin-top: 16px;
                     }
 
                     @media screen and (max-width: 768px) {
@@ -587,15 +590,16 @@ export default {
                 }
 
 
-                
-                
+
+
                 @media screen and (max-width: 768px) {
-                    width: 22rem;
+                    // width: 22rem;
+                    width: auto;
                 }
-                
+
             }
-            
-            .characteristics_mobile{
+
+            .characteristics_mobile {
 
                 display: none;
 
@@ -633,7 +637,8 @@ export default {
                     }
 
                     @media screen and (max-width: 768px) {
-                        display: grid;
+                        // display: grid;
+                        display: inherit;
                     }
 
                 }
@@ -646,12 +651,14 @@ export default {
             @media screen and (max-width: 768px) {
                 display: grid;
                 gap: 0;
+                justify-content: unset;
             }
         }
 
         @media screen and (max-width: 1440px) {
-            margin-top: 0;
+            // margin-top: 0;
             width: auto;
+            margin: 0;
         }
 
     }
@@ -683,7 +690,15 @@ export default {
     @media screen and (max-width: 1440px) {
         display: grid;
         justify-content: center;
-        margin: 80px 0;
+        margin: 80px 0 24px;
+    }
+
+    @media screen and (max-width: 768px) {
+        justify-content: unset;
+    }
+
+    @media screen and (max-width: 380px) {
+        justify-content: center;
     }
 
 }

@@ -9,7 +9,7 @@ export const useRecentStore = defineStore('recent', () => {
       recentProducts.value = JSON.parse(productsFromStorage);
       console.log(recentProducts.value)
     }
-    function addToRecent(id, title, price, image, rating, discount, is_available){
+    function addToRecent(id, title, price, image, rating, discount, is_available, category, guarantee, count_review){
         let findIndex = recentProducts.value.findIndex(elem => elem.id === id)
         if ((findIndex == -1) && (id != 0)){
         recentProducts.value.push({
@@ -19,7 +19,10 @@ export const useRecentStore = defineStore('recent', () => {
             image: image,
             rating: rating,
             discount: discount,
-            is_available: is_available
+            is_available: is_available,
+            category: category,
+            guarantee: guarantee,
+            count_review: count_review,
         })
         if (recentProducts.value.length > 5){
           recentProducts.value.shift()

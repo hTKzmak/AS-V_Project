@@ -11,7 +11,12 @@ import { useRoute } from 'vue-router';
 
 // Новые данные (Бекенд Арсена)
 // let BASE_URL = 'http://localhost:1452/api/products/'
+
+// let BASE_URL = 'http://localhost:1452/'
+// let BASE_URL = 'https://angular-final-project-backend.onrender.com/'
+
 let BASE_URL = 'https://angular-final-project-backend.onrender.com/'
+
 
 let productsList = ref([])
 let catalogsList = reactive([])
@@ -40,6 +45,7 @@ let closeProds = ref([])
 let tagList = ref([])
 let titlePage = ref('')
 // получение всех товаров
+
 // fetch(BASE_URL + 'api/products/')
 //     .then(res => res.json())
 //     .then(json => {
@@ -64,6 +70,7 @@ let titlePage = ref('')
 //         })
 //     })  
 
+
 // получение всех категориев товаров (???)
 
 
@@ -72,7 +79,7 @@ for (let i = 0; i <= 7; i++) {
         .then(res => res.json())
         .then(json => {
             for (let i of json) {
-                if(!catalogsList.includes(i.category)){
+                if (!catalogsList.includes(i.category)) {
                     catalogsList.push(i.category)
                 }
             }
@@ -80,7 +87,7 @@ for (let i = 0; i <= 7; i++) {
 }
 
 export const useCounterStore = defineStore('appleStore', {
-    
+
     state: () => ({
         paginatedData: paginatedData,
         currentPage: currentPage,
@@ -94,7 +101,9 @@ export const useCounterStore = defineStore('appleStore', {
         updatedData: ref([]),
         catalogData: catalogsList,
         inputValue: '',
-        BASE_URL: 'https://angular-final-project-backend.onrender.com/',
+
+        BASE_URL: BASE_URL,
+
         searchData: reactive([]),
         route: useRoute(),
         // dataSortedByDate: dataSortedByDate,
@@ -128,6 +137,7 @@ export const useCounterStore = defineStore('appleStore', {
             categoryProducts.value = []
             this.categoryProducts = []
             fetch(BASE_URL + 'api/products/')
+
             .then(res => res.json())
             .then(json => {
                 this.productsList = []
@@ -197,38 +207,43 @@ export const useCounterStore = defineStore('appleStore', {
 
             console.log(filteredProducts)
         },
+
         changeCategory(){
             localStorage.tags = JSON.stringify(this.tagList)
+
             currentPage.value = 1
             menuListarr.value = []
             // category.value = route.params.category;
             console.log(this.route.params.category)
             this.filterByCategory(this.route.params.category)
         },
+
         filterByCategory(category){
             localStorage.tags = JSON.stringify(this.tagList)
             this.categoryData = []
+
             switch (category) {
                 case 'smartphones':
                     this.categoryData = this.data.filter(prod => prod.category == 'Смартфоны')
-                  break;
+                    break;
                 case 'pads':
                     this.categoryData = this.data.filter(prod => prod.category == 'Планшеты')
-                  break;
-                  case 'accessories':
+                    break;
+                case 'accessories':
                     this.categoryData = this.data.filter(prod => prod.category == 'Аксессуары')
                     break;
                 case 'gadgets':
                     this.categoryData = this.data.filter(prod => prod.category == 'Гаджеты')
-                break;
+                    break;
                 case 'all':
                     this.categoryData = this.data
-                break;
+                    break;
                 case 'laptops':
                     this.categoryData = this.data.filter(prod => prod.category == 'Компьютеры')
-                break;
+                    break;
                 case 'watches':
                     this.categoryData = this.data.filter(prod => prod.category == 'Часы')
+
                 break; 
                 case 'onSale':
                   this.categoryData = this.data.filter(prod => prod.discount != null)
@@ -255,11 +270,12 @@ export const useCounterStore = defineStore('appleStore', {
               }
               }
               if (totalItems/itemsPerPage < 1){
+
                 menuListarr.value.push(1)
-              }
-              console.log(menuListarr)
-              console.log(totalItems)
-            
+            }
+            console.log(menuListarr)
+            console.log(totalItems)
+
             console.log('Get filtered by ' + category)
             console.log(this.categoryData)
 
@@ -499,9 +515,10 @@ export const useCounterStore = defineStore('appleStore', {
             console.log('We are going to page ' + pageNumber)
             this.getVisibleRecipes()
             console.log(paginatedData.value)
-          },
+        },
 
         // перемещаемя на следующую страницу
+
  nextPage() {
     if (menuListarr.value.length != currentPage.value) {
       currentPage.value++
@@ -540,7 +557,6 @@ getCloseProds(id){
     console.log(id)
     console.log(productsList[1])
 },
-
 
 
     }

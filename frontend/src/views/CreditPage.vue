@@ -49,8 +49,8 @@ export default {
                 <div class="info">
                     <img src="../assets/images/credit/person.png" alt="#">
                     <div class="title">
-                        <span>Заполните одну короткую анкету и получите ответ от более 10 банков-партнеров</span>
-                        <ButtonElem title="заполнить заявку" addedItemStyle='false' />
+                        <span>Выберите из списка товаров понравившийся продукт и заполните анкету</span>
+                        <RouterLink to="list_of_products/smartphones">Выбрать продукт</RouterLink>
                     </div>
                 </div>
                 <div class="message">
@@ -331,6 +331,7 @@ export default {
 
             .title {
                 margin-top: 32px;
+                display: grid;
 
                 span {
                     font-size: 32px;
@@ -341,11 +342,19 @@ export default {
                     }
                 }
 
-                button {
+                a {
                     margin-top: 16px;
                     padding: 18px 79px;
+
                     font-size: 16px;
                     border-radius: 8px;
+                    
+                    background-color: #0071E4;
+                    color: #FFF;
+                    
+                    text-align: center;
+                    
+                    width: fit-content;
 
                     @media screen and (max-width: 768px) {
                         width: 100%;

@@ -165,6 +165,10 @@ const visiblePages = computed(() => {
 
 .for-review{
   justify-content: left;
+
+  @media screen and (max-width: 1440px) {
+    justify-content: center;
+  }
 }
 
 .page-numbers {

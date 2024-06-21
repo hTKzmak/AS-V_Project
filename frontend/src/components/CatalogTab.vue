@@ -85,6 +85,7 @@ export default {
         overflow-x: hidden;
         display: grid;
         padding-left: 20px;
+        padding-bottom: 38px;
 
 
         .catalogItem {
@@ -178,7 +179,11 @@ export default {
 
         a {
             font-size: 20px;
-            margin: 10px 20px 10px 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            padding-left: 0;
+            padding-bottom: 15px;
         }
 
     }
