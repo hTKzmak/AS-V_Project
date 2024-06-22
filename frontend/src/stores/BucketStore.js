@@ -40,7 +40,6 @@ export const useBucketStore = defineStore('bucket', () => {
     const productsFromStorage = localStorage.getItem('bucket');
     if (productsFromStorage) {
         bucket.value = JSON.parse(productsFromStorage);
-        console.log(bucket.value)
     }
     let buckLength = ref(bucket.value.length)
     let BuckExist = ref(bucket.value.length);
@@ -58,7 +57,6 @@ export const useBucketStore = defineStore('bucket', () => {
             bucket.value.splice(findIndex, 1)
             buckLength.value--
             localStorage.setItem('bucket', JSON.stringify(bucket.value))
-            console.log(bucket.value)
             // console.log(localStorage.getItem(JSON.stringify(('bucket.value'))))
             // console.log(bucket.value)
         } else {
@@ -68,7 +66,6 @@ export const useBucketStore = defineStore('bucket', () => {
             })
             buckLength.value++
             localStorage.bucket = JSON.stringify(bucket.value)
-            console.log(bucket.value)
             //    console.log(localStorage.getItem(JSON.stringify('bucket.value')))
         }
         totPrice.value = 0
@@ -99,7 +96,6 @@ export const useBucketStore = defineStore('bucket', () => {
         });
         buckLength.value--
         localStorage.bucket = JSON.stringify(bucket.value)
-        console.log('Deleeted itemm with ID ' + id + ', now Bucket lenght is ' + buckLength.value)
     }
 
     function countUp(id) {
@@ -107,7 +103,6 @@ export const useBucketStore = defineStore('bucket', () => {
         bucket.value.forEach(element => {
             if (element.id == id) {
                 element.count++
-                console.log('count of prod with id ' + id + ' updated to ' + element.count)
                 localStorage.bucket = JSON.stringify(bucket.value)
                 totPrice.value = 0
                 bucket.value.forEach(element => {
@@ -130,10 +125,8 @@ export const useBucketStore = defineStore('bucket', () => {
                     });
                     buckLength.value--
                     localStorage.bucket = JSON.stringify(bucket.value)
-                    console.log('Deleeted itemm with ID ' + id + ', now Bucket lenght is ' + buckLength.value)
                 } else {
                     element.count--
-                    console.log('count of prod with id ' + id + ' updated to ' + element.count)
                     localStorage.bucket = JSON.stringify(bucket.value)
                     totPrice.value = 0
                     bucket.value.forEach(element => {
