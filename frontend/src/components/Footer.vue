@@ -37,7 +37,7 @@ const appleStore = useCounterStore()
                     <li><RouterLink class="route" to="/warranty">Гарантия</RouterLink></li>
                     <li><RouterLink class="route" to="/refund">Политика возрата</RouterLink></li>
                     <li><RouterLink class="route" to="/credit">Кредит</RouterLink></li>
-                    <li><RouterLink class="route" to="/">Доставка и оплата</RouterLink></li>
+                    <li><RouterLink class="route" to="/delivery">Доставка и оплата</RouterLink></li>
                     <li><RouterLink class="route" to="/review">Отзывы</RouterLink></li>
                     <li><RouterLink class="route" to="/contacts">Контакты</RouterLink></li>
                     <li><RouterLink class="route" to="/error">Политика конфеденциальности</RouterLink></li>
