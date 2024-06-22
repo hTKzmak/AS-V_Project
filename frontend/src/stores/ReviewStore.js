@@ -35,7 +35,6 @@ export const useReviewStore = defineStore('review', () => {
     menuListarr.value = []
     getVisibleRecipes()
     totalItems = reviewData.length;
-    console.log(Math.ceil(totalItems / itemsPerPage))
     if ((totalItems / itemsPerPage) >= 1) {
         for (let i = 0; i < totalItems / itemsPerPage; i++) {
             menuListarr.value.push(i)
@@ -44,21 +43,17 @@ export const useReviewStore = defineStore('review', () => {
     if ((totalItems / itemsPerPage) < 1) {
         menuListarr.value.push(1)
     }
-    console.log(menuListarr.value)
-    console.log(totalItems)
 
     function goToPage(pageNumber) {
         currentPage.value = pageNumber;
         console.log('We are going to page ' + pageNumber)
         getVisibleRecipes()
-        console.log(paginatedData.value)
     }
 
     // перемещаемя на следующую страницу
     function nextPage() {
         if (menuListarr.value.length != currentPage.value) {
             currentPage.value++
-            goToPage(currentPage.value)
         }
     }
 
@@ -66,7 +61,6 @@ export const useReviewStore = defineStore('review', () => {
     function previousPage() {
         if (menuListarr.value[0] != currentPage.value) {
             currentPage.value = currentPage.value - 1
-            goToPage(currentPage.value)
         }
     }
 
@@ -84,7 +78,6 @@ export const useReviewStore = defineStore('review', () => {
         const startIndex = (currentPage.value - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         paginatedData.value = reviewData.slice(startIndex, endIndex);
-        console.log(paginatedData.value)
     }
 
     return { reviewData, menuListarr, paginatedData, currentPage, itemsPerPage, totalItems, goToPage, nextPage, previousPage, totalPages, getVisibleRecipes }
