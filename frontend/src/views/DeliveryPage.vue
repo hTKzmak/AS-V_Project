@@ -1,5 +1,15 @@
-<script>
+<script setup>
+import coins from '../assets/images/delivery/coins.png'
+import card from '../assets/images/delivery/card.png'
+import buying from '../assets/images/delivery/buying.png'
+import columns from '../assets/images/delivery/columns.png'
+import passed from '../assets/images/delivery/passed.png'
 
+let data = [
+    { img: coins, title: 'Оплата наличными', text: 'Оплатить товар наличными вы можете как в магазине, так и при доставке на дом – у наших курьеров всегда есть сдача. Перед тем, как расплатиться, у вас есть возможность удостовериться в надлежащем качестве устройства, распаковав коробку.' },
+    { img: card, title: 'Банковской картой в магазине/курьеру', text: 'Неважно, забираете ли вы товар сами из магазина или заказали доставку – в любом случае вы можете расплатиться таким способом, ведь у наших курьеров всегда есть терминалы.' },
+    { img: buying, title: 'Онлайн оплата +8% комиссия', text: 'Оплата через платежную систему на сайте при помощи банковской карты, яндекс деньги, web money и др. Обратите внимание, комиссия зависит от способа оплаты.' },
+]
 </script>
 
 <template>
@@ -83,6 +93,53 @@
                         техники перед оплатой</p>
                 </div>
             </div>
+        </div>
+
+        <div class="paying-methods">
+            <span id="title">Оплачивайте как угодно</span>
+            <div class="paying-lists">
+                <div class="part-one">
+                    <div class="paying-item" v-for="elem in data">
+                        <div class="main">
+                            <img :src="elem.img" alt="#">
+                            <span>{{ elem.title }}</span>
+                        </div>
+                        <p>{{ elem.text }}</p>
+                    </div>
+                </div>
+                <div class="part-two">
+                    <div class="paying-item">
+                        <div class="main">
+                            <img :src="columns" alt="#">
+                            <span>Безналичный расчет</span>
+                        </div>
+                        <p>Мы всегда действуем в интересах покупателей, поэтому предоставляем возможность оплатить товар
+                            при помощи безналичного расчета. Обратитесь к нашим менеджерам по телефону <b>+7 (812)
+                                704-86-97</b>, чтобы получить всю необходимую информацию для осуществления оплаты этим
+                            способом.
+                        </p>
+                    </div>
+                    <div class="paying-item">
+                        <div class="main">
+                            <img :src="passed" alt="#">
+                            <span>Кредит</span>
+                        </div>
+                        <p>Иногда желание стать владельцем гаджета не совсем совпадает с возможностью сразу оплатить всю
+                            сумму. Но огорчаться не следует – вы можете приобрести любой товар в кредит. Мы сотрудничаем
+                            со многими банками, поэтому оформление кредита происходит очень быстро и просто. Уточнить
+                            все моменты для получения кредитных средств вы можете у наших менеджеров, позвонив по
+                            указанному телефону <b>+7 (812) 704-86-97</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="choose-gadget">
+            <div class="title">
+                <span>Выбирайте технику, а мы позаботимся о доставке</span>
+                <RouterLink to="/">пойти выбирать</RouterLink>
+            </div>
+            <img src="../assets/images/delivery/hand.png" alt="#">
         </div>
     </div>
 </template>
@@ -471,5 +528,177 @@
         }
     }
 
+}
+
+.paying-methods {
+    background-color: #F9F9F9;
+    padding: 32px 40px;
+    margin-top: 42px;
+    border-radius: 16px;
+
+    #title {
+        font-size: 40px;
+        font-weight: 700;
+
+        @media screen and (max-width: 768px) {
+            font-size: 20px;
+        }
+    }
+
+    .part-one,
+    .part-two {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+
+        .paying-item {
+            width: 100%;
+        }
+
+        @media screen and (max-width: 1440px) {
+            flex-direction: column;
+        }
+    }
+
+    .paying-lists {
+
+        margin-top: 24px;
+        display: grid;
+        gap: 16px;
+
+        .paying-item {
+            background-color: #FFFFFF;
+            padding: 16px;
+            border-radius: 16px;
+
+            .main {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+
+                img {
+                    @media screen and (max-width: 768px) {
+                        width: 32px;
+                    }
+                }
+
+                span {
+                    font-style: 18px;
+                    font-weight: 700;
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            p {
+                font-size: 16px;
+                color: #585656;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 14px;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                width: auto;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: 16px;
+    }
+}
+
+.choose-gadget {
+    margin-top: 24px;
+    margin-bottom: 33px;
+
+    height: 320px;
+
+    background-color: #F9F9F9;
+    padding: 16px 48px;
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    .title {
+
+        width: 615px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+
+        span {
+            font-size: 40px;
+            font-weight: 700;
+
+            @media screen and (max-width: 1440px) {
+                font-size: 32px;
+            }
+
+            @media screen and (max-width: 768px) {
+                font-size: 20px;
+            }
+        }
+
+        a {
+            border-radius: 8px;
+            padding: 18px;
+            font-size: 16px;
+            border: none;
+            background-color: #0071e4;
+            color: #fff;
+            cursor: pointer;
+            width: 288px;
+            text-align: center;
+
+            @media screen and (max-width: 768px) {
+                margin: 0 auto;
+                width: 80%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            width: auto;
+        }
+    }
+
+    img {
+        position: absolute;
+        right: 0;
+        bottom: -45%;
+
+        @media screen and (max-width: 1440px) {
+            width: 215px;
+            right: 35px;
+            bottom: -35px;
+        }
+
+        @media screen and (max-width: 768px) {
+            position: unset;
+            margin-bottom: -32px;
+            margin-top: 16px;
+            width: 107px;
+        }
+    }
+
+    @media screen and (max-width: 1440px) {
+        height: 212px;
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: 16px;
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+    }
 }
 </style>
