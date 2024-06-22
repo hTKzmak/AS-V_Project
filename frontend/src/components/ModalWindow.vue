@@ -30,7 +30,6 @@ function closeHandle() {
     // isModalOpen.value = !isModalOpen.value
     modalStore.isShown = !modalStore.isShown
     modalStore.typeModal = ''
-    console.log(modalStore.isShown)
 }
 
 // watch(isModalOpen, (new) => {
