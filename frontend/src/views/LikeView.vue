@@ -37,7 +37,7 @@ export default {
             }
         }, { deep: true });
         onMounted(() => {
-            likeStore.getVisibleRecipes(),
+            likeStore.getVisibleRecipes()
         }
         )
         return {
