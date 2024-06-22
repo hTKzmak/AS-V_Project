@@ -49,7 +49,6 @@ export default {
             (newId, oldId) => {
                 idForWatch.value = newId;
                 singleProductStore.findProd(idForWatch.value)
-                console.log(singleProductStore.count_review)
                 recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available, 1, 1, singleProductStore.count_review)
             }
 
@@ -103,12 +102,9 @@ export default {
         // }
         // )
         onMounted(() => {
-            console.log('before mounted')
             productId.value = route.params.id
-            console.log(productId.value)
             singleProductStore.findProd(productId.value)
             recentStore.addToRecent(singleProductStore.id, singleProductStore.name, singleProductStore.price, singleProductStore.images[0], singleProductStore.rating, singleProductStore.discount_price, singleProductStore.is_available, 1, 1, singleProductStore.count_review)
-            console.log(appleStore.data.length)
         });
         console.log(appleStore.data.length)
         return {
