@@ -31,7 +31,6 @@ export default {
     watch(
       () => appleStore.totalFilters, // Наблюдайте за изменениями в appleStore.totalFilters
       (newFilters) => {
-        console.log(newFilters);
         totalFilters.value = newFilters;
       },
       { deep: true }
@@ -42,14 +41,11 @@ export default {
             (newRoute) => {
               getTags(newRoute)
               category.value = newRoute
-              console.log(appleStore.titlePage)
             }
             
         );
 
     onMounted(() => {
-        console.log('On mounted tags')
-        console.log(appleStore.titlePage)
         tagsData.value = appleStore.getOnMountedTags()
     })
     return {
