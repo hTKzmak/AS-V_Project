@@ -18,7 +18,6 @@ import { onMounted, ref, watchEffect } from 'vue';
             if (appleStore.data.length > 0) {
                 sortedData.value = [...appleStore.data].sort((a, b) => b.count_review - a.count_review);
             }
-            console.log(sortedData.value)
         });
         // onMounted(() =>{
         //     if (appleStore.data.length > 0) {
