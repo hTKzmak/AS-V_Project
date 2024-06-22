@@ -90,7 +90,7 @@ export const useSingleProductStore = defineStore('singleProduct', () => {
     .then(json => {
     allProds.value = json
     closeProds.value = allProds.value.filter(p => p.name == name.value)
-    console.log(closeProds.value)
+
 
     // Уникальные объекты по цвету
   closeColor.value = closeProds.value.reduce((acc, prod) => {
@@ -100,7 +100,6 @@ export const useSingleProductStore = defineStore('singleProduct', () => {
   return acc;
 }, []);
 
-console.log('Уникальные цвета:', closeColor.value);
 
 // Уникальные объекты по объему встроенной памяти
   closeMemo.value = closeProds.value.reduce((acc, prod) => {
