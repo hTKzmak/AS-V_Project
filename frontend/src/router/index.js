@@ -8,6 +8,8 @@ import CreditPage from '@/views/CreditPage.vue'
 import RefundPage from '@/views/RefundPage.vue'
 import ContactsPage from '@/views/contactsPage.vue'
 import ReviewPage from '@/views/ReviewPage.vue'
+import WarrantyPage from '@/views/WarrantyPage.vue'
+import DeliveryPage from '@/views/DeliveryPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +53,16 @@ const router = createRouter({
       path: '/review',
       name: 'ReviewPage', 
       component: ReviewPage
+    },
+    {
+      path: '/warranty',
+      name: 'WarrantyPage', 
+      component: WarrantyPage
+    },
+    {
+      path: '/delivery',
+      name: 'DeliveryPage', 
+      component: DeliveryPage
     },
     {
       path: '/:pathMatch(.*)*',

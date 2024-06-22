@@ -154,7 +154,7 @@ export default {
                             src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/ban">Гарантия</RouterLink>
+                    <RouterLink to="/warranty">Гарантия</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
                     <RouterLink to="/refund">Политика возрата</RouterLink>
@@ -163,7 +163,7 @@ export default {
                     <RouterLink to="/credit">Кредит</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/ban">Доставка и оплата</RouterLink>
+                    <RouterLink to="/delivery">Доставка и оплата</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
                     <RouterLink to="/review">Отзывы</RouterLink>
@@ -261,7 +261,7 @@ export default {
                                 src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
                     </li>
                     <li>
-                        <RouterLink class="route" to="/">Гарантия</RouterLink>
+                        <RouterLink class="route" to="/warranty">Гарантия</RouterLink>
                     </li>
                     <li>
                         <RouterLink class="route" to="/refund">Политика возрата</RouterLink>
@@ -270,7 +270,7 @@ export default {
                         <RouterLink class="route" to="/credit">Кредит</RouterLink>
                     </li>
                     <li>
-                        <RouterLink class="route" to="/">Доставка и оплата</RouterLink>
+                        <RouterLink class="route" to="/delivery">Доставка и оплата</RouterLink>
                     </li>
                     <li>
                         <RouterLink class="route" to="/review">Отзывы</RouterLink>
