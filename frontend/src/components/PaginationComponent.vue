@@ -20,13 +20,10 @@ let totalPages = ref(10)
 // Общее количество страниц
 if (props.page == 'list'){
     totalPages = computed(() => appleStore.menuListarr.length);
-    console.log(totalPages.value)
 } else if(props.page == 'like'){
     totalPages = computed(() => likeStore.menuListarr.length);
-    console.log(totalPages.value)
 } else if(props.page == 'review'){
   totalPages = computed(() => reviewStore.menuListarr.length);
-  console.log(totalPages.value)
 }
 
 
@@ -37,13 +34,10 @@ const nextPage = () => {
 
     if (props.page == 'list'){
         appleStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in LIST')
     } else if(props.page == 'like'){
         likeStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in LIKE')
     }else if(props.page == 'review'){
         reviewStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in REVIEW')
     }
   }
 };
@@ -54,13 +48,10 @@ const previousPage = () => {
     currentPage.value -= 1;
     if (props.page == 'list'){
         appleStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in LIST')
     } else if(props.page == 'like'){
         likeStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in LIKE')
     } else if(props.page == 'review'){
       reviewStore.goToPage(currentPage.value);
-        console.log('We went to page ' + currentPage.value + ' in LIKE')
     }
   }
 };
