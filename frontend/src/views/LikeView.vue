@@ -16,35 +16,28 @@ export default {
         const likeStore = useLikeStore()
         const likeSort = ref('none')
         function checkLiked() {
-            console.log(likeStore.likedProducts)
         }
         watch(likeSort, (newSort) => {
             console.log(newSort)
             if (newSort === 'none') {
                 likeStore.baseSort()
-                console.log(likeStore.likedProducts)
             }
             else if (newSort === 'price_up') {
                 likeStore.sortPriceUp()
                 likeStore.likedProductsLength++
-                console.log(likeStore.likedProducts)
             } else if (newSort === 'price_down') {
                 likeStore.sortPriceDown()
                 likeStore.likedProductsLength++
-                console.log(likeStore.likedProducts)
             } else if (newSort === 'rate_up') {
                 likeStore.sortRateUp()
                 likeStore.likedProductsLength++
-                console.log(likeStore.likedProducts)
             } else if (newSort === 'rate_down') {
                 likeStore.sortRateDown()
                 likeStore.likedProductsLength++
-                console.log(likeStore.likedProducts)
             }
         }, { deep: true });
         onMounted(() => {
             likeStore.getVisibleRecipes(),
-                console.log(likeStore.paginatedData)
         }
         )
         return {
