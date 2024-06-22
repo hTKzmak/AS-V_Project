@@ -95,11 +95,9 @@ export default {
         },
         callbackHandle() {
             this.modalStore.changeModal('Callback')
-            console.log('callback comes in')
         },
         nightHandle() {
             this.modalStore.changeModal('night')
-            console.log('night comes in')
         },
         // функция для отображения товаров выбранного каталога (эту функцию будет нужно доработать, если появится бекенд)
 
