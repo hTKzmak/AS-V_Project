@@ -69,6 +69,21 @@
                     src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a
                         href="https://www.gps.ie/">gps tracker sport</a></iframe></div>
         </div>
+
+        <div class="happy-delivery">
+            <div class="happy-main">
+                <div class="imTired">
+                    <div class="moscow">актуально в Москве</div>
+                    <img src="../assets/images/happy.png" alt=":)">
+                </div>
+                <div class="title">
+                    <span>Доставка, которая радует</span>
+                    <p>согласуем с вами удобное время <br /> курьер позвонит за час до доставки <br /> любые ваши
+                        проверки
+                        техники перед оплатой</p>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -357,5 +372,104 @@
     @media screen and (max-width: 768px) {
         padding: 16px;
     }
+}
+
+.happy-delivery {
+    background-color: #F3F8FF;
+
+    border-radius: 16px;
+
+    padding: 16px;
+    margin-top: 24px;
+
+    height: 233px;
+
+    overflow: hidden;
+    position: relative;
+
+    color: #0071E4;
+
+    .moscow {
+        background-color: #FFFFFF;
+        padding: 16px;
+        border-radius: 8px;
+        width: inherit;
+
+        position: absolute;
+        top: 24px;
+        right: 24px;
+
+        @media screen and (max-width: 768px) {
+            margin-top: 0;
+            position: unset;
+            font-size: 12px;
+            width: auto;
+            padding: 8px;
+        }
+    }
+
+
+    .happy-main {
+        display: flex;
+        align-items: center;
+
+        .imTired {
+            @media screen and (max-width: 768px) {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+        }
+
+        .title {
+            margin-top: -13rem;
+
+            span {
+                font-size: 40px;
+                font-weight: 700;
+
+                @media screen and (max-width: 1440px) {
+                    font-size: 20px;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 16px;
+                }
+            }
+
+            p {
+                font-size: 16px;
+                line-height: 25px;
+                font-weight: 600;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 14px;
+                }
+            }
+
+            @media screen and (max-width: 1440px) {
+                margin-top: -11rem;
+            }
+
+            @media screen and (max-width: 768px) {
+                margin-top: 0;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+    }
+
+    img {
+        @media screen and (max-width: 768px) {
+            width: 105px;
+            margin-bottom: -50px;
+        }
+    }
+
 }
 </style>
