@@ -14,7 +14,6 @@ function changeHandle() {
     // modalStore.typeModal.value = 'Bucket'
     // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
     modalStore.changeModal('Success')
-    console.log(modalStore.typeModal)
 }
 
 
