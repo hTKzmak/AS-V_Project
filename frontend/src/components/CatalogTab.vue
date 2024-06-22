@@ -26,7 +26,6 @@ export default {
         // ф-ия для закрытия данного компонента CatalogTab, чтобы она не отображалась
         showCatalogFunc() {
             this.$emit('toggle-catalog')
-            console.log(this.showCatalog)
         }
     }
 }
