@@ -125,7 +125,6 @@ export const useCounterStore = defineStore('appleStore', {
     actions: {
       addFiltersCount(num){
         this.totalFilters = num;
-        console.log(num)
       },
 
 
@@ -186,7 +185,6 @@ export const useCounterStore = defineStore('appleStore', {
         })
         },
         getValue() {
-          console.log(this.data.sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt))))
             return(this.data.sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt))))
         },
         searchFunc(value) {
@@ -253,9 +251,6 @@ export const useCounterStore = defineStore('appleStore', {
               this.prices =  this.data.map(product => product.price);
               this.minPrice = Math.min(...this.prices);
               this.maxPrice = Math.max(...this.prices);
-              console.log(this.prices)
-              console.log(this.minPrice)
-              console.log(this.maxPrice)
 
               
               menuListarr.value = []
@@ -270,19 +265,12 @@ export const useCounterStore = defineStore('appleStore', {
 
                 menuListarr.value.push(1)
             }
-            console.log(menuListarr)
-            console.log(totalItems)
-
-            console.log('Get filtered by ' + category)
-            console.log(this.categoryData)
-
 
         },
 
         getTags(route){
             this.categoryData = []
             this.filterByCategory(route)
-            console.log('finding tags in ' + categoryProducts.value)
             this.tagList = categoryProducts.value.reduce((acc, product) => {
                 if (!acc.some(item => item.title === product.title)) {
                   acc.push({ id: product.id, title: product.title });
@@ -317,7 +305,6 @@ export const useCounterStore = defineStore('appleStore', {
                     this.titlePage = 'Продукты Apple'
               }
 
-            console.log(this.tagList)
             return(this.tagList)
 
         },
@@ -335,21 +322,14 @@ export const useCounterStore = defineStore('appleStore', {
     baseSort(){
         this.categoryData.sort((a, b) => a.id - b.id);
         this.getVisibleRecipes()
-            console.log('Sorted Array Base')
-            console.log(this.categoryData)
         },
     sortPriceUp(){
         this.categoryData.sort((a, b) => a.price - b.price);
         this.getVisibleRecipes()
-            console.log('Sorted Array PRICE UP')
-            console.log(this.categoryData)
-
         },
     sortPriceDown(){
         this.categoryData.sort((a, b) => b.price - a.price );
         this.getVisibleRecipes()
-            console.log('Sorted Array PRICE DOWN')
-            console.log(this.categoryData)
         },
 
     sortByPrice(min, max){
@@ -357,7 +337,6 @@ export const useCounterStore = defineStore('appleStore', {
         let sortedByPriceData = []
         sortedByPriceData = this.categoryData.filter(e => (e.price>=min) && (e.price<=max))
         this.categoryData = sortedByPriceData
-        console.log(this.categoryData)
         menuListarr.value = []
         this.getVisibleRecipes()
         totalItems = this.categoryData.length;
@@ -377,7 +356,6 @@ export const useCounterStore = defineStore('appleStore', {
         let sortedByPriceDiag = []
         sortedByPriceDiag = this.categoryData.filter((e => e.diag >= min) && (e => e.diag <= max))  
         this.categoryData = sortedByPriceDiag
-        console.log(this.categoryData)
         menuListarr.value = []
         this.getVisibleRecipes()
         totalItems = this.categoryData.length;
@@ -396,7 +374,6 @@ export const useCounterStore = defineStore('appleStore', {
         this.categoryData = this.stableData
         if(memoryValues.length!=0){
             this.categoryData = this.filterProductsByMemory(memoryValues)
-            console.log(this.categoryData)
         }
         menuListarr.value = []
         this.getVisibleRecipes()
@@ -425,7 +402,6 @@ export const useCounterStore = defineStore('appleStore', {
         this.categoryData = this.stableData
         if(memoryValues.length!=0){
             this.categoryData = this.filterProductsByProc(memoryValues)
-            console.log(this.categoryData)
         }
         menuListarr.value = []
         this.getVisibleRecipes()
@@ -445,7 +421,6 @@ export const useCounterStore = defineStore('appleStore', {
             const memoryCharacteristic = product.characteristics.find(
               characteristic => characteristic.characteristic === "Процессор",
             );
-            console.log(memoryCharacteristic.value)
             return memoryCharacteristic && memoryValues.includes(memoryCharacteristic.value);
           });
       },
@@ -454,7 +429,6 @@ export const useCounterStore = defineStore('appleStore', {
         this.categoryData = this.stableData
         if(memoryValues.length!=0){
             this.categoryData = this.filterProductsByWidth(memoryValues)
-            console.log(this.categoryData)
         }
         menuListarr.value = []
         this.getVisibleRecipes()
@@ -471,7 +445,6 @@ export const useCounterStore = defineStore('appleStore', {
     filterProductsByWidth(memoryValues) {
         this.categoryData = this.stableData
         return this.categoryData.filter(product => {
-          console.log(product)
           return memoryValues.some(value => product.title.includes(value));
         })
       },
@@ -482,7 +455,6 @@ export const useCounterStore = defineStore('appleStore', {
         
         console.log('finding all products with name '+name)
         this.categoryData = this.data.filter(prod => prod.title == name)
-        console.log(this.categoryData)
         this.getVisibleRecipes()
         menuListarr.value = []
               this.getVisibleRecipes()
@@ -499,7 +471,6 @@ export const useCounterStore = defineStore('appleStore', {
         this.nameFiltered = true
         console.log(this.nameFiltered + ' ' + this.currName + ' ' + name)
         if ((this.currName == name) && (this.nameFiltered)){
-            console.log('second touch')
             this.nameFiltered = false
             this.changeCategory()
         }
@@ -509,9 +480,7 @@ export const useCounterStore = defineStore('appleStore', {
 // -------------------------------ПАГИНАЦИЯ---------------------------
         goToPage(pageNumber) {
             currentPage.value = pageNumber;
-            console.log('We are going to page ' + pageNumber)
             this.getVisibleRecipes()
-            console.log(paginatedData.value)
         },
 
         // перемещаемя на следующую страницу
