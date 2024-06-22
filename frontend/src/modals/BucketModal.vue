@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { useModalStore } from '@/stores/ModalStore'
 import { useBucketStore } from '@/stores/BucketStore';
 import EmptyBucket from './EmptyBucket.vue';
@@ -15,6 +16,8 @@ function changeHandle() {
     // console.log(modalStore.typeModal + ' ' + modalStore.isShown)
     modalStore.changeModal('Success')
 }
+
+let deilveryType = ref('')
 
 
 </script>
@@ -82,7 +85,7 @@ function changeHandle() {
                         </select> -->
                         <div class="custom-select">
                             <select name="" id="">
-                                <option value="All">Все модели</option>
+                                <option value="All">Наличными</option>
                             </select>
                         </div>
                     </div>
@@ -93,17 +96,33 @@ function changeHandle() {
 
                         <div class="radio-group">
                             <label>
-                                <input type="radio" name="debt" value="yes">
+                                <input type="radio" name="debt" v-model="deilveryType" value="self" >
                                 <p class="radio-answer">Самовывоз</p>
                             </label>
                             <label>
-                                <input type="radio" name="debt" value="no" checked>
+                                <input type="radio" name="debt" v-model="deilveryType" value="delivery" checked>
                                 <p class="radio-answer">Доставка</p>
                             </label>
                         </div>
 
 
 
+                    </div>
+                    <div v-if="deilveryType==='delivery'" class="info_field">
+                        <h3>Выберите способ доставки</h3>
+                        <input placeholder="Город" class="text_input" type="text">
+                        <input placeholder="Адрес доставки" class="text_input" type="text">
+                    </div>
+                    <div v-if="deilveryType==='self'" class="info_field">
+                        <h3>Выберите пункт самовывоза</h3>
+                        <!-- <select class="payment-select">
+                            <option>Наличными</option>
+                        </select> -->
+                        <div class="custom-select">
+                            <select name="" id="">
+                                <option value="All">Москва, ул Ленина, 117</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="info_field">
                         <h3>Введите телефон</h3>
