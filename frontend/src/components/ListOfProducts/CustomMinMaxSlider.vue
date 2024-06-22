@@ -102,7 +102,6 @@ const onInput = ({ target }) => {
                 appleStore.sortByPrice(sliderMinValue.value, sliderMaxValue.value)
             } else if (targetVal.value == 'diag_smmartpads' || targetVal.value == 'diag'){
                 appleStore.sortByDiag(sliderMinValue.value, sliderMaxValue.value)
-                console.log(sliderMinValue.value)
             }
 
 
@@ -116,7 +115,6 @@ const onInput = ({ target }) => {
                 appleStore.sortByPrice(sliderMinValue.value, sliderMaxValue.value)
             } else if (targetVal.value == 'diag_smmartpads' || targetVal.value == 'diag'){
                 appleStore.sortByDiag(sliderMinValue.value, sliderMaxValue.value)
-                console.log(sliderMaxValue.value)
             }
 
     }
