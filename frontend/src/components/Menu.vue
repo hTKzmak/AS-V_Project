@@ -16,7 +16,6 @@ export default {
         // ф-ия для отображения CatalogTab (это отдельный компонент для мобильной и планшетной версии каталогов) 
         showCatalogFunc() {
             this.$emit('toggle-catalog')
-            console.log(this.showCatalog)
         },
 
         showBasketFunc(){
