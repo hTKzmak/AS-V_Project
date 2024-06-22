@@ -34,13 +34,13 @@ const appleStore = useCounterStore()
 
             <div class="footer-navigation">
                 <ul>
-                    <li><RouterLink class="route" to="/">Гарантия</RouterLink></li>
-                    <li><RouterLink class="route" to="/refund">Политика конфеденциальности</RouterLink></li>
-                    <li><RouterLink class="route" to="/">Кредит</RouterLink></li>
+                    <li><RouterLink class="route" to="/warranty">Гарантия</RouterLink></li>
+                    <li><RouterLink class="route" to="/refund">Политика возрата</RouterLink></li>
+                    <li><RouterLink class="route" to="/credit">Кредит</RouterLink></li>
                     <li><RouterLink class="route" to="/">Доставка и оплата</RouterLink></li>
-                    <li><RouterLink class="route" to="/">Отзывы</RouterLink></li>
+                    <li><RouterLink class="route" to="/review">Отзывы</RouterLink></li>
                     <li><RouterLink class="route" to="/contacts">Контакты</RouterLink></li>
-                    <li><RouterLink class="route" to="/">Политика конфеденциальности</RouterLink></li>
+                    <li><RouterLink class="route" to="/error">Политика конфеденциальности</RouterLink></li>
                 </ul>
                 <ul>
                     <li @click="appleStore.changeCategory"><RouterLink class="route" to="/list_of_products/smartphones">iPhone</RouterLink></li>

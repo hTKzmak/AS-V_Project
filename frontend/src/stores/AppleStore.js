@@ -10,9 +10,9 @@ import { useRoute } from 'vue-router';
 // let BASE_URL = 'https://dummyjson.com/products'
 
 // Новые данные (Бекенд Арсена)
-// let BASE_URL = 'http://localhost:1452/'
+let BASE_URL = 'http://localhost:1452/'
 
-let BASE_URL = 'https://angular-final-project-backend.onrender.com/'
+// let BASE_URL = 'https://angular-final-project-backend.onrender.com/'
 
 
 let productsList = ref([])

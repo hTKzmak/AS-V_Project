@@ -156,7 +156,7 @@ export default {
                             src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/ban">Гарантия</RouterLink>
+                    <RouterLink to="/warranty">Гарантия</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
                     <RouterLink to="/refund">Политика возрата</RouterLink>
@@ -263,7 +263,7 @@ export default {
                                 src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
                     </li>
                     <li>
-                        <RouterLink class="route" to="/">Гарантия</RouterLink>
+                        <RouterLink class="route" to="/warranty">Гарантия</RouterLink>
                     </li>
                     <li>
                         <RouterLink class="route" to="/refund">Политика возрата</RouterLink>
