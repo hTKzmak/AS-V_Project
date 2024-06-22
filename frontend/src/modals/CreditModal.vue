@@ -5,7 +5,6 @@ import { useCurrentProductStore } from '../stores/CurrentProductStore'
 import ButtonElem from '@/components/UI/ButtonElem.vue';
 // const modalStore = useModalStore()
 const CurrentProductStore = useCurrentProductStore()
-console.log(CurrentProductStore.image)
 
 const value = ref(6);
 const MonthPayment = ref(Math.round(CurrentProductStore.price / value.value))
