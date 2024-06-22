@@ -7,7 +7,6 @@ export const useRecentStore = defineStore('recent', () => {
     const productsFromStorage = localStorage.getItem('recent');
     if (productsFromStorage) {
       recentProducts.value = JSON.parse(productsFromStorage);
-      console.log(recentProducts.value)
     }
     function addToRecent(id, title, price, image, rating, discount, is_available, category, guarantee, count_review){
         let findIndex = recentProducts.value.findIndex(elem => elem.id === id)
@@ -28,7 +27,6 @@ export const useRecentStore = defineStore('recent', () => {
           recentProducts.value.shift()
         }
         localStorage.recent = JSON.stringify(recentProducts.value)
-        console.log(recentProducts.value)
         }
 
     }
