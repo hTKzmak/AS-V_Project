@@ -91,8 +91,6 @@ export default {
                 const filteredNumbers = this.choosenRoster.filter((number) => number !== elem.id);
                 this.choosenRoster = filteredNumbers
             }
-
-            console.log(this.choosenRoster)
         },
 
         // ф-ия для закрытия фильтра, чтобы она не отображалась
@@ -122,7 +120,6 @@ export default {
             appleStore.addFiltersCount(totalFilters.value)
         }
 
-        console.log(route.params.category)
 
         watch(
             () => route.params.category,
@@ -154,7 +151,6 @@ export default {
         }
         let selectedItemsProc = ref([])
         function addInListProc(elem){
-            console.log('Proccessor')
             if (!selectedItemsProc.value.find(e => e == elem)){
                 selectedItemsProc.value.push(elem)
                 console.log(selectedItemsProc.value)
@@ -168,7 +164,6 @@ export default {
         }
         let selectedItemsWidth = ref([])
         function addInListWidth(elem){
-            console.log('Proccessor')
             if (!selectedItemsWidth.value.find(e => e == elem)){
                 selectedItemsWidth.value.push(elem)
                 console.log(selectedItemsWidth.value)
