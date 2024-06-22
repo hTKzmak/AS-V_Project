@@ -18,14 +18,12 @@ export const useLikeStore = defineStore('like', () => {
     const productsFromStorage = localStorage.getItem('likedProducts');
     if (productsFromStorage) {
       likedProducts = JSON.parse(productsFromStorage);
-      console.log(likedProducts)
     }
 
               let menuListarr = ref([]);
               menuListarr.value = []
               getVisibleRecipes()
               totalItems = likedProducts.length;
-              console.log(Math.ceil(totalItems/itemsPerPage))
               if((totalItems/itemsPerPage) >= 1){
                 for (let i = 0; i < totalItems/itemsPerPage; i++) {
                 menuListarr.value.push(i)
@@ -34,8 +32,7 @@ export const useLikeStore = defineStore('like', () => {
               if ((totalItems/itemsPerPage) < 1){
                 menuListarr.value.push(1)
               }
-              console.log(menuListarr.value)
-              console.log(totalItems)
+
 
     
       
@@ -71,7 +68,6 @@ export const useLikeStore = defineStore('like', () => {
                 menuListarr.value = []
                 getVisibleRecipes()
                 totalItems = likedProducts.length;
-                console.log(Math.ceil(totalItems/itemsPerPage))
                 for (let i = 0; i < totalItems/itemsPerPage; i++) {
                   menuListarr.value.push(i)
                 }
@@ -80,9 +76,7 @@ export const useLikeStore = defineStore('like', () => {
                 }
                 
             localStorage.setItem('likedProducts', JSON.stringify(likedProducts))
-            console.log(likedProducts)
             likedProductsLength.value--
-            console.log(likedProductsLength)
             // console.log(localStorage.getItem(JSON.stringify(('likedProducts'))))
             // console.log(likedProducts)
             return(false)
@@ -102,9 +96,7 @@ export const useLikeStore = defineStore('like', () => {
                   }
 
                 localStorage.likedProducts = JSON.stringify(likedProducts)
-                console.log(likedProducts)
                 likedProductsLength.value++
-                console.log(likedProductsLength)
                 return(true)
             //    console.log(localStorage.getItem(JSON.stringify('likedProducts')))
         }
@@ -125,34 +117,29 @@ export const useLikeStore = defineStore('like', () => {
     function baseSort(){
         likedProducts.sort((a, b) => a.id - b.id);
         localStorage.likedProducts = JSON.stringify(likedProducts)
-        console.log('Sorted Array')
         getVisibleRecipes()
     }
     function sortPriceUp(){
         likedProducts.sort((a, b) => a.price - b.price);
         localStorage.likedProducts = JSON.stringify(likedProducts)
-        console.log('Sorted Array')
         getVisibleRecipes()
         
     }
     function sortPriceDown(){
         likedProducts.sort((a, b) => b.price - a.price );
         localStorage.likedProducts = JSON.stringify(likedProducts)
-        console.log('Sorted Array')
         getVisibleRecipes()
 
     }
     function sortRateUp(){
         likedProducts.sort((a, b) => a.rating - b.rating);
         localStorage.likedProducts = JSON.stringify(likedProducts)
-        console.log('Sorted Array')
         getVisibleRecipes()
 
     }
     function sortRateDown(){
         likedProducts.sort((a, b) => b.rating - a.rating );
         localStorage.likedProducts = JSON.stringify(likedProducts)
-        console.log('Sorted Array')
         getVisibleRecipes()
 
     }
@@ -162,7 +149,6 @@ export const useLikeStore = defineStore('like', () => {
         currentPage.value = pageNumber;
         console.log('We are going to page ' + pageNumber)
         getVisibleRecipes()
-        console.log(paginatedData.value)
       }
 
     // перемещаемя на следующую страницу
@@ -195,7 +181,6 @@ function getVisibleRecipes() {
 const startIndex = (currentPage.value - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
 paginatedData.value = likedProducts.slice(startIndex, endIndex);
-console.log(paginatedData.value)
 }
 
   return { likedProducts, likedProductsLength, paginatedData, currentPage, itemsPerPage, totalItems, menuListarr,  addFavourite, sortPriceUp, sortPriceDown, sortRateUp, sortRateDown, baseSort, goToPage, nextPage, previousPage, totalPages, getVisibleRecipes, }
