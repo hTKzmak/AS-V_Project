@@ -133,7 +133,7 @@ const props = defineProps({
         </div>
 
 
-        <RouterLink :to="is_available ? productLink : ''">
+        <RouterLink class="main-product-info" :to="is_available ? productLink : ''">
             <h3 v-if="memo !== undefined">{{ title }} {{ color }} {{ memo.value }} {{ memo.unit_type }}</h3>
             <h3 v-if="memo == undefined">{{ title }} {{ color }}</h3>
             <div class="product-image" :style="{ backgroundImage: `url('${BASE_URL + image}')` }"></div>
@@ -142,7 +142,7 @@ const props = defineProps({
 
         <!-- если товар есть в наличии -->
 
-        <div v-if="is_available" class="product-item-info">
+        <div v-if="is_available" class="other-product-info">
             <div class="product-info">
                 <div class="existence">
                     <div class="existence-sign"></div>
@@ -260,34 +260,45 @@ const props = defineProps({
         }
     }
 
-    h3 {
-        font-size: 24px;
-        text-align: center;
-        margin-top: 9px;
-        margin-bottom: 9px;
-        color: #100E0E;
+    .main-product-info{
 
-        text-overflow: clip;
-        -webkit-line-clamp: 2;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 9px;
+            margin-bottom: 9px;
+            color: #100E0E;
+    
+            text-overflow: clip;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+    
+            @media screen and (max-width: 1440px) {
+                font-weight: 700;
+                font-size: 18px;
+            }
+        }
+    
+        .product-image {
+            width: inherit;
+            height: 300px;
+    
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+        }
 
         @media screen and (max-width: 1440px) {
-            font-weight: 700;
+            flex-direction: column-reverse;
         }
     }
 
-    .product-image {
-        width: inherit;
-        height: 300px;
-
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-    }
-
-    .product-item-info {
+    .other-product-info {
 
         // display: none;
 

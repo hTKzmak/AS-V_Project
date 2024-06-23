@@ -21,8 +21,8 @@ export default {
 
 <template>
     <div class="slider-container">
-        <Carousel :items-to-show="1" :wrap-around="true" :transition="500">
-            <Slide v-for="slide in data" :key="slide.slide" :id="slide.slide" @click="changeSlider" @touchend="changeSlider">
+        <Carousel :items-to-show="1" :wrap-around="true" :transition="500" @click="changeSlider" @touchend="changeSlider">
+            <Slide v-for="slide in data" :key="slide.slide" :id="slide.slide">
                 <SliderContent :title="slide.title" :img="slide.img" :price="slide.price" :link="slide.link" />
             </Slide>
 
@@ -35,7 +35,7 @@ export default {
     </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .slider-container {
     max-width: 1440px;
     margin: 0 auto;

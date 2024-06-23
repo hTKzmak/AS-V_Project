@@ -152,8 +152,16 @@ export default {
     display: inline-block;
     padding: 5px;
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 20px;
+    right: 44px;
+
+    @media screen and (max-width: 1440px) {
+        right: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+        top: 15px;
+    }
 }
 
 .up {

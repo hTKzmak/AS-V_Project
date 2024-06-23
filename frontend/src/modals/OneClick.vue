@@ -17,7 +17,7 @@ const CurrentProductStore = useCurrentProductStore()
             <div class="mobile-info">
                 <h2>{{ CurrentProductStore.name }}</h2>
                 <div class="mobile-price">
-                    <p class="oldPrice">{{ CurrentProductStore.oldPrice }} ₽</p>
+                    <p v-show="CurrentProductStore.oldPrice !== null" class="oldPrice">{{ CurrentProductStore.oldPrice + '₽' }}</p>
                     <p class="currPrice">{{ CurrentProductStore.price }} ₽</p>
                 </div>
 
@@ -29,14 +29,15 @@ const CurrentProductStore = useCurrentProductStore()
         <div class="textField">
             <p class="smallInfo desk-credit">Купить в 1 клик</p>
             <h2 class="desk-credit">{{ CurrentProductStore.name }}</h2>
-            <p class="oldPrice desk-credit">{{ CurrentProductStore.oldPrice }} ₽</p>
+            <p v-show="CurrentProductStore.oldPrice !== null" class="oldPrice desk-credit">{{ CurrentProductStore.oldPrice + '₽' }}</p>
             <p class="currPrice desk-credit">{{ CurrentProductStore.price }} ₽</p>
             <input placeholder="+7" class="input_field" type="tel">
-            <!-- props: ['title', 'img', 'action', 'addedItemStyle'] -->
+
             <div style="width: 256px; height: 56px;">
                 <ButtonElem title="оформить заказ" addedItemStyle="false" />
             </div>
-            <p class="smallInfo">Либо позвоните или напишите нам </p>
+
+            <p class="smallInfo">Либо позвоните или напишите нам</p>
             <div class="last-info">
                 <h3>+7 (812) 704-86-97</h3>
                 <div class="social-media">

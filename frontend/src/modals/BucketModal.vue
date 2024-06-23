@@ -31,19 +31,20 @@ let deilveryType = ref('')
             <div class="list custom-scrollbar-min">
                 <div v-for="(item, index) in bucketStore.bucket" :key="index" class="product_card">
 
-                    <button class='close' @click="deleteItem(item.id)"><img src="..\assets\icons\modals\close.png" alt=""></button>
+                    <button class='close' @click="deleteItem(item.id)"><img src="..\assets\icons\modals\close.png"
+                            alt=""></button>
 
                     <img class="prod_img" :src="item.image">
 
                     <div class="mobileProductInfo">
                         <img class="prod_img" :src="item.image">
-                        <p>{{ item.title }}</p>
+                        <p id="product-mobile-name">{{ item.title }} {{ item.color }} {{ item.memo }}</p>
                     </div>
 
                     <div class="text-field">
 
-                        <p>{{item.title}} {{ item.color }} {{  item.memo }}</p>
-                        
+                        <p id="product-desktop-name">{{ item.title }} {{ item.color }} {{ item.memo }}</p>
+
                         <div class="priceAndCount">
                             <div class="price-field">
                                 <p v-if="item.oldPrice !== null" style="text-decoration: line-through; color: grey;">
@@ -51,7 +52,7 @@ let deilveryType = ref('')
                                 <p v-if="item.lastPrice !== null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p>
                             </div>
 
-                       <!-- // <div style="display: flex; gap: 10px;"><p v-if="item.oldPrice!==null" style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p v-if="item.lastPrice!==null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p> -->
+                            <!-- <div style="display: flex; gap: 10px;"><p v-if="item.oldPrice!==null" style="text-decoration: line-through; color: grey;">{{ item.oldPrice }}₽ </p><p v-if="item.lastPrice!==null" style="font-weight: 700;"> {{ item.lastPrice }}₽</p> -->
 
                             <div class="counter-field">
                                 <button @click="bucketStore.countDown(item.id)" class="change-count">-</button>
@@ -351,9 +352,6 @@ let deilveryType = ref('')
 
 
 .counter-field {
-    // position: absolute;
-    // right: 20px;
-    // bottom: 5px;
     align-self: flex-end;
     display: flex;
     align-items: center;
@@ -477,6 +475,19 @@ option {
     gap: 10px;
     width: 70%;
 
+    #product-desktop-name {
+        display: flex;
+        text-overflow: clip;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+    }
+
     p {
         padding: 0;
         margin: 0;
@@ -533,6 +544,19 @@ option {
 
     .mobileProductInfo {
         display: none;
+
+        #product-mobile-name {
+            display: none;
+
+            @media screen and (max-width: 768px) {
+                display: flex;
+                text-overflow: clip;
+                -webkit-line-clamp: 2;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
 
         @media screen and (max-width:768px) {
             display: flex;

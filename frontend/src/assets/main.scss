@@ -8,8 +8,8 @@ html,
 body {
     background: $main-background-color;
     color: $main-font-color;
-    font-family: "SF Pro Display inherit", sans-serif;
-    // font-family: "SF Pro Display Regular", sans-serif;
+    // font-family: "SF Pro Display inherit", sans-serif;
+    font-family: "SF Pro Display Regular", sans-serif;
     // font-family: 'SF Pro Display Medium', sans-serif;
     // font-family: 'SF Pro Display Bold', sans-serif;
     // font-family: 'SF Pro Display Black', sans-serif;
@@ -43,18 +43,18 @@ body {
     h4,
     h5,
     input {
-        // font-family: "SF Pro Display Regular", sans-serif;
+        font-family: "SF Pro Display Regular", sans-serif;
         font-weight: 400;
     }
 
     h3 {
-        // font-family: "SF Pro Display Medium", sans-serif;
+        font-family: "SF Pro Display Medium", sans-serif;
         font-weight: 500;
     }
 
     h1,
     h2 {
-        // font-family: "SF Pro Display Bold", sans-serif;
+        font-family: "SF Pro Display Bold", sans-serif;
         font-weight: 600;
         margin-left: 0;
     }

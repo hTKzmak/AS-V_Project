@@ -6,7 +6,7 @@
             <img src="./assets/images/ears.png" alt="Nothing Ear">
             <div class="title">
                 <h1>Купить Nothing Ear(1)</h1>
-                <h2>в наличии в Санкт-Петербурге</h2>
+                <p>в наличии в Санкт-Петербурге</p>
             </div>
         </div>
         <div class="nothing-blocks-list">
@@ -90,8 +90,9 @@
             }
         }
         
-        h2 {
+        p {
             font-weight: 400;
+            font-size: 24px;
             
             @media screen and (max-width: 768px) {
                 font-size: 16px;
@@ -100,7 +101,6 @@
 
         @media screen and (max-width: 768px) {
             text-align: center;
-            ;
         }
     }
 
