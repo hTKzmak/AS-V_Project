@@ -589,7 +589,7 @@ export default {
 
         border-radius: 16px;
 
-        width: 352px;
+        width: 320px;
 
         z-index: 1;
 
@@ -646,7 +646,7 @@ export default {
                         overflow: hidden;
 
                         width: 95px;
-                        padding: 10px 16px;
+                        padding: 10px 5px;
 
                         background-color: #FFF;
                         border: 1px solid #E7E7E7;
