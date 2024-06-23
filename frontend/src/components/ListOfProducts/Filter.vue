@@ -20,7 +20,7 @@ export default {
             // список для фильтрации товаров
             rostlerData: [
                 {
-                    id: 1, title: 'Память', forCategory:['pads','smartphones','laptops', ''], list: [
+                    id: 1, title: 'Память', forCategory:['pads','smartphones','laptops'], list: [
                         { id: 1, value:64, text: '64 ГБ', filterType: 'memo' },
                         { id: 2, value:128, text: '128 ГБ', filterType: 'memo' },
                         { id: 3, value:256, text: '256 ГБ', filterType: 'memo' },
@@ -29,7 +29,7 @@ export default {
                     ]
                 },
                 {
-                    id: 2, title: 'Процессор', forCategory:['watches','smartphones','laptops', ''],     list: [
+                    id: 2, title: 'Процессор', forCategory:['watches','smartphones','laptops'],     list: [
                         { id: 1, value:"A13 Bionic", text: "A13 Bionic"  },
                         { id: 2, value:"A14 Bionic", text: "A14 Bionic"  },
                         { id: 3, value:"A15 Bionic", text: "A15 Bionic"  },
@@ -44,7 +44,7 @@ export default {
                     ]
                 },
                 {
-                    id: 3, title: 'Ширина', forCategory:['watches', ''], list: [
+                    id: 3, title: 'Ширина', forCategory:['watches'], list: [
                         { id: 1, value:41, text: '41мм', },
                         { id: 2, value:45, text: '45мм', },
                         { id: 3, value:49, text: '49мм', },

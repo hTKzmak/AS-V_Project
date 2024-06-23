@@ -301,6 +301,9 @@ export const useCounterStore = defineStore('appleStore', {
                 case 'watches':
                     this.titlePage = 'Часы Apple'
                 break; 
+                case 'onSale':
+                    this.titlePage = 'Скидки на товары Apple!'
+                break; 
                 default:
                     this.titlePage = 'Продукты Apple'
               }

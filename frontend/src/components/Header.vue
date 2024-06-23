@@ -10,7 +10,8 @@ import iMacIcon from '../assets/icons/header/gadgets/macbook.svg'
 import watchIcon from '../assets/icons/header/gadgets/applewatch.svg'
 import gadgetsIcon from '../assets/icons/header/gadgets/airpods.svg'
 import toolsIcon from '../assets/icons/header/gadgets/tools.svg'
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default {
     components: {
@@ -44,6 +45,20 @@ export default {
         const productLink = computed(() => ({
             name: '/product'
         }));
+
+        const route = useRoute()
+        let tagsData = ref()
+        function getTags(route){
+            tagsData.value = appleStore.getTags(route)
+        }
+
+        watch(
+            () => route.params.category,
+            (newRoute) => {
+              getTags(newRoute)
+            }
+        );
+
         return {
 
             appleStore, modalStore, bucketStore, productLink,
@@ -150,10 +165,10 @@ export default {
                     <RouterLink to="/list_of_products/all">Весь каталог</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
-                    <RouterLink to="/list_of_products/smartphones" id="fire"><img
+                    <RouterLink to="/list_of_products/onSale" id="fire"><img
                             src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
                 </li>
-                <li @click="showMenuFunc()">
+                <li @click="showMenuFunc()">    
                     <RouterLink to="/warranty">Гарантия</RouterLink>
                 </li>
                 <li @click="showMenuFunc()">
@@ -257,7 +272,7 @@ export default {
                         <RouterLink class="route" to="/list_of_products/all">Весь каталог</RouterLink>
                     </li>
                     <li>
-                        <RouterLink class="route" to="/list_of_products/smartphones" id="fire"><img
+                        <RouterLink class="route" to="/list_of_products/onSale" id="fire"><img
                                 src="../assets/icons/header/fire-emblem.svg">Акции</RouterLink>
                     </li>
                     <li>
