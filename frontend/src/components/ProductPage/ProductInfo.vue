@@ -196,7 +196,7 @@ export default {
                         </div>
 
                         <h3>{{ singleProductStore.discount_price ? singleProductStore.discount_price + ' ' + '₽' :
-                            singleProductStore.price + ' ' + '₽'}}</h3>
+                            singleProductStore.price + ' ' + '₽' }}</h3>
                         <ButtonElem
                             v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) == undefined && singleProductStore.is_available"
                             title="Добавить в корзину" addedItemStyle="false" :action="addToBucket" />
@@ -212,7 +212,12 @@ export default {
                         <p>Купить в 1 клик</p>
                         <div class="buyInOneClick">
                             <input type="tel" name="#" id="#" placeholder="+7 900 654 32 45">
-                            <ButtonElem title="Купить" addedItemStyle="false" :action="buyInOneClick" />
+                            <div class="" v-if="singleProductStore.is_available">
+                                <ButtonElem title="Купить" addedItemStyle="false" :action="buyInOneClick" />
+                            </div>
+                            <div v-else>
+                                <ButtonElem title="Купить" addedItemStyle="false" :action="buyInOneClick" disabled style="background-color: #0071E499;"/>
+                            </div>
                         </div>
 
                         <nav>

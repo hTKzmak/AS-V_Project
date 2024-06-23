@@ -5,6 +5,7 @@ import { useCurrentProductStore } from '../stores/CurrentProductStore'
 import ButtonElem from '@/components/UI/ButtonElem.vue';
 // const modalStore = useModalStore()
 const CurrentProductStore = useCurrentProductStore()
+console.log(CurrentProductStore.image)
 
 const value = ref(6);
 const MonthPayment = ref(Math.round(CurrentProductStore.price / value.value))
@@ -573,7 +574,7 @@ h3 {
   font-weight: 700;
 
   @media screen and (max-width: 768px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 

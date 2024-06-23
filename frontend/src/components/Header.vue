@@ -508,7 +508,6 @@ header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 15px;
 
             position: relative;
 
@@ -812,7 +811,7 @@ header {
         background-color: #FFF;
         left: 0;
         right: 0;
-        top: 64px;
+        top: 60px;
         height: 100rem;
 
         .recall {

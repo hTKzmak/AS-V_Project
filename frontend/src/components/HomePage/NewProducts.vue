@@ -7,26 +7,25 @@ import { onMounted, ref, watchEffect } from 'vue';
         const appleStore = useCounterStore();
         const sortedData = ref([]);
 
-
-        function sortData(){
-            sortedData.value = appleStore.getValue()
-        }
         // нужен для отображения новых товаров по дате (от большего к меньшему)
         watchEffect(() => { 
-            sortedData.value = [...appleStore.data].sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
-            sortedData.value.sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
+            if (appleStore.data.length > 0) {
+                sortedData.value = [...appleStore.data].sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
+            }
         });
         onMounted(() =>{   
-            sortedData.value = [...appleStore.data].sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
-            sortedData.value.sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
+            if (appleStore.data.length > 0) {
+                sortedData.value = [...appleStore.data].sort((a, b) => (new Date(b.createdAt)) - (new Date(a.createdAt)))
+            }
         }
         )
 
 
 </script>
 
+
 <template>
-    <div class="container" @click="sortData">
+    <div class="container">
         <RouterLink id="products-link" to="/">Новинки</RouterLink>
         <ProductsList :count="8" :data="sortedData" />
     </div>
