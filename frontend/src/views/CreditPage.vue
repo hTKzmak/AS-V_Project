@@ -357,7 +357,7 @@ export default {
                     width: fit-content;
 
                     @media screen and (max-width: 768px) {
-                        width: 100%;
+                        width: auto;
                         padding: 18px;
                     }
                 }
