@@ -8,6 +8,10 @@ import ButtonElem from '../UI/ButtonElem.vue';
 import Rating from '../UI/Rating.vue';
 import { ref, watchEffect } from 'vue';
 
+// икноки корзин
+import cart from '../../assets/icons/cart.svg';
+import cartAdded from '../../assets/icons/cartAdded.svg';
+
 export default {
     name: 'App',
     props: {
@@ -37,7 +41,10 @@ export default {
         return {
             appleStore,
             bucketStore,
-            sortedData
+            sortedData,
+
+            cart,
+            cartAdded,
         }
     },
     data() {
@@ -66,11 +73,8 @@ export default {
                 <div class="img" :style="{ backgroundImage: `url('${BASE_URL + item.image}')` }">></div>
                 <span id="price">{{ item.discount === null ? item.price : item.discount }} ₽</span>
 
-                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) == undefined" title="в корзину"
-                    img='/cart.svg' addedItemStyle='false'
-                    :action="() => addToBucket(item.id, item.title, item.discount === null ? item.price : item.discount, item.discount === null ? null : item.price, BASE_URL + item.image, 1)" />
-                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) != undefined" title="в корзине"
-                    img='/inCart.svg' addedItemStyle='true' />
+                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) == undefined" title="в корзину" :img='cart' addedItemStyle='false' :action="() => addToBucket(item.id, item.title, item.discount === null ? item.price : item.discount, item.discount === null ? null : item.price, BASE_URL + item.image, 1)" />
+                <ButtonElem v-if="this.bucketStore.bucket.find((e) => e.id === item.id) != undefined" title="в корзине" :img='cartAdded' addedItemStyle='true' />
 
                 <RouterLink id="productLink" :to="{ path: '/product/' + item.id }">подробнее</RouterLink>
             </div>

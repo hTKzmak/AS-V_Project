@@ -76,6 +76,8 @@ export default {
             gap: 8px;
             font-size: 15px;
 
+            font-family: "SF Pro Display Regular", sans-serif;
+
             color: #282626;
 
             &:hover {

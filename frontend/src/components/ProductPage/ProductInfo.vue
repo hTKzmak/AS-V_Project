@@ -202,7 +202,7 @@ export default {
                             title="Добавить в корзину" addedItemStyle="false" :action="addToBucket" />
                         <ButtonElem
                             v-if="bucketStore.bucket.find((e) => e.id === singleProductStore.id) != undefined && singleProductStore.is_available"
-                            title="В корзине" img='/inCart.svg' addedItemStyle='true' />
+                            title="В корзине" addedItemStyle='true' />
                         <button v-if="!singleProductStore.is_available" id="discountBtn"
                             style="color: #0071E4; align-self: center; width: 100%; font-size: 16px; height: 50px;"
                             @click="noProduct">

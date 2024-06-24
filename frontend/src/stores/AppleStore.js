@@ -12,6 +12,7 @@ import { useRoute } from 'vue-router';
 // Новые данные (Бекенд Арсена)
 // let BASE_URL = 'http://localhost:1452/'
 
+// Новые данные (от Алексея)
 let BASE_URL = 'https://angular-final-project-backend.onrender.com/'
 
 

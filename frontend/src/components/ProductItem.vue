@@ -12,6 +12,10 @@ import Rating from './UI/Rating.vue';
 import { computed, onMounted } from 'vue';
 import { ref } from 'vue';
 
+// икноки корзин
+import cart from '../assets/icons/cart.svg';
+import cartAdded from '../assets/icons/cartAdded.svg';
+
 const modalStore = useModalStore()
 
 // Добавил appleStore
@@ -165,10 +169,10 @@ const props = defineProps({
                 <!-- мобильная версия кнопки для покупки  -->
 
                 <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined"
-                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/cart.svg'
+                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" :img='cart'
                     addedItemStyle='false' :action="addToBucket" />
                 <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined"
-                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" img='/inCart.svg'
+                    :title="discount === null ? price + ' ' + '₽' : discount + ' ' + '₽'" :img='cartAdded'
                     addedItemStyle='true' />
 
                 <h3>{{ discount === null ? price : discount }} ₽</h3>
@@ -177,9 +181,9 @@ const props = defineProps({
             <!-- ПК версия кнопки для покупки  -->
 
             <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) == undefined" title="в корзину"
-                img='/cart.svg' addedItemStyle='false' :action="addToBucket" />
+                :img='cart' addedItemStyle='false' :action="addToBucket" />
             <ButtonElem v-if="bucketStore.bucket.find((e) => e.id === props.id) != undefined" title="в корзине"
-                img='/inCart.svg' addedItemStyle='true' />
+                :img='cartAdded' addedItemStyle='true' />
 
 
             <div class="other">
