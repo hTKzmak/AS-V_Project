@@ -14,8 +14,8 @@ export default {
 
     const totalFilters = ref(appleStore.totalFilters)
 
-    function getTags(route){
-        tagsData.value = appleStore.getTags(route)
+    function getTags(route) {
+      tagsData.value = appleStore.getTags(route)
     }
 
     watch(listSort, (newSort) => {
@@ -37,16 +37,16 @@ export default {
     );
 
     watch(
-            () => route.params.category,
-            (newRoute) => {
-              getTags(newRoute)
-              category.value = newRoute
-            }
-            
-        );
+      () => route.params.category,
+      (newRoute) => {
+        getTags(newRoute)
+        category.value = newRoute
+      }
+
+    );
 
     onMounted(() => {
-        tagsData.value = appleStore.getOnMountedTags()
+      tagsData.value = appleStore.getOnMountedTags()
     })
     return {
       appleStore,
@@ -54,7 +54,7 @@ export default {
       tagsData,
       category,
       totalFilters,
-        getTags
+      getTags
     };
   },
   methods: {
@@ -71,237 +71,264 @@ export default {
 </script>
 
 <template :key="forceRenderKey">
-    <div class="container">
-      <h2>{{ appleStore.titlePage }}</h2>
-      <div class="tagsAndSort">
-        <div class="tags-list">
-          <div class="tags-list" v-if="category != 'onSale'">
+  <div class="container">
+    <h2>{{ appleStore.titlePage }}</h2>
+    <div class="tagsAndSort">
+      <div class="tags-list">
+        <div class="tags-list" v-if="category != 'onSale'">
           <div class="tag-item" v-for="elem in tagsData" :key="elem.id" @click="appleStore.filterByName(elem.title)">
             {{ elem.title }}
           </div>
-         </div>
         </div>
-  
-        <div class="filterAndSort">
-          <div class="filter-item">
-            <button @click="showFilterFunc">
-              <img src="../../assets/icons/filter.svg" alt="#">
-              Фильтр
-            </button>
-  
-            <div class="erase-filter">
-              <div class="count">{{ totalFilters }}</div>
-              <button @click="reRender">Сбросить фильтр</button>
-            </div>
+      </div>
+
+      <div class="filterAndSort">
+        <div class="filter-item">
+          <button @click="showFilterFunc">
+            <img src="../../assets/icons/filter.svg" alt="#">
+            Фильтр
+          </button>
+
+          <div class="erase-filter">
+            <div class="count">{{ totalFilters }}</div>
+            <button @click="reRender">Сбросить фильтр</button>
           </div>
-  
-          <div class="sort">
-            Сортировать
-            <div class="custom-select">
-              <select name="#" id="#" v-model="listSort">
-                <option class="like-option" value="none">по умолчанию</option>
-                <option class="like-option" value="price_up">цена вверх</option>
-                <option class="like-option" value="price_down">цена вниз</option>
-              </select>
-            </div>
+        </div>
+
+        <div class="sort">
+          Сортировать
+          <div class="custom-select">
+            <select name="#" id="#" v-model="listSort">
+              <option class="like-option" value="none">по умолчанию</option>
+              <option class="like-option" value="price_up">цена вверх</option>
+              <option class="like-option" value="price_down">цена вниз</option>
+            </select>
           </div>
         </div>
       </div>
     </div>
-  </template>
-  
+  </div>
+</template>
+
 
 
 <style lang="scss">
 h2 {
-    font-size: 40px;
-    margin-left: 20px;
+  font-size: 40px;
+  margin-left: 20px;
 
-    @media screen and (max-width: 1440px) {
-        margin: 16px 0 16px 0;
-        font-size: 32px;
-    }
+  @media screen and (max-width: 1440px) {
+    margin: 16px 0 16px 0;
+    font-size: 32px;
+  }
 
-    @media screen and (max-width: 768px) {
-        font-size: 24px;
-    }
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+  }
 }
 
 .tagsAndSort {
 
+  display: flex;
+  justify-content: space-between;
+
+  .tags-list {
+
+    margin: 20px 0;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 60rem;
 
-    .tags-list {
+    .tag-item {
+      background-color: #F9F9F9;
+      color: #585656;
 
-        margin: 20px 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        width: 60rem;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 16px;
 
-        .tag-item {
-            background-color: #F9F9F9;
-            color: #585656;
+      cursor: pointer;
+      user-select: none;
 
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 16px;
+      transition: 0.3s;
 
-            cursor: pointer;
-            user-select: none;
+      width: max-content;
 
-            transition: 0.3s;
+      &:hover {
+        background-color: #0071E4;
+        color: #FFF;
+      }
 
-            width: max-content;
+      @media screen and (max-width: 768px) {
+        margin-left: 8px;
+      }
 
-            &:hover {
-                background-color: #0071E4;
-                color: #FFF;
-            }
-
-            @media screen and (max-width: 768px) {
-                margin-left: 8px;
-            }
-
-            &:first-child {
-                @media screen and (max-width: 768px) {
-                    margin-left: 0;
-                }
-            }
-        }
-
-        @media screen and (max-width: 1440px) {
-            width: auto;
-        }
-
+      &:first-child {
         @media screen and (max-width: 768px) {
-            // для firefox
-            display: ruby;
-            // для chrome
-            display: -webkit-inline-box;
-
-            overflow-x: auto;
-            flex-wrap: inherit;
-            width: auto;
+          margin-left: 0;
         }
+      }
     }
-
-    .filterAndSort {
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .filter-item {
-
-            display: none;
-            align-items: center;
-            gap: 16px;
-
-            button {
-                font-size: 16px;
-                display: none;
-                align-items: center;
-                gap: 8px;
-
-                @media screen and (max-width: 1440px) {
-                    display: flex;
-                }
-            }
-
-            .erase-filter {
-
-                display: flex;
-                align-items: center;
-                gap: 8px;
-
-                .count {
-                    color: #fff;
-                    background-color: #0071E4;
-                    border-radius: 100px;
-                    padding: 8px 13px;
-                    font-size: 16px;
-                    width: fit-content;
-                    text-align: center;
-                }
-
-                button {
-                    color: #0071E4;
-                    background: transparent;
-                    border: none;
-                    text-align: start;
-                }
-            }
-
-            @media screen and (max-width: 1440px) {
-                display: flex;
-            }
-        }
-
-
-        .sort {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            .custom-select {
-                width: 170px;
-                position: relative;
-
-                select {
-                    appearance: none;
-                    /*  safari  */
-                    -webkit-appearance: none;
-                    /*  other styles for aesthetics */
-
-                    width: 100%;
-                    font-size: 1.15rem;
-                    padding: 8px 16px;
-                    background-color: #F9F9F9;
-                    border: none;
-
-                    color: #100E0E;
-                    cursor: pointer;
-                    border-radius: 8px;
-                    font-size: 16px;
-                }
-            }
-
-
-            .custom-select::after {
-                content: "";
-                position: absolute;
-                right: 1rem;
-                pointer-events: none;
-
-                border: solid #706e6e;
-                border-width: 0 3px 3px 0;
-                display: inline-block;
-                padding: 5px;
-            }
-
-            .custom-select::after {
-                top: 30%;
-
-                border-color: #0071e4;
-                transform: rotate(45deg);
-                -webkit-transform: rotate(45deg);
-            }
-
-        }
-
-        @media screen and (max-width: 768px) {
-            display: grid;
-            justify-content: start;
-            gap: 10px;
-        }
-
-    }
-
 
     @media screen and (max-width: 1440px) {
-        display: grid;
+      width: auto;
     }
+
+    @media screen and (max-width: 768px) {
+      // для firefox
+      display: ruby;
+      // для chrome
+      display: -webkit-inline-box;
+
+      overflow-x: auto;
+      flex-wrap: inherit;
+      width: auto;
+    }
+  }
+
+  .filterAndSort {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .filter-item {
+
+      display: none;
+      align-items: center;
+      gap: 16px;
+
+      button {
+        font-size: 16px;
+        display: none;
+        align-items: center;
+        gap: 8px;
+
+        @media screen and (max-width: 1440px) {
+          display: flex;
+        }
+      }
+
+      .erase-filter {
+
+        // display: flex;
+        // align-items: center;
+        // gap: 8px;
+
+        display: none;
+
+        .count {
+          color: #fff;
+          background-color: #0071E4;
+
+          border-radius: 100%;
+          padding: 10px;
+
+          font-size: 15px;
+          text-align: center;
+
+          width: 15px;
+          height: 15px;
+
+          overflow: hidden;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        button {
+          color: #0071E4;
+          background: transparent;
+          border: none;
+          text-align: start;
+        }
+
+        @media screen and (max-width: 768px) {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+      }
+
+      @media screen and (max-width: 1440px) {
+        display: flex;
+        gap: 8px;
+      }
+    }
+
+
+    .sort {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .custom-select {
+        width: 170px;
+        position: relative;
+
+        select {
+          appearance: none;
+          /*  safari  */
+          -webkit-appearance: none;
+          /*  other styles for aesthetics */
+
+          width: 100%;
+          font-size: 1.15rem;
+          padding: 8px 16px;
+          background-color: #F9F9F9;
+          border: none;
+
+          color: #100E0E;
+          cursor: pointer;
+          border-radius: 8px;
+          font-size: 16px;
+        }
+      }
+
+
+      .custom-select::after {
+        content: "";
+        position: absolute;
+        right: 1rem;
+        pointer-events: none;
+
+        border: solid #706e6e;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 5px;
+      }
+
+      .custom-select::after {
+        top: 30%;
+
+        border-color: #0071e4;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+      }
+
+      @media screen and (min-width: 768px) and (max-width: 1440px) {
+        position: absolute;
+        right: 0;
+      }
+
+    }
+
+    @media screen and (max-width: 768px) {
+      display: grid;
+      justify-content: start;
+      gap: 10px;
+    }
+
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1440px) {
+    position: relative;
+  }
+
+  @media screen and (max-width: 1440px) {
+    display: grid;
+  }
 }
 </style>
