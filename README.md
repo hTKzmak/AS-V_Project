@@ -32,3 +32,10 @@
 **Description**
 
 <p>This is a site for purchasing Apple products and other gadgets. AppleStore was created in Vue.js with using other libraries: Pinia, vue-router and Vue3-carousel.</p>
+
+<p>We use this backend by Arsen4ik: 
+<br>
+    <a href="https://github.com/Arsen4ik/apple-store-backend" target="_blank">AppleStore backend repository</a>
+<br>
+    <a href="https://angular-final-project-backend.onrender.com/" target="_blank">AppleStore backend in Render.com</a>
+</p>
