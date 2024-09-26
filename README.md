@@ -1,5 +1,5 @@
 <div id="header" align="center">
-  <img src="./assets/intro.png"/>
+  <img src="./assets/banner.png"/>
 </div>
 
 <br>
