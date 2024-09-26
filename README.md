@@ -39,3 +39,7 @@
 <br>
     <a href="https://angular-final-project-backend.onrender.com/" target="_blank">AppleStore backend in Render.com</a>
 </p>
+
+<br>
+
+<b><i>Website may not work correctly because of backend in Render.com</i></b>
