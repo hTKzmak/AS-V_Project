@@ -5,7 +5,7 @@
 <br>
 
 <div>
-    <b>Result:</b> <a>https://htkzmak.github.io/AS-V_Project/</a>
+    <b>Result:</b> <a href="https://htkzmak.github.io/AS-V_Project/" target="_blank">Right here</a>
 </div>
 
 <br>
