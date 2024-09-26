@@ -31,4 +31,4 @@
 
 **Description**
 
-<p>This is a site for purchasing Apple products and other gadgets. AppleStore was created in Vue.js with using other libraries: Pinia and Vue3-carousel.</p>
+<p>This is a site for purchasing Apple products and other gadgets. AppleStore was created in Vue.js with using other libraries: Pinia, vue-router and Vue3-carousel.</p>
