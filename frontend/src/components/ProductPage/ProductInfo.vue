@@ -129,9 +129,7 @@ export default {
                 <nav>
                     <ul>
                         <li v-for="image in singleProductStore.images" :key="image">
-                            <button>
-                                <img :src="appleStore.BASE_URL + image" alt="product image">
-                            </button>
+                            <button :style="{ backgroundImage: `url('${appleStore.BASE_URL + image}')` }"></button>
                         </li>
                     </ul>
                 </nav>
@@ -146,11 +144,11 @@ export default {
                         <nav class="close-prods">
                             <ul>
                                 <li v-for="elem in singleProductStore.closeColor" :key="elem.id">
-                                    <button id="color">
-                                        <RouterLink :to="'/product/' + elem.id">
-                                            <img :src="appleStore.BASE_URL + elem.images[0]" alt="product image">
-                                        </RouterLink>
-                                    </button>
+                                    <RouterLink :to="'/product/' + elem.id">
+                                        <button id="color"
+                                            :style="{ backgroundImage: `url('${appleStore.BASE_URL + elem.images[0]}')` }">
+                                        </button>
+                                    </RouterLink>
                                 </li>
                             </ul>
                         </nav>
@@ -216,7 +214,8 @@ export default {
                                 <ButtonElem title="Купить" addedItemStyle="false" :action="buyInOneClick" />
                             </div>
                             <div v-else>
-                                <ButtonElem title="Купить" addedItemStyle="false" :action="buyInOneClick" disabled style="background-color: #0071E499;"/>
+                                <ButtonElem title="Купить" addedItemStyle="false" :action="buyInOneClick" disabled
+                                    style="background-color: #0071E499;" />
                             </div>
                         </div>
 
@@ -328,14 +327,15 @@ export default {
                         transition: 0.3s;
                         border: 2px solid transparent;
 
-                        img {
-                            width: 100px;
-                            height: 100px;
+                        background-repeat: no-repeat;
+                        background-size: cover;
 
-                            @media screen and (max-width: 768px) {
-                                width: 72px;
-                                height: 72px;
-                            }
+                        width: 100px;
+                        height: 100px;
+
+                        @media screen and (max-width: 768px) {
+                            width: 72px;
+                            height: 72px;
                         }
 
                         &:hover {
@@ -687,6 +687,18 @@ export default {
             width: 80px;
             height: 80px;
         }
+
+        // #color-img {
+        //     background-color: red;
+        //     width: 80px;
+        //     height: 80px;
+        // }
+
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        width: 80px;
+        height: 80px;
     }
 
     #memory {
