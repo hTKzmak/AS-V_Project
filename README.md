@@ -15,7 +15,6 @@
 <ul style="list-style-type: none">
     <li>
         <strong>Melnik:</strong> <a href="https://github.com/hTKzmak" target="_blank">hTKzmak</a><br>
-        Developed the entire visual and interactive part of the site.
         Responsible for the visual and interactive part of the site.
     </li>
     <li>
